@@ -17,6 +17,9 @@
 		8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */; };
 		8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */; };
 		8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7E9257F4B5B007527E2 /* Pattern.m */; };
+		8E96B827257F68F9007527E2 /* MoireView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B826257F68F9007527E2 /* MoireView.m */; };
+		8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B82C257F6E5B007527E2 /* TileLayer.m */; };
+		8E96B836257F7107007527E2 /* PatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B835257F7107007527E2 /* PatternView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,12 @@
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7E8257F4B5B007527E2 /* Pattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pattern.h; sourceTree = "<group>"; };
 		8E96B7E9257F4B5B007527E2 /* Pattern.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pattern.m; sourceTree = "<group>"; };
+		8E96B825257F68F9007527E2 /* MoireView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoireView.h; sourceTree = "<group>"; };
+		8E96B826257F68F9007527E2 /* MoireView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoireView.m; sourceTree = "<group>"; };
+		8E96B82B257F6E5B007527E2 /* TileLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileLayer.h; sourceTree = "<group>"; };
+		8E96B82C257F6E5B007527E2 /* TileLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileLayer.m; sourceTree = "<group>"; };
+		8E96B834257F7107007527E2 /* PatternView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternView.h; sourceTree = "<group>"; };
+		8E96B835257F7107007527E2 /* PatternView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +120,16 @@
 				8E96B7A5257F33CF007527E2 /* AppDelegate.m */,
 				8E96B7A7257F33CF007527E2 /* SceneDelegate.h */,
 				8E96B7A8257F33CF007527E2 /* SceneDelegate.m */,
+				8E96B825257F68F9007527E2 /* MoireView.h */,
+				8E96B826257F68F9007527E2 /* MoireView.m */,
 				8E96B7AA257F33CF007527E2 /* ViewController.h */,
 				8E96B7AB257F33CF007527E2 /* ViewController.m */,
 				8E96B7E8257F4B5B007527E2 /* Pattern.h */,
 				8E96B7E9257F4B5B007527E2 /* Pattern.m */,
+				8E96B834257F7107007527E2 /* PatternView.h */,
+				8E96B835257F7107007527E2 /* PatternView.m */,
+				8E96B82B257F6E5B007527E2 /* TileLayer.h */,
+				8E96B82C257F6E5B007527E2 /* TileLayer.m */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
@@ -272,9 +287,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E96B7AC257F33CF007527E2 /* ViewController.m in Sources */,
+				8E96B836257F7107007527E2 /* PatternView.m in Sources */,
 				8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
+				8E96B827257F68F9007527E2 /* MoireView.m in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
+				8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

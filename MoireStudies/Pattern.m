@@ -9,4 +9,9 @@
 
 @implementation Pattern
 
+- (Pattern*) initWithSpeed: (double) s Direction: (double) d FillRatio: (double) f ZoomRatio: (double) z {
+    // TODO stub
+    return nil;
+}
+
 @end
