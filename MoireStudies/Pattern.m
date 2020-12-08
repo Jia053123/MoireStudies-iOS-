@@ -10,7 +10,10 @@
 @implementation Pattern
 
 - (Pattern*) initWithSpeed: (double) s Direction: (double) d FillRatio: (double) f ZoomRatio: (double) z {
-    // TODO stub
+    self.speed = s;
+    self.direction = d;
+    self.fillRatio = f;
+    self.zoomRatio = z;
     return nil;
 }
 

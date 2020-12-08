@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface TileLayer : CALayer
 
+@property CALayer* fillLayer;
+
 @end
 
 NS_ASSUME_NONNULL_END
