@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property Pattern* pattern;
 
+- (PatternView*) initWithFrame: (CGRect)f ControlFrame: (CGRect)c;
+
 @end
 
 NS_ASSUME_NONNULL_END

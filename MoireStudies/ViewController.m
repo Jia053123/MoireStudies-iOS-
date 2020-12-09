@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+#import "MoireView.h"
 
 @interface ViewController ()
 
@@ -15,7 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSAssert([self.view isKindOfClass:[MoireView class]], @"the view is of wrong class");
+    [(MoireView*)self.view setUp];
 }
 
 

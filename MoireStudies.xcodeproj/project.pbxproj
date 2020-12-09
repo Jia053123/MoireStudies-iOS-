@@ -20,6 +20,7 @@
 		8E96B827257F68F9007527E2 /* MoireView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B826257F68F9007527E2 /* MoireView.m */; };
 		8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B82C257F6E5B007527E2 /* TileLayer.m */; };
 		8E96B836257F7107007527E2 /* PatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B835257F7107007527E2 /* PatternView.m */; };
+		8E96B84A25805509007527E2 /* ControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B84925805509007527E2 /* ControlView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		8E96B82C257F6E5B007527E2 /* TileLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileLayer.m; sourceTree = "<group>"; };
 		8E96B834257F7107007527E2 /* PatternView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternView.h; sourceTree = "<group>"; };
 		8E96B835257F7107007527E2 /* PatternView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
+		8E96B84825805509007527E2 /* ControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlView.h; sourceTree = "<group>"; };
+		8E96B84925805509007527E2 /* ControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				8E96B7E9257F4B5B007527E2 /* Pattern.m */,
 				8E96B834257F7107007527E2 /* PatternView.h */,
 				8E96B835257F7107007527E2 /* PatternView.m */,
+				8E96B84825805509007527E2 /* ControlView.h */,
+				8E96B84925805509007527E2 /* ControlView.m */,
 				8E96B82B257F6E5B007527E2 /* TileLayer.h */,
 				8E96B82C257F6E5B007527E2 /* TileLayer.m */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
@@ -288,6 +293,7 @@
 			files = (
 				8E96B7AC257F33CF007527E2 /* ViewController.m in Sources */,
 				8E96B836257F7107007527E2 /* PatternView.m in Sources */,
+				8E96B84A25805509007527E2 /* ControlView.m in Sources */,
 				8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E96B827257F68F9007527E2 /* MoireView.m in Sources */,
