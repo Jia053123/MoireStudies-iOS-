@@ -9,4 +9,13 @@
 
 @implementation MoireView
 
+- (id) initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        // TODO: stub
+        self.backgroundColor = [UIColor blueColor];
+    }
+    return self;
+}
+
 @end
