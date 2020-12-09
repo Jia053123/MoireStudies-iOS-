@@ -24,7 +24,10 @@
 }
 
 - (void)setUpMaskWithControlFrame: (CGRect)c {
-    
+    mask = [[UIView alloc]initWithFrame:c];
+    mask.backgroundColor = [UIColor blackColor];
+    mask.layer.cornerRadius = 30;
+    self.maskView = mask;
 }
 
 - (void)setUpControlsWithControlFrame: (CGRect)c {

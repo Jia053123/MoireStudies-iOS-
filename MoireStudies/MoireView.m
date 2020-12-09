@@ -21,8 +21,8 @@
 
 - (void) setUp {
     PatternView* pv = [[PatternView alloc]
-                        initWithFrame:self.frame
-                       ControlFrame:CGRectMake(10, 10, 100, 100)];
+                       initWithFrame:self.frame
+                       ControlFrame:CGRectMake(10, 30, 200, 300)];
     pv.backgroundColor = [UIColor yellowColor];
     [self addSubview:pv];
 }
