@@ -20,5 +20,20 @@
     [(MoireView*)self.view setUp];
 }
 
+- (BOOL)setDirectionTo:(double)d {
+    return FALSE;
+}
+
+- (BOOL)setFillRatioTo:(double)f {
+    return FALSE;
+}
+
+- (BOOL)setSpeedTo:(double)s {
+    return FALSE;
+}
+
+- (BOOL)setZoomRatioTo:(double)z {
+    return FALSE;
+}
 
 @end

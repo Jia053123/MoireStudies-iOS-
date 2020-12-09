@@ -6,8 +6,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ControlViewTarget.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <ControlViewTarget>
 
 
 @end

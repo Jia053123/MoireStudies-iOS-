@@ -69,6 +69,7 @@
 		8E96B835257F7107007527E2 /* PatternView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
 		8E96B84825805509007527E2 /* ControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlView.h; sourceTree = "<group>"; };
 		8E96B84925805509007527E2 /* ControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlView.m; sourceTree = "<group>"; };
+		8E96B84E258065A3007527E2 /* ControlViewTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlViewTarget.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +134,7 @@
 				8E96B835257F7107007527E2 /* PatternView.m */,
 				8E96B84825805509007527E2 /* ControlView.h */,
 				8E96B84925805509007527E2 /* ControlView.m */,
+				8E96B84E258065A3007527E2 /* ControlViewTarget.h */,
 				8E96B82B257F6E5B007527E2 /* TileLayer.h */,
 				8E96B82C257F6E5B007527E2 /* TileLayer.m */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
