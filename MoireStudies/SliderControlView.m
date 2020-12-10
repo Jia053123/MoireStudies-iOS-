@@ -7,7 +7,9 @@
 
 #import "SliderControlView.h"
 
-@implementation SliderControlView
+@implementation SliderControlView {
+    
+}
 
 - (UIView*) instanceFromNib {
     return (UIView*)[[UINib nibWithNibName:@"SliderControlView" bundle:nil]instantiateWithOwner:nil options:nil].firstObject;
@@ -16,8 +18,9 @@
 - (id) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
-        [self addSubview:[self instanceFromNib]];
+        UIView* view = [self instanceFromNib];
+        view.frame = self.frame;
+        [self addSubview:view];
     }
     return self;
 }

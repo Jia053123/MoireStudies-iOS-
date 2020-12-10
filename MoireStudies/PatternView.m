@@ -18,7 +18,7 @@
     self = [super init];
     if (self) {
         self.frame = f;
-        [self setUpMaskWithControlFrame:c];
+        //[self setUpMaskWithControlFrame:c];
         [self setUpControlsWithControlFrame:c];
     }
     return self;
@@ -33,7 +33,6 @@
 
 - (void)setUpControlsWithControlFrame: (CGRect)c {
     controlView = [[SliderControlView alloc]initWithFrame:c];
-    //controlView.backgroundColor = [UIColor whiteColor];
     [self addSubview:controlView];
 }
 
