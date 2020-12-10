@@ -14,7 +14,10 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="44C-Mh-Fz5">
-                    <rect key="frame" x="17" y="66" width="322" height="30"/>
+                    <rect key="frame" x="17" y="64" width="322" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="31" id="cRK-l8-6fh"/>
+                    </constraints>
                     <segments>
                         <segment title="First"/>
                         <segment title="Second"/>
@@ -22,39 +25,35 @@
                     </segments>
                 </segmentedControl>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz">
-                    <rect key="frame" x="15" y="162" width="326" height="28.5"/>
+                    <rect key="frame" x="15" y="159.5" width="326" height="31"/>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM">
-                    <rect key="frame" x="15" y="351" width="326" height="29"/>
+                    <rect key="frame" x="15" y="349" width="326" height="31"/>
                 </slider>
                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp">
-                    <rect key="frame" x="15" y="264" width="326" height="21.5"/>
+                    <rect key="frame" x="15" y="254.5" width="326" height="31"/>
                 </slider>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PcE-Z6-FY6">
-                    <rect key="frame" x="120" y="37" width="116" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-Z6-FY6">
+                    <rect key="frame" x="160" y="47" width="37" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ONi-oa-ap4">
-                    <rect key="frame" x="120" y="133" width="116" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ONi-oa-ap4">
+                    <rect key="frame" x="152" y="142" width="52" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWX-sj-wB0">
-                    <rect key="frame" x="120" y="235" width="116" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-No-WpR">
+                    <rect key="frame" x="146" y="332" width="65" height="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z4c-No-WpR">
-                    <rect key="frame" x="120" y="322" width="116" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWX-sj-wB0">
+                    <rect key="frame" x="154" y="237" width="48" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -66,16 +65,16 @@
                 <constraint firstItem="ONi-oa-ap4" firstAttribute="centerX" secondItem="JvY-7a-rPz" secondAttribute="centerX" id="8xe-CV-XT9"/>
                 <constraint firstItem="44C-Mh-Fz5" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="AcL-TV-s9k"/>
                 <constraint firstItem="MIZ-pY-bGK" firstAttribute="bottom" secondItem="JvY-7a-rPz" secondAttribute="bottom" multiplier="5:2" id="BOg-z3-pW4"/>
-                <constraint firstItem="EeR-r3-5Tp" firstAttribute="top" secondItem="ZWX-sj-wB0" secondAttribute="bottom" constant="8" id="E1h-xj-t0u"/>
-                <constraint firstItem="JvY-7a-rPz" firstAttribute="top" secondItem="ONi-oa-ap4" secondAttribute="bottom" constant="8" id="G4a-rr-TQZ"/>
+                <constraint firstItem="EeR-r3-5Tp" firstAttribute="top" secondItem="ZWX-sj-wB0" secondAttribute="bottom" constant="3" id="E1h-xj-t0u"/>
+                <constraint firstItem="JvY-7a-rPz" firstAttribute="top" secondItem="ONi-oa-ap4" secondAttribute="bottom" constant="3" id="G4a-rr-TQZ"/>
+                <constraint firstItem="44C-Mh-Fz5" firstAttribute="top" secondItem="PcE-Z6-FY6" secondAttribute="bottom" constant="3" id="Mie-uB-R21"/>
                 <constraint firstItem="Z4c-No-WpR" firstAttribute="centerX" secondItem="PI2-Sz-5kM" secondAttribute="centerX" id="RcZ-Qr-DnI"/>
                 <constraint firstItem="JvY-7a-rPz" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="S6G-da-uUM"/>
                 <constraint firstItem="PcE-Z6-FY6" firstAttribute="centerX" secondItem="44C-Mh-Fz5" secondAttribute="centerX" id="TcA-ui-Kyo"/>
                 <constraint firstItem="ZWX-sj-wB0" firstAttribute="centerX" secondItem="EeR-r3-5Tp" secondAttribute="centerX" id="Uri-Gd-U0y"/>
-                <constraint firstItem="PI2-Sz-5kM" firstAttribute="top" secondItem="Z4c-No-WpR" secondAttribute="bottom" constant="8" id="ZDL-Mn-MYI"/>
+                <constraint firstItem="PI2-Sz-5kM" firstAttribute="top" secondItem="Z4c-No-WpR" secondAttribute="bottom" constant="3" id="ZDL-Mn-MYI"/>
                 <constraint firstItem="MIZ-pY-bGK" firstAttribute="bottom" secondItem="PI2-Sz-5kM" secondAttribute="bottom" multiplier="5:4" id="eL0-Js-Ora"/>
                 <constraint firstItem="MIZ-pY-bGK" firstAttribute="bottom" secondItem="44C-Mh-Fz5" secondAttribute="bottom" multiplier="5:1" id="g17-uf-eHj"/>
-                <constraint firstItem="44C-Mh-Fz5" firstAttribute="top" secondItem="PcE-Z6-FY6" secondAttribute="bottom" constant="8" id="jjv-ZY-0Vy"/>
                 <constraint firstItem="44C-Mh-Fz5" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="paD-s7-7pn"/>
                 <constraint firstItem="JvY-7a-rPz" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="rNn-fx-Bvl"/>
                 <constraint firstItem="MIZ-pY-bGK" firstAttribute="bottom" secondItem="EeR-r3-5Tp" secondAttribute="bottom" multiplier="5:3" id="t2g-jK-vXs"/>
