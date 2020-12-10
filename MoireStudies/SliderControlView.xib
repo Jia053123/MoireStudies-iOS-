@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="HIh-Ms-d8D">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="496"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PcE-Z6-FY6">
+                    <rect key="frame" x="149" y="15" width="116" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ONi-oa-ap4">
+                    <rect key="frame" x="149" y="122" width="116" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZWX-sj-wB0">
+                    <rect key="frame" x="149" y="258" width="116" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz">
+                    <rect key="frame" x="18" y="151" width="378" height="30"/>
+                </slider>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM">
+                    <rect key="frame" x="18" y="447" width="378" height="31"/>
+                </slider>
+                <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp">
+                    <rect key="frame" x="18" y="287" width="378" height="30"/>
+                </slider>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="44C-Mh-Fz5">
+                    <rect key="frame" x="20" y="44" width="374" height="31"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                        <segment title=""/>
+                    </segments>
+                </segmentedControl>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z4c-No-WpR">
+                    <rect key="frame" x="149" y="418" width="116" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="MIZ-pY-bGK"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="PI2-Sz-5kM" firstAttribute="top" secondItem="Z4c-No-WpR" secondAttribute="bottom" constant="8" symbolic="YES" id="3yA-L6-eJF"/>
+                <constraint firstItem="PI2-Sz-5kM" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="8r7-UK-N4W"/>
+                <constraint firstItem="44C-Mh-Fz5" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="AcL-TV-s9k"/>
+                <constraint firstItem="JvY-7a-rPz" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="S6G-da-uUM"/>
+                <constraint firstItem="ONi-oa-ap4" firstAttribute="centerX" secondItem="JvY-7a-rPz" secondAttribute="centerX" id="VWR-NJ-lum"/>
+                <constraint firstItem="ZWX-sj-wB0" firstAttribute="centerX" secondItem="EeR-r3-5Tp" secondAttribute="centerX" id="gnV-5Z-hFU"/>
+                <constraint firstItem="44C-Mh-Fz5" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="paD-s7-7pn"/>
+                <constraint firstItem="Z4c-No-WpR" firstAttribute="centerX" secondItem="PI2-Sz-5kM" secondAttribute="centerX" id="qQ9-F2-C2i"/>
+                <constraint firstItem="JvY-7a-rPz" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="rNn-fx-Bvl"/>
+                <constraint firstItem="PI2-Sz-5kM" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="w1q-C0-BQ1"/>
+                <constraint firstItem="EeR-r3-5Tp" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.903382" id="wl9-Ub-MmU"/>
+                <constraint firstItem="PcE-Z6-FY6" firstAttribute="centerX" secondItem="44C-Mh-Fz5" secondAttribute="centerX" id="yzk-Za-a8X"/>
+                <constraint firstItem="EeR-r3-5Tp" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="z1g-QI-rBh"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-433.33333333333337" y="-299.33035714285711"/>
+        </view>
+    </objects>
+</document>

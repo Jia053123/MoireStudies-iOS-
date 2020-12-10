@@ -7,13 +7,14 @@
 
 #import "PatternView.h"
 #import "ControlView.h"
+#import "SliderControlView.h"
 
 @implementation PatternView {
     UIView* mask;
     ControlView* controlView;
 }
 
-- (PatternView*)initWithFrame:(CGRect)f ControlFrame:(CGRect)c{
+- (PatternView*)initWithFrame:(CGRect)f ControlFrame:(CGRect)c {
     self = [super init];
     if (self) {
         self.frame = f;
@@ -31,7 +32,9 @@
 }
 
 - (void)setUpControlsWithControlFrame: (CGRect)c {
-    
+    controlView = [[SliderControlView alloc]initWithFrame:c];
+    //controlView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:controlView];
 }
 
 @end

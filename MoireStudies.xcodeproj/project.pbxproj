@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E326B7B2581B73500A80D36 /* SliderControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderControlView.xib */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
 		8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A8257F33CF007527E2 /* SceneDelegate.m */; };
 		8E96B7AC257F33CF007527E2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7AB257F33CF007527E2 /* ViewController.m */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E326B7A2581B73500A80D36 /* SliderControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderControlView.xib; sourceTree = "<group>"; };
 		8E96B7A1257F33CF007527E2 /* MoireStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoireStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7A4257F33CF007527E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8E96B7A5257F33CF007527E2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				8E96B835257F7107007527E2 /* PatternView.m */,
 				8E96B84825805509007527E2 /* ControlView.h */,
 				8E96B84925805509007527E2 /* ControlView.m */,
+				8E326B7A2581B73500A80D36 /* SliderControlView.xib */,
 				8E96B85225807154007527E2 /* SliderControlView.h */,
 				8E96B85325807154007527E2 /* SliderControlView.m */,
 				8E96B8582580718B007527E2 /* GestureControlView.h */,
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */,
+				8E326B7B2581B73500A80D36 /* SliderControlView.xib in Resources */,
 				8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */,
 				8E96B7AF257F33CF007527E2 /* Main.storyboard in Resources */,
 			);
