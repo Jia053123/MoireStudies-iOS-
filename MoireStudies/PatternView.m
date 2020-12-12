@@ -19,18 +19,9 @@
     if (self) {
         self.backgroundColor = [UIColor yellowColor];
         self.frame = f;
-        [self setUpMaskWithControlFrame:c];
         [self setUpControlsWithControlFrame:c];
     }
     return self;
-}
-
-- (void)setUpMaskWithControlFrame: (CGRect)c {
-    mask = [[UIView alloc]initWithFrame:c];
-    mask.backgroundColor = [UIColor greenColor];
-    mask.layer.cornerRadius = 30;
-    //self.maskView = mask;
-    [self addSubview:mask];
 }
 
 - (void)setUpControlsWithControlFrame: (CGRect)c {

@@ -20,10 +20,18 @@
 }
 
 - (void) setUp {
-    PatternView* pv = [[PatternView alloc]
+    CGRect controlFrame1 = CGRectMake(10, 30, 200, 300);
+    PatternView* pv1 = [[PatternView alloc]
                        initWithFrame:self.frame
-                       ControlFrame:CGRectMake(10, 30, 200, 300)];
-    [self addSubview:pv];
+                       ControlFrame:controlFrame1];
+    [self addSubview:pv1];
+    PatternView* pv2;
+    // TODO
+    [self setUpMaskOnPatternView:pv2 WithControlFrame:controlFrame1];
+}
+
+- (void)setUpMaskOnPatternView: (UIView*)pv WithControlFrame: (CGRect)c {
+    // TODO: mask corresponding pattern view to match the control views
 }
 
 @end
