@@ -17,8 +17,9 @@
 - (PatternView*)initWithFrame:(CGRect)f ControlFrame:(CGRect)c {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor yellowColor];
         self.frame = f;
-        //[self setUpMaskWithControlFrame:c];
+        [self setUpMaskWithControlFrame:c];
         [self setUpControlsWithControlFrame:c];
     }
     return self;
@@ -26,9 +27,10 @@
 
 - (void)setUpMaskWithControlFrame: (CGRect)c {
     mask = [[UIView alloc]initWithFrame:c];
-    mask.backgroundColor = [UIColor blackColor];
+    mask.backgroundColor = [UIColor greenColor];
     mask.layer.cornerRadius = 30;
-    self.maskView = mask;
+    //self.maskView = mask;
+    [self addSubview:mask];
 }
 
 - (void)setUpControlsWithControlFrame: (CGRect)c {

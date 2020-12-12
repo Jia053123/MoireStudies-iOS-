@@ -19,7 +19,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         UIView* view = [self instanceFromNib];
-        view.frame = self.frame;
+        view.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         [self addSubview:view];
     }
     return self;
