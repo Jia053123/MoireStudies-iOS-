@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
+		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
+		8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */; };
 		8E326B7B2581B73500A80D36 /* SliderControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderControlView.xib */; };
 		8E36F73725930914004BC2F3 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73625930914004BC2F3 /* ControlView.swift */; };
 		8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderControlView.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
+		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
+		8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPatternView.swift; sourceTree = "<group>"; };
 		8E326B7A2581B73500A80D36 /* SliderControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderControlView.xib; sourceTree = "<group>"; };
 		8E36F73625930914004BC2F3 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
@@ -132,6 +136,8 @@
 				8E96B7AB257F33CF007527E2 /* ViewController.m */,
 				8E2BB6D52593277E0018D913 /* Pattern.swift */,
 				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
+				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
+				8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */,
 				8E36F73625930914004BC2F3 /* ControlView.swift */,
 				8E326B7A2581B73500A80D36 /* SliderControlView.xib */,
 				8E36F73E25930969004BC2F3 /* SliderControlView.swift */,
@@ -298,8 +304,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E96B7AC257F33CF007527E2 /* ViewController.m in Sources */,
+				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,
 				8E36F73725930914004BC2F3 /* ControlView.swift in Sources */,
+				8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */,
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */,

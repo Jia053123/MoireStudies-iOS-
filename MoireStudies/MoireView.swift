@@ -9,6 +9,9 @@ import UIKit
 import Foundation
 
 class MoireView: UIView {
+    typealias PatternViewSubclass = CoreAnimPatternView
+    typealias ControlViewSubclass = SliderControlView
+    
     var patternView1: PatternView?
     var controlView1: ControlView?
     var patternView2: PatternView?
@@ -16,7 +19,7 @@ class MoireView: UIView {
     
     @objc func setUp() {
         let controlFrame1 = CGRect(x: 10, y: 30, width: 200, height: 300)
-        patternView1 = PatternView.init(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
+        patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height))
         patternView1?.backgroundColor = UIColor.yellow
         if let pv = patternView1 {
             self.addSubview(pv)
@@ -31,7 +34,7 @@ class MoireView: UIView {
     }
     
     func setUpControlsWithControlFrame(frame: CGRect) {
-        controlView1 = SliderControlView.init(frame: frame)
+        controlView1 = ControlViewSubclass.init(frame: frame)
         if let cv = controlView1 {
             self.addSubview(cv)
         }
