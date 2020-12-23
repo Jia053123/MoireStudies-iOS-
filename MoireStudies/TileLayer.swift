@@ -9,7 +9,9 @@ import Foundation
 import UIKit
 
 class TileLayer: CALayer {
+    
     func setUp(fillRatio: Double) {
         self.borderColor = UIColor.red.cgColor
+        self.borderWidth = 1
     }
 }

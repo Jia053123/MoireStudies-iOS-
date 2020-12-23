@@ -17,4 +17,8 @@ class PatternView : UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
+    
+    func setUp() {
+        preconditionFailure("this method must be overridden")
+    }
 }
