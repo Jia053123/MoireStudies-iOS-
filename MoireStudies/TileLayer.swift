@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class TileLayer: CALayer {
     func setUp(fillRatio: Double) {

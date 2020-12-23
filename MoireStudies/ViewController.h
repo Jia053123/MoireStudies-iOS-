@@ -10,5 +10,10 @@
 
 @interface ViewController : UIViewController <ControlViewTarget>
 
+- (BOOL)modifyPatternWithSpeed:(double)speed;
+- (BOOL)modifyPatternWithDirection:(double)direction;
+- (BOOL)modifyPatternWithFillRatio:(double)fillRatio;
+- (BOOL)modifyPatternWithZoomRatio:(double)zoomRatio;
+
 @end
 

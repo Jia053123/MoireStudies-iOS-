@@ -8,8 +8,8 @@
 import Foundation
 
 @objc protocol ControlViewTarget {
-    func setSpeedTo(speed: Double) -> Bool
-    func setDirectionTo(direction: Double) -> Bool
-    func setFillRatioTo(fillRatio: Double) -> Bool
-    func setZoomRatioTo(zoomRatio: Double) -> Bool
+    func modifyPattern(speed: Double) -> Bool
+    func modifyPattern(direction: Double) -> Bool
+    func modifyPattern(fillRatio: Double) -> Bool
+    func modifyPattern(zoomRatio: Double) -> Bool
 }
