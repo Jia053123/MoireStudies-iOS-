@@ -12,6 +12,7 @@
 		8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderControlView.swift */; };
 		8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74925931669004BC2F3 /* GestureControlView.swift */; };
 		8E36F74F25931796004BC2F3 /* ControlViewTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* ControlViewTarget.swift */; };
+		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MoireView.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
 		8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A8257F33CF007527E2 /* SceneDelegate.m */; };
@@ -23,7 +24,6 @@
 		8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */; };
 		8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */; };
 		8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7E9257F4B5B007527E2 /* Pattern.m */; };
-		8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B82C257F6E5B007527E2 /* TileLayer.m */; };
 		8E96B836257F7107007527E2 /* PatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B835257F7107007527E2 /* PatternView.m */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +50,7 @@
 		8E36F73E25930969004BC2F3 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
 		8E36F74925931669004BC2F3 /* GestureControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureControlView.swift; sourceTree = "<group>"; };
 		8E36F74E25931796004BC2F3 /* ControlViewTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewTarget.swift; sourceTree = "<group>"; };
+		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MoireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireView.swift; sourceTree = "<group>"; };
 		8E96B7A1257F33CF007527E2 /* MoireStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoireStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,8 +73,6 @@
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7E8257F4B5B007527E2 /* Pattern.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pattern.h; sourceTree = "<group>"; };
 		8E96B7E9257F4B5B007527E2 /* Pattern.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Pattern.m; sourceTree = "<group>"; };
-		8E96B82B257F6E5B007527E2 /* TileLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TileLayer.h; sourceTree = "<group>"; };
-		8E96B82C257F6E5B007527E2 /* TileLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileLayer.m; sourceTree = "<group>"; };
 		8E96B834257F7107007527E2 /* PatternView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternView.h; sourceTree = "<group>"; };
 		8E96B835257F7107007527E2 /* PatternView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -142,8 +141,7 @@
 				8E36F73E25930969004BC2F3 /* SliderControlView.swift */,
 				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
 				8E36F74E25931796004BC2F3 /* ControlViewTarget.swift */,
-				8E96B82B257F6E5B007527E2 /* TileLayer.h */,
-				8E96B82C257F6E5B007527E2 /* TileLayer.m */,
+				8E36F75625931993004BC2F3 /* TileLayer.swift */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
@@ -310,10 +308,10 @@
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */,
+				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E36F74F25931796004BC2F3 /* ControlViewTarget.swift in Sources */,
-				8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
