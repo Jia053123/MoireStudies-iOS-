@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ControlViewTarget.h"
+#import "MoireStudies-Swift.h"
 
 @interface ViewController : UIViewController <ControlViewTarget>
 

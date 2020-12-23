@@ -5,9 +5,8 @@
 //  Created by Jialiang Xiang on 2020-12-08.
 //
 
+#import "MoireStudies-Swift.h"
 #import "PatternView.h"
-#import "ControlView.h"
-#import "SliderControlView.h"
 
 @implementation PatternView {
 }

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8E326B7B2581B73500A80D36 /* SliderControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderControlView.xib */; };
+		8E36F73725930914004BC2F3 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73625930914004BC2F3 /* ControlView.swift */; };
+		8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderControlView.swift */; };
+		8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74925931669004BC2F3 /* GestureControlView.swift */; };
 		8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MoireView.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
 		8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A8257F33CF007527E2 /* SceneDelegate.m */; };
@@ -21,9 +24,6 @@
 		8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7E9257F4B5B007527E2 /* Pattern.m */; };
 		8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B82C257F6E5B007527E2 /* TileLayer.m */; };
 		8E96B836257F7107007527E2 /* PatternView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B835257F7107007527E2 /* PatternView.m */; };
-		8E96B84A25805509007527E2 /* ControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B84925805509007527E2 /* ControlView.m */; };
-		8E96B85425807154007527E2 /* SliderControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B85325807154007527E2 /* SliderControlView.m */; };
-		8E96B85A2580718B007527E2 /* GestureControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B8592580718B007527E2 /* GestureControlView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		8E326B7A2581B73500A80D36 /* SliderControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderControlView.xib; sourceTree = "<group>"; };
+		8E36F73625930914004BC2F3 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
+		8E36F73E25930969004BC2F3 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
+		8E36F74925931669004BC2F3 /* GestureControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureControlView.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MoireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireView.swift; sourceTree = "<group>"; };
 		8E96B7A1257F33CF007527E2 /* MoireStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoireStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,13 +74,7 @@
 		8E96B82C257F6E5B007527E2 /* TileLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TileLayer.m; sourceTree = "<group>"; };
 		8E96B834257F7107007527E2 /* PatternView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PatternView.h; sourceTree = "<group>"; };
 		8E96B835257F7107007527E2 /* PatternView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PatternView.m; sourceTree = "<group>"; };
-		8E96B84825805509007527E2 /* ControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlView.h; sourceTree = "<group>"; };
-		8E96B84925805509007527E2 /* ControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ControlView.m; sourceTree = "<group>"; };
 		8E96B84E258065A3007527E2 /* ControlViewTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlViewTarget.h; sourceTree = "<group>"; };
-		8E96B85225807154007527E2 /* SliderControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderControlView.h; sourceTree = "<group>"; };
-		8E96B85325807154007527E2 /* SliderControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderControlView.m; sourceTree = "<group>"; };
-		8E96B8582580718B007527E2 /* GestureControlView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GestureControlView.h; sourceTree = "<group>"; };
-		8E96B8592580718B007527E2 /* GestureControlView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GestureControlView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,13 +136,10 @@
 				8E96B7E9257F4B5B007527E2 /* Pattern.m */,
 				8E96B834257F7107007527E2 /* PatternView.h */,
 				8E96B835257F7107007527E2 /* PatternView.m */,
-				8E96B84825805509007527E2 /* ControlView.h */,
-				8E96B84925805509007527E2 /* ControlView.m */,
+				8E36F73625930914004BC2F3 /* ControlView.swift */,
 				8E326B7A2581B73500A80D36 /* SliderControlView.xib */,
-				8E96B85225807154007527E2 /* SliderControlView.h */,
-				8E96B85325807154007527E2 /* SliderControlView.m */,
-				8E96B8582580718B007527E2 /* GestureControlView.h */,
-				8E96B8592580718B007527E2 /* GestureControlView.m */,
+				8E36F73E25930969004BC2F3 /* SliderControlView.swift */,
+				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
 				8E96B84E258065A3007527E2 /* ControlViewTarget.h */,
 				8E96B82B257F6E5B007527E2 /* TileLayer.h */,
 				8E96B82C257F6E5B007527E2 /* TileLayer.m */,
@@ -310,15 +304,15 @@
 			files = (
 				8E96B7AC257F33CF007527E2 /* ViewController.m in Sources */,
 				8E96B836257F7107007527E2 /* PatternView.m in Sources */,
-				8E96B84A25805509007527E2 /* ControlView.m in Sources */,
 				8E96B7EA257F4B5B007527E2 /* Pattern.m in Sources */,
+				8E36F73725930914004BC2F3 /* ControlView.swift in Sources */,
+				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
+				8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */,
 				8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E96B82D257F6E5B007527E2 /* TileLayer.m in Sources */,
-				8E96B85A2580718B007527E2 /* GestureControlView.m in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
-				8E96B85425807154007527E2 /* SliderControlView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,5 +3,3 @@
 //
 
 #import "PatternView.h"
-#import "ControlView.h"
-#import "SliderControlView.h"

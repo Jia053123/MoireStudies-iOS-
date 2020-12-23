@@ -6,7 +6,6 @@
 //
 
 #import "ViewController.h"
-#import "MoireStudies-Swift.h"
 
 @interface ViewController ()
 
