@@ -19,12 +19,10 @@ class MoireView: UIView {
     var controlView2: ControlView?
     
     @objc func setUp() {
-        let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
-        patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength))
-        patternView1?.center = CGPoint(x: self.frame.width/2.0, y: self.frame.height/2.0)
-        patternView1?.setUp()
+        patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         if let pv = patternView1 {
             self.addSubview(pv)
+            pv.setUp()
         }
         // TODO: setup patternView2
         //self.setUpMaskOnPatternView(patternView: patternView2, controlFrame: controlFrame1)
