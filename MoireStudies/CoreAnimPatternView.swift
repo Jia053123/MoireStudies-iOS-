@@ -18,14 +18,14 @@ class CoreAnimPatternView: PatternView {
     override func setUp() {
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
         backingView = UIView(frame: CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength))
-        backingView?.center = self.center
         if let bv = backingView {
+            bv.center = self.center
             self.addSubview(bv)
             // the tiles are placed to fill the backing view
             tileLength = Double(bv.frame.width)
             numOfTile = Int(ceil(Double(bv.frame.height) / tileHeight)) + 1
             
-            for i in 1...numOfTile {
+            for i in 0..<numOfTile {
                 let xPos : Double = Double(self.frame.width / 2)
                 let yPos : Double = Double(i) * tileHeight
                 
@@ -50,5 +50,6 @@ class CoreAnimPatternView: PatternView {
     func animateTile(tile: TileLayer) {
         // calculate distance till the end of the frame
         // calculate duration from distance so that speed is fixed
+        // recycle the tile at the end of the animation
     }
 }
