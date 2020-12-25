@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "MoireStudies-Swift.h"
 
-@interface ViewController : UIViewController <ControlViewTarget>
+@interface ViewController : UIViewController <PatternControlTarget>
 
 - (BOOL)modifyPatternWithSpeed:(double)speed;
 - (BOOL)modifyPatternWithDirection:(double)direction;

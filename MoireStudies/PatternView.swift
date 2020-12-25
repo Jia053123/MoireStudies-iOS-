@@ -8,7 +8,23 @@
 import Foundation
 import UIKit
 
-class PatternView : UIView {
+class PatternView : UIView, PatternControlTarget{
+    
+    func modifyPattern(speed: Double) -> Bool {
+        return false
+    }
+    
+    func modifyPattern(direction: Double) -> Bool {
+        return false
+    }
+    
+    func modifyPattern(fillRatio: Double) -> Bool {
+        return false
+    }
+    
+    func modifyPattern(zoomRatio: Double) -> Bool {
+        return false
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

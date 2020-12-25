@@ -19,6 +19,7 @@ class MoireView: UIView {
     var controlView2: ControlView?
     
     @objc func setUp() {
+        self.backgroundColor = UIColor.gray
         patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         if let pv = patternView1 {
             self.addSubview(pv)

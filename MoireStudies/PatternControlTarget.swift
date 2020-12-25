@@ -7,7 +7,7 @@
 
 import Foundation
 
-@objc protocol ControlViewTarget {
+@objc protocol PatternControlTarget {
     func modifyPattern(speed: Double) -> Bool
     func modifyPattern(direction: Double) -> Bool
     func modifyPattern(fillRatio: Double) -> Bool
