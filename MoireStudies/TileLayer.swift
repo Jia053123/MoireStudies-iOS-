@@ -14,4 +14,8 @@ class TileLayer: CALayer {
         self.borderColor = UIColor.red.cgColor
         self.borderWidth = 1
     }
+    
+    deinit {
+        self.delegate = nil // prevent retain cycle
+    }
 }

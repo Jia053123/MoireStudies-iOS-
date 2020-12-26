@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CoreAnimPatternView: PatternView {
+class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     private var _pattern: Pattern?
     var pattern: Pattern {
         get {
@@ -20,6 +20,7 @@ class CoreAnimPatternView: PatternView {
         }
         set {
             _pattern = newValue
+            self.resetAnimation()
         }
     }
     
@@ -27,11 +28,15 @@ class CoreAnimPatternView: PatternView {
     private var tileLength: Double?
     private var numOfTile: Int = 0
     private var tiles: Array<TileLayer> = Array()
+    private var lastTile: TileLayer? // keep track of the top tile to ensure the recycled tiles fit seamlessly
     private var backingView: UIView? // the view that holds all the tiles
     
     override func setUp() {
+        self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
-        backingView = UIView(frame: CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength))
+        //backingView = UIView(frame: CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength))
+        backingView = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height))
+        backingView?.backgroundColor = UIColor.white
         if let bv = backingView {
             bv.center = self.center
             self.addSubview(bv)
@@ -41,7 +46,7 @@ class CoreAnimPatternView: PatternView {
             numOfTile = 20
             
             for i in 0..<numOfTile {
-                let xPos : Double = Double(self.frame.width / 2)
+                let xPos : Double = Double(bv.frame.width / 2)
                 let yPos : Double = Double(i) * tileHeight
                 
                 let newTile = TileLayer()
@@ -64,16 +69,34 @@ class CoreAnimPatternView: PatternView {
     
     func animateTile(tile: TileLayer) {
         if let bv = backingView {
-            // all tiles move towards the top of the frame. calc remaining distance
+            // all tiles move towards the bottom of the frame. calc remaining distance
             let remainingDistance: Double = Double(bv.frame.height - tile.position.y)
             // calculate duration from the distance so that speed is fixed
             let duration = remainingDistance / self.pattern.speed
             // animate and recycle the tile at the end of the animation
-            let moveUpAnim = CABasicAnimation(keyPath: "position")
-            moveUpAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
-            moveUpAnim.toValue = CGPoint(x: tile.position.x, y: bv.frame.height)
-            moveUpAnim.duration = duration
-            tile.add(moveUpAnim, forKey: "move up")
+            let moveDownAnim = CABasicAnimation(keyPath: "position")
+            moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
+            moveDownAnim.toValue = CGPoint(x: tile.position.x, y: bv.frame.height)
+            moveDownAnim.duration = duration
+            moveDownAnim.delegate = self;
+            
+            tile.add(moveDownAnim, forKey: "move down")
         }
     }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        print("animation did stop")
+        let tile: TileLayer? = anim.value(forKey: "move down") as? TileLayer
+        if let t = tile {
+            self.animateTile(tile: t)
+        } else {
+            print("no tile found for the key")
+        }
+    }
+    
+    func resetAnimation() {
+        // TODO
+    }
+    
+    
 }
