@@ -55,7 +55,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
             newTile.setUp(fillRatio: 0.5) // TODO
             backingView.layer.addSublayer(newTile)
             tiles.append(newTile)
-            if i == numOfTile - 1 {
+            if i == 0 {
                 lastTile = newTile
             }
         }
@@ -86,8 +86,8 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         print("animation did stop")
         let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
-        if let t = tile {
-            t.position = CGPoint(x: Double(backingView.frame.width/2), y: Double(lastTile!.position.y) - tileHeight)
+        if let t = tile, let lt = lastTile {
+            t.position = CGPoint(x: Double(backingView.frame.width/2), y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
             t.removeAnimation(forKey: "move down")
             lastTile = t
             self.animateTile(tile: t)
