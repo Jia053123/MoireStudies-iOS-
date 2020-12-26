@@ -69,23 +69,27 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     }
     
     func animateTile(tile: TileLayer) {
-        // all tiles move towards the bottom of the frame. calc remaining distance
+        // all tiles move towards the bottom of the frame at the same speed
         let remainingDistance: Double = Double(backingView.frame.height - tile.position.y)
-        // calculate duration from the distance so that speed is fixed
         let duration = remainingDistance / self.pattern.speed
-        // animate and recycle the tile at the end of the animation
         let moveDownAnim = CABasicAnimation(keyPath: "position")
         moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
         moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.frame.height)
         moveDownAnim.duration = duration
         moveDownAnim.delegate = self;
+        moveDownAnim.fillMode = CAMediaTimingFillMode.forwards
+        moveDownAnim.isRemovedOnCompletion = false
+        moveDownAnim.setValue(tile, forKey: "tileLayer")
         tile.add(moveDownAnim, forKey: "move down")
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         print("animation did stop")
-        let tile: TileLayer? = anim.value(forKey: "move down") as? TileLayer
+        let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
         if let t = tile {
+            t.position = CGPoint(x: Double(backingView.frame.width/2), y: Double(lastTile!.position.y) - tileHeight)
+            t.removeAnimation(forKey: "move down")
+            lastTile = t
             self.animateTile(tile: t)
         } else {
             print("no tile found for the key")
@@ -93,7 +97,8 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     }
     
     func resetAnimation() {
-        // TODO
+        // interrupt animations and set model layers to presentation layers
+        // animate with new settings
     }
     
     
