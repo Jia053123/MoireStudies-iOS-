@@ -34,15 +34,14 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     override func setUp() {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
-        //backingView = UIView(frame: CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength))
-        backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height)
+        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+        //backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //shows the whole backing view for debug
         backingView.backgroundColor = UIColor.white
         backingView.center = self.center
         self.addSubview(backingView)
         // the tiles are placed to fill the backing view
         tileLength = Double(backingView.frame.width)
-        //numOfTile = Int(ceil(Double(bv.frame.height) / tileHeight)) + 1
-        numOfTile = 20
+        numOfTile = Int(ceil(Double(backingView.frame.height) / tileHeight)) + 1
         
         for i in 0..<numOfTile {
             let xPos : Double = Double(backingView.frame.width / 2)
