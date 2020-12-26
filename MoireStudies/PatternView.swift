@@ -8,22 +8,20 @@
 import Foundation
 import UIKit
 
-class PatternView : UIView, PatternControlTarget{
-    
-    func modifyPattern(speed: Double) -> Bool {
-        return false
-    }
-    
-    func modifyPattern(direction: Double) -> Bool {
-        return false
-    }
-    
-    func modifyPattern(fillRatio: Double) -> Bool {
-        return false
-    }
-    
-    func modifyPattern(zoomRatio: Double) -> Bool {
-        return false
+class PatternView : UIView {
+    private var _pattern: Pattern?
+    var pattern: Pattern {
+        get {
+            if let p = _pattern {
+                return p
+            } else {
+                return Pattern.defaultPattern()
+            }
+        }
+        set {
+            _pattern = newValue
+            self.resetView()
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -35,6 +33,10 @@ class PatternView : UIView, PatternControlTarget{
     }
     
     func setUp() {
+        preconditionFailure("this method must be overridden")
+    }
+    
+    func resetView() {
         preconditionFailure("this method must be overridden")
     }
 }

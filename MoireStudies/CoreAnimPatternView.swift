@@ -9,21 +9,6 @@ import Foundation
 import UIKit
 
 class CoreAnimPatternView: PatternView, CAAnimationDelegate {
-    private var _pattern: Pattern?
-    var pattern: Pattern {
-        get {
-            if let p = _pattern {
-                return p
-            } else {
-                return Pattern.defaultPattern()
-            }
-        }
-        set {
-            _pattern = newValue
-            self.resetAnimation()
-        }
-    }
-    
     private var tileHeight: Double = 10.0
     private var tileLength: Double?
     private var numOfTile: Int = 0
@@ -86,7 +71,8 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
         print("animation did stop")
         let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
         if let t = tile, let lt = lastTile {
-            t.position = CGPoint(x: Double(backingView.frame.width/2), y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
+            t.position = CGPoint(x: Double(backingView.frame.width/2),
+                                 y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
             t.removeAnimation(forKey: "move down")
             lastTile = t
             self.animateTile(tile: t)
@@ -95,7 +81,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
         }
     }
     
-    func resetAnimation() {
+    override func resetView() {
         // interrupt animations and set model layers to presentation layers
         // animate with new settings
     }

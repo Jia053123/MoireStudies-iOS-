@@ -18,8 +18,16 @@ class MoireView: UIView {
     var patternView2: PatternView?
     var controlView2: ControlView?
     
-    @objc func setUp() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.backgroundColor = UIColor.gray
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    @objc func displayMoire(patterns: NSMutableArray) {
         patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
         if let pv = patternView1 {
             self.addSubview(pv)
