@@ -19,8 +19,9 @@ class PatternView : UIView {
             }
         }
         set {
-            _pattern = newValue
-            self.resetView()
+            if _pattern != newValue {
+                self.patternChanged(from: _pattern, to: newValue)
+            }
         }
     }
     
@@ -32,11 +33,11 @@ class PatternView : UIView {
         super.init(frame: frame)
     }
     
-    func setUp() {
+    func setUp(pattern: Pattern) {
         preconditionFailure("this method must be overridden")
     }
     
-    func resetView() {
+    func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
         preconditionFailure("this method must be overridden")
     }
 }

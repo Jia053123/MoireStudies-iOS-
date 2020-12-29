@@ -16,7 +16,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     private var lastTile: TileLayer? // keep track of the top tile to ensure the recycled tiles fit seamlessly
     private var backingView: UIView = UIView() // the view that holds all the tiles
     
-    override func setUp() {
+    override func setUp(pattern: Pattern) {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
         backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
@@ -68,7 +68,6 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        print("animation did stop")
         let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
         if let t = tile, let lt = lastTile {
             t.position = CGPoint(x: Double(backingView.frame.width/2),
@@ -81,8 +80,8 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
         }
     }
     
-    override func resetView() {
-        // interrupt animations and set model layers to presentation layers
+    override func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
+        // TODO: interrupt animations and set model layers to presentation layers
         // animate with new settings
     }
     

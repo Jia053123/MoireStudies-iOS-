@@ -9,12 +9,14 @@ import Foundation
 import UIKit
 
 class ViewController: UIViewController, PatternControlTarget {
-    private var patterns: NSMutableArray = []
+    private var patternsModel: Array<Pattern> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let moireView = self.view as! MoireView
-        moireView.displayMoire(patterns: patterns)
+        
+        patternsModel.append(Pattern.randomPattern())
+        moireView.displayMoire(patterns: patternsModel)
     }
     
     func modifyPattern(speed: Double) -> Bool {

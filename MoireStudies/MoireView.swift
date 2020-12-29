@@ -13,10 +13,10 @@ class MoireView: UIView {
     typealias ControlViewSubclass = SliderControlView
     
     var controlFrame1 = CGRect(x: 10, y: 30, width: 200, height: 300)
-    var patternView1: PatternView?
     var controlView1: ControlView?
-    var patternView2: PatternView?
-    var controlView2: ControlView?
+    
+    private var patternViews: Array<PatternViewSubclass> = []
+    private var controlViews: Array<ControlViewSubclass> = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,14 +27,14 @@ class MoireView: UIView {
         super.init(coder: coder)
     }
     
-    @objc func displayMoire(patterns: NSMutableArray) {
-        patternView1 = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
-        if let pv = patternView1 {
-            self.addSubview(pv)
-            pv.setUp()
+    func displayMoire(patterns: Array<Pattern>) {
+        patternViews = []
+        for pattern in patterns {
+            let newPatternView: PatternViewSubclass = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+            patternViews.append(newPatternView)
+            self.addSubview(newPatternView)
+            newPatternView.setUp(pattern: pattern)
         }
-        // TODO: setup patternView2
-        //self.setUpMaskOnPatternView(patternView: patternView2, controlFrame: controlFrame1)
         self.setUpControls(frame: controlFrame1)
     }
     
