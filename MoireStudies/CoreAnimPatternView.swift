@@ -43,6 +43,12 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
                 lastTile = newTile
             }
         }
+        self.pattern = pattern
+    }
+    
+    override func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
+        // TODO: interrupt animations and set model layers to presentation layers
+        // animate with new settings depending on which properties changed
         self.animateTiles()
     }
     
@@ -79,11 +85,4 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
             print("no tile found for the key")
         }
     }
-    
-    override func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
-        // TODO: interrupt animations and set model layers to presentation layers
-        // animate with new settings
-    }
-    
-    
 }

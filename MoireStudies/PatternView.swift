@@ -20,7 +20,9 @@ class PatternView : UIView {
         }
         set {
             if _pattern != newValue {
-                self.patternChanged(from: _pattern, to: newValue)
+                let oldValue = _pattern
+                _pattern = newValue
+                self.patternChanged(from: oldValue, to: newValue)
             }
         }
     }
