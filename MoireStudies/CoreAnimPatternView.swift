@@ -20,11 +20,17 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     func setUpAndRender(pattern: Pattern) {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
-        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-        //backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //shows the whole backing view for debug
+        //backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+        backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //shows the whole backing view for debug
         backingView.backgroundColor = UIColor.white
         backingView.center = self.center
         self.addSubview(backingView)
+        self.createTiles()
+        self.pattern = pattern
+        self.animateTiles()
+    }
+    
+    private func createTiles() {
         // the tiles are placed to fill the backing view
         tileLength = Double(backingView.frame.width)
         numOfTile = Int(ceil(Double(backingView.frame.height) / tileHeight)) + 1
@@ -44,13 +50,18 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
                 lastTile = newTile
             }
         }
-        self.updatePattern(newPattern: pattern)
     }
     
     func updatePattern(newPattern: Pattern) {
+        // set model layers to presentation layers and interrupt animations
+        for tile in tiles {
+            if let p = tile.presentation() {
+                tile.position = p.position
+            }
+            tile.removeAnimation(forKey: "move down")
+        }
+        // animate with new settings depending on which properties changed
         self.pattern = newPattern
-        // TODO: interrupt animations and set model layers to presentation layers
-        // TODO: animate with new settings depending on which properties changed
         self.animateTiles()
     }
     
@@ -76,15 +87,17 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
-        let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
-        if let t = tile, let lt = lastTile {
-            t.position = CGPoint(x: Double(backingView.frame.width/2),
-                                 y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
-            t.removeAnimation(forKey: "move down")
-            lastTile = t
-            self.animateTile(tile: t)
-        } else {
-            print("no tile found for the key")
+        if (flag) { // in case this method is triggered by removing the animation
+            let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
+            if let t = tile, let lt = lastTile {
+                t.position = CGPoint(x: Double(backingView.frame.width/2),
+                                     y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
+                t.removeAnimation(forKey: "move down")
+                lastTile = t
+                self.animateTile(tile: t)
+            } else {
+                print("no tile found for the key")
+            }
         }
     }
 }

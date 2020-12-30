@@ -41,6 +41,6 @@ class SliderControlView : ControlView {
     }
     
     private func calcSpeed(speedSegmentIndex: Int) -> Double {
-        return Double((speedSegmentIndex + 1) * 5 + 10)
+        return Double((speedSegmentIndex + 1) * 8 + 10)
     }
 }

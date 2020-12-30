@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 class MainView: UIView {
-    typealias PatternViewSubclass = CoreAnimPatternView
+    typealias PatternViewClass = CoreAnimPatternView
     private var patternViews: Array<PatternView> = []
     
     override init(frame: CGRect) {
@@ -25,7 +25,7 @@ class MainView: UIView {
     func setUpMoire(patterns: Array<Pattern>) {
         patternViews = []
         for pattern in patterns {
-            let newPatternView: PatternView = PatternViewSubclass.init(frame: self.bounds)
+            let newPatternView: PatternView = PatternViewClass.init(frame: self.bounds)
             patternViews.append(newPatternView)
             self.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)

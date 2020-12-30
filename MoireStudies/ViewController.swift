@@ -10,7 +10,6 @@ import UIKit
 
 class ViewController: UIViewController, PatternControlTarget {
     typealias ControlViewSubclass = SliderControlView
-    
     private var patternsModel: Array<Pattern> = []
     private var controlFrame1 = CGRect(x: 10, y: 30, width: 150, height: 300)
     private var controlViews: Array<ControlViewSubclass> = []
@@ -29,6 +28,10 @@ class ViewController: UIViewController, PatternControlTarget {
     
     func modifyPattern(speed: Double) -> Bool {
         print("speed is set to: ", speed)
+        var newPattern = patternsModel.first!
+        newPattern.speed = speed
+        let mainView = self.view as! MainView
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
         return true
     }
     
