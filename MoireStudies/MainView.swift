@@ -10,7 +10,7 @@ import Foundation
 
 class MainView: UIView {
     typealias PatternViewSubclass = CoreAnimPatternView
-    private var patternViews: Array<PatternViewSubclass> = []
+    private var patternViews: Array<PatternView> = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,14 +22,18 @@ class MainView: UIView {
         self.backgroundColor = UIColor.gray
     }
     
-    func displayMoire(patterns: Array<Pattern>) {
+    func setUpMoire(patterns: Array<Pattern>) {
         patternViews = []
         for pattern in patterns {
-            let newPatternView: PatternViewSubclass = PatternViewSubclass.init(frame: self.bounds)
+            let newPatternView: PatternView = PatternViewSubclass.init(frame: self.bounds)
             patternViews.append(newPatternView)
             self.addSubview(newPatternView)
-            newPatternView.setUp(pattern: pattern)
+            newPatternView.setUpAndRender(pattern: pattern)
         }
+    }
+    
+    func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {
+        self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
     }
     
     func setUpMaskOnPatternView(patternView: UIView, controlFrame: CGRect) {

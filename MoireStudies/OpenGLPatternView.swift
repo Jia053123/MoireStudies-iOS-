@@ -6,7 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
-class OpenGLPatternView: PatternView {
+class OpenGLPatternView: UIView, PatternView {
+    func setUpAndRender(pattern: Pattern) {
+        
+    }
+    
+    func updatePattern(newPattern: Pattern) {
+        
+    }
+    
     
 }

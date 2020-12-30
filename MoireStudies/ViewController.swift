@@ -17,13 +17,13 @@ class ViewController: UIViewController, PatternControlTarget {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let moireView = self.view as! MainView
+        let mainView = self.view as! MainView
         
         patternsModel.append(Pattern.randomPattern())
-        moireView.displayMoire(patterns: patternsModel)
+        mainView.setUpMoire(patterns: patternsModel)
         let controlView = ControlViewSubclass.init(frame: controlFrame1)
         controlView.target = self
-        moireView.addSubview(controlView)
+        mainView.addSubview(controlView)
         self.controlViews.append(controlView)
     }
     

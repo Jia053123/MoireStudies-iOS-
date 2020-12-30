@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class CoreAnimPatternView: PatternView, CAAnimationDelegate {
+class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
+    private var pattern: Pattern?
     private var tileHeight: Double = 10.0
     private var tileLength: Double?
     private var numOfTile: Int = 0
@@ -16,7 +17,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     private var lastTile: TileLayer? // keep track of the top tile to ensure the recycled tiles fit seamlessly
     private var backingView: UIView = UIView() // the view that holds all the tiles
     
-    override func setUp(pattern: Pattern) {
+    func setUpAndRender(pattern: Pattern) {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
         backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
@@ -43,10 +44,11 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
                 lastTile = newTile
             }
         }
-        self.pattern = pattern
+        self.updatePattern(newPattern: pattern)
     }
     
-    override func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
+    func updatePattern(newPattern: Pattern) {
+        self.pattern = newPattern
         // TODO: interrupt animations and set model layers to presentation layers
         // TODO: animate with new settings depending on which properties changed
         self.animateTiles()
@@ -61,7 +63,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     func animateTile(tile: TileLayer) {
         // all tiles move towards the bottom of the frame at the same speed
         let remainingDistance: Double = Double(backingView.frame.height - tile.position.y)
-        let duration = remainingDistance / self.pattern.speed
+        let duration = remainingDistance / self.pattern!.speed
         let moveDownAnim = CABasicAnimation(keyPath: "position")
         moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
         moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.frame.height)
