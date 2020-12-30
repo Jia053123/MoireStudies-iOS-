@@ -35,7 +35,7 @@ class SliderControlView : UIView, ControlView {
     
     @IBAction func speedChanged(_ sender: Any) {
         if let t = self.target {
-            t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speed.selectedSegmentIndex))
+            _ = t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speed.selectedSegmentIndex))
         } else {
             print("target for SliderControlView not set")
         }

@@ -21,8 +21,8 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
         self.pattern = pattern
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
-        //backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-        backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //shows the whole backing view for debug
+        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+        //backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //uncomment to show the whole backing view for debug
         backingView.backgroundColor = UIColor.white
         backingView.center = self.center
         self.addSubview(backingView)
