@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class SliderControlView : ControlView {
+class SliderControlView : UIView, ControlView {
+    var target: PatternControlTarget?
     @IBOutlet weak var speed: UISegmentedControl!
     @IBOutlet weak var direction: UISlider!
     @IBOutlet weak var fillRatio: UISlider!
@@ -42,5 +43,22 @@ class SliderControlView : ControlView {
     
     private func calcSpeed(speedSegmentIndex: Int) -> Double {
         return Double((speedSegmentIndex + 1) * 8 + 10)
+    }
+    
+    private func calcSegmentIndex(speed: Double) -> Int {
+        switch speed {
+        case 0.0...18.0:
+            return 0
+        case 18.0.nextUp...26.0:
+            return 1
+        case 26.0.nextUp...Double.infinity:
+            return 2
+        default:
+            return 0
+        }
+    }
+    
+    func matchControls(pattern: Pattern) {
+        self.speed.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
     }
 }

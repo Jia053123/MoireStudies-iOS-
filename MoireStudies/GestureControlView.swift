@@ -6,7 +6,14 @@
 //
 
 import Foundation
+import UIKit
 
-class GestureControlView: ControlView {
+class GestureControlView: UIView, ControlView {
+    var target: PatternControlTarget?
+    
+    func matchControls(pattern: Pattern) {
+        
+    }
+    
     
 }

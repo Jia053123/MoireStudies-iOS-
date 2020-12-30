@@ -24,6 +24,14 @@ class ViewController: UIViewController, PatternControlTarget {
         controlView.target = self
         mainView.addSubview(controlView)
         self.controlViews.append(controlView)
+        self.matchControlViewsWithPatterns()
+    }
+    
+    func matchControlViewsWithPatterns() {
+        assert(patternsModel.count == controlViews.count)
+        for i in 0..<patternsModel.count {
+            controlViews[i].matchControls(pattern: patternsModel[i])
+        }
     }
     
     func modifyPattern(speed: Double) -> Bool {

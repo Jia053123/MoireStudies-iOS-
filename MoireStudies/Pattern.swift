@@ -18,7 +18,7 @@ struct Pattern : Equatable {
     }
     
     static func randomPattern() -> Pattern {
-        return Pattern(speed: Double.random(in: 10.0...20.0),
+        return Pattern(speed: Double.random(in: 10.0...40.0),
                        direction: Double.random(in: 0...360),
                        fillRatio: Double.random(in: 0.1...0.9),
                        zoomRatio: Double.random(in: 0.5...1.0))
