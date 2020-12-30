@@ -19,15 +19,9 @@ class SliderControlView : ControlView {
         self.setUp()
     }
     
-//    func instanceFromNib() -> UIView {
-//        return UINib(nibName: "SliderControlView", bundle: nil).instantiate(withOwner: nil, options: nil).first as! UIView
-//    }
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor.yellow
-        //let view: UIView = self.instanceFromNib()
-//        view.frame = CGRect(x: 0, y: 0, width: self.frame.size.width, height: self.frame.size.height)
-        //self.addSubview(view)
         self.setUp()
     }
     

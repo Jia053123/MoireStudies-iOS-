@@ -30,7 +30,7 @@ class MainView: UIView {
     func displayMoire(patterns: Array<Pattern>) {
         patternViews = []
         for pattern in patterns {
-            let newPatternView: PatternViewSubclass = PatternViewSubclass.init(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height))
+            let newPatternView: PatternViewSubclass = PatternViewSubclass.init(frame: self.bounds)
             patternViews.append(newPatternView)
             self.addSubview(newPatternView)
             newPatternView.setUp(pattern: pattern)
