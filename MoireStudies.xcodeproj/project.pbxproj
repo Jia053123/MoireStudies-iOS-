@@ -17,7 +17,7 @@
 		8E36F74F25931796004BC2F3 /* PatternControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* PatternControlTarget.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
-		8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MoireView.swift */; };
+		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
 		8E9690E22596FA3700C69DDC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* ViewController.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
 		8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A8257F33CF007527E2 /* SceneDelegate.m */; };
@@ -58,7 +58,7 @@
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
-		8E8D95A2258C3165000CD481 /* MoireView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireView.swift; sourceTree = "<group>"; };
+		8E8D95A2258C3165000CD481 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8E9690E12596FA3700C69DDC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8E96B7A1257F33CF007527E2 /* MoireStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoireStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7A4257F33CF007527E2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -131,7 +131,7 @@
 				8E96B7A7257F33CF007527E2 /* SceneDelegate.h */,
 				8E96B7A8257F33CF007527E2 /* SceneDelegate.m */,
 				8E9690E12596FA3700C69DDC /* ViewController.swift */,
-				8E8D95A2258C3165000CD481 /* MoireView.swift */,
+				8E8D95A2258C3165000CD481 /* MainView.swift */,
 				8E2BB6D52593277E0018D913 /* Pattern.swift */,
 				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
 				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
@@ -310,7 +310,7 @@
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
-				8E8D95A3258C3165000CD481 /* MoireView.swift in Sources */,
+				8E8D95A3258C3165000CD481 /* MainView.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E36F74F25931796004BC2F3 /* PatternControlTarget.swift in Sources */,

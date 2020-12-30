@@ -13,7 +13,7 @@ class ViewController: UIViewController, PatternControlTarget {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let moireView = self.view as! MoireView
+        let moireView = self.view as! MainView
         
         patternsModel.append(Pattern.randomPattern())
         moireView.displayMoire(patterns: patternsModel)

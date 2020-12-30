@@ -48,7 +48,7 @@ class CoreAnimPatternView: PatternView, CAAnimationDelegate {
     
     override func patternChanged(from oldPattern: Pattern?, to newPattern: Pattern) {
         // TODO: interrupt animations and set model layers to presentation layers
-        // animate with new settings depending on which properties changed
+        // TODO: animate with new settings depending on which properties changed
         self.animateTiles()
     }
     

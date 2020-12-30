@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 class ControlView : UIView {
-    
+    var target: PatternControlTarget?
 }

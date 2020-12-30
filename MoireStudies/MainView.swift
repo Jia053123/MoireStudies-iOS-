@@ -8,11 +8,11 @@
 import UIKit
 import Foundation
 
-class MoireView: UIView {
+class MainView: UIView {
     typealias PatternViewSubclass = CoreAnimPatternView
     typealias ControlViewSubclass = SliderControlView
     
-    var controlFrame1 = CGRect(x: 10, y: 30, width: 200, height: 300)
+    var controlFrame1 = CGRect(x: 10, y: 30, width: 150, height: 300)
     var controlView1: ControlView?
     
     private var patternViews: Array<PatternViewSubclass> = []
