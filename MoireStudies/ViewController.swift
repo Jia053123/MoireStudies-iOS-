@@ -48,6 +48,11 @@ class ViewController: UIViewController, PatternControlTarget {
     }
     
     func modifyPattern(fillRatio: Double) -> Bool {
+        print("fillRatio is set to: ", fillRatio)
+        var newPattern = patternsModel.first!
+        newPattern.fillRatio = fillRatio
+        let mainView = self.view as! MainView
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
         return true
     }
     

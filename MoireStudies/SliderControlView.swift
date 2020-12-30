@@ -10,10 +10,10 @@ import UIKit
 
 class SliderControlView : UIView, ControlView {
     var target: PatternControlTarget?
-    @IBOutlet weak var speed: UISegmentedControl!
-    @IBOutlet weak var direction: UISlider!
-    @IBOutlet weak var fillRatio: UISlider!
-    @IBOutlet weak var zoomRatio: UISlider!
+    @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var directionSlider: UISlider!
+    @IBOutlet weak var fillRatioSlider: UISlider!
+    @IBOutlet weak var zoomRatioSlider: UISlider!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -35,10 +35,24 @@ class SliderControlView : UIView, ControlView {
     
     @IBAction func speedChanged(_ sender: Any) {
         if let t = self.target {
-            _ = t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speed.selectedSegmentIndex))
+            _ = t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speedSegmentedControl.selectedSegmentIndex))
         } else {
             print("target for SliderControlView not set")
         }
+    }
+    
+    @IBAction func directionChanged(_ sender: Any) {
+    }
+    
+    @IBAction func fillRatioChanged(_ sender: Any) {
+        if let t = self.target {
+            _ = t.modifyPattern(fillRatio: Double(fillRatioSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
+    }
+    
+    @IBAction func zoomRatioChanged(_ sender: Any) {
     }
     
     private func calcSpeed(speedSegmentIndex: Int) -> Double {
@@ -59,6 +73,6 @@ class SliderControlView : UIView, ControlView {
     }
     
     func matchControls(pattern: Pattern) {
-        self.speed.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
+        self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
     }
 }

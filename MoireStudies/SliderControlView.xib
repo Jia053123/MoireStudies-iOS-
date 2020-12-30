@@ -9,10 +9,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderControlView" customModule="MoireStudies" customModuleProvider="target">
             <connections>
-                <outlet property="direction" destination="JvY-7a-rPz" id="VF1-QH-Q9N"/>
-                <outlet property="fillRatio" destination="EeR-r3-5Tp" id="NjE-jS-kWX"/>
-                <outlet property="speed" destination="44C-Mh-Fz5" id="Dm6-XQ-Z1n"/>
-                <outlet property="zoomRatio" destination="PI2-Sz-5kM" id="1Kn-QM-reZ"/>
+                <outlet property="directionSlider" destination="JvY-7a-rPz" id="VF1-QH-Q9N"/>
+                <outlet property="fillRatioSlider" destination="EeR-r3-5Tp" id="NjE-jS-kWX"/>
+                <outlet property="speedSegmentedControl" destination="44C-Mh-Fz5" id="Dm6-XQ-Z1n"/>
+                <outlet property="zoomRatioSlider" destination="PI2-Sz-5kM" id="1Kn-QM-reZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -37,12 +37,21 @@
                 </segmentedControl>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz">
                     <rect key="frame" x="13" y="159.5" width="282" height="31"/>
+                    <connections>
+                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
+                    </connections>
                 </slider>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.10000000000000001" maxValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp">
                     <rect key="frame" x="13" y="254.5" width="282" height="31"/>
+                    <connections>
+                        <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
+                    </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM">
                     <rect key="frame" x="13" y="349" width="282" height="31"/>
+                    <connections>
+                        <action selector="zoomRatioChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-Z6-FY6">
                     <rect key="frame" x="135.5" y="47" width="37" height="14"/>

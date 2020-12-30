@@ -53,12 +53,21 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     }
     
     func updatePattern(newPattern: Pattern) {
-        // set model layers to presentation layers and interrupt animations
-        for tile in tiles {
-            if let p = tile.presentation() {
-                tile.position = p.position
+        if let p = self.pattern {
+            if p.speed != newPattern.speed {
+                // set model layers to presentation layers and interrupt animations
+                for tile in tiles {
+                    if let pl = tile.presentation() {
+                        tile.position = pl.position
+                    }
+                    tile.removeAnimation(forKey: "move down")
+                }
             }
-            tile.removeAnimation(forKey: "move down")
+            if p.fillRatio != newPattern.fillRatio {
+                for tile in tiles {
+                    tile.fillRatio = newPattern.fillRatio // triggers animation did stop with false flag
+                }
+            }
         }
         // animate with new settings depending on which properties changed
         self.pattern = newPattern
