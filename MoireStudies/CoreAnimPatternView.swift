@@ -18,6 +18,7 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     private var backingView: UIView = UIView() // the view that holds all the tiles
     
     func setUpAndRender(pattern: Pattern) {
+        self.pattern = pattern
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
         //backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
@@ -26,7 +27,6 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
         backingView.center = self.center
         self.addSubview(backingView)
         self.createTiles()
-        self.pattern = pattern
         self.animateTiles()
     }
     
@@ -43,7 +43,7 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
             newTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
             newTile.position = CGPoint(x: xPos, y: yPos)
-            newTile.setUp(fillRatio: 0.5) // TODO
+            newTile.setUp(fillRatio: pattern?.fillRatio ?? 0.5)
             backingView.layer.addSublayer(newTile)
             tiles.append(newTile)
             if i == 0 {
