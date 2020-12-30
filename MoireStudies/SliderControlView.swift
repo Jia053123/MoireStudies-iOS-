@@ -21,20 +21,26 @@ class SliderControlView : ControlView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.yellow
         self.setUp()
     }
     
-    private func setUp()
-    {
+    private func setUp() {
         let nib = UINib(nibName: "SliderControlView", bundle: nil)
         if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
     }
+    
     @IBAction func speedChanged(_ sender: Any) {
-        print("speed changed")
+        if let t = self.target {
+            t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speed.selectedSegmentIndex))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
+    private func calcSpeed(speedSegmentIndex: Int) -> Double {
+        return Double((speedSegmentIndex + 1) * 5 + 10)
+    }
 }
