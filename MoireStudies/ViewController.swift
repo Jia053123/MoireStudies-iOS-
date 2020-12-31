@@ -36,37 +36,33 @@ class ViewController: UIViewController, PatternControlTarget {
     
     func modifyPattern(speed: Double) -> Bool {
         print("speed is set to: ", speed)
-        var newPattern = patternsModel.first!
-        newPattern.speed = speed
+        patternsModel[0].speed = speed
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: patternsModel[0])
         return true
     }
     
     func modifyPattern(direction: Double) -> Bool {
         print("direction is set to: ", direction)
-        var newPattern = patternsModel.first!
-        newPattern.direction = direction
+        patternsModel[0].direction = direction
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: patternsModel[0])
         return true
     }
     
     func modifyPattern(fillRatio: Double) -> Bool {
         print("fillRatio is set to: ", fillRatio)
-        var newPattern = patternsModel.first!
-        newPattern.fillRatio = fillRatio
+        patternsModel[0].fillRatio = fillRatio
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: patternsModel[0])
         return true
     }
     
     func modifyPattern(zoomRatio: Double) -> Bool {
         print("zoomRatio is set to: ", zoomRatio)
-        var newPattern = patternsModel.first!
-        newPattern.zoomRatio = zoomRatio
+        patternsModel[0].zoomRatio = zoomRatio
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: patternsModel[0])
         return true
     }
 }
