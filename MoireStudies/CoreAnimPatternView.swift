@@ -16,16 +16,18 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     private var tiles: Array<TileLayer> = Array()
     private var lastTile: TileLayer? // keep track of the top tile to ensure the recycled tiles fit seamlessly
     private var backingView: UIView = UIView() // the view that holds all the tiles
+    private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
     
     func setUpAndRender(pattern: Pattern) {
         self.pattern = pattern
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
-        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-        //backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
+        //backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
         backingView.backgroundColor = UIColor.white
         backingView.center = self.center
         self.addSubview(backingView)
+        backingViewDefaultTransf = backingView.transform
         self.createTiles()
         self.animateTiles()
     }
@@ -53,31 +55,33 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     }
     
     func updatePattern(newPattern: Pattern) {
-        if let p = self.pattern {
-            if p.speed != newPattern.speed {
+        let oldPattern = self.pattern
+        self.pattern = newPattern
+        if let op = oldPattern {
+            if op.speed != newPattern.speed {
                 // set model layers to presentation layers and interrupt animations
                 for tile in tiles {
                     if let pl = tile.presentation() {
                         tile.position = pl.position
                     }
+                }
+                for tile in tiles {
                     tile.removeAnimation(forKey: "move down")
                 }
+                self.animateTiles()
             }
             
-            if p.direction != newPattern.direction || p.zoomRatio != newPattern.zoomRatio {
+            if op.direction != newPattern.direction || op.zoomRatio != newPattern.zoomRatio {
                 backingView.transform =
-                    CGAffineTransform.init(rotationAngle: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.zoomRatio), y: CGFloat(newPattern.zoomRatio))
+                    backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction))//.scaledBy(x: CGFloat(newPattern.zoomRatio), y: CGFloat(newPattern.zoomRatio))
             }
             
-            if p.fillRatio != newPattern.fillRatio {
+            if op.fillRatio != newPattern.fillRatio {
                 for tile in tiles {
                     tile.fillRatio = newPattern.fillRatio // triggers animation did stop with false flag
                 }
             }
         }
-        // animate with new settings depending on which properties changed
-        self.pattern = newPattern
-        self.animateTiles()
     }
     
     func animateTiles() {
