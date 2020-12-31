@@ -10,8 +10,8 @@ import UIKit
 
 class TileLayer: CALayer {
     private let fillLayer = CALayer()
-    private var _fillRatio: Double = 0.5
-    var fillRatio : Double {
+    private var _fillRatio: CGFloat = 0.5
+    var fillRatio : CGFloat {
         get {
             return self._fillRatio
         }
@@ -25,9 +25,7 @@ class TileLayer: CALayer {
         }
     }
     
-    func setUp(fillRatio: Double) {
-//        self.borderColor = UIColor.red.cgColor
-//        self.borderWidth = 1 // uncomment for debug
+    func setUp(fillRatio: CGFloat) {
         assert(fillRatio > 0 && fillRatio <= 1)
         fillLayer.backgroundColor = UIColor.black.cgColor
         fillLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height * CGFloat(fillRatio))

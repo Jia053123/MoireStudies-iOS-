@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 @objc protocol PatternControlTarget {
-    func modifyPattern(speed: Double) -> Bool
-    func modifyPattern(direction: Double) -> Bool
-    func modifyPattern(fillRatio: Double) -> Bool
-    func modifyPattern(zoomRatio: Double) -> Bool
+    func modifyPattern(speed: CGFloat) -> Bool
+    func modifyPattern(direction: CGFloat) -> Bool
+    func modifyPattern(fillRatio: CGFloat) -> Bool
+    func modifyPattern(zoomRatio: CGFloat) -> Bool
 }

@@ -45,7 +45,7 @@ class SliderControlView : UIView, ControlView {
     
     @IBAction func directionChanged(_ sender: Any) {
         if let t = self.target {
-            _ = t.modifyPattern(direction: Double(directionSlider.value))
+            _ = t.modifyPattern(direction: CGFloat(directionSlider.value))
         } else {
             print("target for SliderControlView not set")
         }
@@ -53,7 +53,7 @@ class SliderControlView : UIView, ControlView {
     
     @IBAction func fillRatioChanged(_ sender: Any) {
         if let t = self.target {
-            _ = t.modifyPattern(fillRatio: Double(fillRatioSlider.value))
+            _ = t.modifyPattern(fillRatio: CGFloat(fillRatioSlider.value))
         } else {
             print("target for SliderControlView not set")
         }
@@ -61,23 +61,23 @@ class SliderControlView : UIView, ControlView {
     
     @IBAction func zoomRatioChanged(_ sender: Any) {
         if let t = self.target {
-            _ = t.modifyPattern(zoomRatio: Double(zoomRatioSlider.value))
+            _ = t.modifyPattern(zoomRatio: CGFloat(zoomRatioSlider.value))
         } else {
             print("target for SliderControlView not set")
         }
     }
     
-    private func calcSpeed(speedSegmentIndex: Int) -> Double {
-        return Double((speedSegmentIndex + 1) * 8 + 10)
+    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat {
+        return (CGFloat(speedSegmentIndex) + 1.0) * 8.0 + 10.0
     }
     
-    private func calcSegmentIndex(speed: Double) -> Int {
+    private func calcSegmentIndex(speed: CGFloat) -> Int {
         switch speed {
         case 0.0...18.0:
             return 0
-        case 18.0.nextUp...26.0:
+        case CGFloat(18.0).nextUp...26.0:
             return 1
-        case 26.0.nextUp...Double.infinity:
+        case CGFloat(26.0).nextUp...CGFloat.infinity:
             return 2
         default:
             return 0

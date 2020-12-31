@@ -34,7 +34,7 @@ class ViewController: UIViewController, PatternControlTarget {
         }
     }
     
-    func modifyPattern(speed: Double) -> Bool {
+    func modifyPattern(speed: CGFloat) -> Bool {
         print("speed is set to: ", speed)
         patternsModel[0].speed = speed
         let mainView = self.view as! MainView
@@ -42,7 +42,7 @@ class ViewController: UIViewController, PatternControlTarget {
         return true
     }
     
-    func modifyPattern(direction: Double) -> Bool {
+    func modifyPattern(direction: CGFloat) -> Bool {
         print("direction is set to: ", direction)
         patternsModel[0].direction = direction
         let mainView = self.view as! MainView
@@ -50,7 +50,7 @@ class ViewController: UIViewController, PatternControlTarget {
         return true
     }
     
-    func modifyPattern(fillRatio: Double) -> Bool {
+    func modifyPattern(fillRatio: CGFloat) -> Bool {
         print("fillRatio is set to: ", fillRatio)
         patternsModel[0].fillRatio = fillRatio
         let mainView = self.view as! MainView
@@ -58,7 +58,7 @@ class ViewController: UIViewController, PatternControlTarget {
         return true
     }
     
-    func modifyPattern(zoomRatio: Double) -> Bool {
+    func modifyPattern(zoomRatio: CGFloat) -> Bool {
         print("zoomRatio is set to: ", zoomRatio)
         patternsModel[0].zoomRatio = zoomRatio
         let mainView = self.view as! MainView
