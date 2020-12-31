@@ -35,7 +35,7 @@
                         <action selector="speedChanged:" destination="-1" eventType="valueChanged" id="n7T-pc-qPP"/>
                     </connections>
                 </segmentedControl>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz">
                     <rect key="frame" x="13" y="159.5" width="282" height="31"/>
                     <connections>
                         <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
@@ -47,7 +47,7 @@
                         <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
                     </connections>
                 </slider>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="1" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM">
                     <rect key="frame" x="13" y="349" width="282" height="31"/>
                     <connections>
                         <action selector="zoomRatioChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>

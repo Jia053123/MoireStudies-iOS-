@@ -20,9 +20,9 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     func setUpAndRender(pattern: Pattern) {
         self.pattern = pattern
         self.backgroundColor = UIColor.clear
-        let diagonalLength = Double(sqrt(pow(Float(self.frame.width), 2) + pow(Float(self.frame.height), 2)))
+        let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
         backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-        //backingView.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height) //uncomment to show the whole backing view for debug
+        //backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
         backingView.backgroundColor = UIColor.white
         backingView.center = self.center
         self.addSubview(backingView)
@@ -32,11 +32,11 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     
     private func createTiles() {
         // the tiles are placed to fill the backing view
-        tileLength = Double(backingView.frame.width)
-        numOfTile = Int(ceil(Double(backingView.frame.height) / tileHeight)) + 1
+        tileLength = Double(backingView.bounds.width)
+        numOfTile = Int(ceil(Double(backingView.bounds.height) / tileHeight)) + 1
         
         for i in 0..<numOfTile {
-            let xPos : Double = Double(backingView.frame.width / 2)
+            let xPos : Double = Double(backingView.bounds.width / 2)
             let yPos : Double = Double(i) * tileHeight
             
             let newTile = TileLayer()
@@ -63,6 +63,12 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
                     tile.removeAnimation(forKey: "move down")
                 }
             }
+            
+            if p.direction != newPattern.direction || p.zoomRatio != newPattern.zoomRatio {
+                backingView.transform =
+                    CGAffineTransform.init(rotationAngle: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.zoomRatio), y: CGFloat(newPattern.zoomRatio))
+            }
+            
             if p.fillRatio != newPattern.fillRatio {
                 for tile in tiles {
                     tile.fillRatio = newPattern.fillRatio // triggers animation did stop with false flag
@@ -81,12 +87,12 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     }
     
     func animateTile(tile: TileLayer) {
-        // all tiles move towards the bottom of the frame at the same speed
-        let remainingDistance: Double = Double(backingView.frame.height - tile.position.y)
+        // all tiles move towards the bottom of the backing view at the same speed
+        let remainingDistance: Double = Double(backingView.bounds.height - tile.position.y)
         let duration = remainingDistance / self.pattern!.speed
         let moveDownAnim = CABasicAnimation(keyPath: "position")
         moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
-        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.frame.height)
+        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.bounds.height)
         moveDownAnim.duration = duration
         moveDownAnim.delegate = self;
         moveDownAnim.fillMode = CAMediaTimingFillMode.forwards
@@ -99,7 +105,7 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
         if (flag) { // in case this method is triggered by removing the animation
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
             if let t = tile, let lt = lastTile {
-                t.position = CGPoint(x: Double(backingView.frame.width/2),
+                t.position = CGPoint(x: Double(backingView.bounds.width/2),
                                      y: Double(lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
                 t.removeAnimation(forKey: "move down")
                 lastTile = t

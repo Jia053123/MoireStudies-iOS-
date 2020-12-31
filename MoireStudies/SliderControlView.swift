@@ -31,6 +31,8 @@ class SliderControlView : UIView, ControlView {
             self.addSubview(view)
             view.frame = self.bounds
         }
+        directionSlider.minimumValue = 0.0
+        directionSlider.maximumValue = 2 * Float.pi
     }
     
     @IBAction func speedChanged(_ sender: Any) {
@@ -42,6 +44,11 @@ class SliderControlView : UIView, ControlView {
     }
     
     @IBAction func directionChanged(_ sender: Any) {
+        if let t = self.target {
+            _ = t.modifyPattern(direction: Double(directionSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func fillRatioChanged(_ sender: Any) {
@@ -53,6 +60,11 @@ class SliderControlView : UIView, ControlView {
     }
     
     @IBAction func zoomRatioChanged(_ sender: Any) {
+        if let t = self.target {
+            _ = t.modifyPattern(zoomRatio: Double(zoomRatioSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     private func calcSpeed(speedSegmentIndex: Int) -> Double {

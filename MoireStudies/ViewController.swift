@@ -23,7 +23,7 @@ class ViewController: UIViewController, PatternControlTarget {
         let controlView = ControlViewSubclass.init(frame: controlFrame1)
         controlView.target = self
         mainView.addSubview(controlView)
-        self.controlViews.append(controlView)
+        controlViews.append(controlView)
         self.matchControlViewsWithPatterns()
     }
     
@@ -44,6 +44,11 @@ class ViewController: UIViewController, PatternControlTarget {
     }
     
     func modifyPattern(direction: Double) -> Bool {
+        print("direction is set to: ", direction)
+        var newPattern = patternsModel.first!
+        newPattern.direction = direction
+        let mainView = self.view as! MainView
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
         return true
     }
     
@@ -57,6 +62,11 @@ class ViewController: UIViewController, PatternControlTarget {
     }
     
     func modifyPattern(zoomRatio: Double) -> Bool {
+        print("zoomRatio is set to: ", zoomRatio)
+        var newPattern = patternsModel.first!
+        newPattern.zoomRatio = zoomRatio
+        let mainView = self.view as! MainView
+        mainView.modifiyPatternView(patternViewIndex: 0, newPattern: newPattern)
         return true
     }
 }
