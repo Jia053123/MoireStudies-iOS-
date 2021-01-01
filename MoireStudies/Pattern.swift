@@ -25,5 +25,17 @@ struct Pattern : Equatable {
                        zoomRatio: CGFloat.random(in: 1.0...2.0))
     }
     
+    static func demoPattern1() -> Pattern {
+        return Pattern(speed: 30.0,
+                       direction: CGFloat.pi/4,
+                       fillRatio: CGFloat.random(in: 0.3...0.7),
+                       zoomRatio: CGFloat.random(in: 1.0...2.0))
+    }
     
+    static func demoPattern2() -> Pattern {
+        return Pattern(speed: 30.0,
+                       direction: CGFloat.pi/4.0 + 0.1 + CGFloat.pi*2.0,
+                       fillRatio: CGFloat.random(in: 0.3...0.7),
+                       zoomRatio: CGFloat.random(in: 1.3...1.7))
+    }
 }

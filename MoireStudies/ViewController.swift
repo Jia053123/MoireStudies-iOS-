@@ -11,14 +11,14 @@ import UIKit
 class ViewController: UIViewController {
     typealias ControlViewSubclass = SliderControlView
     private var patternsModel: Array<Pattern> = []
-    private var controlFrames: Array<CGRect> = [CGRect(x: 10, y: 30, width: 150, height: 300),
-                                                CGRect(x: 200, y: 30, width: 150, height: 300)]
+    private var controlFrames: Array<CGRect> = [CGRect(x: 50, y: 100, width: 100, height: 150),
+                                                CGRect(x: 200, y: 100, width: 100, height: 150)]
     private var controlViewControllers: Array<ControlViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        patternsModel.append(Pattern.defaultPattern())
-        patternsModel.append(Pattern.randomPattern())
+        patternsModel.append(Pattern.demoPattern1())
+        patternsModel.append(Pattern.demoPattern2())
         let mainView = self.view as! MainView
         mainView.setUpMoire(patterns: patternsModel)
         
