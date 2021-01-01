@@ -10,7 +10,7 @@ import UIKit
 
 class ControlViewController: UIViewController, PatternControlTarget {
     typealias ControlViewSubclass = SliderControlView
-    var delegate: PatternControlTarget?
+    weak var delegate: ViewController?
     private var defaultFrame = CGRect(x: 10, y: 30, width: 150, height: 300)
     
     init(pattern: Pattern?) {
@@ -32,19 +32,19 @@ class ControlViewController: UIViewController, PatternControlTarget {
     }
     
     func modifyPattern(speed: CGFloat) -> Bool {
-        return delegate?.modifyPattern(speed: speed) ?? false
+        return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
     
     func modifyPattern(direction: CGFloat) -> Bool {
-        return delegate?.modifyPattern(direction: direction) ?? false
+        return delegate?.modifyPattern(direction: direction, caller: self) ?? false
     }
     
     func modifyPattern(fillRatio: CGFloat) -> Bool {
-        return delegate?.modifyPattern(fillRatio: fillRatio) ?? false
+        return delegate?.modifyPattern(fillRatio: fillRatio, caller: self) ?? false
     }
     
     func modifyPattern(zoomRatio: CGFloat) -> Bool {
-        return delegate?.modifyPattern(zoomRatio: zoomRatio) ?? false
+        return delegate?.modifyPattern(zoomRatio: zoomRatio, caller: self) ?? false
     }
 }
 
