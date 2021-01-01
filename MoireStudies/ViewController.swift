@@ -11,8 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     typealias ControlViewSubclass = SliderControlView
     private var patternsModel: Array<Pattern> = []
-    private var controlFrames: Array<CGRect> = [CGRect(x: 30, y: 20, width: 150, height: 250),
-                                                CGRect(x: 220, y: 20, width: 150, height: 250)]
+    private var controlFrames: Array<CGRect> = [CGRect(x: 20, y: 20, width: 150, height: 200),
+                                                CGRect(x: 190, y: 20, width: 150, height: 200)]
     private var controlViewControllers: Array<ControlViewController> = []
     
     override func viewDidLoad() {
