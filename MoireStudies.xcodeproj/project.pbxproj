@@ -11,6 +11,7 @@
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */; };
 		8E31447F259EBA8E00BB0399 /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31447E259EBA8E00BB0399 /* ControlViewController.swift */; };
+		8E31448A259F030000BB0399 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E314489259F030000BB0399 /* MaskView.swift */; };
 		8E326B7B2581B73500A80D36 /* SliderControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderControlView.xib */; };
 		8E36F73725930914004BC2F3 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73625930914004BC2F3 /* ControlView.swift */; };
 		8E36F73F25930969004BC2F3 /* SliderControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderControlView.swift */; };
@@ -52,6 +53,7 @@
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPatternView.swift; sourceTree = "<group>"; };
 		8E31447E259EBA8E00BB0399 /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
+		8E314489259F030000BB0399 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		8E326B7A2581B73500A80D36 /* SliderControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderControlView.xib; sourceTree = "<group>"; };
 		8E36F73625930914004BC2F3 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderControlView.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				8E9690E12596FA3700C69DDC /* ViewController.swift */,
 				8E31447E259EBA8E00BB0399 /* ControlViewController.swift */,
 				8E8D95A2258C3165000CD481 /* MainView.swift */,
+				8E314489259F030000BB0399 /* MaskView.swift */,
 				8E2BB6D52593277E0018D913 /* Pattern.swift */,
 				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
 				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
@@ -304,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* ViewController.swift in Sources */,
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,

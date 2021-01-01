@@ -11,8 +11,8 @@ import UIKit
 class ViewController: UIViewController {
     typealias ControlViewSubclass = SliderControlView
     private var patternsModel: Array<Pattern> = []
-    private var controlFrames: Array<CGRect> = [CGRect(x: 10, y: 30, width: 150, height: 300),
-                                                CGRect(x: 200, y: 30, width: 150, height: 300)]
+    private var controlFrames: Array<CGRect> = [CGRect(x: 30, y: 20, width: 150, height: 250),
+                                                CGRect(x: 220, y: 20, width: 150, height: 250)]
     private var controlViewControllers: Array<ControlViewController> = []
     
     override func viewDidLoad() {
@@ -26,8 +26,13 @@ class ViewController: UIViewController {
         for i in 0..<patternsModel.count {
             let cvc = ControlViewController.init(frame: controlFrames[i], pattern: patternsModel[i])
             cvc.delegate = self
-            self.view.addSubview(cvc.view)
+            mainView.addSubview(cvc.view)
             controlViewControllers.append(cvc)
+            if (i == 0) {
+                mainView.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
+            } else if (i == 1) {
+                mainView.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
+            }
         }
     }
     

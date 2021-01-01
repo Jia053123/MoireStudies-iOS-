@@ -11,6 +11,7 @@ import Foundation
 class MainView: UIView {
     typealias PatternViewClass = CoreAnimPatternView
     private var patternViews: Array<PatternView> = []
+    private var maskViews: Array<MaskView> = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,7 +37,9 @@ class MainView: UIView {
         self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
     }
     
-    func setUpMaskOnPatternView(patternView: UIView, controlFrame: CGRect) {
-        // TODO: mask corresponding pattern view to match the control views
+    func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
+        let maskView = MaskView.init(frame: self.bounds, maskFrame: controlViewFrame)
+        patternViews[patternIndex].mask = maskView
+        print("added mask")
     }
 }
