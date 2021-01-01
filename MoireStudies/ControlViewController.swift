@@ -11,11 +11,10 @@ import UIKit
 class ControlViewController: UIViewController, PatternControlTarget {
     typealias ControlViewSubclass = SliderControlView
     weak var delegate: ViewController?
-    private var defaultFrame = CGRect(x: 10, y: 30, width: 150, height: 300)
     
-    init(pattern: Pattern?) {
+    init(frame: CGRect, pattern: Pattern?) {
         super.init(nibName: nil, bundle: nil)
-        let controlView = ControlViewSubclass.init(frame: defaultFrame)
+        let controlView = ControlViewSubclass.init(frame: frame)
         controlView.target = self
         if let p = pattern {
             controlView.matchControlsWithModel(pattern: p)
