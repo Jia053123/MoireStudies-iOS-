@@ -14,12 +14,12 @@ class MainView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.gray
+        self.backgroundColor = UIColor.white
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.backgroundColor = UIColor.gray
+        self.backgroundColor = UIColor.white
     }
     
     func setUpMoire(patterns: Array<Pattern>) {

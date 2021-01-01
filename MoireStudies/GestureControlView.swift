@@ -11,7 +11,7 @@ import UIKit
 class GestureControlView: UIView, ControlView {
     var target: PatternControlTarget?
     
-    func matchControls(pattern: Pattern) {
+    func matchControlsWithModel(pattern: Pattern) {
         
     }
     

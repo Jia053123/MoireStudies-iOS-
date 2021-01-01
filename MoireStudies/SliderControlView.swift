@@ -84,7 +84,7 @@ class SliderControlView : UIView, ControlView {
         }
     }
     
-    func matchControls(pattern: Pattern) {
+    func matchControlsWithModel(pattern: Pattern) {
         self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
         self.directionSlider.value = Float(pattern.direction)
         self.fillRatioSlider.value = Float(pattern.fillRatio)

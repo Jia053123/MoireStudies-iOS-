@@ -11,28 +11,39 @@ import UIKit
 class ViewController: UIViewController, PatternControlTarget {
     typealias ControlViewSubclass = SliderControlView
     private var patternsModel: Array<Pattern> = []
-    private var controlFrame1 = CGRect(x: 10, y: 30, width: 150, height: 300)
-    private var controlViews: Array<ControlViewSubclass> = []
+    private var controlFrames: Array<CGRect> = [CGRect(x: 10, y: 30, width: 150, height: 300), CGRect(x: 200, y: 30, width: 150, height: 300)]
+    //private var controlViews: Array<ControlViewSubclass> = []
+    private var controlViewControllers: Array<ControlViewController> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let mainView = self.view as! MainView
-        
         patternsModel.append(Pattern.randomPattern())
+        patternsModel.append(Pattern.randomPattern())
+        let mainView = self.view as! MainView
         mainView.setUpMoire(patterns: patternsModel)
-        let controlView = ControlViewSubclass.init(frame: controlFrame1)
-        controlView.target = self
-        mainView.addSubview(controlView)
-        controlViews.append(controlView)
-        self.matchControlViewsWithPatterns()
+        
+        assert(controlFrames.count == patternsModel.count)
+        for i in 0..<patternsModel.count {
+            let cvc = ControlViewController.init(pattern: patternsModel[i])
+            cvc.delegate = self
+            cvc.view.frame = controlFrames[i]
+            self.view.addSubview(cvc.view)
+            controlViewControllers.append(cvc)
+        }
+        
+        //let controlView = ControlViewSubclass.init(frame: controlFrame1)
+        //controlView.target = self
+        //mainView.addSubview(controlView)
+        //controlViews.append(controlView)
+        //self.matchControlViewsWithPatterns()
     }
     
-    func matchControlViewsWithPatterns() {
-        assert(patternsModel.count == controlViews.count)
-        for i in 0..<patternsModel.count {
-            controlViews[i].matchControls(pattern: patternsModel[i])
-        }
-    }
+//    func matchControlViewsWithPatterns() {
+//        assert(patternsModel.count == controlViews.count)
+//        for i in 0..<patternsModel.count {
+//            controlViews[i].matchControlsWithModel(pattern: patternsModel[i])
+//        }
+//    }
     
     func modifyPattern(speed: CGFloat) -> Bool {
         print("speed is set to: ", speed)

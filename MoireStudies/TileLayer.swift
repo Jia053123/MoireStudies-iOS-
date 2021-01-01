@@ -26,6 +26,7 @@ class TileLayer: CALayer {
     }
     
     func setUp(fillRatio: CGFloat) {
+        self.backgroundColor = UIColor.clear.cgColor
         assert(fillRatio > 0 && fillRatio <= 1)
         fillLayer.backgroundColor = UIColor.black.cgColor
         fillLayer.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height * CGFloat(fillRatio))

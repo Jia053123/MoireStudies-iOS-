@@ -10,5 +10,5 @@ import UIKit
 
 protocol ControlView : UIView {
     var target: PatternControlTarget? { get set }
-    func matchControls(pattern: Pattern)
+    func matchControlsWithModel(pattern: Pattern)
 }
