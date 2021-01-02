@@ -11,7 +11,7 @@ import QuartzCore
 
 class MaskView: UIView {
     private var maskFrame: CGRect
-    private var cornerRadius: CGFloat = 12
+    private var cornerRadius: CGFloat = Constants.UI.maskCornerRadius
     
     init(frame: CGRect, maskFrame: CGRect) {
         self.maskFrame = maskFrame

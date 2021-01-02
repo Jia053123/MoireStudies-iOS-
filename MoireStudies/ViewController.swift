@@ -42,6 +42,9 @@ class ViewController: UIViewController {
     
     func modifyPattern(speed: CGFloat, caller: ControlViewController) -> Bool {
         print("speed is set to: ", speed)
+        guard Constants.Bounds.speedRange.contains(speed) else {
+            return false
+        }
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
@@ -53,6 +56,9 @@ class ViewController: UIViewController {
     
     func modifyPattern(direction: CGFloat, caller: ControlViewController) -> Bool {
         print("direction is set to: ", direction)
+        guard Constants.Bounds.directionRange.contains(direction) else {
+            return false
+        }
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
@@ -64,6 +70,9 @@ class ViewController: UIViewController {
     
     func modifyPattern(fillRatio: CGFloat, caller: ControlViewController) -> Bool {
         print("fillRatio is set to: ", fillRatio)
+        guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
+            return false
+        }
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
@@ -75,6 +84,9 @@ class ViewController: UIViewController {
     
     func modifyPattern(zoomRatio: CGFloat, caller: ControlViewController) -> Bool {
         print("zoomRatio is set to: ", zoomRatio)
+        guard Constants.Bounds.zoomRatioRange.contains(zoomRatio) else {
+            return false
+        }
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
