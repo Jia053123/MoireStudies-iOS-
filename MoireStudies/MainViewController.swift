@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
-    typealias ControlViewSubclass = SliderControlView
+    typealias ControlViewSubclass = SliderCtrlViewSch1
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<ControlViewController> = []

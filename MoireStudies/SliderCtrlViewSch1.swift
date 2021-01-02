@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class SliderControlView : UIView, ControlView {
-    var target: PatternControlTarget?
+class SliderCtrlViewSch1 : UIView, ControlView {
+    var target: PatternCtrlTargetSch1?
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
@@ -26,7 +26,7 @@ class SliderControlView : UIView, ControlView {
     }
     
     private func setUp() {
-        let nib = UINib(nibName: "SliderControlView", bundle: nil)
+        let nib = UINib(nibName: "SliderCtrlViewSch1", bundle: nil)
         if let view = nib.instantiate(withOwner: self, options: nil).first as? UIView {
             self.addSubview(view)
             view.frame = self.bounds

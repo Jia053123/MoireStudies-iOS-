@@ -7,12 +7,12 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderControlView" customModule="MoireStudies" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderCtrlViewSch2">
             <connections>
+                <outlet property="blackSlider" destination="EeR-r3-5Tp" id="NjE-jS-kWX"/>
                 <outlet property="directionSlider" destination="JvY-7a-rPz" id="VF1-QH-Q9N"/>
-                <outlet property="fillRatioSlider" destination="EeR-r3-5Tp" id="NjE-jS-kWX"/>
                 <outlet property="speedSegmentedControl" destination="44C-Mh-Fz5" id="Dm6-XQ-Z1n"/>
-                <outlet property="zoomRatioSlider" destination="PI2-Sz-5kM" id="1Kn-QM-reZ"/>
+                <outlet property="whiteSlider" destination="PI2-Sz-5kM" id="1Kn-QM-reZ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -65,7 +65,7 @@
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
                     </constraints>
                     <connections>
-                        <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
+                        <action selector="blackWidthChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="1" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="ZoomRatioSlider">
@@ -74,7 +74,7 @@
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
                     </constraints>
                     <connections>
-                        <action selector="zoomRatioChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
+                        <action selector="whiteWidthChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
                     </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-Z6-FY6">
@@ -95,8 +95,8 @@
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zoom Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-No-WpR">
-                    <rect key="frame" x="68" y="204" width="65" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-No-WpR">
+                    <rect key="frame" x="85" y="204" width="31" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="DbR-UX-qdY"/>
                     </constraints>
@@ -104,8 +104,8 @@
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fill Ratio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWX-sj-wB0">
-                    <rect key="frame" x="76.5" y="136" width="48.5" height="14"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWX-sj-wB0">
+                    <rect key="frame" x="85" y="136" width="31" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="UhM-EU-ONI"/>
                     </constraints>

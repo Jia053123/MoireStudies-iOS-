@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PatternCotrlTargetSch1 {
+protocol PatternCtrlTargetSch1 {
     func modifyPattern(speed: CGFloat) -> Bool
     func modifyPattern(direction: CGFloat) -> Bool
     func modifyPattern(fillRatio: CGFloat) -> Bool

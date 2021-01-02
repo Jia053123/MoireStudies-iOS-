@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class ControlViewController: UIViewController, PatternControlTarget {
-    typealias ControlViewSubclass = SliderControlView
-    weak var delegate: ViewController?
+class ControlViewController: UIViewController, PatternCtrlTargetSch1 {
+    typealias ControlViewSubclass = SliderCtrlViewSch1
+    weak var delegate: MainViewController?
     
     init(frame: CGRect, pattern: Pattern?) {
         super.init(nibName: nil, bundle: nil)
