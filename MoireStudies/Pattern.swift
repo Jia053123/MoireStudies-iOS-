@@ -34,7 +34,7 @@ struct Pattern : Equatable {
     
     static func demoPattern2() -> Pattern {
         return Pattern(speed: 30.0,
-                       direction: CGFloat.pi/4.0 + 0.05 + CGFloat.pi*2.0,
+                       direction: CGFloat.pi/4.0 + 0.05 + CGFloat.pi,
                        fillRatio: CGFloat.random(in: 0.3...0.7),
                        zoomRatio: CGFloat.random(in: 1.3...1.7))
     }

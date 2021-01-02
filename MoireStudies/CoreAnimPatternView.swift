@@ -10,7 +10,7 @@ import UIKit
 
 class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     private var pattern: Pattern = Pattern.defaultPattern()
-    private var tileHeight: CGFloat = 10.0
+    private var tileHeight: CGFloat = 8.0
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0
     private var tiles: Array<TileLayer> = Array()
