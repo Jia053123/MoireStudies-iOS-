@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, PatternStore {
     typealias ControlViewSubclass = SliderCtrlViewSch1
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
-    private var controlViewControllers: Array<ControlViewController> = []
+    private var controlViewControllers: Array<CtrlViewControllerSch1> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
         
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
-            let cvc = ControlViewController.init(frame: controlFrames[i], pattern: patternsModel[i])
+            let cvc = CtrlViewControllerSch1.init(frame: controlFrames[i], pattern: patternsModel[i])
             cvc.delegate = self
             mainView.addSubview(cvc.view)
             controlViewControllers.append(cvc)
@@ -35,11 +35,11 @@ class MainViewController: UIViewController {
         }
     }
     
-    func findControlViewIndex(controlViewController: ControlViewController) -> Int? {
+    func findControlViewIndex(controlViewController: CtrlViewControllerSch1) -> Int? {
         return controlViewControllers.firstIndex(of: controlViewController)
     }
     
-    func modifyPattern(speed: CGFloat, caller: ControlViewController) -> Bool {
+    func modifyPattern(speed: CGFloat, caller: CtrlViewControllerSch1) -> Bool {
         print("speed is set to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             return false
@@ -53,7 +53,7 @@ class MainViewController: UIViewController {
         return true
     }
     
-    func modifyPattern(direction: CGFloat, caller: ControlViewController) -> Bool {
+    func modifyPattern(direction: CGFloat, caller: CtrlViewControllerSch1) -> Bool {
         print("direction is set to: ", direction)
         guard Constants.Bounds.directionRange.contains(direction) else {
             return false
@@ -67,7 +67,7 @@ class MainViewController: UIViewController {
         return true
     }
     
-    func modifyPattern(fillRatio: CGFloat, caller: ControlViewController) -> Bool {
+    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewControllerSch1) -> Bool {
         print("fillRatio is set to: ", fillRatio)
         guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
             return false
@@ -81,7 +81,7 @@ class MainViewController: UIViewController {
         return true
     }
     
-    func modifyPattern(zoomRatio: CGFloat, caller: ControlViewController) -> Bool {
+    func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewControllerSch1) -> Bool {
         print("zoomRatio is set to: ", zoomRatio)
         guard Constants.Bounds.zoomRatioRange.contains(zoomRatio) else {
             return false

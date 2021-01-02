@@ -10,17 +10,16 @@
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */; };
-		8E31447F259EBA8E00BB0399 /* ControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31447E259EBA8E00BB0399 /* ControlViewController.swift */; };
+		8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */; };
 		8E31448A259F030000BB0399 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E314489259F030000BB0399 /* MaskView.swift */; };
 		8E31449225A0393A00BB0399 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31449125A0393A00BB0399 /* Constants.swift */; };
 		8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */; };
 		8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */; };
-		8E3144B325A04F4200BB0399 /* PatternCtrlTargetSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144B225A04F4200BB0399 /* PatternCtrlTargetSch2.swift */; };
+		8E3144B325A04F4200BB0399 /* PatternCtrlSch2Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144B225A04F4200BB0399 /* PatternCtrlSch2Target.swift */; };
 		8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */; };
-		8E36F73725930914004BC2F3 /* ControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73625930914004BC2F3 /* ControlView.swift */; };
 		8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */; };
 		8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74925931669004BC2F3 /* GestureControlView.swift */; };
-		8E36F74F25931796004BC2F3 /* PatternCtrlTargetSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* PatternCtrlTargetSch1.swift */; };
+		8E36F74F25931796004BC2F3 /* PatternCtrlSch1Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* PatternCtrlSch1Target.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
 		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
@@ -33,6 +32,9 @@
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
 		8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */; };
 		8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */; };
+		8EE29F5525A054C700FF2539 /* PatternStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternStore.swift */; };
+		8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */; };
+		8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,17 +58,16 @@
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPatternView.swift; sourceTree = "<group>"; };
-		8E31447E259EBA8E00BB0399 /* ControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewController.swift; sourceTree = "<group>"; };
+		8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch1.swift; sourceTree = "<group>"; };
 		8E314489259F030000BB0399 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		8E31449125A0393A00BB0399 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch2.xib; sourceTree = "<group>"; };
 		8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch2.swift; sourceTree = "<group>"; };
-		8E3144B225A04F4200BB0399 /* PatternCtrlTargetSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternCtrlTargetSch2.swift; sourceTree = "<group>"; };
+		8E3144B225A04F4200BB0399 /* PatternCtrlSch2Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternCtrlSch2Target.swift; sourceTree = "<group>"; };
 		8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCtrlViewSch1.xib; sourceTree = "<group>"; };
-		8E36F73625930914004BC2F3 /* ControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlView.swift; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch1.swift; sourceTree = "<group>"; };
 		8E36F74925931669004BC2F3 /* GestureControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureControlView.swift; sourceTree = "<group>"; };
-		8E36F74E25931796004BC2F3 /* PatternCtrlTargetSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternCtrlTargetSch1.swift; sourceTree = "<group>"; };
+		8E36F74E25931796004BC2F3 /* PatternCtrlSch1Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternCtrlSch1Target.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -88,6 +89,9 @@
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoireStudiesUITests.m; sourceTree = "<group>"; };
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8EE29F5425A054C700FF2539 /* PatternStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternStore.swift; sourceTree = "<group>"; };
+		8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewSch1.swift; sourceTree = "<group>"; };
+		8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewSch2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,25 +146,12 @@
 				8E96B7A5257F33CF007527E2 /* AppDelegate.m */,
 				8E96B7A7257F33CF007527E2 /* SceneDelegate.h */,
 				8E96B7A8257F33CF007527E2 /* SceneDelegate.m */,
-				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
-				8E31447E259EBA8E00BB0399 /* ControlViewController.swift */,
-				8E8D95A2258C3165000CD481 /* MainView.swift */,
-				8E314489259F030000BB0399 /* MaskView.swift */,
-				8E2BB6D52593277E0018D913 /* Pattern.swift */,
-				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
-				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
-				8E36F75625931993004BC2F3 /* TileLayer.swift */,
-				8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */,
-				8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */,
-				8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */,
-				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
-				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
-				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
-				8E36F73625930914004BC2F3 /* ControlView.swift */,
-				8E36F74E25931796004BC2F3 /* PatternCtrlTargetSch1.swift */,
-				8E3144B225A04F4200BB0399 /* PatternCtrlTargetSch2.swift */,
-				8E31449125A0393A00BB0399 /* Constants.swift */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
+				8E31449125A0393A00BB0399 /* Constants.swift */,
+				8EE29F7925A0591500FF2539 /* Model */,
+				8EE29F7E25A059B900FF2539 /* Controller */,
+				8EE29F7825A058E100FF2539 /* PatternView */,
+				8EE29F7A25A0594700FF2539 /* ControlView */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
 				8E96B7B5257F33D3007527E2 /* Info.plist */,
@@ -186,6 +177,69 @@
 				8E96B7CD257F33D4007527E2 /* Info.plist */,
 			);
 			path = MoireStudiesUITests;
+			sourceTree = "<group>";
+		};
+		8EE29F7825A058E100FF2539 /* PatternView */ = {
+			isa = PBXGroup;
+			children = (
+				8E8D95A2258C3165000CD481 /* MainView.swift */,
+				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
+				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
+				8E36F75625931993004BC2F3 /* TileLayer.swift */,
+				8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */,
+			);
+			path = PatternView;
+			sourceTree = "<group>";
+		};
+		8EE29F7925A0591500FF2539 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8EE29F5425A054C700FF2539 /* PatternStore.swift */,
+				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
+				8E2BB6D52593277E0018D913 /* Pattern.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8EE29F7A25A0594700FF2539 /* ControlView */ = {
+			isa = PBXGroup;
+			children = (
+				8E314489259F030000BB0399 /* MaskView.swift */,
+				8EE29F8225A05B0100FF2539 /* Scheme1 */,
+				8EE29F8325A05B0800FF2539 /* Scheme2 */,
+			);
+			path = ControlView;
+			sourceTree = "<group>";
+		};
+		8EE29F7E25A059B900FF2539 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E36F74E25931796004BC2F3 /* PatternCtrlSch1Target.swift */,
+				8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */,
+				8E3144B225A04F4200BB0399 /* PatternCtrlSch2Target.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8EE29F8225A05B0100FF2539 /* Scheme1 */ = {
+			isa = PBXGroup;
+			children = (
+				8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */,
+				8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */,
+				8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */,
+				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
+			);
+			path = Scheme1;
+			sourceTree = "<group>";
+		};
+		8EE29F8325A05B0800FF2539 /* Scheme2 */ = {
+			isa = PBXGroup;
+			children = (
+				8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */,
+				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
+				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
+			);
+			path = Scheme2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,24 +374,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EE29F5525A054C700FF2539 /* PatternStore.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
+				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,
-				8E36F73725930914004BC2F3 /* ControlView.swift in Sources */,
 				8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */,
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
-				8E3144B325A04F4200BB0399 /* PatternCtrlTargetSch2.swift in Sources */,
+				8E3144B325A04F4200BB0399 /* PatternCtrlSch2Target.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
+				8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */,
 				8E8D95A3258C3165000CD481 /* MainView.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
-				8E36F74F25931796004BC2F3 /* PatternCtrlTargetSch1.swift in Sources */,
-				8E31447F259EBA8E00BB0399 /* ControlViewController.swift in Sources */,
+				8E36F74F25931796004BC2F3 /* PatternCtrlSch1Target.swift in Sources */,
+				8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

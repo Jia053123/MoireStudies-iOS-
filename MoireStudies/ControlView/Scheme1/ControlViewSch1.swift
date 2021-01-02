@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol ControlView : UIView {
-    var target: PatternCtrlTargetSch1? { get set }
+protocol ControlViewSch1 : UIView {
+    var target: PatternCtrlSch1Target? { get set }
     func matchControlsWithModel(pattern: Pattern)
 }
