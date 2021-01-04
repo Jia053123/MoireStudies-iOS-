@@ -23,7 +23,9 @@ class MainViewController: UIViewController, PatternStore {
         
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
-            let cvc: CtrlViewController = CtrlViewControllerSubclass.init(id: i, frame: controlFrames[i], pattern: patternsModel[i])
+            let cvc: CtrlViewController = CtrlViewControllerSubclass.init(id: self.getCtrlViewControllerId(index: i),
+                                                                          frame: controlFrames[i],
+                                                                          pattern: patternsModel[i])
             cvc.delegate = self
             mainView.addSubview(cvc.view)
             controlViewControllers.append(cvc)
@@ -40,8 +42,22 @@ class MainViewController: UIViewController, PatternStore {
         patternsModel.append(Pattern.demoPattern2())
     }
     
+    func getCtrlViewControllerId(index: Int) -> Int {
+        let id = index
+        assert(self.getCtrlViewControllerIndex(id: id) == index, "reverse conversion test failed")
+        return id
+    }
+    
+    func getCtrlViewControllerIndex(id: Int) -> Int {
+        let index = id
+        return index
+    }
+    
     func findControlViewIndex(controlViewController: CtrlViewController) -> Int? {
-        return controlViewController.id
+        guard let i = controlViewController.id else {
+            return nil
+        }
+        return self.getCtrlViewControllerIndex(id: i)
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
