@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternStore {
-    //typealias ControlViewSubclass = SliderCtrlViewSch1
     typealias CtrlViewControllerSubclass = CtrlViewControllerSch1
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
@@ -58,6 +57,13 @@ class MainViewController: UIViewController, PatternStore {
             return nil
         }
         return self.getCtrlViewControllerIndex(id: i)
+    }
+    
+    func getPattern(caller: CtrlViewController) -> Pattern? {
+        guard let i = caller.id else {
+            return nil
+        }
+        return self.patternsModel[getCtrlViewControllerIndex(id: i)]
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {

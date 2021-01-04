@@ -18,7 +18,11 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, PatternCtrlS
         let controlView: ControlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
         controlView.target = self
         if let p = pattern {
-            controlView.matchControlsWithModel(pattern: p)
+            let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio)
+            controlView.matchControlsWithValues(speed: p.speed,
+                                                direction: p.direction,
+                                                blackWidth: result.blackWidth,
+                                                whiteWidth: result.whiteWidth)
         }
         self.view = controlView
     }
@@ -31,6 +35,18 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, PatternCtrlS
         super.viewDidLoad()
     }
     
+    func convertToFillRatioAndZoomRatio(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, zoomRatio: CGFloat) {
+        let fr = blackWidth / (blackWidth + whiteWidth)
+        let zr = blackWidth / fr * Constants.UI.tileHeight
+        return (fr, zr)
+    }
+    
+    func convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat, zoomRatio: CGFloat) -> (blackWidth: CGFloat, whiteWidth: CGFloat) {
+        let bw = fillRatio * Constants.UI.tileHeight * zoomRatio
+        let ww = (1-fillRatio) * Constants.UI.tileHeight * zoomRatio
+        return (bw, ww)
+    }
+    
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
@@ -40,13 +56,27 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, PatternCtrlS
     }
     
     func modifyPattern(blackWidth: CGFloat) -> Bool {
-//        return delegate?.modifyPattern(fillRatio: fillRatio, caller: self) ?? false
-        return false
+        guard let d = self.delegate else {
+            return false
+        }
+        let p: Pattern = d.getPattern(caller: self)!
+        let ww = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).whiteWidth
+        let result = convertToFillRatioAndZoomRatio(blackWidth: blackWidth, whiteWidth: ww)
+        let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
+        let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
+        return r1 && r2
     }
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
-//        return delegate?.modifyPattern(zoomRatio: zoomRatio, caller: self) ?? false
-        return false
+        guard let d = self.delegate else {
+            return false
+        }
+        let p: Pattern = d.getPattern(caller: self)!
+        let bw = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).blackWidth
+        let result = convertToFillRatioAndZoomRatio(blackWidth: bw, whiteWidth: whiteWidth)
+        let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
+        let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
+        return r1 && r2
     }
 }
 

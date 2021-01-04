@@ -52,19 +52,19 @@ class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
     }
     
     @IBAction func blackWidthChanged(_ sender: Any) {
-//        if let t = self.target {
-//            _ = t.modifyPattern(fillRatio: CGFloat(blackSlider.value))
-//        } else {
-//            print("target for SliderControlView not set")
-//        }
+        if let t = self.target {
+            _ = t.modifyPattern(blackWidth: CGFloat(blackSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func whiteWidthChanged(_ sender: Any) {
-//        if let t = self.target {
-//            _ = t.modifyPattern(zoomRatio: CGFloat(whiteSlider.value))
-//        } else {
-//            print("target for SliderControlView not set")
-//        }
+        if let t = self.target {
+            _ = t.modifyPattern(whiteWidth: CGFloat(whiteSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     private func calcSpeed(speedSegmentIndex: Int) -> CGFloat {
@@ -84,10 +84,10 @@ class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
         }
     }
     
-    func matchControlsWithModel(pattern: Pattern) {
-        self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
-        self.directionSlider.value = Float(pattern.direction)
-//        self.blackSlider.value = Float(pattern.fillRatio)
-//        self.whiteSlider.value = Float(pattern.zoomRatio)
+    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, blackWidth: CGFloat, whiteWidth: CGFloat) {
+        self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: speed)
+        self.directionSlider.value = Float(direction)
+        self.blackSlider.value = Float(blackWidth)
+        self.whiteSlider.value = Float(whiteWidth)
     }
 }

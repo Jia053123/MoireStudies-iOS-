@@ -13,4 +13,5 @@ protocol PatternStore: UIViewController {
     func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool
     func modifyPattern(fillRatio: CGFloat, caller: CtrlViewController) -> Bool
     func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewController) -> Bool
+    func getPattern(caller: CtrlViewController) -> Pattern?
 }
