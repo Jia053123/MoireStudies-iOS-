@@ -35,6 +35,7 @@
 		8EE29F5525A054C700FF2539 /* PatternStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternStore.swift */; };
 		8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */; };
 		8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */; };
+		8EE29F8825A05BC100FF2539 /* PatternCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* PatternCtrlViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		8EE29F5425A054C700FF2539 /* PatternStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternStore.swift; sourceTree = "<group>"; };
 		8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewSch1.swift; sourceTree = "<group>"; };
 		8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewSch2.swift; sourceTree = "<group>"; };
+		8EE29F8725A05BC000FF2539 /* PatternCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternCtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 		8EE29F7E25A059B900FF2539 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8EE29F8725A05BC000FF2539 /* PatternCtrlViewController.swift */,
 				8E36F74E25931796004BC2F3 /* PatternCtrlSch1Target.swift */,
 				8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */,
 				8E3144B225A04F4200BB0399 /* PatternCtrlSch2Target.swift */,
@@ -382,6 +385,7 @@
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,
 				8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */,
+				8EE29F8825A05BC100FF2539 /* PatternCtrlViewController.swift in Sources */,
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E3144B325A04F4200BB0399 /* PatternCtrlSch2Target.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,

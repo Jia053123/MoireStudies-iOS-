@@ -8,13 +8,12 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch1: UIViewController, PatternCtrlSch1Target {
-    typealias ControlViewSubclass = SliderCtrlViewSch1
-    weak var delegate: MainViewController?
+class CtrlViewControllerSch1: UIViewController, PatternCtrlViewController, PatternCtrlSch1Target {
+    weak var delegate: PatternStore?
     
     init(frame: CGRect, pattern: Pattern?) {
         super.init(nibName: nil, bundle: nil)
-        let controlView: ControlViewSch1 = ControlViewSubclass.init(frame: frame)
+        let controlView: ControlViewSch1 = SliderCtrlViewSch1.init(frame: frame)
         controlView.target = self
         if let p = pattern {
             controlView.matchControlsWithModel(pattern: p)
