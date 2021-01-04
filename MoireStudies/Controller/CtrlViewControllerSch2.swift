@@ -8,14 +8,15 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch2: UIViewController, CtrlViewController, PatternCtrlSch2Target {
+class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Target {
+    typealias CtrlViewSch2Subclass = SliderCtrlViewSch2
     var id: Int?
     weak var delegate: PatternStore?
     
     required init(id: Int, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
-        let controlView: ControlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
+        let controlView: ControlViewSch2 = CtrlViewSch2Subclass.init(frame: frame)
         controlView.target = self
         if let p = pattern {
             let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio)

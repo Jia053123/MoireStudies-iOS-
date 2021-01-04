@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternStore {
-    typealias CtrlViewControllerSubclass = CtrlViewControllerSch1
+    typealias CtrlViewControllerSubclass = CtrlViewControllerSch2
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []

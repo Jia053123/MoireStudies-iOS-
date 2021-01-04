@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PatternCtrlSch2Target: CtrlViewController {
+protocol CtrlSch2Target: CtrlViewController {
     func modifyPattern(speed: CGFloat) -> Bool
     func modifyPattern(direction: CGFloat) -> Bool
     func modifyPattern(blackWidth: CGFloat) -> Bool
