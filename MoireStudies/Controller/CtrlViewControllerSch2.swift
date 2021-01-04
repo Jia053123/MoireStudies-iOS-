@@ -37,14 +37,14 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
     }
     
     func convertToFillRatioAndZoomRatio(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, zoomRatio: CGFloat) {
-        let fr = blackWidth / (blackWidth + whiteWidth)
-        let zr = blackWidth / fr * Constants.UI.tileHeight
+        let fr: CGFloat = blackWidth / (blackWidth + whiteWidth)
+        let zr: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)
         return (fr, zr)
     }
     
     func convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat, zoomRatio: CGFloat) -> (blackWidth: CGFloat, whiteWidth: CGFloat) {
-        let bw = fillRatio * Constants.UI.tileHeight * zoomRatio
-        let ww = (1-fillRatio) * Constants.UI.tileHeight * zoomRatio
+        let bw: CGFloat = fillRatio * Constants.UI.tileHeight * zoomRatio
+        let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * zoomRatio
         return (bw, ww)
     }
     
@@ -57,24 +57,28 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
     }
     
     func modifyPattern(blackWidth: CGFloat) -> Bool {
+        print("setting blackWidth to: ", blackWidth)
         guard let d = self.delegate else {
             return false
         }
         let p: Pattern = d.getPattern(caller: self)!
         let ww = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).whiteWidth
         let result = convertToFillRatioAndZoomRatio(blackWidth: blackWidth, whiteWidth: ww)
+        print("bw: ", blackWidth, "cww: ", ww, "fillr: ", result.fillRatio, "zoomr: ", result.zoomRatio)
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
         let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
         return r1 && r2
     }
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
+        print("setting whiteWidth to: ", whiteWidth)
         guard let d = self.delegate else {
             return false
         }
         let p: Pattern = d.getPattern(caller: self)!
         let bw = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).blackWidth
         let result = convertToFillRatioAndZoomRatio(blackWidth: bw, whiteWidth: whiteWidth)
+        print("cbw: ", bw, "ww: ", whiteWidth, "fillr: ", result.fillRatio, "zoomr: ", result.zoomRatio)
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
         let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
         return r1 && r2

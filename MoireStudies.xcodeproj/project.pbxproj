@@ -22,6 +22,7 @@
 		8E36F74F25931796004BC2F3 /* CtrlSch1Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* CtrlSch1Target.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
+		8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */; };
 		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
@@ -72,6 +73,8 @@
 		8E36F74E25931796004BC2F3 /* CtrlSch1Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlSch1Target.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
+		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2Tests.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8E9690E12596FA3700C69DDC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -160,7 +163,9 @@
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
 				8E96B7B5257F33D3007527E2 /* Info.plist */,
 				8E96B7B6257F33D3007527E2 /* main.m */,
+				8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */,
 				8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */,
+				8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */,
 			);
 			path = MoireStudies;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 					};
 					8E96B7BB257F33D4007527E2 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 						TestTargetID = 8E96B7A0257F33CF007527E2;
 					};
 					8E96B7C6257F33D4007527E2 = {
@@ -411,6 +417,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */,
+				8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +624,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MoireStudiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -627,6 +635,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudiesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudies/MoireStudiesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoireStudies.app/MoireStudies";
 			};
@@ -637,6 +648,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = MoireStudiesTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
@@ -647,6 +659,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudiesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudies/MoireStudiesTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MoireStudies.app/MoireStudies";
 			};

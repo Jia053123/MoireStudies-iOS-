@@ -37,8 +37,9 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func initPatternModel() {
-        patternsModel.append(Pattern.demoPattern1())
-        patternsModel.append(Pattern.demoPattern2())
+        //patternsModel.append(Pattern.demoPattern1())
+//        patternsModel.append(Pattern.demoPattern2())
+        patternsModel.append(Pattern.debugPattern())
     }
     
     func getCtrlViewControllerId(index: Int) -> Int {
@@ -67,7 +68,7 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
-        print("speed is set to: ", speed)
+        print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             return false
         }
@@ -81,7 +82,7 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool {
-        print("direction is set to: ", direction)
+        print("setting direction to: ", direction)
         guard Constants.Bounds.directionRange.contains(direction) else {
             return false
         }
@@ -95,7 +96,7 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func modifyPattern(fillRatio: CGFloat, caller: CtrlViewController) -> Bool {
-        print("fillRatio is set to: ", fillRatio)
+        print("setting fillRatio to: ", fillRatio)
         guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
             return false
         }
@@ -109,7 +110,7 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewController) -> Bool {
-        print("zoomRatio is set to: ", zoomRatio)
+        print("setting zoomRatio to: ", zoomRatio)
         guard Constants.Bounds.zoomRatioRange.contains(zoomRatio) else {
             return false
         }

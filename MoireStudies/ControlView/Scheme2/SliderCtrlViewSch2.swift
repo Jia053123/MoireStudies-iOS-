@@ -33,6 +33,10 @@ class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
         }
         directionSlider.minimumValue = 0.0
         directionSlider.maximumValue = 2 * Float.pi
+        blackSlider.minimumValue = 10.0
+        blackSlider.maximumValue = 20.0
+        whiteSlider.minimumValue = 10.0
+        whiteSlider.maximumValue = 20.0
     }
     
     @IBAction func speedChanged(_ sender: Any) {

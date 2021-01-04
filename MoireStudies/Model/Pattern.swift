@@ -14,6 +14,10 @@ struct Pattern : Equatable {
     var fillRatio: CGFloat
     var zoomRatio: CGFloat
     
+    static func debugPattern() -> Pattern {
+        return Pattern(speed: 10.0, direction: 0.0, fillRatio: 0.5, zoomRatio: 2.0)
+    }
+    
     static func defaultPattern() -> Pattern {
         return Pattern(speed: 10.0, direction: 0.0, fillRatio: 0.5, zoomRatio: 1.0)
     }
