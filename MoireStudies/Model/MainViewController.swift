@@ -37,9 +37,8 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     func initPatternModel() {
-        //patternsModel.append(Pattern.demoPattern1())
-//        patternsModel.append(Pattern.demoPattern2())
-        patternsModel.append(Pattern.debugPattern())
+        patternsModel.append(Pattern.demoPattern1())
+        patternsModel.append(Pattern.demoPattern2())
     }
     
     func getCtrlViewControllerId(index: Int) -> Int {

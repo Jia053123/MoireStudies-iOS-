@@ -31,7 +31,6 @@
 		8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B0257F33D3007527E2 /* Assets.xcassets */; };
 		8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */; };
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
-		8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */; };
 		8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */; };
 		8EE29F5525A054C700FF2539 /* PatternStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternStore.swift */; };
 		8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */; };
@@ -89,7 +88,6 @@
 		8E96B7B5257F33D3007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7B6257F33D3007527E2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8E96B7BC257F33D4007527E2 /* MoireStudiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoireStudiesTests.m; sourceTree = "<group>"; };
 		8E96B7C2257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoireStudiesUITests.m; sourceTree = "<group>"; };
@@ -163,7 +161,6 @@
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
 				8E96B7B5257F33D3007527E2 /* Info.plist */,
 				8E96B7B6257F33D3007527E2 /* main.m */,
-				8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */,
 				8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */,
 				8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */,
 			);
@@ -173,7 +170,7 @@
 		8E96B7BF257F33D4007527E2 /* MoireStudiesTests */ = {
 			isa = PBXGroup;
 			children = (
-				8E96B7C0257F33D4007527E2 /* MoireStudiesTests.m */,
+				8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */,
 				8E96B7C2257F33D4007527E2 /* Info.plist */,
 			);
 			path = MoireStudiesTests;
@@ -416,7 +413,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E96B7C1257F33D4007527E2 /* MoireStudiesTests.m in Sources */,
 				8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
