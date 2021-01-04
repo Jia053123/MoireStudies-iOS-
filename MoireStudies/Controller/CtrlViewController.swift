@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PatternCtrlViewController: UIViewController {
+protocol CtrlViewController: UIViewController {
+    var id: Int? {get set}
     var delegate: PatternStore? { get set }
 }

@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 protocol PatternStore: UIViewController {
-    func modifyPattern(speed: CGFloat, caller: CtrlViewControllerSch1) -> Bool
-    func modifyPattern(direction: CGFloat, caller: CtrlViewControllerSch1) -> Bool
-    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewControllerSch1) -> Bool
-    func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewControllerSch1) -> Bool
+    func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool
+    func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool
+    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewController) -> Bool
+    func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewController) -> Bool
 }
