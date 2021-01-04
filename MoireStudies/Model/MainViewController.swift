@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternStore {
-    typealias CtrlViewControllerSubclass = CtrlViewControllerSch2
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
@@ -22,12 +21,24 @@ class MainViewController: UIViewController, PatternStore {
         
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
-            let cvc: CtrlViewController = CtrlViewControllerSubclass.init(id: self.getCtrlViewControllerId(index: i),
-                                                                          frame: controlFrames[i],
-                                                                          pattern: patternsModel[i])
-            cvc.delegate = self
-            mainView.addSubview(cvc.view)
-            controlViewControllers.append(cvc)
+            var cvc: CtrlViewController?
+            switch Settings.interfaceSetting {
+            case UISettings.controlScheme1Slider:
+                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: patternsModel[i])
+            case UISettings.controlScheme2Slider:
+                cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: patternsModel[i])
+            case UISettings.controlScheme1Gesture:
+                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: patternsModel[i])
+            }
+            cvc!.delegate = self
+            mainView.addSubview(cvc!.view)
+            controlViewControllers.append(cvc!)
             if (i == 0) {
                 mainView.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
             } else if (i == 1) {

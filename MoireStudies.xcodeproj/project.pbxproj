@@ -23,6 +23,7 @@
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
 		8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */; };
+		8E60787625A3D3C6002EB000 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* Settings.swift */; };
 		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
@@ -74,6 +75,7 @@
 		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2Tests.swift; sourceTree = "<group>"; };
+		8E60787525A3D3C6002EB000 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8E9690E12596FA3700C69DDC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				8E96B7A8257F33CF007527E2 /* SceneDelegate.m */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E31449125A0393A00BB0399 /* Constants.swift */,
+				8E60787525A3D3C6002EB000 /* Settings.swift */,
 				8EE29F7925A0591500FF2539 /* Model */,
 				8EE29F7E25A059B900FF2539 /* Controller */,
 				8EE29F7825A058E100FF2539 /* PatternView */,
@@ -401,6 +404,7 @@
 				8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */,
 				8E8D95A3258C3165000CD481 /* MainView.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
+				8E60787625A3D3C6002EB000 /* Settings.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
 				8E36F74F25931796004BC2F3 /* CtrlSch1Target.swift in Sources */,
