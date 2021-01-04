@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol CtrlViewController: UIViewController {
-    var id: Int? {get set}
+    var id: Int? { get }
     var delegate: PatternStore? { get set }
+    init(id: Int, frame: CGRect, pattern: Pattern?)
 }

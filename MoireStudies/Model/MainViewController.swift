@@ -23,8 +23,7 @@ class MainViewController: UIViewController, PatternStore {
         
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
-            let cvc: CtrlViewController = CtrlViewControllerSubclass.init(frame: controlFrames[i], pattern: patternsModel[i])
-            cvc.id = i
+            let cvc: CtrlViewController = CtrlViewControllerSubclass.init(id: i, frame: controlFrames[i], pattern: patternsModel[i])
             cvc.delegate = self
             mainView.addSubview(cvc.view)
             controlViewControllers.append(cvc)

@@ -12,7 +12,8 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, PatternCtrlS
     var id: Int?
     weak var delegate: PatternStore?
     
-    init(frame: CGRect, pattern: Pattern?) {
+    required init(id: Int, frame: CGRect, pattern: Pattern?) {
+        self.id = id
         super.init(nibName: nil, bundle: nil)
         let controlView: ControlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
         controlView.target = self
