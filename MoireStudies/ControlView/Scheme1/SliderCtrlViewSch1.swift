@@ -13,7 +13,7 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
-    @IBOutlet weak var zoomRatioSlider: UISlider!
+    @IBOutlet weak var scaleFactorSlider: UISlider!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -59,9 +59,9 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         }
     }
     
-    @IBAction func zoomRatioChanged(_ sender: Any) {
+    @IBAction func scaleFactorChanged(_ sender: Any) {
         if let t = self.target {
-            _ = t.modifyPattern(zoomRatio: CGFloat(zoomRatioSlider.value))
+            _ = t.modifyPattern(scaleFactor: CGFloat(scaleFactorSlider.value))
         } else {
             print("target for SliderControlView not set")
         }
@@ -88,6 +88,6 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: pattern.speed)
         self.directionSlider.value = Float(pattern.direction)
         self.fillRatioSlider.value = Float(pattern.fillRatio)
-        self.zoomRatioSlider.value = Float(pattern.zoomRatio)
+        self.scaleFactorSlider.value = Float(pattern.scaleFactor)
     }
 }

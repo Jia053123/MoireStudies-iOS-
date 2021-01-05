@@ -12,5 +12,5 @@ protocol CtrlSch1Target: CtrlViewController {
     func modifyPattern(speed: CGFloat) -> Bool
     func modifyPattern(direction: CGFloat) -> Bool
     func modifyPattern(fillRatio: CGFloat) -> Bool
-    func modifyPattern(zoomRatio: CGFloat) -> Bool
+    func modifyPattern(scaleFactor: CGFloat) -> Bool
 }

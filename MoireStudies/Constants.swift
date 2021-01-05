@@ -20,6 +20,6 @@ struct Constants {
         static let speedRange: ClosedRange<CGFloat> = 10.0...50.0
         static let directionRange: ClosedRange<CGFloat> = -1*CGFloat.infinity...CGFloat.infinity
         static let fillRatioRange: ClosedRange<CGFloat> = 0.05...0.95
-        static let zoomRatioRange: ClosedRange<CGFloat> = 1.0...20.0
+        static let scaleFactorRange: ClosedRange<CGFloat> = 1.0...20.0
     }
 }

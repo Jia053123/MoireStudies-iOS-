@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    let schemeSettingItems = ["fill ratio and scale ratio", "black width and white width"]
+    let schemeSettingItems = ["fill ratio and scale factor", "black width and white width"]
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -27,7 +27,7 @@ class SettingsViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch schemeSettingItems[indexPath.row] {
-        case "fill ratio and scale ratio":
+        case "fill ratio and scale factor":
             Settings.interfaceSetting = UISettings.controlScheme1Slider
         case "black width and white width":
             Settings.interfaceSetting = UISettings.controlScheme2Slider

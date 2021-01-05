@@ -19,7 +19,7 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
         let controlView: ControlViewSch2 = CtrlViewSch2Subclass.init(frame: frame)
         controlView.target = self
         if let p = pattern {
-            let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio)
+            let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor)
             controlView.matchControlsWithValues(speed: p.speed,
                                                 direction: p.direction,
                                                 blackWidth: result.blackWidth,
@@ -32,15 +32,15 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
         super.init(coder: coder)
     }
     
-    func convertToFillRatioAndZoomRatio(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, zoomRatio: CGFloat) {
+    func convertToFillRatioAndScaleFactor(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, scaleFactor: CGFloat) {
         let fr: CGFloat = blackWidth / (blackWidth + whiteWidth)
-        let zr: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)
-        return (fr, zr)
+        let sf: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)
+        return (fr, sf)
     }
     
-    func convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat, zoomRatio: CGFloat) -> (blackWidth: CGFloat, whiteWidth: CGFloat) {
-        let bw: CGFloat = fillRatio * Constants.UI.tileHeight * zoomRatio
-        let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * zoomRatio
+    func convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat, scaleFactor: CGFloat) -> (blackWidth: CGFloat, whiteWidth: CGFloat) {
+        let bw: CGFloat = fillRatio * Constants.UI.tileHeight * scaleFactor
+        let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * scaleFactor
         return (bw, ww)
     }
     
@@ -58,11 +58,10 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
             return false
         }
         let p: Pattern = d.getPattern(caller: self)!
-        let ww = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).whiteWidth
-        let result = convertToFillRatioAndZoomRatio(blackWidth: blackWidth, whiteWidth: ww)
-        print("bw: ", blackWidth, "cww: ", ww, "fillr: ", result.fillRatio, "zoomr: ", result.zoomRatio)
+        let ww = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor).whiteWidth
+        let result = convertToFillRatioAndScaleFactor(blackWidth: blackWidth, whiteWidth: ww)
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
-        let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
+        let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
         return r1 && r2
     }
     
@@ -72,11 +71,10 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
             return false
         }
         let p: Pattern = d.getPattern(caller: self)!
-        let bw = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, zoomRatio: p.zoomRatio).blackWidth
-        let result = convertToFillRatioAndZoomRatio(blackWidth: bw, whiteWidth: whiteWidth)
-        print("cbw: ", bw, "ww: ", whiteWidth, "fillr: ", result.fillRatio, "zoomr: ", result.zoomRatio)
+        let bw = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor).blackWidth
+        let result = convertToFillRatioAndScaleFactor(blackWidth: bw, whiteWidth: whiteWidth)
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
-        let r2 = d.modifyPattern(zoomRatio: result.zoomRatio, caller: self)
+        let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
         return r1 && r2
     }
 }

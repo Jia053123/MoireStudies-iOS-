@@ -122,15 +122,15 @@ class MainViewController: UIViewController, PatternStore {
         return true
     }
     
-    func modifyPattern(zoomRatio: CGFloat, caller: CtrlViewController) -> Bool {
-        print("setting zoomRatio to: ", zoomRatio)
-        guard Constants.Bounds.zoomRatioRange.contains(zoomRatio) else {
+    func modifyPattern(scaleFactor: CGFloat, caller: CtrlViewController) -> Bool {
+        print("setting scaleFactor to: ", scaleFactor)
+        guard Constants.Bounds.scaleFactorRange.contains(scaleFactor) else {
             return false
         }
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        patternsModel[index].zoomRatio = zoomRatio
+        patternsModel[index].scaleFactor = scaleFactor
         let mainView = self.view as! MainView
         mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
         return true

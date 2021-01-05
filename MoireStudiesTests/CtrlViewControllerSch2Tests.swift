@@ -19,22 +19,22 @@ class CtrlViewControllerSch2Tests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testConvertToFillRatioAndZoomRatio() {
-        let result1 = controllerSch2.convertToFillRatioAndZoomRatio(blackWidth: 10, whiteWidth: 10)
+    func testConvertToFillRatioAndScaleFactor() {
+        let result1 = controllerSch2.convertToFillRatioAndScaleFactor(blackWidth: 10, whiteWidth: 10)
         XCTAssert(result1.fillRatio == 0.5, String(format: "fillRatio wrong: %f", result1.fillRatio))
-        XCTAssert(result1.zoomRatio == 2.5, String(format: "zoomRatio wrong: %f", result1.zoomRatio))
+        XCTAssert(result1.scaleFactor == 2.5, String(format: "scaleFactor wrong: %f", result1.scaleFactor))
         
-        let result2 = controllerSch2.convertToFillRatioAndZoomRatio(blackWidth: 10, whiteWidth: 40)
+        let result2 = controllerSch2.convertToFillRatioAndScaleFactor(blackWidth: 10, whiteWidth: 40)
         XCTAssert(result2.fillRatio == 0.2, String(format: "fillRatio wrong: %f", result2.fillRatio))
-        XCTAssert(result2.zoomRatio == 6.25, String(format: "zoomRatio wrong: %f", result2.zoomRatio))
+        XCTAssert(result2.scaleFactor == 6.25, String(format: "scaleFactor wrong: %f", result2.scaleFactor))
     }
     
     func testConvertToBlackWidthAndWhiteWidth() {
-        let result1 = controllerSch2.convertToBlackWidthAndWhiteWidth(fillRatio: 0.5, zoomRatio: 2.5)
+        let result1 = controllerSch2.convertToBlackWidthAndWhiteWidth(fillRatio: 0.5, scaleFactor: 2.5)
         XCTAssert(result1.blackWidth == 10.0, String(format: "blackWidth wrong: %f", result1.blackWidth))
         XCTAssert(result1.whiteWidth == 10.0, String(format: "whiteWidth wrong: %f", result1.whiteWidth))
         
-        let result2 = controllerSch2.convertToBlackWidthAndWhiteWidth(fillRatio: 0.2, zoomRatio: 6.25)
+        let result2 = controllerSch2.convertToBlackWidthAndWhiteWidth(fillRatio: 0.2, scaleFactor: 6.25)
         XCTAssert(result2.blackWidth == 10.0, String(format: "blackWidth wrong: %f", result2.blackWidth))
         XCTAssert(result2.whiteWidth == 40.0, String(format: "whiteWidth wrong: %f", result2.whiteWidth))
     }

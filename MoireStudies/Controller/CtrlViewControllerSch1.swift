@@ -40,8 +40,8 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Targ
         return delegate?.modifyPattern(fillRatio: fillRatio, caller: self) ?? false
     }
     
-    func modifyPattern(zoomRatio: CGFloat) -> Bool {
-        return delegate?.modifyPattern(zoomRatio: zoomRatio, caller: self) ?? false
+    func modifyPattern(scaleFactor: CGFloat) -> Bool {
+        return delegate?.modifyPattern(scaleFactor: scaleFactor, caller: self) ?? false
     }
 }
 

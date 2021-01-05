@@ -69,9 +69,9 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
             self.animateTiles()
         }
         
-        if oldPattern.direction != newPattern.direction || oldPattern.zoomRatio != newPattern.zoomRatio {
+        if oldPattern.direction != newPattern.direction || oldPattern.scaleFactor != newPattern.scaleFactor {
             backingView.transform =
-                backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.zoomRatio), y: CGFloat(newPattern.zoomRatio))
+                backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.scaleFactor), y: CGFloat(newPattern.scaleFactor))
         }
         
         if oldPattern.fillRatio != newPattern.fillRatio {
