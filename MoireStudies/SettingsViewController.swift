@@ -24,4 +24,15 @@ class SettingsViewController: UITableViewController {
         cell.textLabel?.text = schemeSettingItems[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch schemeSettingItems[indexPath.row] {
+        case "fill ratio and scale ratio":
+            Settings.interfaceSetting = UISettings.controlScheme1Slider
+        case "black width and white width":
+            Settings.interfaceSetting = UISettings.controlScheme2Slider
+        default:
+            Settings.interfaceSetting = UISettings.controlScheme1Slider
+        }
+    }
 }

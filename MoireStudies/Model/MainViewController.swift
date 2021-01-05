@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternStore {
+    @IBOutlet weak var exitButton: UIButton!
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
@@ -18,7 +19,7 @@ class MainViewController: UIViewController, PatternStore {
         self.initPatternModel()
         let mainView = self.view as! MainView
         mainView.setUpMoire(patterns: patternsModel)
-        
+        // set up control views
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
             var cvc: CtrlViewController?
@@ -39,6 +40,7 @@ class MainViewController: UIViewController, PatternStore {
             cvc!.delegate = self
             mainView.addSubview(cvc!.view)
             controlViewControllers.append(cvc!)
+            // set up mask for each of the control view
             if (i == 0) {
                 mainView.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
             } else if (i == 1) {
@@ -131,6 +133,10 @@ class MainViewController: UIViewController, PatternStore {
         let mainView = self.view as! MainView
         mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
         return true
+    }
+    
+    @IBAction func exitToSettings(_ sender: Any) {
+        
     }
 }
 

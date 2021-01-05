@@ -15,14 +15,31 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="MainView" customModule="MoireStudies" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
+                                <rect key="frame" x="627" y="5" width="30" height="30"/>
+                                <state key="normal" title="ESC"/>
+                                <connections>
+                                    <action selector="exitToSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W3n-7i-63E"/>
+                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="Pli-5s-LsP"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="RFr-pC-Lpc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="lVc-fs-e00"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
+                    <connections>
+                        <outlet property="exitButton" destination="ifa-h7-T8I" id="8Fl-I5-JrW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-203" y="115"/>
+            <point key="canvasLocation" x="-205" y="156"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="muL-zt-Gr6">
