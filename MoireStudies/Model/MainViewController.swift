@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternStore {
-    @IBOutlet weak var exitButton: UIButton!
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
@@ -47,7 +46,6 @@ class MainViewController: UIViewController, PatternStore {
                 mainView.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
             }
         }
-        mainView.bringSubviewToFront(exitButton)
     }
     
     func initPatternModel() {
@@ -134,10 +132,6 @@ class MainViewController: UIViewController, PatternStore {
         let mainView = self.view as! MainView
         mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
         return true
-    }
-    
-    @IBAction func exitToSettings(_ sender: Any) {
-        print("pressed")
     }
 }
 

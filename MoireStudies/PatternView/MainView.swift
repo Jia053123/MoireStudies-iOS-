@@ -9,17 +9,22 @@ import UIKit
 import Foundation
 
 class MainView: UIView {
+    @IBOutlet weak var exitButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
     private var patternViews: Array<PatternView> = []
     private var maskViews: Array<MaskView> = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.white
+        self.initHelper()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        self.initHelper()
+    }
+    
+    func initHelper() {
         self.backgroundColor = UIColor.white
     }
     
@@ -31,6 +36,7 @@ class MainView: UIView {
             self.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
+        self.bringSubviewToFront(exitButton)
     }
     
     func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {

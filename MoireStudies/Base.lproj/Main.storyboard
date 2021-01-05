@@ -17,10 +17,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
-                                <rect key="frame" x="627" y="5" width="30" height="30"/>
-                                <state key="normal" title="ESC"/>
+                                <rect key="frame" x="625" y="3" width="32" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
+                                <state key="normal" title="ESC">
+                                    <color key="titleShadowColor" systemColor="labelColor"/>
+                                </state>
                                 <connections>
-                                    <action selector="exitToSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W3n-7i-63E"/>
                                     <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" id="4Mc-zB-E22"/>
                                 </connections>
                             </button>
@@ -28,14 +30,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="5" id="RFr-pC-Lpc"/>
+                            <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="RFr-pC-Lpc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="lVc-fs-e00"/>
                         </constraints>
+                        <connections>
+                            <outlet property="exitButton" destination="ifa-h7-T8I" id="iBX-BP-Y1t"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
-                    <connections>
-                        <outlet property="exitButton" destination="ifa-h7-T8I" id="8Fl-I5-JrW"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,6 +76,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
