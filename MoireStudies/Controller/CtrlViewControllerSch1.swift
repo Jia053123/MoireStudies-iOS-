@@ -28,10 +28,6 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Targ
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }

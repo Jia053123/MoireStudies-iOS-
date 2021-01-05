@@ -32,10 +32,6 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
         super.init(coder: coder)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     func convertToFillRatioAndZoomRatio(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, zoomRatio: CGFloat) {
         let fr: CGFloat = blackWidth / (blackWidth + whiteWidth)
         let zr: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)

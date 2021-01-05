@@ -41,7 +41,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="wcy-jg-g8r"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="wcy-jg-g8r"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

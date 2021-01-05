@@ -13,8 +13,8 @@ class MainViewController: UIViewController, PatternStore {
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.initPatternModel()
         let mainView = self.view as! MainView
         mainView.setUpMoire(patterns: patternsModel)

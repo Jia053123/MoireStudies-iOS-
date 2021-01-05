@@ -11,11 +11,6 @@ import UIKit
 class SettingsViewController: UITableViewController {
     let schemeSettingItems = ["fill ratio and scale ratio", "black width and white width"]
     
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        tableView.dataSource = self
-//    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
