@@ -21,7 +21,7 @@
                                 <state key="normal" title="ESC"/>
                                 <connections>
                                     <action selector="exitToSettings:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W3n-7i-63E"/>
-                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="Pli-5s-LsP"/>
+                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" id="4Mc-zB-E22"/>
                                 </connections>
                             </button>
                         </subviews>

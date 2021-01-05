@@ -47,6 +47,7 @@ class MainViewController: UIViewController, PatternStore {
                 mainView.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
             }
         }
+        mainView.bringSubviewToFront(exitButton)
     }
     
     func initPatternModel() {
@@ -136,7 +137,7 @@ class MainViewController: UIViewController, PatternStore {
     }
     
     @IBAction func exitToSettings(_ sender: Any) {
-        
+        print("pressed")
     }
 }
 
