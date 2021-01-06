@@ -12,4 +12,5 @@ protocol CtrlViewController: UIViewController {
     var id: Int? { get }
     var delegate: PatternDataSource? { get set }
     init(id: Int, frame: CGRect, pattern: Pattern?)
+    func matchControlsWithModel(pattern: Pattern)
 }

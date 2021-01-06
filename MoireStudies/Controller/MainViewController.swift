@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternDataSource {
-    @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     var initSettings: InitSettings?
     private var moireModel: MoireModel?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
@@ -19,7 +20,7 @@ class MainViewController: UIViewController, PatternDataSource {
         super.viewDidAppear(animated)
         self.initModel()
         let mainView = self.view as! MainView
-        mainView.setUpMoire(patterns: moireModel!.model)
+        mainView.setUp(patterns: moireModel!.model)
         // set up control views
         assert(controlFrames.count >= moireModel!.model.count)
         for i in 0..<moireModel!.model.count {
@@ -142,6 +143,15 @@ class MainViewController: UIViewController, PatternDataSource {
         return true
     }
     
+    func reloadMoire() {
+        let mainView = self.view as! MainView
+        for i in 0..<self.moireModel!.model.count {
+            mainView.modifiyPatternView(patternViewIndex: i, newPattern: self.moireModel!.model[i])
+            let cvc = self.controlViewControllers[i]
+            cvc.matchControlsWithModel(pattern: self.moireModel!.model[i])
+        }
+    }
+    
     func saveMoire() -> Bool {
         do {
             UserDefaults.standard.set(try PropertyListEncoder().encode(self.moireModel), forKey: "Moire")
@@ -152,9 +162,15 @@ class MainViewController: UIViewController, PatternDataSource {
         }
     }
     
-    @IBAction func exitButtonPressed(_ sender: Any) {
+    @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
         performSegue(withIdentifier: "showSettingsView", sender: self)
+    }
+    
+    @IBAction func resetButtonPressed(_ sender: Any) {
+        print("resetting")
+        self.moireModel!.reset()
+        self.reloadMoire()
     }
     
     override var prefersStatusBarHidden: Bool {

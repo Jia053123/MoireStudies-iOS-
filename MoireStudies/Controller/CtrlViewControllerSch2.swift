@@ -17,15 +17,11 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
         self.id = id
         super.init(nibName: nil, bundle: nil)
         let controlView: ControlViewSch2 = CtrlViewSch2Subclass.init(frame: frame)
+        self.view = controlView
         controlView.target = self
         if let p = pattern {
-            let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor)
-            controlView.matchControlsWithValues(speed: p.speed,
-                                                direction: p.direction,
-                                                blackWidth: result.blackWidth,
-                                                whiteWidth: result.whiteWidth)
+            self.matchControlsWithModel(pattern: p)
         }
-        self.view = controlView
     }
     
     required init?(coder: NSCoder) {
@@ -76,6 +72,16 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewController, CtrlSch2Targ
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
         let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
         return r1 && r2
+    }
+    
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch2
+        let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: pattern.fillRatio,
+                                                           scaleFactor: pattern.scaleFactor)
+        cv.matchControlsWithValues(speed: pattern.speed,
+                                   direction: pattern.direction,
+                                   blackWidth: result.blackWidth,
+                                   whiteWidth: result.whiteWidth)
     }
 }
 

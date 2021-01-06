@@ -9,7 +9,8 @@ import UIKit
 import Foundation
 
 class MainView: UIView {
-    @IBOutlet weak var exitButton: UIButton!
+    @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
     private var patternViews: Array<PatternView> = []
     private var maskViews: Array<MaskView> = []
@@ -28,7 +29,7 @@ class MainView: UIView {
         self.backgroundColor = UIColor.white
     }
     
-    func setUpMoire(patterns: Array<Pattern>) {
+    func setUp(patterns: Array<Pattern>) {
         patternViews = []
         for pattern in patterns {
             let newPatternView: PatternView = PatternViewClass.init(frame: self.bounds)
@@ -36,7 +37,8 @@ class MainView: UIView {
             self.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
-        self.bringSubviewToFront(exitButton)
+        self.bringSubviewToFront(gearButton)
+        self.bringSubviewToFront(resetButton)
     }
     
     func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {

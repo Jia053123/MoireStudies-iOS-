@@ -17,11 +17,11 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Targ
         self.id = id
         super.init(nibName: nil, bundle: nil)
         let controlView: ControlViewSch1 = CtrlViewSch1Subclass.init(frame: frame)
+        self.view = controlView
         controlView.target = self
         if let p = pattern {
-            controlView.matchControlsWithModel(pattern: p)
+            self.matchControlsWithModel(pattern: p)
         }
-        self.view = controlView
     }
     
     required init?(coder: NSCoder) {
@@ -42,6 +42,11 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Targ
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
         return delegate?.modifyPattern(scaleFactor: scaleFactor, caller: self) ?? false
+    }
+    
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch1
+        cv.matchControlsWithModel(pattern: pattern)
     }
 }
 

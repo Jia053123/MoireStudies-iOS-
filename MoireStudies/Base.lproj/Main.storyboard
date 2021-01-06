@@ -27,7 +27,16 @@
                                     <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
                                 </state>
                                 <connections>
-                                    <action selector="exitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
+                                    <action selector="gearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ANp-Wm-Nv6">
+                                <rect key="frame" x="596.5" y="6" width="25" height="24"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="arrow.clockwise.circle.fill" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="43w-xx-Qx8"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -35,21 +44,25 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="RFr-pC-Lpc"/>
+                            <constraint firstItem="ANp-Wm-Nv6" firstAttribute="centerY" secondItem="ifa-h7-T8I" secondAttribute="centerY" id="h4c-0T-1qz"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="lVc-fs-e00"/>
+                            <constraint firstItem="ifa-h7-T8I" firstAttribute="leading" secondItem="ANp-Wm-Nv6" secondAttribute="trailing" constant="10" id="ylR-sq-vmH"/>
                         </constraints>
                         <connections>
-                            <outlet property="exitButton" destination="ifa-h7-T8I" id="iBX-BP-Y1t"/>
+                            <outlet property="gearButton" destination="ifa-h7-T8I" id="iBX-BP-Y1t"/>
+                            <outlet property="resetButton" destination="ANp-Wm-Nv6" id="noH-gE-GOL"/>
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>
-                        <outlet property="exitButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
+                        <outlet property="gearButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
+                        <outlet property="resetButton" destination="ANp-Wm-Nv6" id="Vsd-Mg-mrf"/>
                         <segue destination="Pci-Ue-xWn" kind="presentation" identifier="showSettingsView" id="ocz-K8-uQg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205" y="156"/>
+            <point key="canvasLocation" x="-205.54722638680661" y="156"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="muL-zt-Gr6">
@@ -85,6 +98,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.clockwise.circle.fill" catalog="system" width="128" height="121"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
