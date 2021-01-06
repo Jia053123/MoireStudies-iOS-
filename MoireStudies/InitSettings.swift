@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Settings {
+struct InitSettings {
     var renderSetting: RenderSettings = RenderSettings.coreAnimation
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
 }

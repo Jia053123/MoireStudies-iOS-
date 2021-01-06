@@ -26,7 +26,7 @@
                                     <color key="titleShadowColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="4Mc-zB-E22"/>
+                                    <action selector="exitButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,6 +41,10 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
+                    <connections>
+                        <outlet property="exitButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
+                        <segue destination="Pci-Ue-xWn" kind="presentation" identifier="showSettingsView" modalPresentationStyle="fullScreen" id="ocz-K8-uQg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -69,6 +73,7 @@
                             <outlet property="delegate" destination="Pci-Ue-xWn" id="xrc-ST-7Hf"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="fm4-e5-AaX"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainView" animates="NO" modalPresentationStyle="fullScreen" id="e76-fr-0c3"/>
                     </connections>

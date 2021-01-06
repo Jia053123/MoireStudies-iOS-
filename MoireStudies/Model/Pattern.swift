@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct Pattern : Equatable {
+struct Pattern: Equatable, Codable {
     var speed: CGFloat
     var direction: CGFloat
     var fillRatio: CGFloat

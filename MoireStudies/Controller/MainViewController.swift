@@ -9,33 +9,34 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController, PatternDataSource {
-    var settings: Settings?
-    private var patternsModel: Array<Pattern> = []
+    @IBOutlet weak var exitButton: UIButton!
+    var initSettings: InitSettings?
+    private var moireModel: MoireModel?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.initPatternModel()
+        self.initModel()
         let mainView = self.view as! MainView
-        mainView.setUpMoire(patterns: patternsModel)
+        mainView.setUpMoire(patterns: moireModel!.model)
         // set up control views
-        assert(controlFrames.count >= patternsModel.count)
-        for i in 0..<patternsModel.count {
+        assert(controlFrames.count >= moireModel!.model.count)
+        for i in 0..<moireModel!.model.count {
             var cvc: CtrlViewController?
-            switch self.settings!.interfaceSetting {
+            switch self.initSettings!.interfaceSetting {
             case UISettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: patternsModel[i])
+                                                      pattern: moireModel!.model[i])
             case UISettings.controlScheme2Slider:
                 cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: patternsModel[i])
+                                                      pattern: moireModel!.model[i])
             case UISettings.controlScheme1Gesture:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: patternsModel[i])
+                                                      pattern: moireModel!.model[i])
             }
             cvc!.delegate = self
             mainView.addSubview(cvc!.view)
@@ -49,9 +50,15 @@ class MainViewController: UIViewController, PatternDataSource {
         }
     }
     
-    func initPatternModel() {
-        patternsModel.append(Pattern.demoPattern1())
-        patternsModel.append(Pattern.demoPattern2())
+    func initModel() {
+        do {
+            guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
+            self.moireModel = try PropertyListDecoder().decode(MoireModel.self, from: data)
+        } catch {
+            print("problem loading saved moire; loading the default")
+            self.moireModel = MoireModel()
+            self.moireModel?.reset()
+        }
     }
     
     func getCtrlViewControllerId(index: Int) -> Int {
@@ -76,7 +83,7 @@ class MainViewController: UIViewController, PatternDataSource {
         guard let i = caller.id else {
             return nil
         }
-        return self.patternsModel[getCtrlViewControllerIndex(id: i)]
+        return self.moireModel!.model[getCtrlViewControllerIndex(id: i)]
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
@@ -87,9 +94,9 @@ class MainViewController: UIViewController, PatternDataSource {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        patternsModel[index].speed = speed
+        moireModel!.model[index].speed = speed
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
+        mainView.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
         return true
     }
     
@@ -101,9 +108,9 @@ class MainViewController: UIViewController, PatternDataSource {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        patternsModel[index].direction = direction
+        moireModel!.model[index].direction = direction
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
+        mainView.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
         return true
     }
     
@@ -115,9 +122,9 @@ class MainViewController: UIViewController, PatternDataSource {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        patternsModel[index].fillRatio = fillRatio
+        moireModel!.model[index].fillRatio = fillRatio
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
+        mainView.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
         return true
     }
     
@@ -129,10 +136,25 @@ class MainViewController: UIViewController, PatternDataSource {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        patternsModel[index].scaleFactor = scaleFactor
+        moireModel!.model[index].scaleFactor = scaleFactor
         let mainView = self.view as! MainView
-        mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
+        mainView.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
         return true
+    }
+    
+    func saveMoire() -> Bool {
+        do {
+            UserDefaults.standard.set(try PropertyListEncoder().encode(self.moireModel), forKey: "Moire")
+            return true
+        } catch {
+            print("problem saving the moire")
+            return false
+        }
+    }
+    
+    @IBAction func exitButtonPressed(_ sender: Any) {
+        _ = self.saveMoire()
+        performSegue(withIdentifier: "showSettingsView", sender: self)
     }
     
     override var prefersStatusBarHidden: Bool {
