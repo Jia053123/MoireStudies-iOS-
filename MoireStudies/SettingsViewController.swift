@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
     let schemeSettingItems = ["Fill Ratio and Scale Factor", "Black Width and White Width"]
+    var settings = Settings()
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -32,11 +33,17 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch schemeSettingItems[indexPath.row] {
         case "Fill Ratio and Scale Factor":
-            Settings.interfaceSetting = UISettings.controlScheme1Slider
+            self.settings.interfaceSetting = UISettings.controlScheme1Slider
         case "Black Width and White Width":
-            Settings.interfaceSetting = UISettings.controlScheme2Slider
+            self.settings.interfaceSetting = UISettings.controlScheme2Slider
         default:
-            Settings.interfaceSetting = UISettings.controlScheme1Slider
+            self.settings.interfaceSetting = UISettings.controlScheme1Slider
         }
+        performSegue(withIdentifier: "showMainView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let mvc: MainViewController = segue.destination as! MainViewController
+        mvc.settings = self.settings
     }
 }

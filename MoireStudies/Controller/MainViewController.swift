@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController, PatternStore {
+class MainViewController: UIViewController, PatternDataSource {
+    var settings: Settings?
     private var patternsModel: Array<Pattern> = []
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
@@ -22,7 +23,7 @@ class MainViewController: UIViewController, PatternStore {
         assert(controlFrames.count >= patternsModel.count)
         for i in 0..<patternsModel.count {
             var cvc: CtrlViewController?
-            switch Settings.interfaceSetting {
+            switch self.settings!.interfaceSetting {
             case UISettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
@@ -131,6 +132,10 @@ class MainViewController: UIViewController, PatternStore {
         patternsModel[index].scaleFactor = scaleFactor
         let mainView = self.view as! MainView
         mainView.modifiyPatternView(patternViewIndex: index, newPattern: patternsModel[index])
+        return true
+    }
+    
+    override var prefersStatusBarHidden: Bool {
         return true
     }
 }

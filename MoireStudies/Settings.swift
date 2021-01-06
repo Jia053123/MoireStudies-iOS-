@@ -8,8 +8,8 @@
 import Foundation
 
 struct Settings {
-    static var renderSetting: RenderSettings = RenderSettings.coreAnimation
-    static var interfaceSetting: UISettings = UISettings.controlScheme1Slider
+    var renderSetting: RenderSettings = RenderSettings.coreAnimation
+    var interfaceSetting: UISettings = UISettings.controlScheme1Slider
 }
 
 enum RenderSettings {

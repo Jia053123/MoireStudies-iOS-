@@ -18,12 +18,15 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
                                 <rect key="frame" x="625" y="3" width="32" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hYG-uG-xgh"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="15"/>
                                 <state key="normal" title="ESC">
                                     <color key="titleShadowColor" systemColor="labelColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" id="4Mc-zB-E22"/>
+                                    <segue destination="Pci-Ue-xWn" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="4Mc-zB-E22"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -59,9 +62,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="667" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" animates="NO" modalPresentationStyle="fullScreen" id="wcy-jg-g8r"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -69,6 +69,9 @@
                             <outlet property="delegate" destination="Pci-Ue-xWn" id="xrc-ST-7Hf"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainView" animates="NO" modalPresentationStyle="fullScreen" id="e76-fr-0c3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUo-d3-GCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

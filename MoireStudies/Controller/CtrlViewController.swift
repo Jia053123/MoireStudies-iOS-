@@ -10,6 +10,6 @@ import UIKit
 
 protocol CtrlViewController: UIViewController {
     var id: Int? { get }
-    var delegate: PatternStore? { get set }
+    var delegate: PatternDataSource? { get set }
     init(id: Int, frame: CGRect, pattern: Pattern?)
 }

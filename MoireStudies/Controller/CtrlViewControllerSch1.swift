@@ -11,7 +11,7 @@ import UIKit
 class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Target {
     typealias CtrlViewSch1Subclass = SliderCtrlViewSch1
     var id: Int?
-    weak var delegate: PatternStore?
+    weak var delegate: PatternDataSource?
     
     required init(id: Int, frame: CGRect, pattern: Pattern?) {
         self.id = id
