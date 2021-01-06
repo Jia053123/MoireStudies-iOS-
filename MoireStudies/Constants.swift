@@ -11,7 +11,7 @@ import UIKit
 struct Constants {
     struct UI {
         static let maskCornerRadius: CGFloat = 12.0
-        static let tileHeight: CGFloat = 8.0 // the less the height, the more the num of strips rendered on screen
+        static let tileHeight: CGFloat = 6.0 // the less the height, the more the num of strips rendered on screen, the thinner the minimum black/white width
         static let defaultControlFrames: Array<CGRect> = [CGRect(x: 10, y: 10, width: 150, height: 200),
                                                           CGRect(x: 170, y: 10, width: 150, height: 200)]
     }

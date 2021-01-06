@@ -33,6 +33,10 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         }
         directionSlider.minimumValue = 0.0
         directionSlider.maximumValue = 2 * Float.pi
+        fillRatioSlider.minimumValue = 0.1
+        fillRatioSlider.maximumValue = 0.9
+        scaleFactorSlider.minimumValue = 1.0
+        scaleFactorSlider.maximumValue = 5.0
     }
     
     @IBAction func speedChanged(_ sender: Any) {

@@ -51,7 +51,7 @@
                         <action selector="speedChanged:" destination="-1" eventType="valueChanged" id="n7T-pc-qPP"/>
                     </connections>
                 </segmentedControl>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz" userLabel="DirectionSlider">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz" userLabel="DirectionSlider">
                     <rect key="frame" x="7.5" y="83" width="186" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>
@@ -60,7 +60,7 @@
                         <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
                     </connections>
                 </slider>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.10000000000000001" maxValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="FillRatioSlider">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="FillRatioSlider">
                     <rect key="frame" x="7.5" y="151" width="186" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
@@ -69,7 +69,7 @@
                         <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
                     </connections>
                 </slider>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1.5" minValue="1" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="ScaleFactorSlider">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="ScaleFactorSlider">
                     <rect key="frame" x="7.5" y="219" width="186" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>

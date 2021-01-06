@@ -51,7 +51,7 @@
                         <action selector="speedChanged:" destination="-1" eventType="valueChanged" id="n7T-pc-qPP"/>
                     </connections>
                 </segmentedControl>
-                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="7" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz" userLabel="DirectionSlider">
+                <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz" userLabel="DirectionSlider">
                     <rect key="frame" x="7.5" y="83" width="186" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>

@@ -20,7 +20,6 @@ class MoireModel: Codable {
             _model = newValue
         }
     }
-    
     func reset() {
         self._model = []
         self._model.append(Pattern.demoPattern1())
