@@ -10,11 +10,11 @@ import Foundation
 /**
  SubViews hierachy:
  - MainView
-    - UIButton (1)
-    - ControlView (1..)
+    - UIButton
+    - ControlView (n) 
     - MoireView (1)
         - DimView (0..1)
-        - PatternView (1..)
+        - PatternView (n)
             - MaskView(1) in mask property
  */
 class MainView: UIView {
