@@ -10,7 +10,6 @@ import UIKit
 
 class MainViewController: UIViewController, PatternDataSource {
     @IBOutlet weak var gearButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
     var initSettings: InitSettings?
     private var moireModel: MoireModel?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
@@ -52,13 +51,20 @@ class MainViewController: UIViewController, PatternDataSource {
     }
     
     func initModel() {
+        func resetModel() {
+            self.moireModel = MoireModel()
+            self.moireModel!.reset()
+        }
+        guard !self.initSettings!.resetMoire else {
+            resetModel()
+            return
+        }
         do {
             guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
             self.moireModel = try PropertyListDecoder().decode(MoireModel.self, from: data)
         } catch {
             print("problem loading saved moire; loading the default")
-            self.moireModel = MoireModel()
-            self.moireModel?.reset()
+            resetModel()
         }
     }
     
@@ -165,12 +171,6 @@ class MainViewController: UIViewController, PatternDataSource {
     @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
         performSegue(withIdentifier: "showSettingsView", sender: self)
-    }
-    
-    @IBAction func resetButtonPressed(_ sender: Any) {
-        print("resetting")
-        self.moireModel!.reset()
-        self.reloadMoire()
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -38,7 +38,6 @@ class MainView: UIView {
             newPatternView.setUpAndRender(pattern: pattern)
         }
         self.bringSubviewToFront(gearButton)
-        self.bringSubviewToFront(resetButton)
     }
     
     func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {
