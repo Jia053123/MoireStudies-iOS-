@@ -58,6 +58,9 @@
                     </constraints>
                     <connections>
                         <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="boc-gp-LWB"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="rH1-u3-jXD"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="Bje-AC-0vt"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="BlackWidthSlider">
@@ -67,6 +70,9 @@
                     </constraints>
                     <connections>
                         <action selector="blackWidthChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="2fN-Dy-ND2"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="csj-mT-xQC"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="9oo-5p-85l"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="WhiteWidthSlider">
@@ -75,6 +81,9 @@
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
                     </constraints>
                     <connections>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="ozx-iS-f43"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="rXW-DN-3Ld"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="lZP-UO-zFe"/>
                         <action selector="whiteWidthChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
                     </connections>
                 </slider>

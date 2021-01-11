@@ -11,7 +11,7 @@ import UIKit
 class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Target {
     typealias CtrlViewSch1Subclass = SliderCtrlViewSch1
     var id: Int?
-    weak var delegate: PatternDataSource?
+    weak var delegate: PatternManager?
     
     required init(id: Int, frame: CGRect, pattern: Pattern?) {
         self.id = id
@@ -26,6 +26,14 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Targ
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    func highlightPattern() {
+        _ = delegate?.highlightPattern(caller: self)
+    }
+    
+    func unhighlightPattern() {
+        _ = delegate?.unhighlightPattern(caller: self)
     }
     
     func modifyPattern(speed: CGFloat) -> Bool {

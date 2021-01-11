@@ -10,7 +10,6 @@ import Foundation
 
 class MainView: UIView {
     @IBOutlet weak var gearButton: UIButton!
-    @IBOutlet weak var resetButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
     private var patternViews: Array<PatternView> = []
     private var maskViews: Array<MaskView> = []
@@ -40,6 +39,16 @@ class MainView: UIView {
         self.bringSubviewToFront(gearButton)
     }
     
+    func highlightPatternView(patternViewIndex: Int) {
+        print("highlight")
+        // TODO
+    }
+    
+    func unhighlightPatternView(patternViewIndex: Int) {
+        print("unhighlight")
+        // TODO
+    }
+    
     func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {
         self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
     }
@@ -47,6 +56,5 @@ class MainView: UIView {
     func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
         let maskView = MaskView.init(frame: self.bounds, maskFrame: controlViewFrame)
         patternViews[patternIndex].mask = maskView
-        print("added mask")
     }
 }

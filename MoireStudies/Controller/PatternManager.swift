@@ -8,7 +8,10 @@
 import Foundation
 import UIKit
 
-protocol PatternDataSource: UIViewController {
+protocol PatternManager: UIViewController {
+    // these functions return false when the action is illegal, otherwise they return true and the action is performed
+    func highlightPattern(caller: CtrlViewController) -> Bool
+    func unhighlightPattern(caller: CtrlViewController) -> Bool
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool
     func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool
     func modifyPattern(fillRatio: CGFloat, caller: CtrlViewController) -> Bool

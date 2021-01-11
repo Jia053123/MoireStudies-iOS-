@@ -39,6 +39,14 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         scaleFactorSlider.maximumValue = 5.0
     }
     
+    @IBAction func patternEditing(_ sender: Any) {
+        self.target?.highlightPattern()
+    }
+    
+    @IBAction func patternEdited(_ sender: Any) {
+        self.target?.unhighlightPattern()
+    }
+    
     @IBAction func speedChanged(_ sender: Any) {
         if let t = self.target {
             _ = t.modifyPattern(speed: self.calcSpeed(speedSegmentIndex: speedSegmentedControl.selectedSegmentIndex))

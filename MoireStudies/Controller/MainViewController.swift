@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController, PatternDataSource {
+class MainViewController: UIViewController, PatternManager {
     @IBOutlet weak var gearButton: UIButton!
     var initSettings: InitSettings?
     private var moireModel: MoireModel?
@@ -86,11 +86,22 @@ class MainViewController: UIViewController, PatternDataSource {
         return self.getCtrlViewControllerIndex(id: i)
     }
     
-    func getPattern(caller: CtrlViewController) -> Pattern? {
-        guard let i = caller.id else {
-            return nil
+    func highlightPattern(caller: CtrlViewController) -> Bool {
+        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+            return false
         }
-        return self.moireModel!.model[getCtrlViewControllerIndex(id: i)]
+        let mainView = self.view as! MainView
+        mainView.highlightPatternView(patternViewIndex: index)
+        return true
+    }
+    
+    func unhighlightPattern(caller: CtrlViewController) -> Bool {
+        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+            return false
+        }
+        let mainView = self.view as! MainView
+        mainView.unhighlightPatternView(patternViewIndex: index)
+        return true
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
@@ -147,6 +158,13 @@ class MainViewController: UIViewController, PatternDataSource {
         let mainView = self.view as! MainView
         mainView.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
         return true
+    }
+    
+    func getPattern(caller: CtrlViewController) -> Pattern? {
+        guard let i = caller.id else {
+            return nil
+        }
+        return self.moireModel!.model[getCtrlViewControllerIndex(id: i)]
     }
     
     func reloadMoire() {

@@ -10,7 +10,9 @@ import UIKit
 
 protocol CtrlViewController: UIViewController {
     var id: Int? { get }
-    var delegate: PatternDataSource? { get set }
+    var delegate: PatternManager? { get set }
     init(id: Int, frame: CGRect, pattern: Pattern?)
     func matchControlsWithModel(pattern: Pattern)
+    func highlightPattern()
+    func unhighlightPattern()
 }

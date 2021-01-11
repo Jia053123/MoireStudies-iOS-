@@ -57,7 +57,10 @@
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>
                     </constraints>
                     <connections>
-                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
+                        <action selector="patternEdited:" destination="-1" eventType="valueChanged" id="Q9S-lZ-Q4x"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="g8y-79-xpa"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="x64-JN-3HW"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="qig-rF-j9p"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="FillRatioSlider">
@@ -66,7 +69,10 @@
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
                     </constraints>
                     <connections>
-                        <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="B2e-FC-tmf"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="M7L-AV-vv9"/>
+                        <action selector="patternEdited:" destination="-1" eventType="valueChanged" id="cql-6r-dAH"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="j5H-gR-o6S"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="ScaleFactorSlider">
@@ -75,6 +81,9 @@
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
                     </constraints>
                     <connections>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="BJz-6u-daJ"/>
+                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="MSN-DN-t6Y"/>
+                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="dNg-9t-BqN"/>
                         <action selector="scaleFactorChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
                     </connections>
                 </slider>
