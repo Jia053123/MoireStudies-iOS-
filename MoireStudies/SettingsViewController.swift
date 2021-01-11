@@ -12,6 +12,7 @@ class SettingsViewController: UITableViewController {
     let schemeSettingItems = ["Fill Ratio and Scale Factor", "Black Width and White Width"]
     let actionItems = ["Reset Moire"]
     var initSettings = InitSettings()
+    var resetMoire = false
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -64,7 +65,7 @@ class SettingsViewController: UITableViewController {
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
             }
         case 1:
-            self.initSettings.resetMoire = true
+            self.resetMoire = true
         default:
             break
         }
@@ -74,5 +75,8 @@ class SettingsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let mvc: MainViewController = segue.destination as! MainViewController
         mvc.initSettings = self.initSettings
+        if self.resetMoire {
+            mvc.resetMoireWhenInit = true
+        }
     }
 }

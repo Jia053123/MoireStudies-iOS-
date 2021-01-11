@@ -10,7 +10,6 @@ import Foundation
 struct InitSettings {
     var renderSetting: RenderSettings = RenderSettings.coreAnimation
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
-    var resetMoire: Bool = false
 }
 
 enum RenderSettings {

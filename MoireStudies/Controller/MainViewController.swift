@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController, PatternManager {
     @IBOutlet weak var gearButton: UIButton!
     var initSettings: InitSettings?
+    var resetMoireWhenInit = false
     private var moireModel: MoireModel?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewController> = []
@@ -55,7 +56,7 @@ class MainViewController: UIViewController, PatternManager {
             self.moireModel = MoireModel()
             self.moireModel!.reset()
         }
-        guard !self.initSettings!.resetMoire else {
+        guard !self.resetMoireWhenInit else {
             resetModel()
             return
         }
@@ -189,6 +190,13 @@ class MainViewController: UIViewController, PatternManager {
     @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
         performSegue(withIdentifier: "showSettingsView", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let svc: SettingsViewController = segue.destination as! SettingsViewController
+        if let currentSettings = self.initSettings {
+            svc.initSettings = currentSettings
+        }
     }
     
     override var prefersStatusBarHidden: Bool {
