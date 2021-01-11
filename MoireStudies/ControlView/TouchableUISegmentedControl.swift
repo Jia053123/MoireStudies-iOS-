@@ -14,21 +14,25 @@ class TouchableUISegmentedControl: UISegmentedControl {
         sendActions(for: UIControl.Event.touchDown)
     }
     
+    // change value before touch up event is fired
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        let segNum = self.numberOfSegments
+        let width = self.bounds.width
+        let segWidth = width / CGFloat(segNum)
+        let touchX = touches.first!.location(in: self).x
+        let segIndexDraggedInto = Int(floor(touchX / segWidth))
+        if self.selectedSegmentIndex != segIndexDraggedInto {
+            self.selectedSegmentIndex = segIndexDraggedInto
+            sendActions(for: UIControl.Event.valueChanged)
+        }
+    }
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        var touchUpInside = false
-        var touchUpOutside = false
-        for t in touches {
-            if self.bounds.contains(t.location(in: self)) {
-                touchUpInside = true
-            } else {
-                touchUpOutside = true
-            }
-        }
-        if touchUpInside {
+        if self.bounds.contains(touches.first!.location(in: self)) {
             sendActions(for: UIControl.Event.touchUpInside)
-        }
-        if touchUpOutside {
+        } else {
             sendActions(for: UIControl.Event.touchUpOutside)
         }
     }
