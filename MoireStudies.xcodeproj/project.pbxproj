@@ -22,6 +22,7 @@
 		8E36F74F25931796004BC2F3 /* CtrlSch1Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* CtrlSch1Target.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
+		8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */; };
 		8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
 		8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787D25A3DB56002EB000 /* SettingsViewController.swift */; };
@@ -75,6 +76,7 @@
 		8E36F74E25931796004BC2F3 /* CtrlSch1Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlSch1Target.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
+		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2Tests.swift; sourceTree = "<group>"; };
 		8E60787525A3D3C6002EB000 /* InitSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSettings.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		8EE29F7A25A0594700FF2539 /* ControlView */ = {
 			isa = PBXGroup;
 			children = (
+				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
 				8EE29F8225A05B0100FF2539 /* Scheme1 */,
 				8EE29F8325A05B0800FF2539 /* Scheme2 */,
 			);
@@ -396,6 +399,7 @@
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
+				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,

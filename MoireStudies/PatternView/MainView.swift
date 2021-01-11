@@ -66,7 +66,9 @@ class MainView: UIView {
     func unhighlightPatternView(patternViewIndex: Int) {
         print("unhighlight")
         let pv = patternViews[patternViewIndex]
-        highlightedViews.remove(at: highlightedViews.firstIndex(where: {$0 == pv})!)
+        if let i = highlightedViews.firstIndex(where: {$0 == pv}) {
+            highlightedViews.remove(at: i)
+        }
         if highlightedViews.count == 0 {
             dimView.removeFromSuperview()
         }
