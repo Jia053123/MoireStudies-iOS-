@@ -196,6 +196,7 @@
 		8EE29F7825A058E100FF2539 /* PatternView */ = {
 			isa = PBXGroup;
 			children = (
+				8E314489259F030000BB0399 /* MaskView.swift */,
 				8E8D95A2258C3165000CD481 /* MainView.swift */,
 				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
 				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
@@ -217,7 +218,6 @@
 		8EE29F7A25A0594700FF2539 /* ControlView */ = {
 			isa = PBXGroup;
 			children = (
-				8E314489259F030000BB0399 /* MaskView.swift */,
 				8EE29F8225A05B0100FF2539 /* Scheme1 */,
 				8EE29F8325A05B0800FF2539 /* Scheme2 */,
 			);
