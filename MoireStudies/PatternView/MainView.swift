@@ -7,10 +7,20 @@
 
 import UIKit
 import Foundation
-
+/**
+ SubViews hierachy:
+ - MainView
+    - UIButton (1)
+    - ControlView (1..)
+    - MoireView (1)
+        - DimView (0..1)
+        - PatternView (1..)
+            - MaskView(1) in mask property
+ */
 class MainView: UIView {
     @IBOutlet weak var gearButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
+    private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []
     private var highlightedViews: Array<PatternView> = []
     private var maskViews: Array<MaskView> = []
@@ -28,14 +38,16 @@ class MainView: UIView {
     
     func initHelper() {
         self.backgroundColor = UIColor.white
+        self.addSubview(moireView)
     }
     
     func setUp(patterns: Array<Pattern>) {
+        self.moireView.frame = self.bounds
         patternViews = []
         for pattern in patterns {
-            let newPatternView: PatternView = PatternViewClass.init(frame: self.bounds)
+            let newPatternView: PatternView = PatternViewClass.init(frame: self.moireView.bounds)
             patternViews.append(newPatternView)
-            self.addSubview(newPatternView)
+            self.moireView.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
         self.bringSubviewToFront(gearButton)
@@ -44,11 +56,11 @@ class MainView: UIView {
     func highlightPatternView(patternViewIndex: Int) {
         print("highlight")
         let pv = patternViews[patternViewIndex]
-        dimView.frame = self.bounds
+        dimView.frame = self.moireView.bounds
         dimView.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        self.addSubview(dimView)
+        self.moireView.addSubview(dimView)
         highlightedViews.append(pv)
-        self.bringSubviewToFront(pv)
+        self.moireView.bringSubviewToFront(pv)
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {
@@ -66,7 +78,7 @@ class MainView: UIView {
     }
     
     func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
-        let maskView = MaskView.init(frame: self.bounds, maskFrame: controlViewFrame)
+        let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: controlViewFrame)
         patternViews[patternIndex].mask = maskView
     }
 }
