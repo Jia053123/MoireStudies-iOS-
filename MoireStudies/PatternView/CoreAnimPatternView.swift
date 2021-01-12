@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
+class CoreAnimPatternView: UIView {
     private var pattern: Pattern = Pattern.defaultPattern()
     private var tileHeight: CGFloat = Constants.UI.tileHeight
     private var tileLength: CGFloat?
@@ -18,18 +18,7 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
     private var backingView: UIView = UIView() // the view that holds all the tiles
     private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
     
-    func setUpAndRender(pattern: Pattern) {
-        self.backgroundColor = UIColor.clear
-        let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
-        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-//        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
-        backingView.center = self.center
-        self.addSubview(backingView)
-        backingViewDefaultTransf = backingView.transform
-        self.createTiles()
-        self.animateTiles()
-        self.updatePattern(newPattern: pattern)
-    }
+    
     
     private func createTiles() {
         // the tiles are placed to fill the backing view
@@ -51,6 +40,42 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
                 lastTile = newTile
             }
         }
+    }
+    
+    func animateTiles() {
+        for t in tiles {
+            self.animateTile(tile: t)
+        }
+    }
+    
+    func animateTile(tile: TileLayer) {
+        // all tiles move towards the bottom of the backing view at the same speed
+        let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
+        let duration = remainingDistance / self.pattern.speed
+        let moveDownAnim = CABasicAnimation(keyPath: "position")
+        moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
+        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.bounds.height)
+        moveDownAnim.duration = CFTimeInterval(duration)
+        moveDownAnim.delegate = self;
+        moveDownAnim.fillMode = CAMediaTimingFillMode.forwards
+        moveDownAnim.isRemovedOnCompletion = false
+        moveDownAnim.setValue(tile, forKey: "tileLayer")
+        tile.add(moveDownAnim, forKey: "move down")
+    }
+}
+
+extension CoreAnimPatternView: PatternView {
+    func setUpAndRender(pattern: Pattern) {
+        self.backgroundColor = UIColor.clear
+        let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
+        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+        //        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
+        backingView.center = self.center
+        self.addSubview(backingView)
+        backingViewDefaultTransf = backingView.transform
+        self.createTiles()
+        self.animateTiles()
+        self.updatePattern(newPattern: pattern)
     }
     
     func updatePattern(newPattern: Pattern) {
@@ -80,28 +105,9 @@ class CoreAnimPatternView: UIView, PatternView, CAAnimationDelegate {
             }
         }
     }
-    
-    func animateTiles() {
-        for t in tiles {
-            self.animateTile(tile: t)
-        }
-    }
-    
-    func animateTile(tile: TileLayer) {
-        // all tiles move towards the bottom of the backing view at the same speed
-        let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
-        let duration = remainingDistance / self.pattern.speed
-        let moveDownAnim = CABasicAnimation(keyPath: "position")
-        moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
-        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.bounds.height)
-        moveDownAnim.duration = CFTimeInterval(duration)
-        moveDownAnim.delegate = self;
-        moveDownAnim.fillMode = CAMediaTimingFillMode.forwards
-        moveDownAnim.isRemovedOnCompletion = false
-        moveDownAnim.setValue(tile, forKey: "tileLayer")
-        tile.add(moveDownAnim, forKey: "move down")
-    }
-    
+}
+
+extension CoreAnimPatternView: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if (flag) { // in case this method is triggered by removing the animation
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer

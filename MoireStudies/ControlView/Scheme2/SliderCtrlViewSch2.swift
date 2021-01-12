@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
-    var target: CtrlViewSch2Target? // TODO
+    var target: CtrlViewSch2Target? 
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var blackSlider: UISlider!
