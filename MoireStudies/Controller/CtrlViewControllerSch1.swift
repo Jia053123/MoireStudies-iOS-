@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch1: UIViewController, CtrlViewSch1Target {
+class CtrlViewControllerSch1: UIViewController {
     typealias CtrlViewSch1Subclass = SliderCtrlViewSch1
     var id: Int?
     weak var delegate: PatternManager?
@@ -27,7 +27,9 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewSch1Target {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+}
+
+extension CtrlViewControllerSch1: CtrlViewTarget {
     func highlightPattern() {
         _ = delegate?.highlightPattern(caller: self)
     }
@@ -36,6 +38,13 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewSch1Target {
         _ = delegate?.unhighlightPattern(caller: self)
     }
     
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch1
+        cv.matchControlsWithModel(pattern: pattern)
+    }
+}
+
+extension CtrlViewControllerSch1: CtrlViewSch1Target {
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
@@ -50,11 +59,6 @@ class CtrlViewControllerSch1: UIViewController, CtrlViewSch1Target {
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
         return delegate?.modifyPattern(scaleFactor: scaleFactor, caller: self) ?? false
-    }
-    
-    func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch1
-        cv.matchControlsWithModel(pattern: pattern)
     }
 }
 

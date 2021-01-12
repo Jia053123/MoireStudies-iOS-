@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch2: UIViewController, CtrlViewSch2Target {
+class CtrlViewControllerSch2: UIViewController {
     typealias CtrlViewSch2Subclass = SliderCtrlViewSch2
     var id: Int?
     weak var delegate: PatternManager?
@@ -28,14 +28,6 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewSch2Target {
         super.init(coder: coder)
     }
     
-    func highlightPattern() {
-        _ = delegate?.highlightPattern(caller: self)
-    }
-    
-    func unhighlightPattern() {
-        _ = delegate?.unhighlightPattern(caller: self)
-    }
-    
     func convertToFillRatioAndScaleFactor(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, scaleFactor: CGFloat) {
         let fr: CGFloat = blackWidth / (blackWidth + whiteWidth)
         let sf: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)
@@ -47,7 +39,29 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewSch2Target {
         let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * scaleFactor
         return (bw, ww)
     }
+}
+
+extension CtrlViewControllerSch2: CtrlViewTarget {
+    func highlightPattern() {
+        _ = delegate?.highlightPattern(caller: self)
+    }
     
+    func unhighlightPattern() {
+        _ = delegate?.unhighlightPattern(caller: self)
+    }
+    
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch2
+        let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: pattern.fillRatio,
+                                                           scaleFactor: pattern.scaleFactor)
+        cv.matchControlsWithValues(speed: pattern.speed,
+                                   direction: pattern.direction,
+                                   blackWidth: result.blackWidth,
+                                   whiteWidth: result.whiteWidth)
+    }
+}
+
+extension CtrlViewControllerSch2: CtrlViewSch2Target {
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
@@ -80,16 +94,6 @@ class CtrlViewControllerSch2: UIViewController, CtrlViewSch2Target {
         let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
         let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
         return r1 && r2
-    }
-    
-    func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch2
-        let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: pattern.fillRatio,
-                                                           scaleFactor: pattern.scaleFactor)
-        cv.matchControlsWithValues(speed: pattern.speed,
-                                   direction: pattern.direction,
-                                   blackWidth: result.blackWidth,
-                                   whiteWidth: result.whiteWidth)
     }
 }
 

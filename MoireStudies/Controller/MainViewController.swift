@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController, PatternManager {
+class MainViewController: UIViewController {
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!
     var initSettings: InitSettings?
@@ -88,6 +88,57 @@ class MainViewController: UIViewController, PatternManager {
         return self.getCtrlViewControllerIndex(id: i)
     }
     
+    func reloadMoire() {
+        let mainView = self.view as! MainView
+        for i in 0..<self.moireModel!.model.count {
+            mainView.modifiyPatternView(patternViewIndex: i, newPattern: self.moireModel!.model[i])
+            let cvc = self.controlViewControllers[i]
+            cvc.matchControlsWithModel(pattern: self.moireModel!.model[i])
+        }
+    }
+    
+    func saveMoire() -> Bool {
+        do {
+            UserDefaults.standard.set(try PropertyListEncoder().encode(self.moireModel), forKey: "Moire")
+            return true
+        } catch {
+            print("problem saving the moire")
+            return false
+        }
+    }
+    
+    @IBAction func gearButtonPressed(_ sender: Any) {
+        _ = self.saveMoire()
+        performSegue(withIdentifier: "showSettingsView", sender: self.gearButton)
+    }
+    
+    @IBAction func fileButtonPressed(_ sender: Any) {
+        _ = self.saveMoire()
+        performSegue(withIdentifier: "showSaveFilesView", sender: self.fileButton)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let s = sender as? UIButton {
+            switch s {
+            case self.gearButton!:
+                let svc: SettingsViewController = segue.destination as! SettingsViewController
+                if let currentSettings = self.initSettings {
+                    svc.initSettings = currentSettings
+                }
+            case self.fileButton!:
+                break
+            default:
+                break
+            }
+        }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+extension MainViewController: PatternManager {
     func highlightPattern(caller: CtrlViewTarget) -> Bool {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
@@ -167,55 +218,6 @@ class MainViewController: UIViewController, PatternManager {
             return nil
         }
         return self.moireModel!.model[getCtrlViewControllerIndex(id: i)]
-    }
-    
-    func reloadMoire() {
-        let mainView = self.view as! MainView
-        for i in 0..<self.moireModel!.model.count {
-            mainView.modifiyPatternView(patternViewIndex: i, newPattern: self.moireModel!.model[i])
-            let cvc = self.controlViewControllers[i]
-            cvc.matchControlsWithModel(pattern: self.moireModel!.model[i])
-        }
-    }
-    
-    func saveMoire() -> Bool {
-        do {
-            UserDefaults.standard.set(try PropertyListEncoder().encode(self.moireModel), forKey: "Moire")
-            return true
-        } catch {
-            print("problem saving the moire")
-            return false
-        }
-    }
-    
-    @IBAction func gearButtonPressed(_ sender: Any) {
-        _ = self.saveMoire()
-        performSegue(withIdentifier: "showSettingsView", sender: self.gearButton)
-    }
-    
-    @IBAction func fileButtonPressed(_ sender: Any) {
-        _ = self.saveMoire()
-        performSegue(withIdentifier: "showSaveFilesView", sender: self.fileButton)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let s = sender as? UIButton {
-            switch s {
-            case self.gearButton!:
-                let svc: SettingsViewController = segue.destination as! SettingsViewController
-                if let currentSettings = self.initSettings {
-                    svc.initSettings = currentSettings
-                }
-            case self.fileButton!:
-                break
-            default:
-                break
-            }
-        }
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
     }
 }
 
