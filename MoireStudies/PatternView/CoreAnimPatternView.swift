@@ -18,8 +18,6 @@ class CoreAnimPatternView: UIView {
     private var backingView: UIView = UIView() // the view that holds all the tiles
     private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
     
-    
-    
     private func createTiles() {
         // the tiles are placed to fill the backing view
         tileLength = backingView.bounds.width

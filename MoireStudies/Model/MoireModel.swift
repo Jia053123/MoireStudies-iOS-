@@ -38,12 +38,16 @@ class MoireModel: Codable {
     }
     
     private var _previewData: Data?
+    
     var preview: UIImage {
         get {
-            return UIImage(systemName: "photo")!
+            guard let d = _previewData, let img = UIImage.init(data: d) else {
+                return UIImage(systemName: "photo")!
+            }
+            return img
         }
         set {
-            print("TODO: setting the preview")
+            _previewData = newValue.pngData()
         }
     }
     
@@ -51,6 +55,6 @@ class MoireModel: Codable {
         self._model = []
         self._model.append(Pattern.demoPattern1())
         self._model.append(Pattern.demoPattern2())
-        // TODO: reset icon
+        _previewData = nil
     }
 }

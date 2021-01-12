@@ -22,6 +22,7 @@ class MaskView: UIView {
     required init?(coder: NSCoder) {
         self.maskFrame = CGRect.zero
         super.init(coder: coder)
+        self.backgroundColor = UIColor.clear
     }
     
     override func draw(_ rect: CGRect) {
