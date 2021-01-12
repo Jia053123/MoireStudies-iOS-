@@ -87,13 +87,18 @@ class MainView: UIView {
     }
     
     func takeMoireScreenshot() -> UIImage? {
-        UIGraphicsBeginImageContext(self.moireView.frame.size)
-        guard let currentContext = UIGraphicsGetCurrentContext() else {
-            return nil
+        for pv in patternViews {
+            pv.mask?.backgroundColor = UIColor.black
         }
+        UIGraphicsBeginImageContext(self.moireView.frame.size)
+        guard let currentContext = UIGraphicsGetCurrentContext() else {return nil}
         self.moireView.layer.render(in: currentContext)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
+        for pv in patternViews {
+            pv.mask?.backgroundColor = UIColor.clear
+        }
         return img
     }
 }
