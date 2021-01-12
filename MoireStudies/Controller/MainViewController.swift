@@ -15,7 +15,7 @@ class MainViewController: UIViewController, PatternManager {
     var resetMoireWhenInit = false
     private var moireModel: MoireModel?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
-    private var controlViewControllers: Array<CtrlViewController> = []
+    private var controlViewControllers: Array<CtrlViewTarget> = []
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -25,7 +25,7 @@ class MainViewController: UIViewController, PatternManager {
         // set up control views
         assert(controlFrames.count >= moireModel!.model.count)
         for i in 0..<moireModel!.model.count {
-            var cvc: CtrlViewController?
+            var cvc: CtrlViewTarget?
             switch self.initSettings!.interfaceSetting {
             case UISettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
@@ -81,14 +81,14 @@ class MainViewController: UIViewController, PatternManager {
         return index
     }
     
-    func findControlViewIndex(controlViewController: CtrlViewController) -> Int? {
+    func findControlViewIndex(controlViewController: CtrlViewTarget) -> Int? {
         guard let i = controlViewController.id else {
             return nil
         }
         return self.getCtrlViewControllerIndex(id: i)
     }
     
-    func highlightPattern(caller: CtrlViewController) -> Bool {
+    func highlightPattern(caller: CtrlViewTarget) -> Bool {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
@@ -97,7 +97,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func unhighlightPattern(caller: CtrlViewController) -> Bool {
+    func unhighlightPattern(caller: CtrlViewTarget) -> Bool {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
@@ -106,7 +106,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
+    func modifyPattern(speed: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             return false
@@ -120,7 +120,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool {
+    func modifyPattern(direction: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting direction to: ", direction)
         guard Constants.Bounds.directionRange.contains(direction) else {
             return false
@@ -134,7 +134,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewController) -> Bool {
+    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting fillRatio to: ", fillRatio)
         guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
             return false
@@ -148,7 +148,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func modifyPattern(scaleFactor: CGFloat, caller: CtrlViewController) -> Bool {
+    func modifyPattern(scaleFactor: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting scaleFactor to: ", scaleFactor)
         guard Constants.Bounds.scaleFactorRange.contains(scaleFactor) else {
             return false
@@ -162,7 +162,7 @@ class MainViewController: UIViewController, PatternManager {
         return true
     }
     
-    func getPattern(caller: CtrlViewController) -> Pattern? {
+    func getPattern(caller: CtrlViewTarget) -> Pattern? {
         guard let i = caller.id else {
             return nil
         }

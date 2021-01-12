@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch1: UIViewController, CtrlViewController, CtrlSch1Target {
+class CtrlViewControllerSch1: UIViewController, CtrlViewSch1Target {
     typealias CtrlViewSch1Subclass = SliderCtrlViewSch1
     var id: Int?
     weak var delegate: PatternManager?

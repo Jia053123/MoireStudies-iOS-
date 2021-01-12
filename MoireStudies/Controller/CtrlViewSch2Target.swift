@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CtrlSch2Target: CtrlViewController {
+protocol CtrlViewSch2Target: CtrlViewTarget {
     // these functions return false when the action is illegal, otherwise they return true and the action is performed
     func modifyPattern(speed: CGFloat) -> Bool
     func modifyPattern(direction: CGFloat) -> Bool

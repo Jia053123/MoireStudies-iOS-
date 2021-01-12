@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class GestureControlView: UIView, ControlViewSch1 {
-    var target: CtrlSch1Target?
+    var target: CtrlViewSch1Target?
     
     func matchControlsWithModel(pattern: Pattern) {
         
