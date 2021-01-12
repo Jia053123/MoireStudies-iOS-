@@ -11,7 +11,7 @@ import Foundation
  SubViews hierachy:
  - MainView
     - UIButton
-    - ControlView (n) 
+    - ControlView (n)
     - MoireView (1)
         - DimView (0..1)
         - PatternView (n)
@@ -19,6 +19,7 @@ import Foundation
  */
 class MainView: UIView {
     @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
     private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []
@@ -51,6 +52,7 @@ class MainView: UIView {
             newPatternView.setUpAndRender(pattern: pattern)
         }
         self.bringSubviewToFront(gearButton)
+        self.bringSubviewToFront(fileButton)
     }
     
     func highlightPatternView(patternViewIndex: Int) {

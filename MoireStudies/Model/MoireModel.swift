@@ -23,6 +23,7 @@ class MoireModel: Codable {
             }
         }
     }
+    
     private var _model: Array<Pattern> = []
     var model: Array<Pattern> {
         get {
@@ -35,8 +36,9 @@ class MoireModel: Codable {
             _model = newValue
         }
     }
-    private var _iconData: Data?
-    var icon: UIImage {
+    
+    private var _previewData: Data?
+    var preview: UIImage {
         get {
             return UIImage(systemName: "photo")!
         }
@@ -44,7 +46,6 @@ class MoireModel: Codable {
             print("setting the icon")
         }
     }
-
     
     func reset() {
         self._model = []

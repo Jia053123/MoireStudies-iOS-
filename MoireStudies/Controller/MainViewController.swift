@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController, PatternManager {
     @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton!
     var initSettings: InitSettings?
     var resetMoireWhenInit = false
     private var moireModel: MoireModel?
@@ -189,13 +190,27 @@ class MainViewController: UIViewController, PatternManager {
     
     @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
-        performSegue(withIdentifier: "showSettingsView", sender: self)
+        performSegue(withIdentifier: "showSettingsView", sender: self.gearButton)
+    }
+    
+    @IBAction func fileButtonPressed(_ sender: Any) {
+        _ = self.saveMoire()
+        performSegue(withIdentifier: "showSaveFilesView", sender: self.fileButton)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let svc: SettingsViewController = segue.destination as! SettingsViewController
-        if let currentSettings = self.initSettings {
-            svc.initSettings = currentSettings
+        if let s = sender as? UIButton {
+            switch s {
+            case self.gearButton!:
+                let svc: SettingsViewController = segue.destination as! SettingsViewController
+                if let currentSettings = self.initSettings {
+                    svc.initSettings = currentSettings
+                }
+            case self.fileButton!:
+                break
+            default:
+                break
+            }
         }
     }
     
