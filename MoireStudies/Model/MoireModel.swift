@@ -43,7 +43,7 @@ class MoireModel: Codable {
             return UIImage(systemName: "photo")!
         }
         set {
-            print("setting the icon")
+            print("TODO: setting the preview")
         }
     }
     

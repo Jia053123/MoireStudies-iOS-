@@ -104,7 +104,9 @@ class MainViewController: UIViewController {
     
     func saveMoire() -> Bool {
         // save preview
-        
+        if let img = self.mainView!.takeMoireScreenshot() {
+            self.moireModel?.preview = img
+        }
         // write to disk
         do {
             UserDefaults.standard.set(try PropertyListEncoder().encode(self.moireModel), forKey: "Moire")

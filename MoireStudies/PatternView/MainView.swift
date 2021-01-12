@@ -85,4 +85,15 @@ class MainView: UIView {
         let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: controlViewFrame)
         patternViews[patternIndex].mask = maskView
     }
+    
+    func takeMoireScreenshot() -> UIImage? {
+        UIGraphicsBeginImageContext(self.moireView.frame.size)
+        guard let currentContext = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        self.moireView.layer.render(in: currentContext)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img
+    }
 }
