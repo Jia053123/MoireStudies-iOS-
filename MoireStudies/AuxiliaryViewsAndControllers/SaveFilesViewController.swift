@@ -47,4 +47,19 @@ class SaveFilesViewController: UICollectionViewController {
         }
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == self.moires.count {
+            // plus is pressed
+            // save current moire
+            let mvc = self.presentingViewController as! MainViewController
+            let saveSuccess = mvc.saveMoire()
+            // create new moire, pass to MainViewController
+            if saveSuccess {
+                
+            }
+        } else {
+            print("TODO: save file selected")
+        }
+    }
 }
