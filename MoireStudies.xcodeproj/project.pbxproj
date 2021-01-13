@@ -44,6 +44,7 @@
 		8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */; };
 		8EE29F9625A2A6B000FF2539 /* CtrlViewControllerSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */; };
+		8EEBABA225AEB04A00857C96 /* SaveFileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EEBABA125AEB04A00857C96 /* SaveFileIO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewSch2.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewTarget.swift; sourceTree = "<group>"; };
 		8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2.swift; sourceTree = "<group>"; };
+		8EEBABA125AEB04A00857C96 /* SaveFileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileIO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,12 +170,9 @@
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E31449125A0393A00BB0399 /* Constants.swift */,
-				8E60787525A3D3C6002EB000 /* InitSettings.swift */,
-				8E60787D25A3DB56002EB000 /* SettingsViewController.swift */,
-				8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */,
-				8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */,
+				8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */,
 				8EE29F7925A0591500FF2539 /* Model */,
-				8EE29F7E25A059B900FF2539 /* Controller */,
+				8EE29F7E25A059B900FF2539 /* ViewControllers */,
 				8EE29F7825A058E100FF2539 /* PatternView */,
 				8EE29F7A25A0594700FF2539 /* ControlView */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
@@ -222,6 +221,7 @@
 				8E2BB6D52593277E0018D913 /* Pattern.swift */,
 				8E6EB6FD25A52EBF007EA799 /* Moire.swift */,
 				8E5BABDF25AE82F4003FC799 /* MoireModel.swift */,
+				8EEBABA125AEB04A00857C96 /* SaveFileIO.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,7 +236,7 @@
 			path = ControlView;
 			sourceTree = "<group>";
 		};
-		8EE29F7E25A059B900FF2539 /* Controller */ = {
+		8EE29F7E25A059B900FF2539 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
@@ -247,7 +247,7 @@
 				8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */,
 				8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */,
 			);
-			path = Controller;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		8EE29F8225A05B0100FF2539 /* Scheme1 */ = {
@@ -269,6 +269,17 @@
 				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
 			);
 			path = Scheme2;
+			sourceTree = "<group>";
+		};
+		8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E60787525A3D3C6002EB000 /* InitSettings.swift */,
+				8E60787D25A3DB56002EB000 /* SettingsViewController.swift */,
+				8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */,
+				8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */,
+			);
+			path = AuxiliaryViewsAndControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -431,6 +442,7 @@
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,
+				8EEBABA225AEB04A00857C96 /* SaveFileIO.swift in Sources */,
 				8E36F74F25931796004BC2F3 /* CtrlViewSch1Target.swift in Sources */,
 				8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
