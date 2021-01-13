@@ -29,6 +29,7 @@
 		8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
 		8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787D25A3DB56002EB000 /* SettingsViewController.swift */; };
+		8E6BF3F125AEC880005FE7CA /* MoireModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */; };
 		8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EB6FD25A52EBF007EA799 /* Moire.swift */; };
 		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
@@ -87,6 +88,7 @@
 		8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2Tests.swift; sourceTree = "<group>"; };
 		8E60787525A3D3C6002EB000 /* InitSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSettings.swift; sourceTree = "<group>"; };
 		8E60787D25A3DB56002EB000 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModelTests.swift; sourceTree = "<group>"; };
 		8E6EB6FD25A52EBF007EA799 /* Moire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moire.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */,
+				8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */,
 				8E96B7C2257F33D4007527E2 /* Info.plist */,
 			);
 			path = MoireStudiesTests;
@@ -449,6 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E6BF3F125AEC880005FE7CA /* MoireModelTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
