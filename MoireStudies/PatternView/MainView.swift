@@ -56,7 +56,6 @@ class MainView: UIView {
     }
     
     func highlightPatternView(patternViewIndex: Int) {
-        print("highlight")
         let pv = patternViews[patternViewIndex]
         dimView.frame = self.moireView.bounds
         dimView.backgroundColor = UIColor(white: 1, alpha: 0.5)
@@ -66,7 +65,6 @@ class MainView: UIView {
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {
-        print("unhighlight")
         let pv = patternViews[patternViewIndex]
         if let i = highlightedViews.firstIndex(where: {$0 == pv}) {
             highlightedViews.remove(at: i)

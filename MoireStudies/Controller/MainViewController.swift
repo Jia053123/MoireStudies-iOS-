@@ -13,7 +13,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     var initSettings: InitSettings?
     var resetMoireWhenInit = false
-    private var moireModel: MoireModel?
+    private var moireModel: Moire?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
     private var mainView: MainView? {
@@ -26,24 +26,24 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
         self.initModel()
         let mv = self.mainView!
-        mv.setUp(patterns: moireModel!.model)
+        mv.setUp(patterns: moireModel!.patterns)
         // set up control views
-        assert(controlFrames.count >= moireModel!.model.count)
-        for i in 0..<moireModel!.model.count {
+        assert(controlFrames.count >= moireModel!.patterns.count)
+        for i in 0..<moireModel!.patterns.count {
             var cvc: CtrlViewTarget?
             switch self.initSettings!.interfaceSetting {
             case UISettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: moireModel!.model[i])
+                                                      pattern: moireModel!.patterns[i])
             case UISettings.controlScheme2Slider:
                 cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: moireModel!.model[i])
+                                                      pattern: moireModel!.patterns[i])
             case UISettings.controlScheme1Gesture:
                 cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
                                                       frame: controlFrames[i],
-                                                      pattern: moireModel!.model[i])
+                                                      pattern: moireModel!.patterns[i])
             }
             cvc!.delegate = self
             mv.addSubview(cvc!.view)
@@ -59,7 +59,7 @@ class MainViewController: UIViewController {
     
     func initModel() {
         func resetModel() {
-            self.moireModel = MoireModel()
+            self.moireModel = Moire()
             self.moireModel!.reset()
         }
         guard !self.resetMoireWhenInit else {
@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         }
         do {
             guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
-            self.moireModel = try PropertyListDecoder().decode(MoireModel.self, from: data)
+            self.moireModel = try PropertyListDecoder().decode(Moire.self, from: data)
         } catch {
             print("problem loading saved moire; loading the default")
             resetModel()
@@ -95,10 +95,10 @@ class MainViewController: UIViewController {
     
     func reloadMoire() {
         let mv = self.mainView!
-        for i in 0..<self.moireModel!.model.count {
-            mv.modifiyPatternView(patternViewIndex: i, newPattern: self.moireModel!.model[i])
+        for i in 0..<self.moireModel!.patterns.count {
+            mv.modifiyPatternView(patternViewIndex: i, newPattern: self.moireModel!.patterns[i])
             let cvc = self.controlViewControllers[i]
-            cvc.matchControlsWithModel(pattern: self.moireModel!.model[i])
+            cvc.matchControlsWithModel(pattern: self.moireModel!.patterns[i])
         }
     }
     
@@ -175,9 +175,9 @@ extension MainViewController: PatternManager {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        moireModel!.model[index].speed = speed
+        moireModel!.patterns[index].speed = speed
         let mv = self.mainView!
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
+        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.patterns[index])
         return true
     }
     
@@ -189,9 +189,9 @@ extension MainViewController: PatternManager {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        moireModel!.model[index].direction = direction
+        moireModel!.patterns[index].direction = direction
         let mv = self.mainView!
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
+        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.patterns[index])
         return true
     }
     
@@ -203,9 +203,9 @@ extension MainViewController: PatternManager {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        moireModel!.model[index].fillRatio = fillRatio
+        moireModel!.patterns[index].fillRatio = fillRatio
         let mv = self.mainView!
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
+        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.patterns[index])
         return true
     }
     
@@ -217,9 +217,9 @@ extension MainViewController: PatternManager {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
         }
-        moireModel!.model[index].scaleFactor = scaleFactor
+        moireModel!.patterns[index].scaleFactor = scaleFactor
         let mv = self.mainView!
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.model[index])
+        mv.modifiyPatternView(patternViewIndex: index, newPattern: moireModel!.patterns[index])
         return true
     }
     
@@ -227,7 +227,7 @@ extension MainViewController: PatternManager {
         guard let i = caller.id else {
             return nil
         }
-        return self.moireModel!.model[getCtrlViewControllerIndex(id: i)]
+        return self.moireModel!.patterns[getCtrlViewControllerIndex(id: i)]
     }
 }
 
