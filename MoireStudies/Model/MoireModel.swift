@@ -8,34 +8,49 @@
 import Foundation
 
 class MoireModel {
-    private var _model: Array<Moire> = []
-    var model: Array<Moire> {
+    private var _moires: Array<Moire> = []
+    var moires: Array<Moire> {
         get {
-            if _model.isEmpty {
-                self.reset()
+            if _moires.isEmpty {
+                _ = self.createNew()
             }
-            return _model
-        }
-        set {
-            _model = newValue
+            return _moires
         }
     }
     
     required init() {
         guard let _m = SaveFileIO.readSavedMoires() else {return}
-        _model = _m
+        _moires = _m
     }
     
-    func saveAndCreateNew(moireToSave: Moire) -> Moire {
-        try? SaveFileIO.saveOrUpdate(moire: moireToSave)
+    func numOfMoires() -> Int {
+        return _moires.count
+    }
+    
+    func load(moireIndex: Int) -> Moire? {
+        return nil
+    }
+    
+    func load(moireId: String) -> Moire? {
+        return nil
+    }
+    
+    func saveOrUpdate(moire: Moire) throws {
+        try SaveFileIO.saveOrUpdate(moire: moire)
+    }
+    
+    func createNew() -> Moire {
         let newM = Moire()
-        _model.append(newM)
+        _moires.append(newM)
         return newM
     }
     
-    func reset() {
-        self._model = []
-        self._model.append(Moire())
+    func delete(moireId: String) -> Bool {
+        return false
+    }
+    
+    func deleteAll() {
+        self._moires = []
     }
 }
 

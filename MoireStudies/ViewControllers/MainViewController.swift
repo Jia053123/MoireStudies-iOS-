@@ -9,11 +9,10 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
-    @IBOutlet weak var gearButton: UIButton!
-    @IBOutlet weak var fileButton: UIButton!
+//    private var moireModel: MoireModel = MoireModel.init()
+    private var moire: Moire?
     var initSettings: InitSettings?
     var resetMoireWhenInit = false
-    private var moire: Moire?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
     private var mainView: MainView? {
@@ -21,6 +20,8 @@ class MainViewController: UIViewController {
             return self.view as? MainView
         }
     }
+    @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
