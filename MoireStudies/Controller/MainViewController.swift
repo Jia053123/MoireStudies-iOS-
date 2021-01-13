@@ -22,8 +22,8 @@ class MainViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.initModel()
         let mv = self.mainView!
         mv.setUp(patterns: moireModel!.patterns)
@@ -141,6 +141,15 @@ class MainViewController: UIViewController {
                 break
             }
         }
+        self.pauseMoire()
+    }
+    
+    func pauseMoire() {
+        self.mainView!.pauseMoire()
+    }
+
+    func resumeMoire() {
+        self.mainView!.resumeMoire()
     }
     
     override var prefersStatusBarHidden: Bool {

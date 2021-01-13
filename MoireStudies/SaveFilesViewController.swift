@@ -21,6 +21,14 @@ class SaveFilesViewController: UICollectionViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            let mvc = self.presentingViewController as? MainViewController
+            mvc?.resumeMoire()
+        }
+    }
+    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }

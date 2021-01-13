@@ -14,6 +14,14 @@ class SettingsViewController: UITableViewController {
     var initSettings = InitSettings()
     var resetMoire = false
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            let mvc = self.presentingViewController as? MainViewController
+            mvc?.resumeMoire()
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }

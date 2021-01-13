@@ -55,6 +55,11 @@ class MainView: UIView {
         self.bringSubviewToFront(fileButton)
     }
     
+    func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
+        let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: controlViewFrame)
+        patternViews[patternIndex].mask = maskView
+    }
+    
     func highlightPatternView(patternViewIndex: Int) {
         let pv = patternViews[patternViewIndex]
         dimView.frame = self.moireView.bounds
@@ -79,9 +84,16 @@ class MainView: UIView {
         self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
     }
     
-    func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
-        let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: controlViewFrame)
-        patternViews[patternIndex].mask = maskView
+    func pauseMoire() {
+        for pv in patternViews {
+            pv.pauseAnimations()
+        }
+    }
+    
+    func resumeMoire() {
+        for pv in patternViews {
+            pv.resumeAnimations()
+        }
     }
     
     func takeMoireScreenshot() -> UIImage? {

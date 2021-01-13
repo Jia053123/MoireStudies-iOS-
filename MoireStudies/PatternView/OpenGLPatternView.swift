@@ -17,5 +17,11 @@ class OpenGLPatternView: UIView, PatternView {
         
     }
     
+    func pauseAnimations() {
+        
+    }
     
+    func resumeAnimations() {
+        
+    }
 }

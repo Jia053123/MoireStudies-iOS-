@@ -46,7 +46,7 @@ class CoreAnimPatternView: UIView {
         }
     }
     
-    func animateTile(tile: TileLayer) {
+    private func animateTile(tile: TileLayer) {
         // all tiles move towards the bottom of the backing view at the same speed
         let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
         let duration = remainingDistance / self.pattern.speed
@@ -101,6 +101,17 @@ extension CoreAnimPatternView: PatternView {
             for tile in tiles {
                 tile.fillRatio = newPattern.fillRatio
             }
+        }
+    }
+    
+    func pauseAnimations() {
+        for t in tiles {
+            t.speed = 0.0
+        }
+    }
+    func resumeAnimations() {
+        for t in tiles {
+            t.speed = 1.0
         }
     }
 }
