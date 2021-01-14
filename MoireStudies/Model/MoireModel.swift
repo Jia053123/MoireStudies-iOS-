@@ -9,50 +9,42 @@ import Foundation
 
 class MoireModel {
     private var saveFileIO = SaveFileIO.init()
-//    private var _moires: Array<Moire> = []
-//    var moires: Array<Moire> {
-//        get {
-//            if _moires.isEmpty {
-//                _ = self.createNew()
-//            }
-//            return _moires
-//        }
-//    }
-    
-//    required init() {
-//        guard let _m = SaveFileIO.readAllMoires() else {return}
-//        _moires = _m
-//    }
+    var moires: Array<Moire> { // TODO: rename to currentMoires?
+        get {
+            if self.numOfMoires() == 0 {
+                _ = self.createNew()
+            }
+            return self.allMoires()
+        }
+    }
     
     func numOfMoires() -> Int {
-        return 0
+        return saveFileIO.numOfMoire() ?? 0
     }
     
-    func load(moireIndex: Int) -> Moire? {
-        return nil
+    func allMoires() -> Array<Moire> {
+        guard let ms = saveFileIO.readAllMoires() else {
+            return []
+        }
+        return ms.compactMap({$0})
     }
     
-    func load(moireId: String) -> Moire? {
-        return nil
+    func open(moireId: String) -> Moire? {
+        return self.saveFileIO.read(moireId: moireId)
     }
     
-    func saveOrUpdate(moire: Moire) throws {
-        
-//        try SaveFileIO.saveOrUpdate(moire: moire)
+    func saveOrUpdate(moire: Moire) {
+        self.saveFileIO.save(moire: moire)
     }
     
     func createNew() -> Moire {
         let newM = Moire()
-//        _moires.append(newM)
+        self.saveFileIO.save(moire: newM)
         return newM
     }
     
     func delete(moireId: String) -> Bool {
-        return false
-    }
-    
-    func deleteAll() {
-//        self._moires = []
+        return self.saveFileIO.delete(moireId: moireId)
     }
 }
 
@@ -77,7 +69,7 @@ fileprivate class SaveFileIO {
         return saveFileDirectory.appendingPathComponent(fileName)
     }
     
-    func read(moireUrl: URL) -> Moire? {
+    private func read(moireUrl: URL) -> Moire? {
         do {
             let moireData = try Data.init(contentsOf: moireUrl)
             let moire = try decoder.decode(Moire.self, from: moireData)
@@ -99,17 +91,19 @@ fileprivate class SaveFileIO {
         fileManager.createFile(atPath: url.absoluteString, contents: encodedMoire, attributes: nil)
     }
     
-    func delete(moireUrl: URL) {
+    private func delete(moireUrl: URL) -> Bool {
         do {
             try fileManager.removeItem(at: moireUrl)
+            return true
         } catch {
             print("IO ERROR: deleting moire file from disk failed")
+            return false
         }
     }
     
-    func delete(moireId: String) {
+    func delete(moireId: String) -> Bool {
         let url = self.makeSaveFileUrl(moireId: moireId)
-        self.delete(moireUrl: url)
+        return self.delete(moireUrl: url)
     }
     
     func numOfMoire() -> Int? {
