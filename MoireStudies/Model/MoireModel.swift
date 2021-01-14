@@ -38,6 +38,7 @@ class MoireModel {
     }
     
     func createNew() -> Moire {
+        print("create new")
         let newM = Moire()
         self.saveFileIO.save(moire: newM)
         return newM
@@ -53,10 +54,12 @@ fileprivate class SaveFileIO {
     private let saveFileDirectory: URL
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
+    
     required init() {
         let documentsDirectory = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory,
                                                   in: FileManager.SearchPathDomainMask.userDomainMask).first!
         saveFileDirectory = documentsDirectory.appendingPathComponent("MoireSaveFiles")
+        print("saveFileDirectory: " + saveFileDirectory.absoluteString)
         var isDirectory: ObjCBool = ObjCBool(false)
         let fileExists = fileManager.fileExists(atPath: saveFileDirectory.absoluteString, isDirectory: &isDirectory)
         if !fileExists || !isDirectory.boolValue  {

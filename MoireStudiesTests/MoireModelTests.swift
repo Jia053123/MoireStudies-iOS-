@@ -17,15 +17,19 @@ class MoireModelTests: XCTestCase {
     }
     
     func testCreateMoires() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let moireModel1 = MoireModel()
+        _ = moireModel1.createNew()
+        _ = moireModel1.createNew()
+        _ = moireModel1.createNew()
+        let count1 = moireModel1.numOfMoires()
+        XCTAssert(count1 == 3, String(format: "current count: %d", count1))
+        _ = moireModel1.createNew()
+        let moireModel2 = MoireModel()
+        let count2 = moireModel2.numOfMoires()
+        XCTAssert(count2 == 4, String(format: "current count: %d", count2))
     }
     
-    func testSaveNewMoires() throws {
-        
-    }
-    
-    func testUpdateExistingMoires() throws {
+    func testSaveAndUpdateMoires() throws {
         
     }
     

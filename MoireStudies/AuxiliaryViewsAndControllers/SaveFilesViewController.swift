@@ -15,7 +15,7 @@ class SaveFilesViewController: UICollectionViewController {
         super.init(coder: coder)
         do {
             guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
-            self.moireModel.moires.append(try PropertyListDecoder().decode(Moire.self, from: data))
+//            self.moireModel.moires.append(try PropertyListDecoder().decode(Moire.self, from: data))
         } catch {
             print("problem loading saved moire; loading the default")
         }
