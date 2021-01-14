@@ -58,6 +58,10 @@ class MainViewController: UIViewController {
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        _ = self.saveMoire()
+    }
+    
     func initModel() {
         func resetModel() {
             self.moire = Moire()
