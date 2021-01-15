@@ -14,7 +14,7 @@ class MoireModel {
             if self.numOfMoires() == 0 {
                 _ = self.createNew()
             }
-            return self.allMoires()
+            return []//self.allMoires()
         }
     }
     
@@ -22,16 +22,16 @@ class MoireModel {
         return saveFileIO.numOfMoire() ?? 0
     }
     
-    func allMoires() -> Array<Moire> {
-        guard let ms = saveFileIO.readAllMoiresSortedBy(key: nil) else {
-            return []
-        }
-        return ms.compactMap({$0})
-    }
+//    func allMoires() -> Array<Moire> {
+//        guard let ms = saveFileIO.readAllMoiresSortedBy(key: nil) else {
+//            return []
+//        }
+//        return ms.compactMap({$0})
+//    }
     
-    func open(moireId: String) -> Moire? {
-        return self.saveFileIO.read(moireId: moireId)
-    }
+//    func open(moireId: String) -> Moire? {
+//        return self.saveFileIO.read(moireId: moireId)
+//    }
     
 //    func openLastEdited() -> Moire? {
 //        do {
@@ -42,19 +42,19 @@ class MoireModel {
 //    }
     
     func saveOrUpdate(moire: Moire) {
-        self.saveFileIO.save(moire: moire)
+        _ = self.saveFileIO.save(moire: moire)
     }
     
     func createNew() -> Moire {
         print("create new")
         let newM = Moire()
-        self.saveFileIO.save(moire: newM)
+        _ = self.saveFileIO.save(moire: newM)
         return newM
     }
     
-    func delete(moireId: String) -> Bool {
-        return self.saveFileIO.delete(moireId: moireId)
-    }
+//    func delete(moireId: String) -> Bool {
+//        return self.saveFileIO.delete(moireId: moireId)
+//    }
 }
 
 fileprivate class SaveFileIO {
@@ -71,56 +71,65 @@ fileprivate class SaveFileIO {
         var isDirectory: ObjCBool = ObjCBool(false)
         let fileExists = fileManager.fileExists(atPath: saveFileDirectory.absoluteString, isDirectory: &isDirectory)
         if !fileExists || !isDirectory.boolValue  {
+            print("save file directory doesn't exist; creating directory")
             try! fileManager.createDirectory(at: saveFileDirectory, withIntermediateDirectories: true, attributes: nil)
+        } else {
+            print("save file directory already exists")
         }
     }
     
     private func makeSaveFileUrl(moireId: String) -> URL {
         let fileName = "MOIRE-" + moireId + ".json"
         print("made file name: " + fileName)
-        return saveFileDirectory.appendingPathComponent(fileName)
+        let saveFileUrl = saveFileDirectory.appendingPathComponent(fileName)
+        print("made file url: " + saveFileUrl.absoluteString)
+        return saveFileUrl
     }
     
-    private func read(moireUrl: URL) -> Moire? {
-        do {
-            let moireData = try Data.init(contentsOf: moireUrl)
-            let moire = try decoder.decode(Moire.self, from: moireData)
-            return moire
-        } catch {
-            print("IO ERROR: reading moire file from disk failed")
-            return nil
-        }
-    }
+//    private func read(moireUrl: URL) -> Moire? {
+//        do {
+//            let moireData = try Data.init(contentsOf: moireUrl)
+//            let moire = try decoder.decode(Moire.self, from: moireData)
+//            return moire
+//        } catch {
+//            print("IO ERROR: reading moire file from disk failed")
+//            return nil
+//        }
+//    }
     
-    func read(moireId: String) -> Moire? {
-        let url = makeSaveFileUrl(moireId: moireId)
-        return self.read(moireUrl: url)
-    }
+//    func read(moireId: String) -> Moire? {
+//        let url = makeSaveFileUrl(moireId: moireId)
+//        return self.read(moireUrl: url)
+//    }
     
     func save(moire: Moire) -> Bool {
         let url = self.makeSaveFileUrl(moireId: moire.id)
-        guard fileManager.isWritableFile(atPath: url.absoluteString) else {
-            print("file not writable")
-            return false
-        }
+//        guard fileManager.isWritableFile(atPath: url.path) else {
+//            print("IO ERROR: file not writable")
+//            return false
+//        }
         let encodedMoire = try! encoder.encode(moire)
-        return fileManager.createFile(atPath: url.absoluteString, contents: encodedMoire, attributes: nil)
-    }
-    
-    private func delete(moireUrl: URL) -> Bool {
-        do {
-            try fileManager.removeItem(at: moireUrl)
-            return true
-        } catch {
-            print("IO ERROR: deleting moire file from disk failed")
-            return false
+        let success = fileManager.createFile(atPath: url.path, contents: encodedMoire, attributes: nil)
+        if !success {
+            print("IO ERROR: creating file failed")
         }
+        return success
     }
     
-    func delete(moireId: String) -> Bool {
-        let url = self.makeSaveFileUrl(moireId: moireId)
-        return self.delete(moireUrl: url)
-    }
+//    private func delete(moireUrl: URL) -> Bool {
+//        do {
+//            try fileManager.removeItem(at: moireUrl)
+//            return true
+//        } catch {
+//            print("IO ERROR: deleting moire file from disk failed")
+//            return false
+//        }
+//    }
+    
+//    func delete(moireId: String) -> Bool {
+//        let url = self.makeSaveFileUrl(moireId: moireId)
+//        return self.delete(moireUrl: url)
+//    }
     
     func numOfMoire() -> Int? {
         do {
@@ -136,20 +145,20 @@ fileprivate class SaveFileIO {
         }
     }
     
-    func readAllMoiresSortedBy(key: URLResourceKey?) -> Array<Moire?>? {
-        var moires: Array<Moire?> = []
-        do {
-            // TODO: work with the key
-            let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
-                                                           includingPropertiesForKeys: [],
-                                                           options: [])
-            for u in urls {
-                moires.append(self.read(moireUrl: u) ?? nil)
-            }
-            return moires
-        } catch {
-            print("IO ERROR: accessing files from disk failed")
-            return nil
-        }
-    }
+//    func readAllMoiresSortedBy(key: URLResourceKey?) -> Array<Moire?>? {
+//        var moires: Array<Moire?> = []
+//        do {
+//            // TODO: work with the key
+//            let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
+//                                                           includingPropertiesForKeys: [],
+//                                                           options: [])
+//            for u in urls {
+//                moires.append(self.read(moireUrl: u) ?? nil)
+//            }
+//            return moires
+//        } catch {
+//            print("IO ERROR: accessing files from disk failed")
+//            return nil
+//        }
+//    }
 }
