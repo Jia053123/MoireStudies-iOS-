@@ -23,7 +23,7 @@ class MoireModel {
     }
     
     func allMoires() -> Array<Moire> {
-        guard let ms = saveFileIO.readAllMoires() else {
+        guard let ms = saveFileIO.readAllMoiresSortedBy(key: nil) else {
             return []
         }
         return ms.compactMap({$0})
@@ -32,6 +32,14 @@ class MoireModel {
     func open(moireId: String) -> Moire? {
         return self.saveFileIO.read(moireId: moireId)
     }
+    
+//    func openLastEdited() -> Moire? {
+//        do {
+//            let num = try fileManager.contentsOfDirectory(at: saveFileDirectory,
+//                                                          includingPropertiesForKeys: [],
+//                                                          options: []).count
+//        }
+//    }
     
     func saveOrUpdate(moire: Moire) {
         self.saveFileIO.save(moire: moire)
@@ -68,7 +76,8 @@ fileprivate class SaveFileIO {
     }
     
     private func makeSaveFileUrl(moireId: String) -> URL {
-        let fileName = moireId + ".json"
+        let fileName = "MOIRE-" + moireId + ".json"
+        print("made file name: " + fileName)
         return saveFileDirectory.appendingPathComponent(fileName)
     }
     
@@ -88,10 +97,14 @@ fileprivate class SaveFileIO {
         return self.read(moireUrl: url)
     }
     
-    func save(moire: Moire) {
+    func save(moire: Moire) -> Bool {
         let url = self.makeSaveFileUrl(moireId: moire.id)
+        guard fileManager.isWritableFile(atPath: url.absoluteString) else {
+            print("file not writable")
+            return false
+        }
         let encodedMoire = try! encoder.encode(moire)
-        fileManager.createFile(atPath: url.absoluteString, contents: encodedMoire, attributes: nil)
+        return fileManager.createFile(atPath: url.absoluteString, contents: encodedMoire, attributes: nil)
     }
     
     private func delete(moireUrl: URL) -> Bool {
@@ -111,19 +124,22 @@ fileprivate class SaveFileIO {
     
     func numOfMoire() -> Int? {
         do {
-            let num = try fileManager.contentsOfDirectory(at: saveFileDirectory,
+            let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
                                                           includingPropertiesForKeys: [],
-                                                          options: []).count
-            return num
+                                                          options: [])
+            let moires = urls.filter({$0.lastPathComponent.hasPrefix("MOIRE-")})
+//            print(urls[0].absoluteString)
+            return moires.count
         } catch {
             print("IO ERROR: accessing directory from disk failed")
             return nil
         }
     }
     
-    func readAllMoires() -> Array<Moire?>? {
+    func readAllMoiresSortedBy(key: URLResourceKey?) -> Array<Moire?>? {
         var moires: Array<Moire?> = []
         do {
+            // TODO: work with the key
             let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
                                                            includingPropertiesForKeys: [],
                                                            options: [])

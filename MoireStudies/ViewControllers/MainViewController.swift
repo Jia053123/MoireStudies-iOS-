@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
-//    private var moireModel: MoireModel = MoireModel.init()
+    private var moireModel: MoireModel = MoireModel.init()
     private var moire: Moire?
     var initSettings: InitSettings?
     var resetMoireWhenInit = false
@@ -64,20 +64,26 @@ class MainViewController: UIViewController {
     
     func initModel() {
         func resetModel() {
-            self.moire = Moire()
-            self.moire!.reset()
+//            self.moire = Moire()
+//            self.moire!.reset()
+            if let m = self.moire {
+                m.reset()
+            } else {
+                self.moire = self.moireModel.createNew()
+            }
         }
         guard !self.resetMoireWhenInit else {
             resetModel()
             return
         }
-        do {
-            guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
-            self.moire = try PropertyListDecoder().decode(Moire.self, from: data)
-        } catch {
-            print("problem loading saved moire; loading the default")
-            resetModel()
-        }
+        
+//        do {
+//            guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
+//            self.moire = try PropertyListDecoder().decode(Moire.self, from: data)
+//        } catch {
+//            print("problem loading saved moire; loading the default")
+//            resetModel()
+//        }
     }
     
     func getCtrlViewControllerId(index: Int) -> Int {
