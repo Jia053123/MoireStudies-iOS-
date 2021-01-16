@@ -13,7 +13,9 @@ import XCTest
 class MoireModelTests: XCTestCase {
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let moireModel = MoireModel()
+        let success = moireModel.deleteAllSaves()
+        XCTAssert(success == true)
     }
     
     func testCreateMoires() throws {

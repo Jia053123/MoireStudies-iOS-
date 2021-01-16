@@ -55,6 +55,10 @@ class MoireModel {
     func delete(moireId: String) -> Bool {
         return self.saveFileIO.delete(moireId: moireId)
     }
+    
+    func deleteAllSaves() -> Bool {
+        return self.saveFileIO.deleteAll()
+    }
 }
 
 fileprivate class SaveFileIO {
@@ -127,18 +131,35 @@ fileprivate class SaveFileIO {
         return self.delete(moireUrl: url)
     }
     
-    func numOfMoire() -> Int? {
+    func allMoireUrls() -> Array<URL>? {
         do {
             let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
                                                           includingPropertiesForKeys: [],
                                                           options: [])
-            let moires = urls.filter({$0.lastPathComponent.hasPrefix("MOIRE-")})
-//            print(urls[0].path)
-            return moires.count
+            return urls.filter({$0.lastPathComponent.hasPrefix("MOIRE-")})
         } catch {
             print("IO ERROR: accessing directory from disk failed")
             return nil
         }
+    }
+    
+    func numOfMoire() -> Int? {
+        guard let urls = self.allMoireUrls() else {
+            return nil
+        }
+        return urls.count
+    }
+    
+    func deleteAll() -> Bool {
+        guard let urls = self.allMoireUrls() else {
+            return false
+        }
+        var success: Bool = true
+        for u in urls {
+            let s = self.delete(moireUrl: u)
+            success = success && s
+        }
+        return success
     }
     
 //    func readAllMoiresSortedBy(key: URLResourceKey?) -> Array<Moire?>? {
