@@ -41,9 +41,9 @@ class MoireModel {
 //        }
 //    }
     
-    func saveOrUpdate(moire: Moire) {
-        _ = self.saveFileIO.save(moire: moire)
-    }
+//    func saveOrUpdate(moire: Moire) {
+//        _ = self.saveFileIO.save(moire: moire)
+//    }
     
     func createNew() -> Moire {
         print("create new")
@@ -52,9 +52,9 @@ class MoireModel {
         return newM
     }
     
-//    func delete(moireId: String) -> Bool {
-//        return self.saveFileIO.delete(moireId: moireId)
-//    }
+    func delete(moireId: String) -> Bool {
+        return self.saveFileIO.delete(moireId: moireId)
+    }
 }
 
 fileprivate class SaveFileIO {
@@ -67,9 +67,9 @@ fileprivate class SaveFileIO {
         let documentsDirectory = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory,
                                                   in: FileManager.SearchPathDomainMask.userDomainMask).first!
         saveFileDirectory = documentsDirectory.appendingPathComponent("MoireSaveFiles")
-        print("saveFileDirectory: " + saveFileDirectory.absoluteString)
+        print("saveFileDirectory: " + saveFileDirectory.path)
         var isDirectory: ObjCBool = ObjCBool(false)
-        let fileExists = fileManager.fileExists(atPath: saveFileDirectory.absoluteString, isDirectory: &isDirectory)
+        let fileExists = fileManager.fileExists(atPath: saveFileDirectory.path, isDirectory: &isDirectory)
         if !fileExists || !isDirectory.boolValue  {
             print("save file directory doesn't exist; creating directory")
             try! fileManager.createDirectory(at: saveFileDirectory, withIntermediateDirectories: true, attributes: nil)
@@ -82,7 +82,7 @@ fileprivate class SaveFileIO {
         let fileName = "MOIRE-" + moireId + ".json"
         print("made file name: " + fileName)
         let saveFileUrl = saveFileDirectory.appendingPathComponent(fileName)
-        print("made file url: " + saveFileUrl.absoluteString)
+        print("made file url: " + saveFileUrl.path)
         return saveFileUrl
     }
     
@@ -104,10 +104,6 @@ fileprivate class SaveFileIO {
     
     func save(moire: Moire) -> Bool {
         let url = self.makeSaveFileUrl(moireId: moire.id)
-//        guard fileManager.isWritableFile(atPath: url.path) else {
-//            print("IO ERROR: file not writable")
-//            return false
-//        }
         let encodedMoire = try! encoder.encode(moire)
         let success = fileManager.createFile(atPath: url.path, contents: encodedMoire, attributes: nil)
         if !success {
@@ -116,20 +112,20 @@ fileprivate class SaveFileIO {
         return success
     }
     
-//    private func delete(moireUrl: URL) -> Bool {
-//        do {
-//            try fileManager.removeItem(at: moireUrl)
-//            return true
-//        } catch {
-//            print("IO ERROR: deleting moire file from disk failed")
-//            return false
-//        }
-//    }
+    private func delete(moireUrl: URL) -> Bool {
+        do {
+            try fileManager.removeItem(at: moireUrl)
+            return true
+        } catch {
+            print("IO ERROR: deleting moire file from disk failed")
+            return false
+        }
+    }
     
-//    func delete(moireId: String) -> Bool {
-//        let url = self.makeSaveFileUrl(moireId: moireId)
-//        return self.delete(moireUrl: url)
-//    }
+    func delete(moireId: String) -> Bool {
+        let url = self.makeSaveFileUrl(moireId: moireId)
+        return self.delete(moireUrl: url)
+    }
     
     func numOfMoire() -> Int? {
         do {
@@ -137,7 +133,7 @@ fileprivate class SaveFileIO {
                                                           includingPropertiesForKeys: [],
                                                           options: [])
             let moires = urls.filter({$0.lastPathComponent.hasPrefix("MOIRE-")})
-//            print(urls[0].absoluteString)
+//            print(urls[0].path)
             return moires.count
         } catch {
             print("IO ERROR: accessing directory from disk failed")

@@ -37,12 +37,23 @@ class MoireModelTests: XCTestCase {
         XCTAssert(count3 == 4, String(format: "current count: %d", count3))
     }
     
-    func testSaveAndUpdateMoires() throws {
+    func testDeleteMoires() throws {
+        let moireModel1 = MoireModel()
         
+        let count0 = moireModel1.numOfMoires()
+        XCTAssert(count0 == 0, String(format: "current count: %d", count0))
+        
+        let m1 = moireModel1.createNew()
+        let m2 = moireModel1.createNew()
+        let m3 = moireModel1.createNew()
+        let count1 = moireModel1.numOfMoires()
+        XCTAssert(count1 == 3, String(format: "current count: %d", count1))
+        
+//        let r1 = moireModel1.delete(moireId: m2.id)
     }
     
-    func testDeleteMoires() throws {
-
+    func testSaveAndUpdateMoires() throws {
+        
     }
     
     func testMultipleOperations() throws {
