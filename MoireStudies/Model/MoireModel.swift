@@ -29,9 +29,9 @@ class MoireModel {
 //        return ms.compactMap({$0})
 //    }
     
-//    func open(moireId: String) -> Moire? {
-//        return self.saveFileIO.read(moireId: moireId)
-//    }
+    func read(moireId: String) -> Moire? {
+        return self.saveFileIO.read(moireId: moireId)
+    }
     
 //    func openLastEdited() -> Moire? {
 //        do {
@@ -41,9 +41,9 @@ class MoireModel {
 //        }
 //    }
     
-//    func saveOrUpdate(moire: Moire) {
-//        _ = self.saveFileIO.save(moire: moire)
-//    }
+    func save(moire: Moire) -> Bool {
+        return self.saveFileIO.save(moire: moire)
+    }
     
     func createNew() -> Moire {
         print("create new")
@@ -90,21 +90,21 @@ fileprivate class SaveFileIO {
         return saveFileUrl
     }
     
-//    private func read(moireUrl: URL) -> Moire? {
-//        do {
-//            let moireData = try Data.init(contentsOf: moireUrl)
-//            let moire = try decoder.decode(Moire.self, from: moireData)
-//            return moire
-//        } catch {
-//            print("IO ERROR: reading moire file from disk failed")
-//            return nil
-//        }
-//    }
+    private func read(moireUrl: URL) -> Moire? {
+        do {
+            let moireData = try Data.init(contentsOf: moireUrl)
+            let moire = try decoder.decode(Moire.self, from: moireData)
+            return moire
+        } catch {
+            print("IO ERROR: reading moire file from disk failed")
+            return nil
+        }
+    }
     
-//    func read(moireId: String) -> Moire? {
-//        let url = makeSaveFileUrl(moireId: moireId)
-//        return self.read(moireUrl: url)
-//    }
+    func read(moireId: String) -> Moire? {
+        let url = makeSaveFileUrl(moireId: moireId)
+        return self.read(moireUrl: url)
+    }
     
     func save(moire: Moire) -> Bool {
         let url = self.makeSaveFileUrl(moireId: moire.id)
