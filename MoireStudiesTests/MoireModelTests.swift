@@ -19,46 +19,68 @@ class MoireModelTests: XCTestCase {
     }
     
     func testCreateMoires() throws {
+        var count: Int
         let moireModel1 = MoireModel()
         
-        let count0 = moireModel1.numOfMoires()
-        XCTAssert(count0 == 0, String(format: "current count: %d", count0))
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 0, String(format: "current count: %d", count))
         
         _ = moireModel1.createNew()
-        let count1 = moireModel1.numOfMoires()
-        XCTAssert(count1 == 1, String(format: "current count: %d", count1))
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 1, String(format: "current count: %d", count))
         
         _ = moireModel1.createNew()
         _ = moireModel1.createNew()
-        let count2 = moireModel1.numOfMoires()
-        XCTAssert(count2 == 3, String(format: "current count: %d", count2))
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 3, String(format: "current count: %d", count))
         
         _ = moireModel1.createNew()
         let moireModel2 = MoireModel()
-        let count3 = moireModel2.numOfMoires()
-        XCTAssert(count3 == 4, String(format: "current count: %d", count3))
+        count = moireModel2.numOfMoires()
+        XCTAssert(count == 4, String(format: "current count: %d", count))
     }
     
     func testDeleteMoires() throws {
+        var count: Int
+        var success: Bool
         let moireModel1 = MoireModel()
         
-        let count0 = moireModel1.numOfMoires()
-        XCTAssert(count0 == 0, String(format: "current count: %d", count0))
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 0, String(format: "current count: %d", count))
         
         let m1 = moireModel1.createNew()
         let m2 = moireModel1.createNew()
         let m3 = moireModel1.createNew()
-        let count1 = moireModel1.numOfMoires()
-        XCTAssert(count1 == 3, String(format: "current count: %d", count1))
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 3, String(format: "current count: %d", count))
         
-//        let r1 = moireModel1.delete(moireId: m2.id)
+        success = moireModel1.delete(moireId: m2.id)
+        XCTAssert(success == true)
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 2, String(format: "current count: %d", count))
+        
+        success = moireModel1.delete(moireId: m1.id)
+        XCTAssert(success == true)
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 1, String(format: "current count: %d", count))
+        
+        success = moireModel1.delete(moireId: m1.id)
+        XCTAssert(success == false)
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 1, String(format: "current count: %d", count))
+        
+        success = moireModel1.delete(moireId: m3.id)
+        XCTAssert(success == true)
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 0, String(format: "current count: %d", count))
+        
+        success = moireModel1.delete(moireId: m3.id)
+        XCTAssert(success == false)
+        count = moireModel1.numOfMoires()
+        XCTAssert(count == 0, String(format: "current count: %d", count))
     }
     
     func testSaveAndUpdateMoires() throws {
-        
-    }
-    
-    func testMultipleOperations() throws {
         
     }
 }
