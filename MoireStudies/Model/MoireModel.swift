@@ -9,14 +9,14 @@ import Foundation
 
 class MoireModel {
     private var saveFileIO = SaveFileIO.init()
-    var moires: Array<Moire> { // TODO: rename to currentMoires?
-        get {
-            if self.numOfMoires() == 0 {
-                _ = self.createNew()
-            }
-            return self.readAllMoiresSortedByLastCreatedOrModified()
-        }
-    }
+//    var allMoires: Array<Moire> {
+//        get {
+//            if self.numOfMoires() == 0 {
+//                _ = self.createNew()
+//            }
+//            return self.readAllMoiresSortedByLastCreatedOrModified()
+//        }
+//    }
     
     func numOfMoires() -> Int {
         return saveFileIO.numOfMoire() ?? 0

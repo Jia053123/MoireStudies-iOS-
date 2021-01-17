@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InitSettings {
+struct InitSettings { // TODO: rename to MainViewControllerInitSettings
     var renderSetting: RenderSettings = RenderSettings.coreAnimation
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
 }
