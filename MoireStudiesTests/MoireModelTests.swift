@@ -113,4 +113,84 @@ class MoireModelTests: XCTestCase {
         XCTAssert(m22 != nil)
         XCTAssert(m22?.patterns[0].scaleFactor == 1.129)
     }
+    
+    func testReadAllMoiresAndReadLastCreatedOrEdited() {
+        var success: Bool
+        var ms: Array<Moire>
+        var m: Moire?
+        var ids: Array<String>
+        let moireModel1 = MoireModel()
+        
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        XCTAssert(ms.count == 0)
+        
+        let m1 = moireModel1.createNew()
+        let i1 = m1.id
+        let m2 = moireModel1.createNew()
+        let i2 = m2.id
+        let m3 = moireModel1.createNew()
+        let i3 = m3.id
+        
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        XCTAssert(ms.count == 3)
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids.contains(i1))
+        XCTAssert(ids.contains(i2))
+        XCTAssert(ids.contains(i3))
+        XCTAssert(ids == [i1,i2,i3])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m != nil)
+        XCTAssert(m?.id == i3)
+        
+        assert(m2.patterns[0].scaleFactor != 1.129)
+        m2.patterns[0].scaleFactor = 1.129
+        success = moireModel1.save(moire: m2)
+        assert(success == true)
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids == [i1,i3,i2])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m != nil)
+        XCTAssert(m?.id == i2)
+        
+        let m4 = moireModel1.createNew()
+        let i4 = m4.id
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids == [i1,i3,i2,i4])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m != nil)
+        XCTAssert(m?.id == i4)
+        
+        success = moireModel1.delete(moireId: i4)
+        assert(success == true)
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        XCTAssert(ms.count == 3)
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids == [i1,i3,i2])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m != nil)
+        XCTAssert(m?.id == i2)
+        
+        success = moireModel1.delete(moireId: i1)
+        assert(success == true)
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        XCTAssert(ms.count == 2)
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids == [i3,i2])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m != nil)
+        XCTAssert(m?.id == i2)
+        
+        success = moireModel1.delete(moireId: i2)
+        assert(success == true)
+        success = moireModel1.delete(moireId: i3)
+        assert(success == true)
+        ms = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
+        XCTAssert(ms.count == 0)
+        ids = ms.compactMap({$0.id})
+        XCTAssert(ids == [])
+        m = moireModel1.readLastCreatedOrEdited()
+        XCTAssert(m == nil)
+    }
 }

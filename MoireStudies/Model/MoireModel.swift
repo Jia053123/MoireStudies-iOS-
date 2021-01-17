@@ -14,7 +14,7 @@ class MoireModel {
             if self.numOfMoires() == 0 {
                 _ = self.createNew()
             }
-            return []//self.allMoires()
+            return self.readAllMoiresSortedByLastCreatedOrModified()
         }
     }
     
@@ -22,24 +22,23 @@ class MoireModel {
         return saveFileIO.numOfMoire() ?? 0
     }
     
-//    func allMoires() -> Array<Moire> {
-//        guard let ms = saveFileIO.readAllMoiresSortedBy(key: nil) else {
-//            return []
-//        }
-//        return ms.compactMap({$0})
-//    }
+    /**
+     returns:  a sorted array of moires sorted in ascending order by its creation date or modification date, whichever comes later
+     */
+    func readAllMoiresSortedByLastCreatedOrModified() -> Array<Moire> {
+        guard let ms = self.saveFileIO.readAllMoiresSortedByLastCreatedOrModified() else {
+            return []
+        }
+        return ms.compactMap({$0})
+    }
     
     func read(moireId: String) -> Moire? {
         return self.saveFileIO.read(moireId: moireId)
     }
     
-//    func openLastEdited() -> Moire? {
-//        do {
-//            let num = try fileManager.contentsOfDirectory(at: saveFileDirectory,
-//                                                          includingPropertiesForKeys: [],
-//                                                          options: []).count
-//        }
-//    }
+    func readLastCreatedOrEdited() -> Moire? {
+        return saveFileIO.readLastCreatedOrModified()
+    }
     
     func save(moire: Moire) -> Bool {
         return self.saveFileIO.save(moire: moire)
@@ -83,7 +82,7 @@ fileprivate class SaveFileIO {
     }
     
     private func makeSaveFileUrl(moireId: String) -> URL {
-        let fileName = "MOIRE-" + moireId + ".json"
+        let fileName = "MOIRE-" + moireId + ".json" // TODO: use a custom extension instead of prefix
         print("made file name: " + fileName)
         let saveFileUrl = saveFileDirectory.appendingPathComponent(fileName)
         print("made file url: " + saveFileUrl.path)
@@ -131,27 +130,80 @@ fileprivate class SaveFileIO {
         return self.delete(moireUrl: url)
     }
     
-    func allMoireUrls() -> Array<URL>? {
+    private func allMoireUrlsSortedByLastCreatedOrModified() -> Array<URL>? {
+        var urls: Array<URL>
         do {
-            let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
-                                                          includingPropertiesForKeys: [],
-                                                          options: [])
-            return urls.filter({$0.lastPathComponent.hasPrefix("MOIRE-")})
+            urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
+                                                           includingPropertiesForKeys: [.attributeModificationDateKey,
+                                                                                        .creationDateKey],
+                                                           options: [])
         } catch {
             print("IO ERROR: accessing directory from disk failed")
+            return nil
+        }
+            
+        urls.sort(by: {
+            func greaterNonNil<T: Comparable>(a: T?, b: T?) -> T? {
+                // in the case a = b, and neither value is nil, a is the output
+                if let nonNilA = a, let nonNilB = b {
+                    if nonNilA >= nonNilB {
+                        return nonNilA
+                    } else {
+                        return nonNilB
+                    }
+                } else {
+                    return a ?? b
+                }
+            }
+            func dateToCompare(url: URL) -> Date? {
+                let md = try? url.resourceValues(forKeys: [.attributeModificationDateKey]).attributeModificationDate
+                let cd = try? url.resourceValues(forKeys: [.creationDateKey]).creationDate
+                return greaterNonNil(a: md, b: cd) // give modification date prority when it's the same as the creation date
+            }
+            let d0 = dateToCompare(url: $0)
+            let d1 = dateToCompare(url: $1)
+            if let greaterD = greaterNonNil(a: d1, b: d0) {
+                if greaterD == d0 {
+                    return false
+                } else {
+                    assert(greaterD == d1)
+                    return true
+                }
+            } else {
+                return true
+            }
+        })
+        return urls
+    }
+    
+    func readAllMoiresSortedByLastCreatedOrModified() -> Array<Moire?>? {
+        var moires: Array<Moire?> = []
+        guard let urls = self.allMoireUrlsSortedByLastCreatedOrModified() else {
+            return nil
+        }
+        for u in urls {
+            moires.append(self.read(moireUrl: u) ?? nil)
+        }
+        return moires
+    }
+    
+    func readLastCreatedOrModified() -> Moire? {
+        if let url = self.allMoireUrlsSortedByLastCreatedOrModified()?.last {
+            return self.read(moireUrl: url)
+        } else {
             return nil
         }
     }
     
     func numOfMoire() -> Int? {
-        guard let urls = self.allMoireUrls() else {
+        guard let urls = self.allMoireUrlsSortedByLastCreatedOrModified() else {
             return nil
         }
         return urls.count
     }
     
     func deleteAll() -> Bool {
-        guard let urls = self.allMoireUrls() else {
+        guard let urls = self.allMoireUrlsSortedByLastCreatedOrModified() else {
             return false
         }
         var success: Bool = true
@@ -161,21 +213,4 @@ fileprivate class SaveFileIO {
         }
         return success
     }
-    
-//    func readAllMoiresSortedBy(key: URLResourceKey?) -> Array<Moire?>? {
-//        var moires: Array<Moire?> = []
-//        do {
-//            // TODO: work with the key
-//            let urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
-//                                                           includingPropertiesForKeys: [],
-//                                                           options: [])
-//            for u in urls {
-//                moires.append(self.read(moireUrl: u) ?? nil)
-//            }
-//            return moires
-//        } catch {
-//            print("IO ERROR: accessing files from disk failed")
-//            return nil
-//        }
-//    }
 }
