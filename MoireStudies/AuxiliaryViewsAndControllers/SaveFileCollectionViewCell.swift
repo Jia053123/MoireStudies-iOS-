@@ -22,4 +22,13 @@ class SaveFileCollectionViewCell: UICollectionViewCell {
         self.previewView.frame = self.bounds
         self.previewView.image = previewImage
     }
+    
+    func highlight() {
+        self.layer.borderWidth = 2.0
+        self.layer.borderColor = UIColor.blue.cgColor
+    }
+    
+    func unhighlight() {
+        self.layer.borderWidth = 0.0
+    }
 }

@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 
 class SaveFilesViewController: UICollectionViewController {
-    var currentMoireId: String?
+    var selectedMoireId: String?
     private var moireModel: MoireModel = MoireModel.init()
-//    private var allMoires: Array<Moire>
+    private var allMoiresCache: Array<Moire>
+    private var highlightedCell: SaveFileCollectionViewCell?
     
     required init?(coder: NSCoder) {
+        allMoiresCache = moireModel.readAllMoiresSortedByLastCreatedOrModified()
         super.init(coder: coder)
-//        do {
-//            guard let data = UserDefaults.standard.value(forKey: "Moire") as? Data else {throw NSError()}
-//            self.moireModel.moires.append(try PropertyListDecoder().decode(Moire.self, from: data))
-//        } catch {
-//            print("problem loading saved moire; loading the default")
-//        }
+    }
+    
+    private func reloadCache() {
+        allMoiresCache = moireModel.readAllMoiresSortedByLastCreatedOrModified()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -28,6 +28,7 @@ class SaveFilesViewController: UICollectionViewController {
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             let mvc = self.presentingViewController as? MainViewController
+            mvc?.selectedMoireId = self.selectedMoireId
             mvc?.reloadMoire()
         }
     }
@@ -43,8 +44,12 @@ class SaveFilesViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "saveFileCell", for: indexPath) as! SaveFileCollectionViewCell
         if indexPath.row < self.moireModel.numOfMoires() {
-            let m = self.moireModel.readAllMoiresSortedByLastCreatedOrModified()[indexPath.row] // TODO: you are reading every file just to output one file
+            let m = self.allMoiresCache[indexPath.row]
             cell.setUp(previewImage: m.preview)
+            if m.id == self.selectedMoireId {
+                self.highlightedCell = cell
+                self.highlightedCell?.highlight()
+            }
         } else {
             cell.setUp(previewImage: UIImage(systemName: "plus.rectangle")!)
         }
@@ -53,9 +58,21 @@ class SaveFilesViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == self.moireModel.numOfMoires() {
-            // plus is selected
+            print("selected plus")
+            let newMoire = self.moireModel.createNew()
+            self.reloadCache()
+            self.selectedMoireId = newMoire.id
+            // TODO: perform segue
         } else {
-            print("TODO: save file selected")
+            print("selected cell at index: ", indexPath.row)
+            self.highlightedCell?.unhighlight()
+            let selectedCell = self.collectionView.cellForItem(at: indexPath)
+            self.highlightedCell = selectedCell as? SaveFileCollectionViewCell
+            assert(highlightedCell != nil)
+            self.highlightedCell?.highlight()
+            self.selectedMoireId = self.allMoiresCache[indexPath.row].id
         }
     }
+    
+    
 }

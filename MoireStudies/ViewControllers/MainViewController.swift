@@ -10,13 +10,27 @@ import UIKit
 
 class MainViewController: UIViewController {
     private var moireModel: MoireModel = MoireModel.init()
+    private var _selectedMoireId: String?
+    var selectedMoireId: String? {
+        get{
+            return _selectedMoireId
+        }
+        set{
+            _selectedMoireId = newValue
+            if let id = _selectedMoireId {
+                self.currentMoire = moireModel.read(moireId: id)
+            }
+        }
+    }
     private var currentMoire: Moire?
     var initSettings: InitSettings?
     var resetMoireWhenInit = false
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
     private var mainView: MainView? {
-        get {return self.view as? MainView}
+        get {
+            return self.view as? MainView
+        }
     }
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!
@@ -73,7 +87,6 @@ class MainViewController: UIViewController {
         let mv = self.mainView!
         mv.reset(patterns: self.currentMoire!.patterns)
         for i in 0..<self.currentMoire!.patterns.count {
-//            mv.modifiyPatternView(patternViewIndex: i, newPattern: self.currentMoire!.patterns[i])
             let cvc = self.controlViewControllers[i]
             cvc.matchControlsWithModel(pattern: self.currentMoire!.patterns[i])
         }
@@ -126,7 +139,8 @@ extension MainViewController {
                     svc.initSettings = currentSettings
                 }
             case self.fileButton!:
-                break
+                let sfvc: SaveFilesViewController = segue.destination as! SaveFilesViewController
+                sfvc.selectedMoireId = self.currentMoire?.id
             default:
                 break
             }

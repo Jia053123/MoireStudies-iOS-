@@ -125,7 +125,6 @@ extension CoreAnimPatternView: PatternView {
 extension CoreAnimPatternView: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if (flag) { // in case this method is triggered by removing the animation
-            print("animation did stop flag")
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
             if let t = tile, let lt = lastTile {
                 t.position = CGPoint(x: backingView.bounds.width/2.0,
