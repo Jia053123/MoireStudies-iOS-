@@ -19,7 +19,7 @@ class SettingsViewController: UITableViewController {
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             let mvc = self.presentingViewController as? MainViewController
-            mvc?.resumeMoire()
+            mvc?.reloadMoire()
         }
     }
     

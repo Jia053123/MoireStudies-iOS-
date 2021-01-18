@@ -67,7 +67,7 @@ extension CoreAnimPatternView: PatternView {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
         backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-        //        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
+//        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
         backingView.center = self.center
         self.addSubview(backingView)
         backingViewDefaultTransf = backingView.transform
@@ -105,28 +105,27 @@ extension CoreAnimPatternView: PatternView {
     }
     
     func pauseAnimations() {
-        for t in tiles {
-            let pausedTime = t.convertTime(CACurrentMediaTime(), from: nil)
-            t.speed = 0.0
-            t.timeOffset = pausedTime
-        }
+        let layer = self.layer
+        let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
+        layer.speed = 0.0
+        layer.timeOffset = pausedTime
     }
+    
     func resumeAnimations() {
-        for t in tiles {
-            let pausedTime = t.timeOffset
-            t.speed = 1.0
-            t.timeOffset = 0.0
-            t.beginTime = 0.0
-            let timeSincePause = t.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
-            t.beginTime = timeSincePause
-        }
+        let layer = self.layer
+        let pausedTime = layer.timeOffset
+        layer.speed = 1.0
+        layer.timeOffset = 0.0
+        layer.beginTime = 0.0
+        let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+        layer.beginTime = timeSincePause
     }
 }
 
 extension CoreAnimPatternView: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if (flag) { // in case this method is triggered by removing the animation
-//            print("animation did stop flag")
+            print("animation did stop flag")
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
             if let t = tile, let lt = lastTile {
                 t.position = CGPoint(x: backingView.bounds.width/2.0,
@@ -135,7 +134,7 @@ extension CoreAnimPatternView: CAAnimationDelegate {
                 lastTile = t
                 self.animateTile(tile: t)
             } else {
-                print("no tile found for the key")
+                print("no tile found for the key or no lastTile")
             }
         }
     }

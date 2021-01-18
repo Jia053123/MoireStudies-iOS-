@@ -28,7 +28,7 @@ class SaveFilesViewController: UICollectionViewController {
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             let mvc = self.presentingViewController as? MainViewController
-            mvc?.resumeMoire()
+            mvc?.reloadMoire()
         }
     }
     

@@ -71,8 +71,9 @@ class MainViewController: UIViewController {
     
     func reloadMoire() {
         let mv = self.mainView!
+        mv.reset(patterns: self.currentMoire!.patterns)
         for i in 0..<self.currentMoire!.patterns.count {
-            mv.modifiyPatternView(patternViewIndex: i, newPattern: self.currentMoire!.patterns[i])
+//            mv.modifiyPatternView(patternViewIndex: i, newPattern: self.currentMoire!.patterns[i])
             let cvc = self.controlViewControllers[i]
             cvc.matchControlsWithModel(pattern: self.currentMoire!.patterns[i])
         }
@@ -97,7 +98,7 @@ class MainViewController: UIViewController {
     }
 
     func resumeMoire() {
-        self.mainView!.resumeMoire()
+        self.mainView!.resumeMoire() // FIX: cannot make this work
     }
     
     override var prefersStatusBarHidden: Bool {

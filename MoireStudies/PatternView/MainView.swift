@@ -43,7 +43,14 @@ class MainView: UIView {
     }
     
     func setUp(patterns: Array<Pattern>) {
+        self.reset(patterns: patterns)
+    }
+    
+    func reset(patterns: Array<Pattern>) {
         self.moireView.frame = self.bounds
+        for sv in self.moireView.subviews {
+            sv.removeFromSuperview()
+        }
         patternViews = []
         for pattern in patterns {
             let newPatternView: PatternView = PatternViewClass.init(frame: self.moireView.bounds)
