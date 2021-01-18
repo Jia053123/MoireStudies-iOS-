@@ -14,15 +14,6 @@ class SettingsViewController: UITableViewController {
     var initSettings = InitSettings()
     var resetMoire = false
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("settings controller: view will disappear")
-        super.viewWillDisappear(animated)
-        if isBeingDismissed {
-            let mvc = self.presentingViewController as? MainViewController
-            mvc?.reloadMoire()
-        }
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -81,7 +72,22 @@ class SettingsViewController: UITableViewController {
         performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
     }
     
+    func setupMainViewController(mainViewController: MainViewController) {
+        // TODO
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("settings controller: view will disappear")
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            if let mvc = self.presentingViewController as? MainViewController {
+                mvc.reloadMainView()
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare for segue")
         let mvc: MainViewController = segue.destination as! MainViewController
         mvc.initSettings = self.initSettings
         if self.resetMoire {

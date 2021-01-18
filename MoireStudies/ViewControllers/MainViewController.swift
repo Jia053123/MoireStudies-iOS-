@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
             return _selectedMoireId
         }
         set{
+            print("updating id from: " + (_selectedMoireId ?? "nil ") + " to: " + (newValue ?? "nil"))
             _selectedMoireId = newValue
             if let id = _selectedMoireId {
                 self.currentMoire = moireModel.read(moireId: id)
@@ -36,43 +37,15 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
+        print("MainViewController: view will appear")
         super.viewWillAppear(animated)
-        self.initMoireToEdit()
+        self.initCurrentMoire()
         self.initInitSettings()
-        let mv = self.mainView!
-        mv.setUp(patterns: currentMoire!.patterns)
-        // set up control views
-        assert(controlFrames.count >= currentMoire!.patterns.count)
-        for i in 0..<currentMoire!.patterns.count {
-            var cvc: CtrlViewTarget?
-            switch self.initSettings!.interfaceSetting {
-            case UISettings.controlScheme1Slider:
-                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            case UISettings.controlScheme2Slider:
-                cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            case UISettings.controlScheme1Gesture:
-                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            }
-            cvc!.delegate = self
-            mv.addSubview(cvc!.view)
-            controlViewControllers.append(cvc!)
-            // set up mask for each of the control view
-            if (i == 0) {
-                mv.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
-            } else if (i == 1) {
-                mv.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
-            }
-        }
+        self.initMainView()
+        self.initControlViews()
     }
     
-    func initMoireToEdit() {
+    func initCurrentMoire() {
         guard !self.resetMoireWhenInit else {
             if let m = self.currentMoire {
                 m.reset()
@@ -106,9 +79,52 @@ class MainViewController: UIViewController {
         }
     }
     
-    func reloadMoire() {
-        let mv = self.mainView!
-        mv.reset(patterns: self.currentMoire!.patterns)
+    func initMainView() {
+        self.mainView!.setUp(patterns: currentMoire!.patterns)
+    }
+    
+    func initControlViews() {
+        assert(controlFrames.count >= currentMoire!.patterns.count)
+        
+        for i in 0..<currentMoire!.patterns.count {
+            var cvc: CtrlViewTarget?
+            switch self.initSettings!.interfaceSetting {
+            case UISettings.controlScheme1Slider:
+                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: currentMoire!.patterns[i])
+            case UISettings.controlScheme2Slider:
+                cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: currentMoire!.patterns[i])
+            case UISettings.controlScheme1Gesture:
+                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
+                                                      frame: controlFrames[i],
+                                                      pattern: currentMoire!.patterns[i])
+            }
+            cvc!.delegate = self
+            let mv = self.mainView!
+            mv.addSubview(cvc!.view)
+            controlViewControllers.append(cvc!)
+            // set up mask for each of the control view
+            if (i == 0) {
+                mv.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
+            } else if (i == 1) {
+                mv.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
+            }
+        }
+    }
+    
+    func reloadMainView() {
+        self.initInitSettings()
+        self.mainView!.reset(patterns: self.currentMoire!.patterns)
+        if self.controlViewControllers.count != self.currentMoire!.patterns.count {
+            for cvc in self.controlViewControllers {
+                cvc.view.removeFromSuperview()
+            }
+            self.controlViewControllers = []
+            self.initControlViews()
+        }
         for i in 0..<self.currentMoire!.patterns.count {
             let cvc = self.controlViewControllers[i]
             cvc.matchControlsWithModel(pattern: self.currentMoire!.patterns[i])

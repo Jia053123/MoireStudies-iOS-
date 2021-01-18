@@ -23,16 +23,6 @@ class SaveFilesViewController: UICollectionViewController {
         allMoiresCache = moireModel.readAllMoiresSortedByLastCreatedOrModified()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("save files controller: view will disappear")
-        super.viewWillDisappear(animated)
-        if isBeingDismissed {
-            let mvc = self.presentingViewController as? MainViewController
-            mvc?.selectedMoireId = self.selectedMoireId
-            mvc?.reloadMoire()
-        }
-    }
-    
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -63,7 +53,6 @@ class SaveFilesViewController: UICollectionViewController {
             self.reloadCache()
 //            self.collectionView.reloadData()
             self.selectedMoireId = newMoire.id
-            // TODO: perform segue
         } else {
             print("selected cell at index: ", indexPath.row)
             self.highlightedCell?.unhighlight()
@@ -76,8 +65,24 @@ class SaveFilesViewController: UICollectionViewController {
         performSegue(withIdentifier: "showMainViewFromSaveFilesView", sender: self)
     }
     
+    func setupMainViewController(mainViewController: MainViewController) {
+        mainViewController.selectedMoireId = self.selectedMoireId
+        mainViewController.reloadMainView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            print("save files controller: is being dismissed")
+            if let mvc = self.presentingViewController as? MainViewController {
+                self.setupMainViewController(mainViewController: mvc)
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare for segue")
         let mvc: MainViewController = segue.destination as! MainViewController
-        mvc.selectedMoireId = self.selectedMoireId
+        self.setupMainViewController(mainViewController: mvc)
     }
 }
