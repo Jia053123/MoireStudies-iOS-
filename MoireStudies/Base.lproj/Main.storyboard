@@ -100,7 +100,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUo-d3-GCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204" y="-823"/>
+            <point key="canvasLocation" x="-228" y="-823"/>
         </scene>
         <!--Save Files View Controller-->
         <scene sceneID="iZN-oS-hP5">
@@ -132,7 +132,7 @@
                         </connections>
                     </collectionView>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSaveFilesView" modalPresentationStyle="fullScreen" id="91Z-hD-AUD"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSaveFilesView" animates="NO" modalPresentationStyle="fullScreen" id="91Z-hD-AUD"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVT-SY-fCP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

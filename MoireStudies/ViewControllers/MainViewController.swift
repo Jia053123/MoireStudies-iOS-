@@ -39,6 +39,7 @@ class MainViewController: UIViewController {
         print("view will appear")
         super.viewWillAppear(animated)
         self.initMoireToEdit()
+        self.initInitSettings()
         let mv = self.mainView!
         mv.setUp(patterns: currentMoire!.patterns)
         // set up control views
@@ -81,6 +82,28 @@ class MainViewController: UIViewController {
             return
         }
         self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
+    }
+    
+    func initInitSettings() {
+        func saveInitSettings() {
+            do {
+                UserDefaults.standard.set(try PropertyListEncoder().encode(self.initSettings), forKey: "InitSettings")
+            } catch {
+                print("problem saving initSettings to disk")
+            }
+        }
+        guard self.initSettings == nil else {
+            saveInitSettings()
+            return
+        }
+        do {
+            guard let data = UserDefaults.standard.value(forKey: "InitSettings") as? Data else {throw NSError()}
+            self.initSettings = try PropertyListDecoder().decode(InitSettings.self, from: data)
+        } catch {
+            print("problem loading initSettings from disk; setting and saving the default")
+            self.initSettings = InitSettings()
+            saveInitSettings()
+        }
     }
     
     func reloadMoire() {
