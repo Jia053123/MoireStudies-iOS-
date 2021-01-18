@@ -53,10 +53,6 @@
                             <constraint firstItem="coU-E5-Qvx" firstAttribute="centerY" secondItem="ifa-h7-T8I" secondAttribute="centerY" id="cwa-hr-D0D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="lVc-fs-e00"/>
                         </constraints>
-                        <connections>
-                            <outlet property="fileButton" destination="coU-E5-Qvx" id="FBE-eJ-VWa"/>
-                            <outlet property="gearButton" destination="ifa-h7-T8I" id="iBX-BP-Y1t"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>

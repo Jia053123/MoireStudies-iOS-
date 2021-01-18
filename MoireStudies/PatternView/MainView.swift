@@ -11,15 +11,14 @@ import Foundation
  SubViews hierachy:
  - MainView
     - UIButton
-    - ControlView (n)
+    - ControlsView
+        - ControlView (n)
     - MoireView (1)
         - DimView (0..1)
         - PatternView (n)
             - MaskView(1) in mask property
  */
 class MainView: UIView {
-    @IBOutlet weak var gearButton: UIButton!
-    @IBOutlet weak var fileButton: UIButton!
     typealias PatternViewClass = CoreAnimPatternView
     private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []
@@ -58,8 +57,6 @@ class MainView: UIView {
             self.moireView.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
-        self.bringSubviewToFront(gearButton)
-        self.bringSubviewToFront(fileButton)
     }
     
     func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {

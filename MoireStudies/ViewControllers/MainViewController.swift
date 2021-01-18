@@ -17,19 +17,22 @@ class MainViewController: UIViewController {
     var initSettings: InitSettings?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
+    private var controlsView = UIView()
     private var mainView: MainView? {
-        get {
-            return self.view as? MainView
-        }
+        get {return self.view as? MainView}
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController: view will appear")
         super.viewWillAppear(animated)
+        self.controlsView.backgroundColor = UIColor.clear
+        self.mainView!.addSubview(self.controlsView)
+        // set up must be done in the order below!
         self.initCurrentMoire()
         self.initInitSettings()
         self.initMainView()
-        self.initControlViews()
+        self.initControls()
+        self.initButtons()
     }
     
     func resetMainView() {
@@ -40,13 +43,14 @@ class MainViewController: UIViewController {
             self.initCurrentMoire()
         }
         self.mainView!.resetMoireView(patterns: self.currentMoire!.patterns)
-        if self.controlViewControllers.count != self.currentMoire!.patterns.count {
-            for cvc in self.controlViewControllers {
-                cvc.view.removeFromSuperview()
-            }
-            self.controlViewControllers = []
-            self.initControlViews()
+        for sv in self.controlsView.subviews {
+            sv.removeFromSuperview()
         }
+        for cvc in self.controlViewControllers {
+            cvc.view.removeFromSuperview()
+        }
+        self.initControls()
+        self.initButtons()
     }
     
     func initCurrentMoire() {
@@ -83,9 +87,10 @@ class MainViewController: UIViewController {
         self.mainView!.setUp(patterns: currentMoire!.patterns)
     }
     
-    func initControlViews() {
+    func initControls() {
+        self.controlViewControllers = []
+        self.controlsView.frame = self.mainView!.bounds
         assert(controlFrames.count >= currentMoire!.patterns.count)
-        
         for i in 0..<currentMoire!.patterns.count {
             var cvc: CtrlViewTarget?
             switch self.initSettings!.interfaceSetting {
@@ -103,16 +108,20 @@ class MainViewController: UIViewController {
                                                       pattern: currentMoire!.patterns[i])
             }
             cvc!.delegate = self
-            let mv = self.mainView!
-            mv.addSubview(cvc!.view)
+            self.controlsView.addSubview(cvc!.view)
             controlViewControllers.append(cvc!)
             // set up mask for each of the control view
             if (i == 0) {
-                mv.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
+                self.mainView!.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
             } else if (i == 1) {
-                mv.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
+                self.mainView!.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
             }
         }
+    }
+    
+    func initButtons() {
+        self.mainView?.bringSubviewToFront(gearButton)
+        self.mainView?.bringSubviewToFront(fileButton)
     }
     
     override var prefersStatusBarHidden: Bool {
