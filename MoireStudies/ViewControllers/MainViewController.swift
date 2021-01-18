@@ -9,23 +9,12 @@ import Foundation
 import UIKit
 
 class MainViewController: UIViewController {
+    @IBOutlet weak var gearButton: UIButton!
+    @IBOutlet weak var fileButton: UIButton!
     private var moireModel: MoireModel = MoireModel.init()
-    private var _selectedMoireId: String?
-    var selectedMoireId: String? {
-        get{
-            return _selectedMoireId
-        }
-        set{
-            print("updating id from: " + (_selectedMoireId ?? "nil ") + " to: " + (newValue ?? "nil"))
-            _selectedMoireId = newValue
-            if let id = _selectedMoireId {
-                self.currentMoire = moireModel.read(moireId: id)
-            }
-        }
-    }
+    var moireIdToInit: String?
     private var currentMoire: Moire?
     var initSettings: InitSettings?
-    var resetMoireWhenInit = false
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
     private var mainView: MainView? {
@@ -33,8 +22,6 @@ class MainViewController: UIViewController {
             return self.view as? MainView
         }
     }
-    @IBOutlet weak var gearButton: UIButton!
-    @IBOutlet weak var fileButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController: view will appear")
@@ -45,16 +32,29 @@ class MainViewController: UIViewController {
         self.initControlViews()
     }
     
-    func initCurrentMoire() {
-        guard !self.resetMoireWhenInit else {
-            if let m = self.currentMoire {
-                m.reset()
-            } else {
-                self.currentMoire = self.moireModel.createNew()
-            }
-            return
+    func resetMainView() {
+        if self.initSettings == nil {
+            self.initInitSettings()
         }
-        self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
+        if self.currentMoire == nil {
+            self.initCurrentMoire()
+        }
+        self.mainView!.resetMoireView(patterns: self.currentMoire!.patterns)
+        if self.controlViewControllers.count != self.currentMoire!.patterns.count {
+            for cvc in self.controlViewControllers {
+                cvc.view.removeFromSuperview()
+            }
+            self.controlViewControllers = []
+            self.initControlViews()
+        }
+    }
+    
+    func initCurrentMoire() {
+        if let miti = self.moireIdToInit {
+            self.currentMoire = self.moireModel.read(moireId: miti)
+        } else {
+            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
+        }
     }
     
     func initInitSettings() {
@@ -115,22 +115,12 @@ class MainViewController: UIViewController {
         }
     }
     
-    func reloadMainView() {
-        self.initInitSettings()
-        self.mainView!.reset(patterns: self.currentMoire!.patterns)
-        if self.controlViewControllers.count != self.currentMoire!.patterns.count {
-            for cvc in self.controlViewControllers {
-                cvc.view.removeFromSuperview()
-            }
-            self.controlViewControllers = []
-            self.initControlViews()
-        }
-        for i in 0..<self.currentMoire!.patterns.count {
-            let cvc = self.controlViewControllers[i]
-            cvc.matchControlsWithModel(pattern: self.currentMoire!.patterns[i])
-        }
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
-    
+}
+
+extension MainViewController {
     func saveMoire() -> Bool {
         // save preview
         if let img = self.mainView!.takeMoireScreenshot() {
@@ -148,13 +138,9 @@ class MainViewController: UIViewController {
     func pauseMoire() {
         self.mainView!.pauseMoire()
     }
-
-    func resumeMoire() {
-        self.mainView!.resumeMoire() // FIX: cannot make this work
-    }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    func resumeMoire() { // FIX: calling this after pause breaks the animation
+        self.mainView!.resumeMoire()
     }
 }
 

@@ -43,10 +43,10 @@ class MainView: UIView {
     }
     
     func setUp(patterns: Array<Pattern>) {
-        self.reset(patterns: patterns)
+        self.resetMoireView(patterns: patterns)
     }
     
-    func reset(patterns: Array<Pattern>) {
+    func resetMoireView(patterns: Array<Pattern>) {
         self.moireView.frame = self.bounds
         for sv in self.moireView.subviews {
             sv.removeFromSuperview()

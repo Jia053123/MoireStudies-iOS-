@@ -66,8 +66,8 @@ class SaveFilesViewController: UICollectionViewController {
     }
     
     func setupMainViewController(mainViewController: MainViewController) {
-        mainViewController.selectedMoireId = self.selectedMoireId
-        mainViewController.reloadMainView()
+        mainViewController.moireIdToInit = self.selectedMoireId
+        mainViewController.resetMainView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
