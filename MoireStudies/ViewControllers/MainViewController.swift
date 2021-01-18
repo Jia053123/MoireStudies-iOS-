@@ -24,6 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     
     override func viewWillAppear(_ animated: Bool) {
+        print("view will appear")
         super.viewWillAppear(animated)
         self.initMoireToEdit()
         let mv = self.mainView!
@@ -58,10 +59,6 @@ class MainViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        _ = self.saveMoire()
-    }
-    
     func initMoireToEdit() {
         guard !self.resetMoireWhenInit else {
             if let m = self.currentMoire {
@@ -72,24 +69,6 @@ class MainViewController: UIViewController {
             return
         }
         self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
-    }
-    
-    func getCtrlViewControllerId(index: Int) -> Int {
-        let id = index
-        assert(self.getCtrlViewControllerIndex(id: id) == index, "reverse conversion test failed")
-        return id
-    }
-    
-    func getCtrlViewControllerIndex(id: Int) -> Int {
-        let index = id
-        return index
-    }
-    
-    func findControlViewIndex(controlViewController: CtrlViewTarget) -> Int? {
-        guard let i = controlViewController.id else {
-            return nil
-        }
-        return self.getCtrlViewControllerIndex(id: i)
     }
     
     func reloadMoire() {
@@ -105,17 +84,30 @@ class MainViewController: UIViewController {
         // save preview
         if let img = self.mainView!.takeMoireScreenshot() {
             self.currentMoire?.preview = img
-        }
+        } else {print("failed to take screenshot")}
         // write to disk
-        do {
-            UserDefaults.standard.set(try PropertyListEncoder().encode(self.currentMoire), forKey: "Moire")
-            return true
-        } catch {
-            print("problem saving the moire")
+        if let cm = self.currentMoire {
+            return self.moireModel.save(moire: cm)
+        } else {
+            print("cannot save current moire because it's nil")
             return false
         }
     }
     
+    func pauseMoire() {
+        self.mainView!.pauseMoire()
+    }
+
+    func resumeMoire() {
+        self.mainView!.resumeMoire()
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+}
+
+extension MainViewController {
     @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
         performSegue(withIdentifier: "showSettingsView", sender: self.gearButton)
@@ -142,21 +134,27 @@ class MainViewController: UIViewController {
         }
         self.pauseMoire()
     }
-    
-    func pauseMoire() {
-        self.mainView!.pauseMoire()
-    }
-
-    func resumeMoire() {
-        self.mainView!.resumeMoire()
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
 }
 
 extension MainViewController: PatternManager {
+    private func getCtrlViewControllerId(index: Int) -> Int {
+        let id = index
+        assert(self.getCtrlViewControllerIndex(id: id) == index, "reverse conversion test failed")
+        return id
+    }
+    
+    private func getCtrlViewControllerIndex(id: Int) -> Int {
+        let index = id
+        return index
+    }
+    
+    private func findControlViewIndex(controlViewController: CtrlViewTarget) -> Int? {
+        guard let i = controlViewController.id else {
+            return nil
+        }
+        return self.getCtrlViewControllerIndex(id: i)
+    }
+    
     func highlightPattern(caller: CtrlViewTarget) -> Bool {
         guard let index = self.findControlViewIndex(controlViewController: caller) else {
             return false
