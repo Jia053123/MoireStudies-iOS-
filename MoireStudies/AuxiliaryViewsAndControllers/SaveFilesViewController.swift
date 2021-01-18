@@ -24,6 +24,7 @@ class SaveFilesViewController: UICollectionViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("save files controller: view will disappear")
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             let mvc = self.presentingViewController as? MainViewController

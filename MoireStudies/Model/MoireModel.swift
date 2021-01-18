@@ -9,14 +9,6 @@ import Foundation
 
 class MoireModel {
     private var saveFileIO = SaveFileIO.init()
-//    var allMoires: Array<Moire> {
-//        get {
-//            if self.numOfMoires() == 0 {
-//                _ = self.createNew()
-//            }
-//            return self.readAllMoiresSortedByLastCreatedOrModified()
-//        }
-//    }
     
     func numOfMoires() -> Int {
         return saveFileIO.numOfMoire() ?? 0
@@ -70,7 +62,7 @@ fileprivate class SaveFileIO {
         let documentsDirectory = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory,
                                                   in: FileManager.SearchPathDomainMask.userDomainMask).first!
         saveFileDirectory = documentsDirectory.appendingPathComponent("MoireSaveFiles")
-        print("saveFileDirectory: " + saveFileDirectory.path)
+//        print("saveFileDirectory: " + saveFileDirectory.path)
         var isDirectory: ObjCBool = ObjCBool(false)
         let fileExists = fileManager.fileExists(atPath: saveFileDirectory.path, isDirectory: &isDirectory)
         if !fileExists || !isDirectory.boolValue  {
@@ -83,9 +75,9 @@ fileprivate class SaveFileIO {
     
     private func makeSaveFileUrl(moireId: String) -> URL {
         let fileName = "MOIRE-" + moireId + ".json" // TODO: use a custom extension instead of prefix
-        print("made file name: " + fileName)
+//        print("made file name: " + fileName)
         let saveFileUrl = saveFileDirectory.appendingPathComponent(fileName)
-        print("made file url: " + saveFileUrl.path)
+//        print("made file url: " + saveFileUrl.path)
         return saveFileUrl
     }
     

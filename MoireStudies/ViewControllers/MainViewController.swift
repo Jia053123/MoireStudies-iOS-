@@ -16,9 +16,7 @@ class MainViewController: UIViewController {
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var controlViewControllers: Array<CtrlViewTarget> = []
     private var mainView: MainView? {
-        get {
-            return self.view as? MainView
-        }
+        get {return self.view as? MainView}
     }
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!

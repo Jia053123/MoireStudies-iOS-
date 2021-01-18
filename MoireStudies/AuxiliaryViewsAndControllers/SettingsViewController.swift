@@ -15,6 +15,7 @@ class SettingsViewController: UITableViewController {
     var resetMoire = false
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("settings controller: view will disappear")
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             let mvc = self.presentingViewController as? MainViewController

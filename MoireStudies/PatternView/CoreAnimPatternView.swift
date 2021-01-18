@@ -106,12 +106,19 @@ extension CoreAnimPatternView: PatternView {
     
     func pauseAnimations() {
         for t in tiles {
+            let pausedTime = t.convertTime(CACurrentMediaTime(), from: nil)
             t.speed = 0.0
+            t.timeOffset = pausedTime
         }
     }
     func resumeAnimations() {
         for t in tiles {
+            let pausedTime = t.timeOffset
             t.speed = 1.0
+            t.timeOffset = 0.0
+            t.beginTime = 0.0
+            let timeSincePause = t.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
+            t.beginTime = timeSincePause
         }
     }
 }
@@ -119,6 +126,7 @@ extension CoreAnimPatternView: PatternView {
 extension CoreAnimPatternView: CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if (flag) { // in case this method is triggered by removing the animation
+//            print("animation did stop flag")
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
             if let t = tile, let lt = lastTile {
                 t.position = CGPoint(x: backingView.bounds.width/2.0,
