@@ -61,6 +61,7 @@ class SaveFilesViewController: UICollectionViewController {
             print("selected plus")
             let newMoire = self.moireModel.createNew()
             self.reloadCache()
+//            self.collectionView.reloadData()
             self.selectedMoireId = newMoire.id
             // TODO: perform segue
         } else {
@@ -72,7 +73,11 @@ class SaveFilesViewController: UICollectionViewController {
             self.highlightedCell?.highlight()
             self.selectedMoireId = self.allMoiresCache[indexPath.row].id
         }
+        performSegue(withIdentifier: "showMainViewFromSaveFilesView", sender: self)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let mvc: MainViewController = segue.destination as! MainViewController
+        mvc.selectedMoireId = self.selectedMoireId
+    }
 }

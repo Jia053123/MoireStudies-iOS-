@@ -95,7 +95,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="fm4-e5-AaX"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainView" animates="NO" modalPresentationStyle="fullScreen" id="e76-fr-0c3"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSettingsView" animates="NO" modalPresentationStyle="fullScreen" id="e76-fr-0c3"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUo-d3-GCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -131,12 +131,18 @@
                             <outlet property="delegate" destination="lTk-Kr-R4N" id="oQ8-uY-GGf"/>
                         </connections>
                     </collectionView>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSaveFilesView" modalPresentationStyle="fullScreen" id="91Z-hD-AUD"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVT-SY-fCP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="502" y="-823"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="e76-fr-0c3"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
