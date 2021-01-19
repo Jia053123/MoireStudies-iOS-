@@ -68,11 +68,11 @@ class SettingsViewController: UITableViewController {
         default:
             break
         }
-        performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
-    }
-    
-    func setupMainViewController(mainViewController: MainViewController) {
-        // TODO
+        if (self.presentingViewController as? MainViewController) == nil {
+            self.performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -80,6 +80,7 @@ class SettingsViewController: UITableViewController {
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             if let mvc = self.presentingViewController as? MainViewController {
+                mvc.initSettings = self.initSettings
                 mvc.resetMainView()
             }
         }

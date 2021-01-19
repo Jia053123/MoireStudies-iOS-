@@ -62,12 +62,7 @@ class SaveFilesViewController: UICollectionViewController {
             self.highlightedCell?.highlight()
             self.selectedMoireId = self.allMoiresCache[indexPath.row].id
         }
-        performSegue(withIdentifier: "showMainViewFromSaveFilesView", sender: self)
-    }
-    
-    func setupMainViewController(mainViewController: MainViewController) {
-        mainViewController.moireIdToInit = self.selectedMoireId
-        mainViewController.resetMainView()
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,14 +70,9 @@ class SaveFilesViewController: UICollectionViewController {
         if isBeingDismissed {
             print("save files controller: is being dismissed")
             if let mvc = self.presentingViewController as? MainViewController {
-                self.setupMainViewController(mainViewController: mvc)
+                mvc.moireIdToInit = self.selectedMoireId
+                mvc.resetMainView()
             }
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare for segue")
-        let mvc: MainViewController = segue.destination as! MainViewController
-        self.setupMainViewController(mainViewController: mvc)
     }
 }

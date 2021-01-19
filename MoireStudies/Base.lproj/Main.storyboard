@@ -127,18 +127,12 @@
                             <outlet property="delegate" destination="lTk-Kr-R4N" id="oQ8-uY-GGf"/>
                         </connections>
                     </collectionView>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSaveFilesView" animates="NO" modalPresentationStyle="fullScreen" id="91Z-hD-AUD"/>
-                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wVT-SY-fCP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="502" y="-823"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="e76-fr-0c3"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>

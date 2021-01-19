@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
         if self.initSettings == nil {
             self.initInitSettings()
         }
-        if self.currentMoire == nil {
+        if self.currentMoire == nil || self.moireIdToInit != self.currentMoire?.id {
             self.initCurrentMoire()
         }
         self.mainView!.resetMoireView(patterns: self.currentMoire!.patterns)
@@ -55,6 +55,7 @@ class MainViewController: UIViewController {
     
     func initCurrentMoire() {
         if let miti = self.moireIdToInit {
+            print("init moire from id: " + miti)
             self.currentMoire = self.moireModel.read(moireId: miti)
         } else {
             self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
