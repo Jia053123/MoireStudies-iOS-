@@ -71,7 +71,7 @@ class SaveFilesViewController: UICollectionViewController {
             print("save files controller: is being dismissed")
             if let mvc = self.presentingViewController as? MainViewController {
                 mvc.moireIdToInit = self.selectedMoireId
-                mvc.resetMainView()
+                mvc.updateMainView()
             }
         }
     }

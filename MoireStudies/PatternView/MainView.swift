@@ -20,10 +20,10 @@ import Foundation
  */
 class MainView: UIView {
     typealias PatternViewClass = CoreAnimPatternView
+    private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []
     private var highlightedViews: Array<PatternView> = []
-    private var maskViews: Array<MaskView> = []
     private var dimView: UIView = UIView()
     
     override init(frame: CGRect) {
@@ -45,6 +45,10 @@ class MainView: UIView {
         self.resetMoireView(patterns: patterns)
     }
     
+    func numOfPatternViews() -> Int {
+        return self.patternViews.count
+    }
+    
     func resetMoireView(patterns: Array<Pattern>) {
         self.moireView.frame = self.bounds
         for sv in self.moireView.subviews {
@@ -57,11 +61,14 @@ class MainView: UIView {
             self.moireView.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
+        self.setUpMasks()
     }
     
-    func setUpMaskOnPatternView(patternIndex: Int, controlViewFrame: CGRect) {
-        let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: controlViewFrame)
-        patternViews[patternIndex].mask = maskView
+    func setUpMasks() {
+        for i in 0..<self.patternViews.count {
+            let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[i])
+            self.patternViews[i].mask = maskView
+        }
     }
     
     func highlightPatternView(patternViewIndex: Int) {

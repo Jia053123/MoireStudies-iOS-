@@ -81,7 +81,7 @@ class SettingsViewController: UITableViewController {
         if isBeingDismissed {
             if let mvc = self.presentingViewController as? MainViewController {
                 mvc.initSettings = self.initSettings
-                mvc.resetMainView()
+                mvc.updateMainView()
             }
         }
     }

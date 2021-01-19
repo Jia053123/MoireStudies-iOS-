@@ -15,18 +15,17 @@ class MainViewController: UIViewController {
     var moireIdToInit: String?
     private var currentMoire: Moire?
     var initSettings: InitSettings?
-    private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
-    private var controlViewControllers: Array<CtrlViewTarget> = []
-    private var controlsView = UIView()
-    private var mainView: MainView? {
-        get {return self.view as? MainView}
+    private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
+    private var controlsView: ControlsView = ControlsView()
+    private var mainView: MainView {
+        get {return self.view as! MainView}
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController: view will appear")
         super.viewWillAppear(animated)
         self.controlsView.backgroundColor = UIColor.clear
-        self.mainView!.addSubview(self.controlsView)
+        self.mainView.addSubview(self.controlsView)
         // set up must be done in the order below!
         self.initCurrentMoire()
         self.initInitSettings()
@@ -35,20 +34,14 @@ class MainViewController: UIViewController {
         self.initButtons()
     }
     
-    func resetMainView() {
+    func updateMainView() {
         if self.initSettings == nil {
             self.initInitSettings()
         }
         if self.currentMoire == nil || self.moireIdToInit != self.currentMoire?.id {
             self.initCurrentMoire()
         }
-        self.mainView!.resetMoireView(patterns: self.currentMoire!.patterns)
-        for sv in self.controlsView.subviews {
-            sv.removeFromSuperview()
-        }
-        for cvc in self.controlViewControllers {
-            cvc.view.removeFromSuperview()
-        }
+        self.mainView.resetMoireView(patterns: self.currentMoire!.patterns)
         self.initControls()
         self.initButtons()
     }
@@ -85,44 +78,17 @@ class MainViewController: UIViewController {
     }
     
     func initMainView() {
-        self.mainView!.setUp(patterns: currentMoire!.patterns)
+        self.mainView.setUp(patterns: currentMoire!.patterns)
     }
     
     func initControls() {
-        self.controlViewControllers = []
-        self.controlsView.frame = self.mainView!.bounds
-        assert(controlFrames.count >= currentMoire!.patterns.count)
-        for i in 0..<currentMoire!.patterns.count {
-            var cvc: CtrlViewTarget?
-            switch self.initSettings!.interfaceSetting {
-            case UISettings.controlScheme1Slider:
-                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            case UISettings.controlScheme2Slider:
-                cvc = CtrlViewControllerSch2.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            case UISettings.controlScheme1Gesture:
-                cvc = CtrlViewControllerSch1.init(id: self.getCtrlViewControllerId(index: i),
-                                                      frame: controlFrames[i],
-                                                      pattern: currentMoire!.patterns[i])
-            }
-            cvc!.delegate = self
-            self.controlsView.addSubview(cvc!.view)
-            controlViewControllers.append(cvc!)
-            // set up mask for each of the control view
-            if (i == 0) {
-                self.mainView!.setUpMaskOnPatternView(patternIndex: 0, controlViewFrame: controlFrames[1])
-            } else if (i == 1) {
-                self.mainView!.setUpMaskOnPatternView(patternIndex: 1, controlViewFrame: controlFrames[0])
-            }
-        }
+        self.controlsView.frame = self.mainView.bounds
+        self.controlsView.reset(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
     }
     
     func initButtons() {
-        self.mainView?.bringSubviewToFront(gearButton)
-        self.mainView?.bringSubviewToFront(fileButton)
+        self.mainView.bringSubviewToFront(gearButton)
+        self.mainView.bringSubviewToFront(fileButton)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -133,7 +99,7 @@ class MainViewController: UIViewController {
 extension MainViewController {
     func saveMoire() -> Bool {
         // save preview
-        if let img = self.mainView!.takeMoireScreenshot() {
+        if let img = self.mainView.takeMoireScreenshot() {
             self.currentMoire?.preview = img
         } else {print("failed to take screenshot")}
         // write to disk
@@ -146,11 +112,11 @@ extension MainViewController {
     }
     
     func pauseMoire() {
-        self.mainView!.pauseMoire()
+        self.mainView.pauseMoire()
     }
     
     func resumeMoire() { // FIX: calling this after pause breaks the animation
-        self.mainView!.resumeMoire()
+        self.mainView.resumeMoire()
     }
 }
 
@@ -185,38 +151,20 @@ extension MainViewController {
 }
 
 extension MainViewController: PatternManager {
-    private func getCtrlViewControllerId(index: Int) -> Int {
-        let id = index
-        assert(self.getCtrlViewControllerIndex(id: id) == index, "reverse conversion test failed")
-        return id
-    }
-    
-    private func getCtrlViewControllerIndex(id: Int) -> Int {
-        let index = id
-        return index
-    }
-    
-    private func findControlViewIndex(controlViewController: CtrlViewTarget) -> Int? {
-        guard let i = controlViewController.id else {
-            return nil
-        }
-        return self.getCtrlViewControllerIndex(id: i)
-    }
-    
     func highlightPattern(caller: CtrlViewTarget) -> Bool {
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.highlightPatternView(patternViewIndex: index)
         return true
     }
     
     func unhighlightPattern(caller: CtrlViewTarget) -> Bool {
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.unhighlightPatternView(patternViewIndex: index)
         return true
     }
@@ -226,11 +174,11 @@ extension MainViewController: PatternManager {
         guard Constants.Bounds.speedRange.contains(speed) else {
             return false
         }
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
         currentMoire!.patterns[index].speed = speed
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
@@ -240,11 +188,11 @@ extension MainViewController: PatternManager {
         guard Constants.Bounds.directionRange.contains(direction) else {
             return false
         }
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
         currentMoire!.patterns[index].direction = direction
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
@@ -254,11 +202,11 @@ extension MainViewController: PatternManager {
         guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
             return false
         }
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
         currentMoire!.patterns[index].fillRatio = fillRatio
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
@@ -268,11 +216,11 @@ extension MainViewController: PatternManager {
         guard Constants.Bounds.scaleFactorRange.contains(scaleFactor) else {
             return false
         }
-        guard let index = self.findControlViewIndex(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
         currentMoire!.patterns[index].scaleFactor = scaleFactor
-        let mv = self.mainView!
+        let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
@@ -281,7 +229,7 @@ extension MainViewController: PatternManager {
         guard let i = caller.id else {
             return nil
         }
-        return self.currentMoire!.patterns[getCtrlViewControllerIndex(id: i)]
+        return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)]
     }
 }
 
