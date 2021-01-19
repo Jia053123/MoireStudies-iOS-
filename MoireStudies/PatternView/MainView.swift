@@ -65,10 +65,10 @@ class MainView: UIView {
     }
     
     func setUpMasks() {
-        for i in 0..<self.patternViews.count {
-            let maskView = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[i])
-            self.patternViews[i].mask = maskView
-        }
+        let maskView1 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[0])
+        self.patternViews[1].mask = maskView1
+        let maskView2 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[1])
+        self.patternViews[0].mask = maskView2
     }
     
     func highlightPatternView(patternViewIndex: Int) {
