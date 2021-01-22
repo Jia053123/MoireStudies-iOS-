@@ -37,7 +37,6 @@ class MoireModel {
     }
     
     func createNew() -> Moire {
-        print("create new")
         let newM = Moire()
         _ = self.saveFileIO.save(moire: newM)
         return newM
@@ -74,8 +73,7 @@ fileprivate class SaveFileIO {
     }
     
     private func makeSaveFileUrl(moireId: String) -> URL {
-        let fileName = "MOIRE-" + moireId + ".json" // TODO: use a custom extension instead of prefix
-//        print("made file name: " + fileName)
+        let fileName = moireId + ".moire"
         let saveFileUrl = saveFileDirectory.appendingPathComponent(fileName)
 //        print("made file url: " + saveFileUrl.path)
         return saveFileUrl
@@ -128,7 +126,7 @@ fileprivate class SaveFileIO {
             urls = try fileManager.contentsOfDirectory(at: saveFileDirectory,
                                                            includingPropertiesForKeys: [.attributeModificationDateKey,
                                                                                         .creationDateKey],
-                                                           options: [])
+                                                           options:.skipsHiddenFiles)
         } catch {
             print("IO ERROR: accessing directory from disk failed")
             return nil
@@ -165,7 +163,7 @@ fileprivate class SaveFileIO {
                 return true
             }
         })
-        return urls
+        return urls.compactMap({$0.absoluteString.hasSuffix(".moire") ? $0 : nil})
     }
     
     func readAllMoiresSortedByLastCreatedOrModified() -> Array<Moire?>? {
