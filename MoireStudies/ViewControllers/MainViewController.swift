@@ -104,7 +104,7 @@ extension MainViewController {
         } else {print("failed to take screenshot")}
         // write to disk
         if let cm = self.currentMoire {
-            return self.moireModel.save(moire: cm)
+            return self.moireModel.saveOrModify(moire: cm)
         } else {
             print("cannot save current moire because it's nil")
             return false
