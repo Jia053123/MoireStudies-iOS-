@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E1B9E6F25B684480021D398 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E6E25B684480021D398 /* ControlsView.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
+		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */; };
@@ -41,7 +42,6 @@
 		8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B0257F33D3007527E2 /* Assets.xcassets */; };
 		8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */; };
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
-		8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */; };
 		8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */; };
@@ -69,6 +69,8 @@
 /* Begin PBXFileReference section */
 		8E1B9E6E25B684480021D398 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
+		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPatternView.swift; sourceTree = "<group>"; };
@@ -110,7 +112,6 @@
 		8E96B7BC257F33D4007527E2 /* MoireStudiesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7C2257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoireStudiesUITests.m; sourceTree = "<group>"; };
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewSch1.swift; sourceTree = "<group>"; };
@@ -201,8 +202,9 @@
 		8E96B7CA257F33D4007527E2 /* MoireStudiesUITests */ = {
 			isa = PBXGroup;
 			children = (
-				8E96B7CB257F33D4007527E2 /* MoireStudiesUITests.m */,
 				8E96B7CD257F33D4007527E2 /* Info.plist */,
+				8E1B9E8225BCE2560021D398 /* UiTests.swift */,
+				8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */,
 			);
 			path = MoireStudiesUITests;
 			sourceTree = "<group>";
@@ -363,6 +365,7 @@
 					};
 					8E96B7C6257F33D4007527E2 = {
 						CreatedOnToolsVersion = 12.2;
+						LastSwiftMigration = 1220;
 						TestTargetID = 8E96B7A0257F33CF007527E2;
 					};
 				};
@@ -469,7 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E96B7CC257F33D4007527E2 /* MoireStudiesUITests.m in Sources */,
+				8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +721,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JN39R4EL8;
 				INFOPLIST_FILE = MoireStudiesUITests/Info.plist;
@@ -728,6 +732,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudiesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudiesUITests/MoireStudiesUITests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MoireStudies;
 			};
@@ -737,6 +744,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JN39R4EL8;
 				INFOPLIST_FILE = MoireStudiesUITests/Info.plist;
@@ -747,6 +755,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudiesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudiesUITests/MoireStudiesUITests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = MoireStudies;
 			};
