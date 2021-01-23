@@ -42,7 +42,6 @@ class CoreAnimPatternView: UIView {
     
     private func animateTile(tile: TileLayer) {
         // all tiles move towards the bottom of the backing view at the same speed
-        tile.speed = 1.0
         let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
         let duration = remainingDistance / self.pattern.speed
         let moveDownAnim = CABasicAnimation(keyPath: "position")
@@ -96,14 +95,7 @@ extension CoreAnimPatternView: PatternView {
         let oldPattern = self.pattern
         self.pattern = newPattern
         if oldPattern.speed != newPattern.speed {
-//            self.reAnimateTiles() 
-            let newOverOldSpeed: CGFloat = newPattern.speed / oldPattern.speed
-            print("speed property multiplied by: ", newOverOldSpeed)
-            for t in tiles {
-                t.beginTime = CACurrentMediaTime()
-                t.timeOffset = t.convertTime(CACurrentMediaTime(), from: nil)
-                t.speed *= Float(newOverOldSpeed)
-            }
+            self.reAnimateTiles()
         }
         
         if oldPattern.direction != newPattern.direction || oldPattern.scaleFactor != newPattern.scaleFactor {
