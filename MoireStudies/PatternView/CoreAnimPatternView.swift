@@ -40,14 +40,9 @@ class CoreAnimPatternView: UIView {
         }
     }
     
-    func animateTiles() {
-        for t in tiles {
-            self.animateTile(tile: t)
-        }
-    }
-    
     private func animateTile(tile: TileLayer) {
         // all tiles move towards the bottom of the backing view at the same speed
+        tile.speed = 1.0
         let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
         let duration = remainingDistance / self.pattern.speed
         let moveDownAnim = CABasicAnimation(keyPath: "position")
@@ -60,6 +55,27 @@ class CoreAnimPatternView: UIView {
         moveDownAnim.setValue(tile, forKey: "tileLayer")
         tile.add(moveDownAnim, forKey: "move down")
     }
+    
+    func animateTiles() {
+        for t in tiles {
+            self.animateTile(tile: t)
+        }
+    }
+    
+    /**
+     Summary: Set model layers to presentation layers, interrupt animations and redo animations
+     */
+    func reAnimateTiles() {
+        for tile in tiles {
+            if let pl = tile.presentation() {
+                tile.position = pl.position
+            }
+        }
+        for tile in tiles {
+            tile.removeAnimation(forKey: "move down")
+        }
+        self.animateTiles()
+    }
 }
 
 extension CoreAnimPatternView: PatternView {
@@ -67,7 +83,7 @@ extension CoreAnimPatternView: PatternView {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
         backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-//        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debug
+//        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debuging
         backingView.center = self.center
         self.addSubview(backingView)
         backingViewDefaultTransf = backingView.transform
@@ -80,16 +96,14 @@ extension CoreAnimPatternView: PatternView {
         let oldPattern = self.pattern
         self.pattern = newPattern
         if oldPattern.speed != newPattern.speed {
-            // set model layers to presentation layers and interrupt animations
-            for tile in tiles {
-                if let pl = tile.presentation() {
-                    tile.position = pl.position
-                }
+//            self.reAnimateTiles() 
+            let newOverOldSpeed: CGFloat = newPattern.speed / oldPattern.speed
+            print("speed property multiplied by: ", newOverOldSpeed)
+            for t in tiles {
+                t.beginTime = CACurrentMediaTime()
+                t.timeOffset = t.convertTime(CACurrentMediaTime(), from: nil)
+                t.speed *= Float(newOverOldSpeed)
             }
-            for tile in tiles {
-                tile.removeAnimation(forKey: "move down")
-            }
-            self.animateTiles()
         }
         
         if oldPattern.direction != newPattern.direction || oldPattern.scaleFactor != newPattern.scaleFactor {
