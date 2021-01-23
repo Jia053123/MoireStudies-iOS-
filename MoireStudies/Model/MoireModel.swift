@@ -64,16 +64,16 @@ class MoireModel {
 
 fileprivate class SaveFileIO {
     private let fileManager: FileManager = FileManager.default
-    private let saveFileDirectory: URL
     private let tempDirectory: URL
+    private let saveFileDirectory: URL
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
     
     required init() {
         let documentsDirectory = fileManager.urls(for: FileManager.SearchPathDirectory.documentDirectory,
                                                   in: FileManager.SearchPathDomainMask.userDomainMask).first!
-        saveFileDirectory = documentsDirectory.appendingPathComponent("MoireSaveFiles")
         tempDirectory = URL.init(fileURLWithPath: NSTemporaryDirectory())
+        saveFileDirectory = documentsDirectory.appendingPathComponent("MoireSaveFiles")
 //        print("saveFileDirectory: " + saveFileDirectory.path)
         var isDirectory: ObjCBool = ObjCBool(false)
         let fileExists = fileManager.fileExists(atPath: saveFileDirectory.path, isDirectory: &isDirectory)

@@ -15,12 +15,12 @@ class SaveFilesViewController: UICollectionViewController {
     private var highlightedCell: SaveFileCollectionViewCell?
     
     required init?(coder: NSCoder) {
-        allMoiresCache = moireModel.readAllMoiresSortedByLastCreatedOrModified()
+        allMoiresCache = moireModel.readAllMoiresSortedByLastCreated()
         super.init(coder: coder)
     }
     
     private func reloadCache() {
-        allMoiresCache = moireModel.readAllMoiresSortedByLastCreatedOrModified()
+        allMoiresCache = moireModel.readAllMoiresSortedByLastCreated()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
