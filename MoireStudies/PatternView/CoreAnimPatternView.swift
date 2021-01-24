@@ -36,11 +36,10 @@ class CoreAnimPatternView: UIView {
         // the tiles are placed to fill the backing view
         tileLength = backingView.bounds.width
         numOfTile = Int(ceil(backingView.bounds.height / tileHeight)) + 1
-        
+
         for i in 0..<numOfTile {
             let xPos : CGFloat = backingView.bounds.width / 2.0
             let yPos : CGFloat = CGFloat(i) * tileHeight
-            
             let newTile = TileLayer()
             newTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
@@ -111,12 +110,10 @@ extension CoreAnimPatternView: PatternView {
         if oldPattern.speed != newPattern.speed {
             self.reAnimateTiles()
         }
-        
         if oldPattern.direction != newPattern.direction || oldPattern.scaleFactor != newPattern.scaleFactor {
             backingView.transform =
                 backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.scaleFactor), y: CGFloat(newPattern.scaleFactor))
         }
-        
         if oldPattern.fillRatio != newPattern.fillRatio {
             for tile in tiles {
                 tile.fillRatio = newPattern.fillRatio
@@ -125,20 +122,22 @@ extension CoreAnimPatternView: PatternView {
     }
     
     func pauseAnimations() {
+        // official Apple code
         let layer = self.layer
         let pausedTime = layer.convertTime(CACurrentMediaTime(), from: nil)
-        layer.speed = 0.0
-        layer.timeOffset = pausedTime
+        layer.speed = 0.0 // sets the layer's time 0
+        layer.timeOffset = pausedTime // add pausedTime to the layer's time, and now layer's time is pausedTime
     }
     
     func resumeAnimations() {
+        // official Apple code
         let layer = self.layer
         let pausedTime = layer.timeOffset
-        layer.speed = 1.0
-        layer.timeOffset = 0.0
-        layer.beginTime = 0.0
+        layer.speed = 1.0 // add current time to the layer's time
+        layer.timeOffset = 0.0 // minus pausedTime from the layer's time, and now layer's time is the current time
+        layer.beginTime = 0.0 // assign this for now so that convertTime work correctly
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
-        layer.beginTime = timeSincePause
+        layer.beginTime = timeSincePause // minus timeSincePause from the layer's time, and now layer's time is pausedTime
     }
 }
 

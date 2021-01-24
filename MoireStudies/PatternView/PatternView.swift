@@ -12,5 +12,4 @@ protocol PatternView : UIView {
     func setUpAndRender(pattern: Pattern)
     func updatePattern(newPattern: Pattern)
     func pauseAnimations()
-    func resumeAnimations()
 }
