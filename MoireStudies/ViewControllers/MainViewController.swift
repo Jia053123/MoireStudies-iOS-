@@ -141,7 +141,7 @@ extension MainViewController {
                 }
             case self.fileButton!:
                 let sfvc: SaveFilesViewController = segue.destination as! SaveFilesViewController
-                sfvc.selectedMoireId = self.currentMoire?.id
+                sfvc.currentMoireId = self.currentMoire?.id
             default:
                 break
             }

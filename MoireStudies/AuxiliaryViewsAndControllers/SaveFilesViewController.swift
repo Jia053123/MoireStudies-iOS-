@@ -8,8 +8,10 @@
 import Foundation
 import UIKit
 
-class SaveFilesViewController: UIViewController, UICollectionViewDataSource {
-    var selectedMoireId: String!
+class SaveFilesViewController: UIViewController {
+    var currentMoireId: String!
+    private lazy var selectedMoireId = currentMoireId
+    private lazy var moireIdToLoad = currentMoireId
     private var moireModel: MoireModel = MoireModel.init()
     private var allMoiresCache: Array<Moire>
     private var highlightedCell: SaveFileCollectionViewCell?
@@ -31,6 +33,33 @@ class SaveFilesViewController: UIViewController, UICollectionViewDataSource {
         self.collectionView.reloadData()
     }
     
+    @IBAction func loadButtonPressed(_ sender: Any) {
+        self.moireIdToLoad = self.selectedMoireId
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteButtonPressed(_ sender: Any) {
+        if let smi = self.selectedMoireId {
+            let success = self.moireModel.delete(moireId: smi)
+            if success {
+                self.reloadCells()
+            }
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            print("save files controller: is being dismissed")
+            if let mvc = self.presentingViewController as? MainViewController {
+                mvc.moireIdToInit = self.moireIdToLoad
+                mvc.updateMainView()
+            }
+        }
+    }
+}
+
+extension SaveFilesViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -52,32 +81,9 @@ class SaveFilesViewController: UIViewController, UICollectionViewDataSource {
         }
         return cell
     }
-    
-    @IBAction func loadButtonPressed(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func deleteButtonPressed(_ sender: Any) {
-        let success = self.moireModel.delete(moireId: self.selectedMoireId)
-        if success {
-            self.reloadCells()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if isBeingDismissed {
-            print("save files controller: is being dismissed")
-            if let mvc = self.presentingViewController as? MainViewController {
-                mvc.moireIdToInit = self.selectedMoireId
-                mvc.updateMainView()
-            }
-        }
-    }
 }
 
 extension SaveFilesViewController: UICollectionViewDelegate {
-    
     private func moveHighlightToCell(cell: SaveFileCollectionViewCell) {
         self.highlightedCell?.unhighlight()
         self.highlightedCell = cell

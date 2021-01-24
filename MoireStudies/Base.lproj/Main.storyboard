@@ -141,9 +141,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-yY-UQo">
-                                <rect key="frame" x="21" y="7" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-yY-UQo">
+                                <rect key="frame" x="20" y="7" width="45" height="30"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
@@ -162,6 +161,9 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xdz-hX-9zY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dM6-yY-UQo" firstAttribute="leading" secondItem="xdz-hX-9zY" secondAttribute="leading" constant="20" id="MhH-0z-pLO"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="vbo-Wf-lJn" id="Bbs-j0-CDz"/>
