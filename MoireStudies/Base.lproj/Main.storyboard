@@ -109,11 +109,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vbo-Wf-lJn">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vbo-Wf-lJn">
                                 <rect key="frame" x="20" y="40" width="627" height="335"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LOZ-pb-rfJ">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LOZ-pb-rfJ">
                                     <size key="itemSize" width="155" height="125"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -127,6 +126,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="155" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="155" height="125"/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -134,15 +134,18 @@
                                     <outlet property="delegate" destination="KRW-Dp-kSv" id="VZL-5y-E4K"/>
                                 </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Save Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-7G-qwP">
-                                <rect key="frame" x="295" y="11" width="76" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-7G-qwP">
+                                <rect key="frame" x="295.5" y="11" width="76" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="Ga4-RH-ySP"/>
+                                    <constraint firstAttribute="height" constant="21" id="YBQ-rx-CUg"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-yY-UQo">
-                                <rect key="frame" x="20" y="7" width="45" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-yY-UQo">
+                                <rect key="frame" x="20" y="6.5" width="45" height="30"/>
                                 <state key="normal" title="Delete">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
@@ -150,9 +153,8 @@
                                     <action selector="deleteButtonPressed:" destination="KRW-Dp-kSv" eventType="touchUpInside" id="aVA-ja-qZi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GL-Gr-rS1">
-                                <rect key="frame" x="613" y="6" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GL-Gr-rS1">
+                                <rect key="frame" x="613" y="6.5" width="34" height="30"/>
                                 <state key="normal" title="Load"/>
                                 <connections>
                                     <action selector="loadButtonPressed:" destination="KRW-Dp-kSv" eventType="touchUpInside" id="dnJ-Oh-6cW"/>
@@ -162,7 +164,17 @@
                         <viewLayoutGuide key="safeArea" id="xdz-hX-9zY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="xdz-hX-9zY" firstAttribute="bottom" secondItem="vbo-Wf-lJn" secondAttribute="bottom" id="3ar-Xc-FDW"/>
+                            <constraint firstItem="vbo-Wf-lJn" firstAttribute="centerX" secondItem="xdz-hX-9zY" secondAttribute="centerX" id="5a5-Wp-BbK"/>
                             <constraint firstItem="dM6-yY-UQo" firstAttribute="leading" secondItem="xdz-hX-9zY" secondAttribute="leading" constant="20" id="MhH-0z-pLO"/>
+                            <constraint firstItem="1GL-Gr-rS1" firstAttribute="centerY" secondItem="DCR-7G-qwP" secondAttribute="centerY" id="PPa-3F-SXX"/>
+                            <constraint firstItem="xdz-hX-9zY" firstAttribute="trailing" secondItem="vbo-Wf-lJn" secondAttribute="trailing" constant="20" id="UKW-Am-tOp"/>
+                            <constraint firstItem="vbo-Wf-lJn" firstAttribute="leading" secondItem="xdz-hX-9zY" secondAttribute="leading" constant="20" id="X1w-av-kqD"/>
+                            <constraint firstItem="DCR-7G-qwP" firstAttribute="top" secondItem="xdz-hX-9zY" secondAttribute="top" constant="11" id="Zc9-BW-jNq"/>
+                            <constraint firstItem="xdz-hX-9zY" firstAttribute="trailing" secondItem="1GL-Gr-rS1" secondAttribute="trailing" constant="20" id="aOr-gs-bCs"/>
+                            <constraint firstItem="DCR-7G-qwP" firstAttribute="centerX" secondItem="xdz-hX-9zY" secondAttribute="centerX" id="vho-li-5c5"/>
+                            <constraint firstItem="vbo-Wf-lJn" firstAttribute="top" secondItem="xdz-hX-9zY" secondAttribute="top" constant="40" id="wcv-5O-Xia"/>
+                            <constraint firstItem="dM6-yY-UQo" firstAttribute="centerY" secondItem="DCR-7G-qwP" secondAttribute="centerY" id="zaZ-3d-rgp"/>
                         </constraints>
                     </view>
                     <connections>

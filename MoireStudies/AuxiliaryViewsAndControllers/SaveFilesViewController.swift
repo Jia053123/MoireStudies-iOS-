@@ -77,6 +77,7 @@ class SaveFilesViewController: UIViewController {
                 self.reloadCells()
                 guard allMoiresCache.count != 0 else {
                     self.createNewMoire()
+                    self.dismissAndLoadSelectedMoire()
                     return
                 }
                 let indexToSelect: Int
@@ -95,7 +96,11 @@ class SaveFilesViewController: UIViewController {
         if isBeingDismissed {
             print("save files controller: is being dismissed")
             if let mvc = self.presentingViewController as? MainViewController {
-                mvc.moireIdToInit = self.moireIdToLoad
+                if let mtl = self.moireIdToLoad, let _ = self.moireModel.read(moireId: mtl) {
+                    mvc.moireIdToInit = self.moireIdToLoad
+                } else {
+                    mvc.moireIdToInit = self.selectedMoireId
+                }
                 mvc.updateMainView()
             }
         }
