@@ -94,7 +94,6 @@ class SaveFilesViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if isBeingDismissed {
-            print("save files controller: is being dismissed")
             if let mvc = self.presentingViewController as? MainViewController {
                 if let mtl = self.moireIdToLoad, let _ = self.moireModel.read(moireId: mtl) {
                     mvc.moireIdToInit = self.moireIdToLoad
