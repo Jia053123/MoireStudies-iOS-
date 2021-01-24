@@ -9,9 +9,21 @@ import Foundation
 import UIKit
 
 class SaveFilesViewController: UIViewController {
-    var currentMoireId: String!
-    private lazy var selectedMoireId = currentMoireId
-    private lazy var moireIdToLoad = currentMoireId
+    var currentMoireId: String?
+    private var _selectedMoireId: String?
+    private var selectedMoireId: String? {
+        get {return _selectedMoireId ?? currentMoireId}
+        set {
+            _selectedMoireId = newValue
+            if let smi = _selectedMoireId {
+                // manage highlight
+                let index = self.allMoiresCache.firstIndex(where: {$0.id == smi})!
+                let cellToHighlight = self.collectionView.cellForItem(at: IndexPath.init(row: index, section: 0))
+                self.moveHighlightToCell(cell: cellToHighlight as? SaveFileCollectionViewCell)
+            }
+        }
+    }
+    private lazy var moireIdToLoad: String? = currentMoireId
     private var moireModel: MoireModel = MoireModel.init()
     private var allMoiresCache: Array<Moire>
     private var highlightedCell: SaveFileCollectionViewCell?
@@ -32,17 +44,48 @@ class SaveFilesViewController: UIViewController {
         self.reloadCache()
         self.collectionView.reloadData()
     }
+    /**
+     - Parameters:
+        - cell: the cell to highlight; if nil, then no cell will be in highlighted state
+     */
+    private func moveHighlightToCell(cell: SaveFileCollectionViewCell?) {
+        self.highlightedCell?.unhighlight()
+        self.highlightedCell = cell
+        self.highlightedCell?.highlight()
+    }
     
-    @IBAction func loadButtonPressed(_ sender: Any) {
+    private func createNewMoire() {
+        let newMoire = self.moireModel.createNew()
+        self.reloadCells()
+        self.selectedMoireId = newMoire.id
+    }
+    
+    private func dismissAndLoadSelectedMoire() {
         self.moireIdToLoad = self.selectedMoireId
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func loadButtonPressed(_ sender: Any) {
+        self.dismissAndLoadSelectedMoire()
+    }
+    
     @IBAction func deleteButtonPressed(_ sender: Any) {
         if let smi = self.selectedMoireId {
+            let index = self.allMoiresCache.firstIndex(where: {$0.id == smi})!
             let success = self.moireModel.delete(moireId: smi)
             if success {
                 self.reloadCells()
+                guard allMoiresCache.count != 0 else {
+                    self.createNewMoire()
+                    return
+                }
+                let indexToSelect: Int
+                if index == 0 {
+                    indexToSelect = 0
+                } else {
+                    indexToSelect = index - 1
+                }
+                self.selectedMoireId = self.allMoiresCache[indexToSelect].id
             }
         }
     }
@@ -84,23 +127,13 @@ extension SaveFilesViewController: UICollectionViewDataSource {
 }
 
 extension SaveFilesViewController: UICollectionViewDelegate {
-    private func moveHighlightToCell(cell: SaveFileCollectionViewCell) {
-        self.highlightedCell?.unhighlight()
-        self.highlightedCell = cell
-        self.highlightedCell?.highlight()
-    }
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == self.moireModel.numOfMoires() {
             print("selected plus to create a new moire")
-            let newMoire = self.moireModel.createNew()
-            self.reloadCells()
-            self.selectedMoireId = newMoire.id
-            self.dismiss(animated: true, completion: nil)
+            self.createNewMoire()
+            self.dismissAndLoadSelectedMoire()
         } else {
             print("selected cell at index: ", indexPath.row)
-            let selectedCell = self.collectionView.cellForItem(at: indexPath) as! SaveFileCollectionViewCell
-            self.moveHighlightToCell(cell: selectedCell)
             self.selectedMoireId = self.allMoiresCache[indexPath.row].id
         }
     }
