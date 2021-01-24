@@ -16,12 +16,16 @@ class MaskView: UIView {
     init(frame: CGRect, maskFrame: CGRect) {
         self.maskFrame = maskFrame
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+        self.setUp()
     }
     
     required init?(coder: NSCoder) {
         self.maskFrame = CGRect.zero
         super.init(coder: coder)
+        self.setUp()
+    }
+    
+    func setUp() {
         self.backgroundColor = UIColor.clear
     }
     

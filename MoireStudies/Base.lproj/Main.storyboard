@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
                                 <rect key="frame" x="631.5" y="3" width="25.5" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="SettingsButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hYG-uG-xgh"/>
                                 </constraints>
@@ -33,6 +34,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coU-E5-Qvx">
                                 <rect key="frame" x="586.5" y="3" width="35" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="SaveFilesButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="rfG-j2-0qP"/>
                                     <constraint firstAttribute="width" constant="35" id="yUb-G4-yUt"/>
@@ -47,6 +49,7 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="MainView"/>
                         <constraints>
                             <constraint firstItem="ifa-h7-T8I" firstAttribute="leading" secondItem="coU-E5-Qvx" secondAttribute="trailing" constant="10" id="5dN-dy-w0U"/>
                             <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="RFr-pC-Lpc"/>
@@ -64,12 +67,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-205.54722638680661" y="156"/>
+            <point key="canvasLocation" x="-228" y="158"/>
         </scene>
-        <!--Settings View Controller-->
+        <!--SettingsViewController-->
         <scene sceneID="muL-zt-Gr6">
             <objects>
-                <tableViewController id="Pci-Ue-xWn" customClass="SettingsViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="SettingsViewController" id="Pci-Ue-xWn" customClass="SettingsViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fMj-Wm-nSm">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="-228" y="-823"/>
         </scene>
-        <!--Save Files View Controller-->
+        <!--SaveFilesViewController-->
         <scene sceneID="iZN-oS-hP5">
             <objects>
-                <collectionViewController id="lTk-Kr-R4N" customClass="SaveFilesViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="SaveFilesViewController" id="lTk-Kr-R4N" customClass="SaveFilesViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="WJD-og-dIU">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
