@@ -114,10 +114,6 @@ extension MainViewController {
     func pauseMoire() {
         self.mainView.pauseMoire()
     }
-    
-    func resumeMoire() { // FIX: calling this after pause breaks the animation
-        self.mainView.resumeMoire()
-    }
 }
 
 extension MainViewController {

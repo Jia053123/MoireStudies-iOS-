@@ -19,7 +19,7 @@ import Foundation
             - MaskView(1) in mask property
  */
 class MainView: UIView {
-    typealias PatternViewClass = CoreAnimPatternView
+    typealias PatternViewClass = MetalPatternView//CoreAnimPatternView
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []
@@ -98,12 +98,6 @@ class MainView: UIView {
     func pauseMoire() {
         for pv in patternViews {
             pv.pauseAnimations()
-        }
-    }
-    
-    func resumeMoire() {
-        for pv in patternViews {
-            pv.resumeAnimations()
         }
     }
     

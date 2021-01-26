@@ -25,7 +25,7 @@ class UiTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+
     func mainViewCheckSch1() {
         XCTAssert(app.otherElements["MainView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)

@@ -10,9 +10,10 @@
 		8E1B9E6F25B684480021D398 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E6E25B684480021D398 /* ControlsView.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
+		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
-		8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */; };
+		8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* MetalPatternView.swift */; };
 		8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */; };
 		8E31448A259F030000BB0399 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E314489259F030000BB0399 /* MaskView.swift */; };
 		8E31449225A0393A00BB0399 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31449125A0393A00BB0399 /* Constants.swift */; };
@@ -71,9 +72,10 @@
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
+		8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MetalPatternViewShader.metal; sourceTree = "<group>"; };
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
-		8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLPatternView.swift; sourceTree = "<group>"; };
+		8E2BB6E2259329440018D913 /* MetalPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternView.swift; sourceTree = "<group>"; };
 		8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch1.swift; sourceTree = "<group>"; };
 		8E314489259F030000BB0399 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		8E31449125A0393A00BB0399 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -145,6 +147,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E1B9E9525C0B96B0021D398 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				8E314489259F030000BB0399 /* MaskView.swift */,
+				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
+				8E8D95A2258C3165000CD481 /* MainView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
+				8E36F75625931993004BC2F3 /* TileLayer.swift */,
+			);
+			path = CoreAnimPatternView;
+			sourceTree = "<group>";
+		};
+		8E1B9E9725C0B9C50021D398 /* MetalPatternView */ = {
+			isa = PBXGroup;
+			children = (
+				8E2BB6E2259329440018D913 /* MetalPatternView.swift */,
+				8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */,
+			);
+			path = MetalPatternView;
+			sourceTree = "<group>";
+		};
+		8E1B9E9825C0BA060021D398 /* Scheme1 */ = {
+			isa = PBXGroup;
+			children = (
+				8E36F74E25931796004BC2F3 /* CtrlViewSch1Target.swift */,
+				8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */,
+			);
+			path = Scheme1;
+			sourceTree = "<group>";
+		};
+		8E1B9E9925C0BA130021D398 /* Scheme2 */ = {
+			isa = PBXGroup;
+			children = (
+				8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */,
+				8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */,
+			);
+			path = Scheme2;
+			sourceTree = "<group>";
+		};
 		8E96B798257F33CF007527E2 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +226,7 @@
 				8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */,
 				8EE29F7925A0591500FF2539 /* Model */,
 				8EE29F7E25A059B900FF2539 /* ViewControllers */,
+				8E1B9E9525C0B96B0021D398 /* MainView */,
 				8EE29F7825A058E100FF2539 /* PatternView */,
 				8EE29F7A25A0594700FF2539 /* ControlView */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
@@ -212,13 +261,9 @@
 		8EE29F7825A058E100FF2539 /* PatternView */ = {
 			isa = PBXGroup;
 			children = (
-				8E314489259F030000BB0399 /* MaskView.swift */,
-				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
-				8E8D95A2258C3165000CD481 /* MainView.swift */,
 				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
-				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
-				8E36F75625931993004BC2F3 /* TileLayer.swift */,
-				8E2BB6E2259329440018D913 /* OpenGLPatternView.swift */,
+				8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */,
+				8E1B9E9725C0B9C50021D398 /* MetalPatternView */,
 			);
 			path = PatternView;
 			sourceTree = "<group>";
@@ -250,10 +295,8 @@
 				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 				8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */,
-				8E36F74E25931796004BC2F3 /* CtrlViewSch1Target.swift */,
-				8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */,
-				8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */,
-				8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */,
+				8E1B9E9825C0BA060021D398 /* Scheme1 */,
+				8E1B9E9925C0BA130021D398 /* Scheme2 */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -433,10 +476,11 @@
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
 				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,
-				8E2BB6E3259329440018D913 /* OpenGLPatternView.swift in Sources */,
+				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
 				8EE29F8825A05BC100FF2539 /* CtrlViewTarget.swift in Sources */,
 				8EE29F9625A2A6B000FF2539 /* CtrlViewControllerSch2.swift in Sources */,
+				8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */,
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E3144B325A04F4200BB0399 /* CtrlViewSch2Target.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,

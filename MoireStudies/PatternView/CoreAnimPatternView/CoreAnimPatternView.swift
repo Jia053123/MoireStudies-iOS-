@@ -128,7 +128,7 @@ extension CoreAnimPatternView: PatternView {
         layer.speed = 0.0 // sets the layer's time 0
         layer.timeOffset = pausedTime // add pausedTime to the layer's time, and now layer's time is pausedTime
     }
-    
+
     func resumeAnimations() {
         // official Apple code
         let layer = self.layer
