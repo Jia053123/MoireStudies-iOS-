@@ -7,10 +7,9 @@
 
 import Foundation
 import UIKit
-import Metal
+import MetalKit
 
-class MetalPatternView: UIView {
-    var device: MTLDevice!
+class MetalPatternView: MTKView {
     var metalLayer: CAMetalLayer!
     var vertexBuffer: MTLBuffer!
     var pipelineState: MTLRenderPipelineState!
@@ -24,6 +23,8 @@ class MetalPatternView: UIView {
     
     private func setUpMetal() {
         device = MTLCreateSystemDefaultDevice()
+        guard device != nil else {return}
+        
         metalLayer = CAMetalLayer()
         metalLayer.device = device
         metalLayer.pixelFormat = MTLPixelFormat.bgra8Unorm //bgra10_xr
@@ -33,18 +34,18 @@ class MetalPatternView: UIView {
         self.layer.addSublayer(metalLayer)
         
         let dataSize = testVertexData.count * MemoryLayout.size(ofValue: testVertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: testVertexData, length: dataSize, options: [])
+        vertexBuffer = device!.makeBuffer(bytes: testVertexData, length: dataSize, options: [])
         
-        let defaultLibrary = device.makeDefaultLibrary()! // compliles all the .metal files
+        let defaultLibrary = device!.makeDefaultLibrary()! // compliles all the .metal files
         let fragmentProgram = defaultLibrary.makeFunction(name: "basic_fragment")
         let vertexProgram = defaultLibrary.makeFunction(name: "basic_vertex")
         let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
         pipelineStateDescriptor.vertexFunction = vertexProgram
         pipelineStateDescriptor.fragmentFunction = fragmentProgram
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm // pixel format for the output buffer
-        pipelineState = try! device.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
+        pipelineState = try! device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         
-        commandQueue = device.makeCommandQueue()
+        commandQueue = device!.makeCommandQueue()
         
         timer = CADisplayLink(target: self, selector: #selector(loop))
         timer.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
