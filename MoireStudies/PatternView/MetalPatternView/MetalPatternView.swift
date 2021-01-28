@@ -14,6 +14,7 @@ class MetalPatternView: MTKView {
     var timer: CADisplayLink!
     
     private func setUpMetal() {
+        print("setup metal")
         device = MTLCreateSystemDefaultDevice()
         guard device != nil else {return}
         let d = MetalPatternRenderer()
@@ -22,34 +23,17 @@ class MetalPatternView: MTKView {
         // Initialize our renderer with the view size
         self.delegate!.mtkView(self, drawableSizeWillChange: self.drawableSize)
         
-        self.clearColor = MTLClearColorMake(1, 1, 1, 0)
-        self.draw() // why is this necessary?
-    
-//     ***   timer = CADisplayLink(target: self, selector: #selector(loop))
-//     ***   timer.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
-    }
-    
-    private func render() {
-//     *** renderPassDescriptor.colorAttachments[0].texture = drawable.texture
-//     *** renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadAction.clear
-//     *** renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0,
-//                                                                            green: 104.0/255.0,
-//                                                                            blue: 55.0/255.0,
-//                                                                            alpha: 1.0)
-    }
-    
-    @objc private func loop() {
-        autoreleasepool {
-            self.render()
-        }
+        self.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 0.0)
+        self.draw()
     }
 }
 
 extension MetalPatternView: PatternView {
     func setUpAndRender(pattern: Pattern) {
+        print("setup and render")
         self.backgroundColor = UIColor.clear
         self.setUpMetal()
-        self.render()
+//        self.draw() // why does it not work when called here???
     }
     
     func updatePattern(newPattern: Pattern) {
@@ -60,3 +44,4 @@ extension MetalPatternView: PatternView {
         print("TODO: pauseAnimations")
     }
 }
+

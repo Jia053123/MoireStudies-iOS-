@@ -12,13 +12,18 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
     var device: MTLDevice!
     var pipelineState: MTLRenderPipelineState!
     var commandQueue: MTLCommandQueue!
-    var viewportSize: simd_double2 = [0.0, 0.0]
+    var viewportSize: packed_float2 = [0.0, 0.0]
     var vertexBuffer: MTLBuffer!
     let testVertexData: [Float] = [
-        0.0, 1.0, 0.0,
-        -1.0, -1.0, 0.0,
-        1.0, -1.0, 0.0
+        0.0, 250.0, 0.0,
+        -250.0, -250.0, 0.0,
+        250.0, -250.0, 0.0
     ]
+//    let testVertexData: [Float] = [
+//        0.0, 1.0, 0.0,
+//        -1.0, -1.0, 0.0,
+//        1.0, -1.0, 0.0
+//    ]
     
     required override init() {
     }
@@ -50,17 +55,20 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         let renderPassDescriptor = view.currentRenderPassDescriptor!
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)!
         renderEncoder.label = "MyRenderEncoder"
-        renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: self.viewportSize.x, height: self.viewportSize.y, znear: 0.0, zfar: 1.0))
+        renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: Double(self.viewportSize.x), height: Double(self.viewportSize.y), znear: 0.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.pipelineState)
         
-        // we don't need to use the buffers here because the data size is small
+        
 //        renderEncoder.setVertexBytes(testVertexData,
 //                                     length: testVertexData.count,
 //                                     index: AAPLVertexInputIndex.AAPLVertexInputIndexVertices.rawValue)
-//        renderEncoder.setVertexBytes(&self.viewportSize,
-//                                     length: MemoryLayout.size(ofValue:self.viewportSize),
-//                                     index: AAPLVertexInputIndex.AAPLVertexInputIndexViewportSize.rawValue)
-        renderEncoder.setVertexBuffer(self.vertexBuffer, offset: 0, index: 0)
+        renderEncoder.setVertexBuffer(self.vertexBuffer,
+                                      offset: 0,
+                                      index: Int(AAPLVertexInputIndexVertices.rawValue))
+        // don't need to use a buffer here because the data size is small
+        renderEncoder.setVertexBytes(&self.viewportSize,
+                                     length: MemoryLayout.size(ofValue:self.viewportSize),
+                                     index: Int(AAPLVertexInputIndexViewportSize.rawValue))
         
         renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangle,
                                       vertexStart: 0,
@@ -72,7 +80,7 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
     
     /// Called whenever view changes orientation or is resized
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.viewportSize.x = Double(size.width)
-        self.viewportSize.y = Double(size.height)
+        self.viewportSize.x = Float(size.width)
+        self.viewportSize.y = Float(size.height)
     }
 }
