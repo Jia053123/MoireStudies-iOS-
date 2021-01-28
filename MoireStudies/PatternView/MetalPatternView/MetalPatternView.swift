@@ -22,7 +22,8 @@ class MetalPatternView: MTKView {
         // Initialize our renderer with the view size
         self.delegate!.mtkView(self, drawableSizeWillChange: self.drawableSize)
         
-        self.draw() // is this necessary?
+        self.clearColor = MTLClearColorMake(1, 1, 1, 0)
+        self.draw() // why is this necessary?
     
 //     ***   timer = CADisplayLink(target: self, selector: #selector(loop))
 //     ***   timer.add(to: RunLoop.main, forMode: RunLoop.Mode.default)

@@ -37,8 +37,8 @@ class MainView: UIView {
     }
     
     func initHelper() {
-        self.backgroundColor = UIColor.white
-        self.addSubview(moireView)
+        self.moireView.backgroundColor = UIColor.white
+        self.addSubview(self.moireView)
     }
     
     func setUp(patterns: Array<Pattern>) {
