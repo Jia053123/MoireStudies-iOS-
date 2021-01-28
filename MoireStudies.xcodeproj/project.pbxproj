@@ -11,6 +11,8 @@
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
+		8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */; };
+		8E1B9EBB25C26ED70021D398 /* ShaderConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9EBA25C26ED70021D398 /* ShaderConstants.swift */; };
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* MetalPatternView.swift */; };
@@ -73,6 +75,8 @@
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
 		8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MetalPatternViewShader.metal; sourceTree = "<group>"; };
+		8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternRenderer.swift; sourceTree = "<group>"; };
+		8E1B9EBA25C26ED70021D398 /* ShaderConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShaderConstants.swift; sourceTree = "<group>"; };
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* MetalPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternView.swift; sourceTree = "<group>"; };
@@ -170,7 +174,9 @@
 			isa = PBXGroup;
 			children = (
 				8E2BB6E2259329440018D913 /* MetalPatternView.swift */,
+				8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */,
 				8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */,
+				8E1B9EBA25C26ED70021D398 /* ShaderConstants.swift */,
 			);
 			path = MetalPatternView;
 			sourceTree = "<group>";
@@ -470,6 +476,7 @@
 				8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
+				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
@@ -484,6 +491,7 @@
 				8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */,
 				8E3144B325A04F4200BB0399 /* CtrlViewSch2Target.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
+				8E1B9EBB25C26ED70021D398 /* ShaderConstants.swift in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */,
