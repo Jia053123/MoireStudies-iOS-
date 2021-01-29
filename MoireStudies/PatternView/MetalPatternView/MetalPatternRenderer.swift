@@ -14,9 +14,7 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
     var commandQueue: MTLCommandQueue!
     var viewportSize: packed_float2 = [0.0, 0.0]
     var vertexBuffer: MTLBuffer!
-    let testVertexData: [packed_float2] = [[0.0, 250.0],
-                                           [-250.0, -250.0],
-                                           [250.0, -250.0]]
+    var tile: MetalTile = MetalTile()
     
     func initWithMetalKitView(mtkView: MTKView) {
         self.device = mtkView.device
@@ -31,8 +29,8 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
-        let dataSize = testVertexData.count * MemoryLayout.size(ofValue: testVertexData[0])
-        vertexBuffer = device.makeBuffer(bytes: testVertexData, length: dataSize, options: [])
+        let dataSize = self.tile.vertices.count * MemoryLayout.size(ofValue: self.tile.vertices[0])
+        vertexBuffer = device.makeBuffer(bytes: self.tile.vertices, length: dataSize, options: [])
     }
     
     /// Called whenever the view needs to render a frame.
@@ -52,9 +50,9 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         renderEncoder.setVertexBytes(&self.viewportSize,
                                      length: MemoryLayout.size(ofValue:self.viewportSize),
                                      index: Int(AAPLVertexInputIndexViewportSize.rawValue))
-        renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangle,
+        renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangleStrip,
                                       vertexStart: 0,
-                                      vertexCount: self.testVertexData.count)
+                                      vertexCount: self.tile.vertices.count)
         renderEncoder.endEncoding()
         
         commandBuffer.present(view.currentDrawable!)
