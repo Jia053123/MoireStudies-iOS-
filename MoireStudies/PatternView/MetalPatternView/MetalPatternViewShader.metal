@@ -11,12 +11,12 @@ using namespace metal;
 
 struct RasterizerData {
     // The [[position]] attribute of this member indicates that this value is the clip space position of the vertex when this structure is returned from the vertex function.
-    float4 position [[position]];
+    float4 position [[position]]; // cannot use packed_float4 because it's not supported
 };
 
 vertex RasterizerData
 basic_vertex(unsigned int vertexID [[ vertex_id ]],
-             const device packed_float3 *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
+             const device packed_float2 *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
              const device packed_float2 *viewportSizePointer [[ buffer(AAPLVertexInputIndexViewportSize)]]) {
     RasterizerData out;
     // Index into the array of positions to get the current vertex. The positions are specified in pixel dimensions
@@ -30,5 +30,5 @@ basic_vertex(unsigned int vertexID [[ vertex_id ]],
 }
 
 fragment half4 basic_fragment(RasterizerData inData [[stage_in]]) {
-    return half4(0.0, 0.0, 0.0, 1.0); // always in black
+    return half4(0.0, 0.0, 0.0, 1.0); // always in black for now
 }
