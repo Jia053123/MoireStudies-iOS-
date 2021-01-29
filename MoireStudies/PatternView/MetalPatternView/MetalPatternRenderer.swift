@@ -19,11 +19,6 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         -250.0, -250.0, 0.0,
         250.0, -250.0, 0.0
     ]
-//    let testVertexData: [Float] = [
-//        0.0, 1.0, 0.0,
-//        -1.0, -1.0, 0.0,
-//        1.0, -1.0, 0.0
-//    ]
     
     required override init() {
     }
@@ -57,11 +52,6 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         renderEncoder.label = "MyRenderEncoder"
         renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: Double(self.viewportSize.x), height: Double(self.viewportSize.y), znear: 0.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.pipelineState)
-        
-        
-//        renderEncoder.setVertexBytes(testVertexData,
-//                                     length: testVertexData.count,
-//                                     index: AAPLVertexInputIndex.AAPLVertexInputIndexVertices.rawValue)
         renderEncoder.setVertexBuffer(self.vertexBuffer,
                                       offset: 0,
                                       index: Int(AAPLVertexInputIndexVertices.rawValue))
@@ -72,7 +62,7 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         
         renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangle,
                                       vertexStart: 0,
-                                      vertexCount: 3)
+                                      vertexCount: self.testVertexData.count)
         renderEncoder.endEncoding()
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()

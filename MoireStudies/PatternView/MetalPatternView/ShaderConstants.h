@@ -22,10 +22,10 @@ typedef enum AAPLVertexInputIndex
 //  shader. This header is shared between the .metal shader and C code, to guarantee that
 //  the layout of the vertex array in the C code matches the layout that the .metal
 //  vertex shader expects.
-//typedef struct
-//{
-//    vector_float2 position;
-//    vector_float4 color;
-//} AAPLVertex;
+typedef struct
+{
+    vector_float2 position;
+    vector_float4 color;
+} AAPLVertex;
 
 #endif /* ShaderConstants_h */
