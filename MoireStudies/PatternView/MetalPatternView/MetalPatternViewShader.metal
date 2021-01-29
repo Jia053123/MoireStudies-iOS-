@@ -16,8 +16,8 @@ struct RasterizerData {
 
 vertex RasterizerData
 basic_vertex(unsigned int vertexID [[ vertex_id ]],
-             const device packed_float2 *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
-             const device packed_float2 *viewportSizePointer [[ buffer(AAPLVertexInputIndexViewportSize)]]) {
+             const device packed_float2 *vertices [[ buffer(VertexInputIndexVertices) ]],
+             const device packed_float2 *viewportSizePointer [[ buffer(VertexInputIndexViewportSize)]]) {
     RasterizerData out;
     // Index into the array of positions to get the current vertex. The positions are specified in pixel dimensions
     float2 pixelSpacePosition = vertices[vertexID].xy;

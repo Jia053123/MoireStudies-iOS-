@@ -45,11 +45,11 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         renderEncoder.setRenderPipelineState(self.pipelineState)
         renderEncoder.setVertexBuffer(self.vertexBuffer,
                                       offset: 0,
-                                      index: Int(AAPLVertexInputIndexVertices.rawValue))
+                                      index: Int(VertexInputIndexVertices.rawValue))
         // don't need to use a buffer here because the data size is small
         renderEncoder.setVertexBytes(&self.viewportSize,
                                      length: MemoryLayout.size(ofValue:self.viewportSize),
-                                     index: Int(AAPLVertexInputIndexViewportSize.rawValue))
+                                     index: Int(VertexInputIndexViewportSize.rawValue))
         renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangleStrip,
                                       vertexStart: 0,
                                       vertexCount: self.tile.vertices.count)
