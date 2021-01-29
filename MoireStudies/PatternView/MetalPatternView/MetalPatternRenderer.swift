@@ -18,11 +18,7 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
                                            [-250.0, -250.0],
                                            [250.0, -250.0]]
     
-    required override init() {
-    }
-    
     func initWithMetalKitView(mtkView: MTKView) {
-        print("init renderer")
         self.device = mtkView.device
         let defaultLibrary = self.device!.makeDefaultLibrary()! // compliles all the .metal files
         let fragmentFunction = defaultLibrary.makeFunction(name: "basic_fragment")
@@ -41,7 +37,6 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
     
     /// Called whenever the view needs to render a frame.
     func draw(in view: MTKView) {
-        print("Drawing Metal!")
         let commandBuffer = self.commandQueue.makeCommandBuffer()!
         commandBuffer.label = "MyCommand"
         
