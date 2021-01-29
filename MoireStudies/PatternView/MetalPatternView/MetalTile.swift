@@ -10,6 +10,7 @@ import MetalKit
 
 class MetalTile: NSObject {
     var position: packed_float2 = [0.0, 0.0]
+    var vertexCount: Int = 4
     let vertices: [packed_float2] = [[150.0, 250.0],
                                      [150.0, -250.0],
                                      [-150.0, 250.0],

@@ -8,7 +8,7 @@
 import Foundation
 import MetalKit
 
-class MetalPatternRenderer: NSObject, MTKViewDelegate {
+class MetalPatternRenderer: NSObject {
     var device: MTLDevice!
     var pipelineState: MTLRenderPipelineState!
     var commandQueue: MTLCommandQueue!
@@ -29,12 +29,28 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
-        let dataSize = self.tile.vertices.count * MemoryLayout.size(ofValue: self.tile.vertices[0])
+        let dataSize = self.tile.vertexCount * MemoryLayout.size(ofValue: self.tile.vertices[0])
         vertexBuffer = device.makeBuffer(bytes: self.tile.vertices, length: dataSize, options: [])
+//        vertexBuffer = device.makeBuffer(length: dataSize, options: MTLResourceOptions.storageModeShared)
     }
     
+    func updateTiles() {
+        let speed: Float = 1
+        tile.position.x += speed
+        
+        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: self.tile.vertices[0]))
+        for i in 0..<tile.vertexCount {
+            vBufferContents[i] = tile.vertices[i] + tile.position
+        }
+    }
+}
+
+extension MetalPatternRenderer: MTKViewDelegate {
     /// Called whenever the view needs to render a frame.
     func draw(in view: MTKView) {
+        // setup buffers before this
+        self.updateTiles()
+        
         let commandBuffer = self.commandQueue.makeCommandBuffer()!
         commandBuffer.label = "MyCommand"
         
@@ -51,8 +67,8 @@ class MetalPatternRenderer: NSObject, MTKViewDelegate {
                                      length: MemoryLayout.size(ofValue:self.viewportSize),
                                      index: Int(VertexInputIndexViewportSize.rawValue))
         renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangleStrip,
-                                      vertexStart: 0,
-                                      vertexCount: self.tile.vertices.count)
+                                     vertexStart: 0,
+                                     vertexCount: self.tile.vertexCount)
         renderEncoder.endEncoding()
         
         commandBuffer.present(view.currentDrawable!)
