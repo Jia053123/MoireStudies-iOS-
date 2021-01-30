@@ -11,17 +11,16 @@ import MetalKit
 
 class MetalPatternView: MTKView {
     var vertexBuffer: MTLBuffer!
-    var timer: CADisplayLink!
-    var renderer: MetalPatternRenderer!
+    var patternRenderer: MetalPatternRenderer!
     
     private func setUpMetal() {
         device = MTLCreateSystemDefaultDevice()
         guard device != nil else {return}
-        self.renderer = MetalPatternRenderer()
-        self.renderer.initWithMetalKitView(mtkView: self)
+        self.patternRenderer = MetalPatternRenderer()
+        self.patternRenderer.initWithMetalKitView(mtkView: self)
         // Initialize our renderer with the view size
-        self.renderer.mtkView(self, drawableSizeWillChange: self.drawableSize)
-        self.delegate = renderer
+        self.patternRenderer.mtkView(self, drawableSizeWillChange: self.drawableSize)
+        self.delegate = patternRenderer
         self.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 0.0)
     }
 }

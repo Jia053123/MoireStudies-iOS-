@@ -77,6 +77,7 @@ extension MetalPatternRenderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         self.viewportSize.x = Float(size.width)
         self.viewportSize.y = Float(size.height)
-        self.tile.length = self.viewportSize.x
+        let diagonalLength = sqrt(pow(Float(self.viewportSize.x), 2) + pow(Float(self.viewportSize.y), 2))
+        self.tile.length = diagonalLength
     }
 }

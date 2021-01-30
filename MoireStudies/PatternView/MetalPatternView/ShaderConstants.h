@@ -10,8 +10,7 @@
 
 #include <simd/simd.h>
 
-// Buffer index values shared between shader and C code to ensure Metal shader buffer inputs
-// match Metal API buffer set calls.
+// Buffer index values shared between shader and C code to ensure Metal shader buffer inputs match Metal API buffer set calls.
 typedef enum VertexInputIndex
 {
     VertexInputIndexVertices     = 0,
