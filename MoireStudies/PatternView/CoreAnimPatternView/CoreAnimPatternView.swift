@@ -14,7 +14,7 @@ class CoreAnimPatternView: UIView {
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0
     private var tiles: Array<TileLayer> = Array()
-    private var lastTile: TileLayer? // keep track of the top tile to ensure the recycled tiles fit seamlessly
+    private var lastTile: TileLayer? // keep track of the tile at the end to ensure the next recycled tile fit seamlessly
     private var backingView: UIView = UIView() // the view that holds all the tiles
     private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
     

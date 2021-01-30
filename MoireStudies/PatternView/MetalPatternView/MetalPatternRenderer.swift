@@ -29,18 +29,17 @@ class MetalPatternRenderer: NSObject {
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
-        let dataSize = self.tile.vertexCount * MemoryLayout.size(ofValue: self.tile.vertices[0])
-        vertexBuffer = device.makeBuffer(bytes: self.tile.vertices, length: dataSize, options: [])
-//        vertexBuffer = device.makeBuffer(length: dataSize, options: MTLResourceOptions.storageModeShared)
+        let dataSize = self.tile.vertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
+        vertexBuffer = device.makeBuffer(bytes: MetalTile.defaultVertices, length: dataSize, options: [])
     }
     
     func updateTiles() {
         let speed: Float = 1
-        tile.position.x += speed
+        tile.translation.x += speed
         
-        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: self.tile.vertices[0]))
+        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
         for i in 0..<tile.vertexCount {
-            vBufferContents[i] = tile.vertices[i] + tile.position
+            vBufferContents[i] = self.tile.calcVertexAt(index: i)
         }
     }
 }
