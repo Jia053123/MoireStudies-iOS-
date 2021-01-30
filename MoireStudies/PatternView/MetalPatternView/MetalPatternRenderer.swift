@@ -34,8 +34,8 @@ class MetalPatternRenderer: NSObject {
     }
     
     func updateTiles() {
-        let speed: Float = 1
-        tile.translation.x += speed
+        let speed: Float = -1
+        tile.translation.y += speed
         
         let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
         for i in 0..<tile.vertexCount {
@@ -45,7 +45,7 @@ class MetalPatternRenderer: NSObject {
 }
 
 extension MetalPatternRenderer: MTKViewDelegate {
-    /// Called whenever the view needs to render a frame.
+
     func draw(in view: MTKView) {
         // setup buffers before this
         self.updateTiles()
@@ -74,9 +74,9 @@ extension MetalPatternRenderer: MTKViewDelegate {
         commandBuffer.commit()
     }
     
-    /// Called whenever view changes orientation or is resized
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         self.viewportSize.x = Float(size.width)
         self.viewportSize.y = Float(size.height)
+        self.tile.length = self.viewportSize.x
     }
 }
