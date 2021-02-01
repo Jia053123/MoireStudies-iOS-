@@ -31,12 +31,13 @@
 		8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */; };
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
 		8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BABDF25AE82F4003FC799 /* MoireModel.swift */; };
-		8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */; };
+		8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* UtilitiesTests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
 		8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787D25A3DB56002EB000 /* SettingsViewController.swift */; };
 		8E6BF3F125AEC880005FE7CA /* MoireModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */; };
 		8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EB6FD25A52EBF007EA799 /* Moire.swift */; };
 		8E6EF2E525C3CB080009905C /* MetalTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E425C3CB080009905C /* MetalTile.swift */; };
+		8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E925C85B0C0009905C /* Utilities.swift */; };
 		8E8D95A3258C3165000CD481 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8D95A2258C3165000CD481 /* MainView.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
@@ -97,12 +98,13 @@
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E5BABDF25AE82F4003FC799 /* MoireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModel.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
-		8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2Tests.swift; sourceTree = "<group>"; };
+		8E60786725A2F049002EB000 /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		8E60787525A3D3C6002EB000 /* InitSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSettings.swift; sourceTree = "<group>"; };
 		8E60787D25A3DB56002EB000 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModelTests.swift; sourceTree = "<group>"; };
 		8E6EB6FD25A52EBF007EA799 /* Moire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moire.swift; sourceTree = "<group>"; };
 		8E6EF2E425C3CB080009905C /* MetalTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalTile.swift; sourceTree = "<group>"; };
+		8E6EF2E925C85B0C0009905C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E8D95A2258C3165000CD481 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8E9690E12596FA3700C69DDC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */,
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E31449125A0393A00BB0399 /* Constants.swift */,
+				8E6EF2E925C85B0C0009905C /* Utilities.swift */,
 				8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */,
 				8EE29F7925A0591500FF2539 /* Model */,
 				8EE29F7E25A059B900FF2539 /* ViewControllers */,
@@ -249,7 +252,7 @@
 		8E96B7BF257F33D4007527E2 /* MoireStudiesTests */ = {
 			isa = PBXGroup;
 			children = (
-				8E60786725A2F049002EB000 /* CtrlViewControllerSch2Tests.swift */,
+				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
 				8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */,
 				8E96B7C2257F33D4007527E2 /* Info.plist */,
 			);
@@ -481,6 +484,7 @@
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */,
+				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
@@ -518,7 +522,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E6BF3F125AEC880005FE7CA /* MoireModelTests.swift in Sources */,
-				8E60786825A2F049002EB000 /* CtrlViewControllerSch2Tests.swift in Sources */,
+				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
