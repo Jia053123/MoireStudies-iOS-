@@ -13,8 +13,9 @@ class MetalPatternView: MTKView {
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
     private var tiles: Array<MetalTile>!
+    private lazy var viewportSize: CGSize = self.drawableSize
     private var diagonalOfDrawableTexture: Float {
-        get {return Float(sqrt(pow(self.drawableSize.width, 2) + pow(self.drawableSize.height, 2)))}
+        get {return Float(sqrt(pow(self.viewportSize.width, 2) + pow(self.viewportSize.height, 2)))}
     }
     
     private var pattern: Pattern!
@@ -28,9 +29,7 @@ class MetalPatternView: MTKView {
         guard device != nil else {return}
         self.patternRenderer = MetalPatternRenderer()
         self.patternRenderer.initWithMetalKitView(mtkView: self)
-        // Initialize our renderer with the view size
-        self.patternRenderer.mtkView(self, drawableSizeWillChange: self.drawableSize)
-        self.delegate = patternRenderer
+        self.delegate = self
         self.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 0.0)
     }
     
@@ -55,6 +54,17 @@ class MetalPatternView: MTKView {
     }
 }
 
+extension MetalPatternView: MTKViewDelegate {
+    func draw(in view: MTKView) {
+        // TODO: update translations
+        self.patternRenderer.draw(in: view, of: self.viewportSize)
+    }
+    
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        self.viewportSize = size
+    }
+}
+
 extension MetalPatternView: PatternView {
     func setUpAndRender(pattern: Pattern) {
         self.pattern = pattern
@@ -68,10 +78,9 @@ extension MetalPatternView: PatternView {
         self.updateTiles()
         // assign the tiles to the renderer
     }
-     
     
     func pauseAnimations() {
-        self.patternRenderer.pauseRendering()
+        print("TODO: pauseRendering")
     }
 }
 

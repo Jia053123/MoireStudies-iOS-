@@ -37,17 +37,6 @@ class MetalPatternRenderer: NSObject {
         let dataSize = self.tile.vertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
         vertexBuffer = device.makeBuffer(bytes: MetalTile.defaultVertices, length: dataSize, options: [])
     }
-    
-    func pauseRendering() {
-        print("TODO: pauseRendering")
-    }
-    
-    func resumeRendering() {
-        print("TODO: resumeRendering")
-    }
-}
-
-extension MetalPatternRenderer: MTKViewDelegate {
 
     func updateTiles() {
         tile.translation.y += self.tileSpeed
@@ -58,7 +47,9 @@ extension MetalPatternRenderer: MTKViewDelegate {
         }
     }
     
-    func draw(in view: MTKView) {
+    func draw(in view: MTKView, of viewportSize: CGSize) {
+        self.viewportSize.x = Float(viewportSize.width)
+        self.viewportSize.y = Float(viewportSize.height)
         // setup buffers before this
         self.updateTiles()
         
@@ -84,10 +75,5 @@ extension MetalPatternRenderer: MTKViewDelegate {
         
         commandBuffer.present(view.currentDrawable!)
         commandBuffer.commit()
-    }
-    
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.viewportSize.x = Float(size.width)
-        self.viewportSize.y = Float(size.height)
     }
 }
