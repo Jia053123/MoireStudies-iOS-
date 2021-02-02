@@ -11,9 +11,7 @@ import UIKit
 class GestureControlView: UIView, ControlViewSch1 {
     var target: CtrlViewSch1Target?
     
-    func matchControlsWithModel(pattern: Pattern) {
+    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat) {
         
     }
-    
-    
 }

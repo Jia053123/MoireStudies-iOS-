@@ -19,7 +19,7 @@ import Foundation
             - MaskView(1) in mask property
  */
 class MainView: UIView {
-    typealias PatternViewClass = MetalPatternView//CoreAnimPatternView
+    typealias PatternViewClass = CoreAnimPatternView
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var moireView: UIView = UIView()
     private var patternViews: Array<PatternView> = []

@@ -33,6 +33,7 @@ class CoreAnimPatternView: UIView {
     }
     
     private func createTiles() {
+        let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth).fillRatio
         // the tiles are placed to fill the backing view
         tileLength = backingView.bounds.width
         numOfTile = Int(ceil(backingView.bounds.height / tileHeight)) + 1
@@ -44,7 +45,7 @@ class CoreAnimPatternView: UIView {
             newTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
             newTile.position = CGPoint(x: xPos, y: yPos)
-            newTile.setUp(fillRatio: pattern.fillRatio)
+            newTile.setUp(fillRatio: fr)
             backingView.layer.addSublayer(newTile)
             tiles.append(newTile)
             if i == 0 {
@@ -110,13 +111,17 @@ extension CoreAnimPatternView: PatternView {
         if oldPattern.speed != newPattern.speed {
             self.reAnimateTiles()
         }
-        if oldPattern.direction != newPattern.direction || oldPattern.scaleFactor != newPattern.scaleFactor {
+        let oldR = Utilities.convertToFillRatioAndScaleFactor(blackWidth: oldPattern.blackWidth,
+                                                              whiteWidth: oldPattern.whiteWidth)
+        let newR = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth,
+                                                              whiteWidth: newPattern.whiteWidth)
+        if oldPattern.direction != newPattern.direction || oldR.scaleFactor != newR.scaleFactor {
             backingView.transform =
-                backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newPattern.scaleFactor), y: CGFloat(newPattern.scaleFactor))
+                backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newR.scaleFactor), y: CGFloat(newR.scaleFactor))
         }
-        if oldPattern.fillRatio != newPattern.fillRatio {
+        if oldR.fillRatio != newR.fillRatio {
             for tile in tiles {
-                tile.fillRatio = newPattern.fillRatio
+                tile.fillRatio = newR.fillRatio
             }
         }
     }

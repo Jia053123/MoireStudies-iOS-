@@ -40,10 +40,11 @@ extension CtrlViewControllerSch1: CtrlViewTarget {
     
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! ControlViewSch1
+        let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
         cv.matchControlsWithValues(speed: pattern.speed,
                                    direction: pattern.direction,
-                                   blackWidth: pattern.blackWidth,
-                                   whiteWidth: pattern.whiteWidth)
+                                   fillRatio: result.fillRatio,
+                                   scaleFactor: result.scaleFactor)
     }
 }
 
