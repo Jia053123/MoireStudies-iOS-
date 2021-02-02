@@ -9,7 +9,7 @@ import Foundation
 import MetalKit
 
 class MetalTile: NSObject {
-    var length: Float = 2048
+    var length: Float = 2048 // 13 inch iPad pro 2020 resolution
     private var halfLength: Float {get {return self.length / 2}}
     var translation: packed_float2 = [0.0, 0.0]
     var direction: Float = 0.0

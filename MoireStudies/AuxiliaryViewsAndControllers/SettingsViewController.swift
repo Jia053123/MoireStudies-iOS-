@@ -76,7 +76,6 @@ class SettingsViewController: UITableViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("settings controller: view will disappear")
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             if let mvc = self.presentingViewController as? MainViewController {

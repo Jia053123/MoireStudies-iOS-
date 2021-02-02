@@ -33,10 +33,12 @@ extension MetalPatternView: PatternView {
     
     func updatePattern(newPattern: Pattern) {
         print("TODO: updatePattern")
+        // convert point to pixel
+        // make the tiles and give them to the renderer
     }
     
     func pauseAnimations() {
-        print("TODO: pauseAnimations")
+        self.patternRenderer.pauseRendering()
     }
 }
 

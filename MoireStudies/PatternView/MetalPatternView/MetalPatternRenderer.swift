@@ -9,11 +9,11 @@ import Foundation
 import MetalKit
 
 class MetalPatternRenderer: NSObject {
-    var device: MTLDevice!
-    var pipelineState: MTLRenderPipelineState!
-    var commandQueue: MTLCommandQueue!
-    var viewportSize: packed_float2 = [0.0, 0.0]
-    var vertexBuffer: MTLBuffer!
+    private var device: MTLDevice!
+    private var pipelineState: MTLRenderPipelineState!
+    private var commandQueue: MTLCommandQueue!
+    private var viewportSize: packed_float2 = [0.0, 0.0]
+    private var vertexBuffer: MTLBuffer!
     var tile: MetalTile = MetalTile()
     
     func initWithMetalKitView(mtkView: MTKView) {
@@ -41,6 +41,14 @@ class MetalPatternRenderer: NSObject {
         for i in 0..<tile.vertexCount {
             vBufferContents[i] = self.tile.calcVertexAt(index: i)
         }
+    }
+    
+    func pauseRendering() {
+        print("TODO: pauseRendering")
+    }
+    
+    func resumeRendering() {
+        print("TODO: resumeRendering")
     }
 }
 
