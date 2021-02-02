@@ -196,7 +196,6 @@ extension MainViewController: PatternManager {
     func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting blackWidth to: ", blackWidth)
         guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
-            print ("return false")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
@@ -211,7 +210,6 @@ extension MainViewController: PatternManager {
     func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
         print("setting whiteWidth to: ", whiteWidth)
         guard Constants.Bounds.whiteWidthRange.contains(whiteWidth) else {
-            print ("return false")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {

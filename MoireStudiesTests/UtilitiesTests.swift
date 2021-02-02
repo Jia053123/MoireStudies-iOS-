@@ -9,7 +9,6 @@ import XCTest
 @testable import MoireStudies
 
 class UtilitiesTests: XCTestCase {
-//    var controllerSch2: CtrlViewControllerSch2 = CtrlViewControllerSch2.init(id: 0, frame: CGRect.zero, pattern: Pattern.defaultPattern())
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

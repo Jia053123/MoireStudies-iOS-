@@ -92,8 +92,8 @@ class MoireModelTests: XCTestCase {
         XCTAssert(success == true)
         
         let m2 = Moire()
-        assert(m2.patterns[0].scaleFactor != 1.129)
-        m2.patterns[0].scaleFactor = 1.129
+        assert(m2.patterns[0].blackWidth != 5.129)
+        m2.patterns[0].blackWidth = 5.129
         let i2 = m2.id
         success = moireModel1.saveOrModify(moire: m2)
         XCTAssert(success == true)
@@ -103,7 +103,7 @@ class MoireModelTests: XCTestCase {
         XCTAssert(m11!.patterns[1].direction == 1.531)
         let m21 = moireModel1.read(moireId: i2)
         XCTAssert(m21 != nil)
-        XCTAssert(m21?.patterns[0].scaleFactor == 1.129)
+        XCTAssert(m21?.patterns[0].blackWidth == 5.129)
         
         success = moireModel1.delete(moireId: i1)
         XCTAssert(success == true)
@@ -111,7 +111,7 @@ class MoireModelTests: XCTestCase {
         XCTAssert(m12 == nil)
         let m22 = moireModel1.read(moireId: i2)
         XCTAssert(m22 != nil)
-        XCTAssert(m22?.patterns[0].scaleFactor == 1.129)
+        XCTAssert(m22?.patterns[0].blackWidth == 5.129)
     }
     
     func testReadAllMoiresAndReadLastCreatedOrEdited() {
@@ -152,8 +152,8 @@ class MoireModelTests: XCTestCase {
         XCTAssert(m != nil)
         XCTAssert(m?.id == i3)
         
-        assert(m2.patterns[0].scaleFactor != 1.129)
-        m2.patterns[0].scaleFactor = 1.129
+        assert(m2.patterns[0].blackWidth != 5.129)
+        m2.patterns[0].blackWidth = 5.129
         success = moireModel1.saveOrModify(moire: m2)
         assert(success == true)
         ms1 = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
