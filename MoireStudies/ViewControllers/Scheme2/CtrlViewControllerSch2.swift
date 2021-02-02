@@ -27,18 +27,6 @@ class CtrlViewControllerSch2: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
-    func convertToFillRatioAndScaleFactor(blackWidth: CGFloat, whiteWidth: CGFloat) -> (fillRatio: CGFloat, scaleFactor: CGFloat) {
-        let fr: CGFloat = blackWidth / (blackWidth + whiteWidth)
-        let sf: CGFloat = blackWidth / (fr * Constants.UI.tileHeight)
-        return (fr, sf)
-    }
-    
-    func convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat, scaleFactor: CGFloat) -> (blackWidth: CGFloat, whiteWidth: CGFloat) {
-        let bw: CGFloat = fillRatio * Constants.UI.tileHeight * scaleFactor
-        let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * scaleFactor
-        return (bw, ww)
-    }
 }
 
 extension CtrlViewControllerSch2: CtrlViewTarget {
@@ -52,12 +40,7 @@ extension CtrlViewControllerSch2: CtrlViewTarget {
     
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! ControlViewSch2
-        let result = self.convertToBlackWidthAndWhiteWidth(fillRatio: pattern.fillRatio,
-                                                           scaleFactor: pattern.scaleFactor)
-        cv.matchControlsWithValues(speed: pattern.speed,
-                                   direction: pattern.direction,
-                                   blackWidth: result.blackWidth,
-                                   whiteWidth: result.whiteWidth)
+        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
     }
 }
 
@@ -71,29 +54,11 @@ extension CtrlViewControllerSch2: CtrlViewSch2Target {
     }
     
     func modifyPattern(blackWidth: CGFloat) -> Bool {
-        print("setting blackWidth to: ", blackWidth)
-        guard let d = self.delegate else {
-            return false
-        }
-        let p: Pattern = d.getPattern(caller: self)!
-        let ww = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor).whiteWidth
-        let result = convertToFillRatioAndScaleFactor(blackWidth: blackWidth, whiteWidth: ww)
-        let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
-        let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
-        return r1 && r2
+        return delegate?.modifyPattern(blackWidth: blackWidth, caller: self) ?? false
     }
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
-        print("setting whiteWidth to: ", whiteWidth)
-        guard let d = self.delegate else {
-            return false
-        }
-        let p: Pattern = d.getPattern(caller: self)!
-        let bw = convertToBlackWidthAndWhiteWidth(fillRatio: p.fillRatio, scaleFactor: p.scaleFactor).blackWidth
-        let result = convertToFillRatioAndScaleFactor(blackWidth: bw, whiteWidth: whiteWidth)
-        let r1 = d.modifyPattern(fillRatio: result.fillRatio, caller: self)
-        let r2 = d.modifyPattern(scaleFactor: result.scaleFactor, caller: self)
-        return r1 && r2
+        return delegate?.modifyPattern(whiteWidth: whiteWidth, caller: self) ?? false
     }
 }
 

@@ -10,5 +10,5 @@ import UIKit
 
 protocol ControlViewSch1 : UIView {
     var target: CtrlViewSch1Target? { get set }
-    func matchControlsWithModel(pattern: Pattern)
+    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, blackWidth: CGFloat, whiteWidth: CGFloat)
 }
