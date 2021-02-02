@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CoreAnimPatternView: UIView {
-    private var pattern: Pattern = Pattern.defaultPattern()
+    private var pattern: Pattern = Pattern.defaultPattern() // TODO: use ! instead
     private var tileHeight: CGFloat = Constants.UI.tileHeight
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0

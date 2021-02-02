@@ -10,8 +10,18 @@ import UIKit
 import MetalKit
 
 class MetalPatternView: MTKView {
-    var vertexBuffer: MTLBuffer!
-    var patternRenderer: MetalPatternRenderer!
+    private var vertexBuffer: MTLBuffer!
+    private var patternRenderer: MetalPatternRenderer!
+    private var tiles: Array<MetalTile>!
+    private var diagonalOfDrawableTexture: Float {
+        get {return Float(sqrt(pow(self.drawableSize.width, 2) + pow(self.drawableSize.height, 2)))}
+    }
+    
+    private var pattern: Pattern!
+    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}
+    private var directionInRad: Float {get {return Float(self.pattern.direction)}}
+    private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
+    private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
     
     private func setUpMetal() {
         device = MTLCreateSystemDefaultDevice()
@@ -23,19 +33,42 @@ class MetalPatternView: MTKView {
         self.delegate = patternRenderer
         self.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 0.0)
     }
+    
+    private func createTiles() {
+        let width = self.blackWidthInPixel + self.whiteWidthInPixel
+        let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
+        self.tiles = []
+        for _ in 0..<numOfTiles {
+            let newTile = MetalTile()
+            self.tiles.append(newTile)
+        }
+        self.updateTiles()
+    }
+    
+    private func updateTiles() {
+        for t in self.tiles {
+            t.length = self.diagonalOfDrawableTexture
+            t.width = self.blackWidthInPixel
+            t.orientation = self.directionInRad
+            // do the translation
+        }
+    }
 }
 
 extension MetalPatternView: PatternView {
     func setUpAndRender(pattern: Pattern) {
-        self.backgroundColor = UIColor.clear
+        self.pattern = pattern
         self.setUpMetal()
+        self.createTiles()
+        self.backgroundColor = UIColor.clear
     }
     
     func updatePattern(newPattern: Pattern) {
-        print("TODO: updatePattern")
-        // convert point to pixel
-        // make the tiles and give them to the renderer
+        self.pattern = newPattern
+        self.updateTiles()
+        // assign the tiles to the renderer
     }
+     
     
     func pauseAnimations() {
         self.patternRenderer.pauseRendering()

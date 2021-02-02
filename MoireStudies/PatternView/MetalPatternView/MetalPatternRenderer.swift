@@ -8,13 +8,18 @@
 import Foundation
 import MetalKit
 
+/**
+ Summary: responsible for rendering the tiles assigned by MetalPatternView
+ */
 class MetalPatternRenderer: NSObject {
     private var device: MTLDevice!
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
     private var viewportSize: packed_float2 = [0.0, 0.0]
     private var vertexBuffer: MTLBuffer!
-    var tile: MetalTile = MetalTile()
+    private var tile: MetalTile = MetalTile()
+    var tiles: Array<MetalTile> = []
+    var tileSpeed: Float = -1.0
     
     func initWithMetalKitView(mtkView: MTKView) {
         self.device = mtkView.device
@@ -33,16 +38,6 @@ class MetalPatternRenderer: NSObject {
         vertexBuffer = device.makeBuffer(bytes: MetalTile.defaultVertices, length: dataSize, options: [])
     }
     
-    func updateTiles() {
-        let speed: Float = -1
-        tile.translation.y += speed
-        
-        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
-        for i in 0..<tile.vertexCount {
-            vBufferContents[i] = self.tile.calcVertexAt(index: i)
-        }
-    }
-    
     func pauseRendering() {
         print("TODO: pauseRendering")
     }
@@ -54,6 +49,15 @@ class MetalPatternRenderer: NSObject {
 
 extension MetalPatternRenderer: MTKViewDelegate {
 
+    func updateTiles() {
+        tile.translation.y += self.tileSpeed
+        
+        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
+        for i in 0..<tile.vertexCount {
+            vBufferContents[i] = self.tile.calcVertexAt(index: i)
+        }
+    }
+    
     func draw(in view: MTKView) {
         // setup buffers before this
         self.updateTiles()
@@ -85,7 +89,5 @@ extension MetalPatternRenderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         self.viewportSize.x = Float(size.width)
         self.viewportSize.y = Float(size.height)
-        let diagonalLength = sqrt(pow(Float(self.viewportSize.x), 2) + pow(Float(self.viewportSize.y), 2))
-        self.tile.length = diagonalLength
     }
 }
