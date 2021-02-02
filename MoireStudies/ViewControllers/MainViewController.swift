@@ -193,29 +193,29 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting fillRatio to: ", fillRatio)
-        guard Constants.Bounds.fillRatioRange.contains(fillRatio) else {
+    func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
+        print("setting blackWidth to: ", blackWidth)
+        guard Constants.Bounds.fillRatioRange.contains(blackWidth) else {
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        currentMoire!.patterns[index].fillRatio = fillRatio
+        currentMoire!.patterns[index].blackWidth = blackWidth
         let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
-    func modifyPattern(scaleFactor: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting scaleFactor to: ", scaleFactor)
-        guard Constants.Bounds.scaleFactorRange.contains(scaleFactor) else {
+    func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
+        print("setting whiteWidth to: ", whiteWidth)
+        guard Constants.Bounds.scaleFactorRange.contains(whiteWidth) else {
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        currentMoire!.patterns[index].scaleFactor = scaleFactor
+        currentMoire!.patterns[index].whiteWidth = whiteWidth
         let mv = self.mainView
         mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true

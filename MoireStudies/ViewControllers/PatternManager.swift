@@ -14,7 +14,7 @@ protocol PatternManager: UIViewController {
     func unhighlightPattern(caller: CtrlViewTarget) -> Bool
     func modifyPattern(speed: CGFloat, caller: CtrlViewTarget) -> Bool
     func modifyPattern(direction: CGFloat, caller: CtrlViewTarget) -> Bool
-    func modifyPattern(fillRatio: CGFloat, caller: CtrlViewTarget) -> Bool
-    func modifyPattern(scaleFactor: CGFloat, caller: CtrlViewTarget) -> Bool
+    func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool
+    func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewTarget) -> Bool
     func getPattern(caller: CtrlViewTarget) -> Pattern?
 }
