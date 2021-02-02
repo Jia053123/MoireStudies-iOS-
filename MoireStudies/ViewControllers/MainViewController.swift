@@ -166,8 +166,8 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
+            print("speed out of bound")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
@@ -180,8 +180,8 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(direction: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting direction to: ", direction)
         guard Constants.Bounds.directionRange.contains(direction) else {
+            print("direction out of bound")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
@@ -194,8 +194,8 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting blackWidth to: ", blackWidth)
         guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
+            print("blackWidth out of bound")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
@@ -208,8 +208,8 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
-        print("setting whiteWidth to: ", whiteWidth)
         guard Constants.Bounds.whiteWidthRange.contains(whiteWidth) else {
+            print("whiteWidth out of bound")
             return false
         }
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {

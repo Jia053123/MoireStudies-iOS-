@@ -19,9 +19,7 @@ struct Constants {
     struct Bounds {
         static let speedRange: ClosedRange<CGFloat> = 10.0...50.0
         static let directionRange: ClosedRange<CGFloat> = -1*CGFloat.infinity...CGFloat.infinity
-        static let blackWidthRange: ClosedRange<CGFloat> = 1...30
-        static let whiteWidthRange: ClosedRange<CGFloat> = 1...30
-//        static let fillRatioRange: ClosedRange<CGFloat> = 0.05...0.95
-//        static let scaleFactorRange: ClosedRange<CGFloat> = 1.0...10.0
+        static let blackWidthRange: ClosedRange<CGFloat> = Constants.UI.tileHeight/2.0...30.0
+        static let whiteWidthRange: ClosedRange<CGFloat> = Constants.UI.tileHeight/2.0...30.0
     }
 }
