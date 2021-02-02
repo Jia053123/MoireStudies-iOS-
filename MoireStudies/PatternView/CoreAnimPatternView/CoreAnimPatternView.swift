@@ -117,7 +117,7 @@ extension CoreAnimPatternView: PatternView {
                                                               whiteWidth: newPattern.whiteWidth)
         if oldPattern.direction != newPattern.direction || oldR.scaleFactor != newR.scaleFactor {
             backingView.transform =
-                backingViewDefaultTransf.rotated(by: CGFloat(newPattern.direction)).scaledBy(x: CGFloat(newR.scaleFactor), y: CGFloat(newR.scaleFactor))
+                backingViewDefaultTransf.rotated(by: newPattern.direction).scaledBy(x: newR.scaleFactor, y: newR.scaleFactor)
         }
         if oldR.fillRatio != newR.fillRatio {
             for tile in tiles {
