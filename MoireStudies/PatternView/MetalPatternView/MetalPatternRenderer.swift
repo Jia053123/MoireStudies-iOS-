@@ -16,14 +16,13 @@ class MetalPatternRenderer: NSObject {
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
     private var viewportSize: packed_float2 = [0.0, 0.0]
-    private var vertexBuffer: MTLBuffer!
-    private var tile: MetalTile = MetalTile()
-    var tiles: Array<MetalTile> = []
-    var tileSpeed: Float = -1.0
+    private var vertexBuffer: MTLBuffer?
+    var tilesToRender: Array<MetalTile>! // sorted: the first element has the most positive translation value
+    private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
     
     func initWithMetalKitView(mtkView: MTKView) {
         self.device = mtkView.device
-        let defaultLibrary = self.device!.makeDefaultLibrary()! // compliles all the .metal files
+        let defaultLibrary = self.device!.makeDefaultLibrary()!
         let fragmentFunction = defaultLibrary.makeFunction(name: "basic_fragment")
         let vertexFunction = defaultLibrary.makeFunction(name: "basic_vertex")
         let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
@@ -33,25 +32,36 @@ class MetalPatternRenderer: NSObject {
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat // pixel format for the output buffer
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
-        
-        let dataSize = self.tile.vertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
-        vertexBuffer = device.makeBuffer(bytes: MetalTile.defaultVertices, length: dataSize, options: [])
     }
 
-    func updateTiles() {
-        tile.translation.y += self.tileSpeed
+    private func initVertexBuffer() {
+        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
+        self.vertexBuffer = device.makeBuffer(length: dataSize, options: [])
+    }
+    
+    func updateBuffer() {
+        if self.vertexBuffer == nil {
+            self.initVertexBuffer()
+        }
         
-        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
-        for i in 0..<tile.vertexCount {
-            vBufferContents[i] = self.tile.calcVertexAt(index: i)
+        let vBufferContents = vertexBuffer!.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer!.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
+
+        for i in 0 ..< self.tilesToRender.count {
+            let t = self.tilesToRender[i]
+            for j in 0 ..< t.vertexCount {
+                vBufferContents[i*t.vertexCount + j] = t.calcVertexAt(index: j)
+            }
         }
     }
     
+    /**
+     Summary: to be called for each frame to render the tiles
+     */
     func draw(in view: MTKView, of viewportSize: CGSize) {
         self.viewportSize.x = Float(viewportSize.width)
         self.viewportSize.y = Float(viewportSize.height)
         // setup buffers before this
-        self.updateTiles()
+        self.updateBuffer()
         
         let commandBuffer = self.commandQueue.makeCommandBuffer()!
         commandBuffer.label = "MyCommand"
@@ -64,13 +74,12 @@ class MetalPatternRenderer: NSObject {
         renderEncoder.setVertexBuffer(self.vertexBuffer,
                                       offset: 0,
                                       index: Int(VertexInputIndexVertices.rawValue))
-        // don't need to use a buffer here because the data size is small
         renderEncoder.setVertexBytes(&self.viewportSize,
                                      length: MemoryLayout.size(ofValue:self.viewportSize),
                                      index: Int(VertexInputIndexViewportSize.rawValue))
-        renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangleStrip,
+        renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangle,
                                      vertexStart: 0,
-                                     vertexCount: self.tile.vertexCount)
+                                     vertexCount: self.totalVertexCount)
         renderEncoder.endEncoding()
         
         commandBuffer.present(view.currentDrawable!)

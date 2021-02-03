@@ -12,10 +12,13 @@ import MetalKit
 class MetalPatternView: MTKView {
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
-    private var tiles: Array<MetalTile>!
+    private var recycledTiles: Array<MetalTile> = []
     private lazy var viewportSize: CGSize = self.drawableSize
     private var diagonalOfDrawableTexture: Float {
         get {return Float(sqrt(pow(self.viewportSize.width, 2) + pow(self.viewportSize.height, 2)))}
+    }
+    private var translationRange: ClosedRange<Float> {
+        get {return -1 * self.diagonalOfDrawableTexture / 2.0 ... self.diagonalOfDrawableTexture / 2.0}
     }
     
     private var pattern: Pattern!
@@ -34,34 +37,64 @@ class MetalPatternView: MTKView {
     }
     
     private func createTiles() {
+        self.patternRenderer.tilesToRender = []
+        
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
-        self.tiles = []
+        var nextTranslation = self.diagonalOfDrawableTexture / 2.0
+        let translationStep = width
         for _ in 0..<numOfTiles {
             let newTile = MetalTile()
-            self.tiles.append(newTile)
+            newTile.translation = nextTranslation
+            self.patternRenderer.tilesToRender.append(newTile)
+            nextTranslation -= translationStep
         }
         self.updateTiles()
     }
     
     private func updateTiles() {
-        for t in self.tiles {
+        for t in self.patternRenderer.tilesToRender {
             t.length = self.diagonalOfDrawableTexture
             t.width = self.blackWidthInPixel
             t.orientation = self.directionInRad
-            // do the translation
+        }
+    }
+    
+    private func translateTiles() { // always move from negative towards positive
+        let tileCount = self.patternRenderer.tilesToRender.count
+        for i in (0 ..< tileCount).reversed() {
+            let tile = self.patternRenderer.tilesToRender[i]
+            let newTrans = tile.translation + self.speedInPixel
+            // remove offscreen tiles
+            if self.translationRange.contains(newTrans) {
+                tile.translation = newTrans
+            } else {
+                // tile is offscreen
+                self.recycledTiles.append(tile)
+                self.patternRenderer.tilesToRender.remove(at: i)
+            }
+        }
+        // append removed tiles to the end
+        let step = self.blackWidthInPixel + self.whiteWidthInPixel
+        let recycledTileCount = self.recycledTiles.count
+        for _ in (0 ..< recycledTileCount).reversed() {
+            let lastTile = self.patternRenderer.tilesToRender.last!
+            let newT = self.recycledTiles.popLast()!
+            newT.translation = lastTile.translation - step
+            self.patternRenderer.tilesToRender.append(newT)
         }
     }
 }
 
 extension MetalPatternView: MTKViewDelegate {
     func draw(in view: MTKView) {
-        // TODO: update translations
+        self.translateTiles()
+        self.updateTiles()
         self.patternRenderer.draw(in: view, of: self.viewportSize)
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.viewportSize = size
+        self.viewportSize = size // cache for performance
     }
 }
 
@@ -76,7 +109,6 @@ extension MetalPatternView: PatternView {
     func updatePattern(newPattern: Pattern) {
         self.pattern = newPattern
         self.updateTiles()
-        // assign the tiles to the renderer
     }
     
     func pauseAnimations() {

@@ -55,7 +55,7 @@ class CoreAnimPatternView: UIView {
     }
     
     private func animateTile(tile: TileLayer) {
-        // all tiles move towards the bottom of the backing view at the same speed
+        // all tiles move towards the bottom of the backing view at the same speed TODO: towards the top instead
         let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
         let duration = remainingDistance / self.pattern.speed
         let moveDownAnim = CABasicAnimation(keyPath: "position")
