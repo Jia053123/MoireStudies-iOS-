@@ -71,7 +71,7 @@ class MetalPatternView: MTKView {
             } else {
                 // tile is offscreen
                 self.recycledTiles.append(tile)
-                self.patternRenderer.tilesToRender.remove(at: i) // TODO: this is O(n)
+                self.patternRenderer.tilesToRender.remove(at: i) // TODO: this is O(n). use popFirst() which is O(1)
             }
         }
         // append removed tiles to the end

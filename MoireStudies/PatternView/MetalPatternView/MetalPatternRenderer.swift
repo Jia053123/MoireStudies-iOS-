@@ -35,6 +35,7 @@ class MetalPatternRenderer: NSObject {
         pipelineStateDescriptor.vertexFunction = vertexFunction
         pipelineStateDescriptor.fragmentFunction = fragmentFunction
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat // pixel format for the output buffer
+        pipelineStateDescriptor.vertexBuffers[Int(VertexInputIndexVertices.rawValue)].mutability = MTLMutability.immutable
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
