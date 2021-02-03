@@ -20,7 +20,6 @@ class MetalPatternView: MTKView {
     private var translationRange: ClosedRange<Float> {
         get {return -1 * self.diagonalOfDrawableTexture / 2.0 ... self.diagonalOfDrawableTexture / 2.0}
     }
-    
     private var pattern: Pattern!
     private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}
     private var directionInRad: Float {get {return Float(self.pattern.direction)}}
@@ -62,24 +61,26 @@ class MetalPatternView: MTKView {
     
     private func translateTiles() { // always move from negative towards positive
         let tileCount = self.patternRenderer.tilesToRender.count
+        // translate
         for i in (0 ..< tileCount).reversed() {
             let tile = self.patternRenderer.tilesToRender[i]
-            let newTrans = tile.translation + self.speedInPixel
-            // remove offscreen tiles
-            if self.translationRange.contains(newTrans) {
-                tile.translation = newTrans
-            } else {
-                // tile is offscreen
-                self.recycledTiles.append(tile)
-                self.patternRenderer.tilesToRender.remove(at: i) // TODO: this is O(n). use popFirst() which is O(1)
-            }
+            tile.translation += self.speedInPixel
         }
+        // remove offscreen tiles
+        repeat {
+            let firstT = self.patternRenderer.tilesToRender.first!
+            if !self.translationRange.contains(firstT.translation) {
+                self.recycledTiles.append(self.patternRenderer.tilesToRender.removeFirst())
+            } else {
+                break // all tiles after this should also be within bound
+            }
+        } while true
         // append removed tiles to the end
-        let step = self.blackWidthInPixel + self.whiteWidthInPixel
+        let step = self.blackWidthInPixel + self.whiteWidthInPixel // TODO: verify correctness
         let recycledTileCount = self.recycledTiles.count
         for _ in (0 ..< recycledTileCount).reversed() {
             let lastTile = self.patternRenderer.tilesToRender.last!
-            let newT = self.recycledTiles.popLast()!
+            let newT = self.recycledTiles.removeLast()
             newT.translation = lastTile.translation - step
             self.patternRenderer.tilesToRender.append(newT)
         }
