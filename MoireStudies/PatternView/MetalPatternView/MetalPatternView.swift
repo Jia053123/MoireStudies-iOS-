@@ -33,7 +33,7 @@ class MetalPatternView: MTKView {
         self.patternRenderer = MetalPatternRenderer()
         self.patternRenderer.initWithMetalKitView(mtkView: self)
         self.delegate = self
-        self.clearColor = MTLClearColorMake(1.0, 1.0, 1.0, 0.0)
+        self.clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are premultipled by alpha, then any RGB component that is > the alpha component is undefined through the hardware’s blending.
     }
     
     private func createTiles() {
@@ -46,7 +46,7 @@ class MetalPatternView: MTKView {
         for _ in 0..<numOfTiles {
             let newTile = MetalTile()
             newTile.translation = nextTranslation
-            self.patternRenderer.tilesToRender.append(newTile)
+            self.patternRenderer.tilesToRender.append(newTile) // TODO: should I reserve array capacity?
             nextTranslation -= translationStep
         }
         self.updateTiles()
@@ -71,7 +71,7 @@ class MetalPatternView: MTKView {
             } else {
                 // tile is offscreen
                 self.recycledTiles.append(tile)
-                self.patternRenderer.tilesToRender.remove(at: i)
+                self.patternRenderer.tilesToRender.remove(at: i) // TODO: this is O(n)
             }
         }
         // append removed tiles to the end
@@ -104,6 +104,7 @@ extension MetalPatternView: PatternView {
         self.setUpMetal()
         self.createTiles()
         self.backgroundColor = UIColor.clear
+        
     }
     
     func updatePattern(newPattern: Pattern) {

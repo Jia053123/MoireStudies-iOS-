@@ -17,7 +17,7 @@ class MetalPatternRenderer: NSObject {
     private var commandQueue: MTLCommandQueue!
     private var viewportSize: packed_float2 = [0.0, 0.0]
     private var vertexBuffer: MTLBuffer?
-    var tilesToRender: Array<MetalTile>! // sorted: the first element has the most positive translation value
+    var tilesToRender: Array<MetalTile>! // sorted: the first element always has the most positive translation value
     private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
     
     func initWithMetalKitView(mtkView: MTKView) {
