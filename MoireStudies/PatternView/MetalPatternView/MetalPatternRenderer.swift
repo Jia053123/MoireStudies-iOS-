@@ -15,8 +15,13 @@ class MetalPatternRenderer: NSObject {
     private var device: MTLDevice!
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
+    
+    private var inFlightSemaphore: DispatchSemaphore!
+    private let MaxFramesInFlight: Int = 3
+    private var vertexBuffers: Array<MTLBuffer> = []
+    private var currentBufferIndex: Int = 0
+    
     private var viewportSize: packed_float2 = [0.0, 0.0]
-    private var vertexBuffer: MTLBuffer?
     var tilesToRender: Array<MetalTile>! // sorted: the first element always has the most positive translation value
     private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
     
@@ -32,19 +37,25 @@ class MetalPatternRenderer: NSObject {
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat // pixel format for the output buffer
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
+        
+        self.inFlightSemaphore = DispatchSemaphore.init(value: MaxFramesInFlight)
     }
 
-    private func initVertexBuffer() {
+    private func initVertexBuffers() {
         let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
-        self.vertexBuffer = device.makeBuffer(length: dataSize, options: [])
+        for _ in 0 ..< self.MaxFramesInFlight {
+            let vb = device.makeBuffer(length: dataSize, options: [])!
+            self.vertexBuffers.append(vb)
+        }
     }
     
     func updateBuffer() {
-        if self.vertexBuffer == nil {
-            self.initVertexBuffer()
+        if self.vertexBuffers.isEmpty {
+            self.initVertexBuffers()
         }
+        let vertexBuffer = self.vertexBuffers[currentBufferIndex]
         
-        let vBufferContents = vertexBuffer!.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer!.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
+        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
 
         for i in 0 ..< self.tilesToRender.count {
             let t = self.tilesToRender[i]
@@ -60,8 +71,10 @@ class MetalPatternRenderer: NSObject {
     func draw(in view: MTKView, of viewportSize: CGSize) {
         self.viewportSize.x = Float(viewportSize.width)
         self.viewportSize.y = Float(viewportSize.height)
-        // setup buffers before this
-        self.updateBuffer()
+        
+        _ = self.inFlightSemaphore.wait(timeout: .distantFuture)
+        self.currentBufferIndex = (self.currentBufferIndex + 1) % MaxFramesInFlight
+        self.updateBuffer() // buffers must be setup before this
         
         let commandBuffer = self.commandQueue.makeCommandBuffer()!
         commandBuffer.label = "MyCommand"
@@ -71,7 +84,7 @@ class MetalPatternRenderer: NSObject {
         renderEncoder.label = "MyRenderEncoder"
         renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: Double(self.viewportSize.x), height: Double(self.viewportSize.y), znear: 0.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.pipelineState)
-        renderEncoder.setVertexBuffer(self.vertexBuffer,
+        renderEncoder.setVertexBuffer(self.vertexBuffers[currentBufferIndex],
                                       offset: 0,
                                       index: Int(VertexInputIndexVertices.rawValue))
         renderEncoder.setVertexBytes(&self.viewportSize,
@@ -83,6 +96,9 @@ class MetalPatternRenderer: NSObject {
         renderEncoder.endEncoding()
         
         commandBuffer.present(view.currentDrawable!)
+        
+        commandBuffer.addCompletedHandler({_ in self.inFlightSemaphore.signal()})
+        
         commandBuffer.commit()
     }
 }

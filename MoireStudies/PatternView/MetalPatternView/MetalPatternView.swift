@@ -33,7 +33,7 @@ class MetalPatternView: MTKView {
         self.patternRenderer = MetalPatternRenderer()
         self.patternRenderer.initWithMetalKitView(mtkView: self)
         self.delegate = self
-        self.clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are premultipled by alpha, then any RGB component that is > the alpha component is undefined through the hardware’s blending.
+        self.clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are pre-multipled by alpha, any RGB component that is > the alpha component is undefined through the hardware’s blending.
     }
     
     private func createTiles() {
