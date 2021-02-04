@@ -30,7 +30,9 @@ class MetalPatternView: UIView {
     private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
     
     private func setup() {
-        (self.layer as! CAMetalLayer).drawableSize = self.bounds.size
+        (self.layer as! CAMetalLayer).drawableSize = CGSize.init(width: self.bounds.size.width * UIScreen.main.scale,
+                                                                 height: self.bounds.size.height * UIScreen.main.scale)
+        self.layer.contentsScale = UIScreen.main.scale
         self.patternRenderer = MetalPatternRenderer()
         self.patternRenderer.initWithMetalLayer(metalLayer: self.layer as! CAMetalLayer)
     }

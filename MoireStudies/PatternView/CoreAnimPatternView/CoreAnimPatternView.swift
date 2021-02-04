@@ -41,7 +41,7 @@ class CoreAnimPatternView: UIView {
         for i in 0..<numOfTile {
             let xPos : CGFloat = backingView.bounds.width / 2.0
             let yPos : CGFloat = CGFloat(i) * tileHeight
-            let newTile = TileLayer()
+            let newTile = TileLayer() // TODO: do I need to set contentscale here? 
             newTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
             newTile.position = CGPoint(x: xPos, y: yPos)
