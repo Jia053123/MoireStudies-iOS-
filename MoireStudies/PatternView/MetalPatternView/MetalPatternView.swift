@@ -70,7 +70,7 @@ class MetalPatternView: UIView {
         // translate
         for i in (0 ..< tileCount).reversed() {
             let tile = self.patternRenderer.tilesToRender[i]
-            tile.translation += self.speedInPixel
+            tile.translation += self.speedInPixel * Float(self.displayLink.duration)
         }
         // remove offscreen tiles
         repeat {
@@ -93,7 +93,6 @@ class MetalPatternView: UIView {
     }
     
     @objc private func render() {
-        print("render")
         self.translateTiles()
         self.updateTiles()
         self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
