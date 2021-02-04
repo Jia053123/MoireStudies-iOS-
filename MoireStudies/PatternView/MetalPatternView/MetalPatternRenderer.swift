@@ -13,6 +13,10 @@ import MetalKit
  */
 class MetalPatternRenderer: NSObject {
     private var device: MTLDevice!
+    
+    private var renderPassDescriptor: MTLRenderPassDescriptor!
+    
+    
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
     
@@ -25,8 +29,14 @@ class MetalPatternRenderer: NSObject {
     var tilesToRender: Array<MetalTile>! // sorted: the first element always has the most positive translation value
     private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
     
-    func initWithMetalKitView(mtkView: MTKView) {
-        self.device = mtkView.device
+    func initWithMetalLayer(metalLayer: CAMetalLayer) {
+        self.device = MTLCreateSystemDefaultDevice()
+        metalLayer.device = self.device
+        
+        self.renderPassDescriptor = MTLRenderPassDescriptor.init()
+        self.renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadAction.clear
+        self.renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.store
+        self.renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are pre-multipled by alpha, any RGB component that is > the alpha component is undefined through the hardware’s blending.
         let defaultLibrary = self.device!.makeDefaultLibrary()!
         let fragmentFunction = defaultLibrary.makeFunction(name: "basic_fragment")
         let vertexFunction = defaultLibrary.makeFunction(name: "basic_vertex")
@@ -34,7 +44,7 @@ class MetalPatternRenderer: NSObject {
         pipelineStateDescriptor.label = "Simple Pipeline"
         pipelineStateDescriptor.vertexFunction = vertexFunction
         pipelineStateDescriptor.fragmentFunction = fragmentFunction
-        pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat // pixel format for the output buffer
+        pipelineStateDescriptor.colorAttachments[0].pixelFormat = metalLayer.pixelFormat // pixel format for the output buffer
         pipelineStateDescriptor.vertexBuffers[Int(VertexInputIndexVertices.rawValue)].mutability = MTLMutability.immutable
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
@@ -69,19 +79,22 @@ class MetalPatternRenderer: NSObject {
     /**
      Summary: to be called for each frame to render the tiles
      */
-    func draw(in view: MTKView, of viewportSize: CGSize) {
+    func draw(in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
         self.viewportSize.x = Float(viewportSize.width)
         self.viewportSize.y = Float(viewportSize.height)
         
         _ = self.inFlightSemaphore.wait(timeout: .distantFuture)
+        
         self.currentBufferIndex = (self.currentBufferIndex + 1) % MaxFramesInFlight
         self.updateBuffer() // buffers must be setup before this
         
-        let commandBuffer = self.commandQueue.makeCommandBuffer()!
+        guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {return}
         commandBuffer.label = "MyCommand"
         
-        let renderPassDescriptor = view.currentRenderPassDescriptor!
-        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)!
+        guard let currentDrawable = metalLayer.nextDrawable() else {return}
+        self.renderPassDescriptor.colorAttachments[0].texture = currentDrawable.texture
+        
+        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: self.renderPassDescriptor)!
         renderEncoder.label = "MyRenderEncoder"
         renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: Double(self.viewportSize.x), height: Double(self.viewportSize.y), znear: 0.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.pipelineState)
@@ -96,7 +109,7 @@ class MetalPatternRenderer: NSObject {
                                      vertexCount: self.totalVertexCount)
         renderEncoder.endEncoding()
         
-        commandBuffer.present(view.currentDrawable!)
+        commandBuffer.present(currentDrawable)//view.currentDrawable!)
         
         commandBuffer.addCompletedHandler({_ in self.inFlightSemaphore.signal()})
         

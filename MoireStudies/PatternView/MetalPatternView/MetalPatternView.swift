@@ -9,11 +9,14 @@ import Foundation
 import UIKit
 import MetalKit
 
-class MetalPatternView: MTKView {
+class MetalPatternView: UIView {
+    override class var layerClass: AnyClass {get {return CAMetalLayer.self}}
+    var displayLink: CADisplayLink!
+    
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
     private var recycledTiles: Array<MetalTile> = []
-    private lazy var viewportSize: CGSize = self.drawableSize
+    private lazy var viewportSize: CGSize = (self.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float {
         get {return Float(sqrt(pow(self.viewportSize.width, 2) + pow(self.viewportSize.height, 2)))}
     }
@@ -26,13 +29,15 @@ class MetalPatternView: MTKView {
     private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
     private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
     
-    private func setUpMetal() {
-        device = MTLCreateSystemDefaultDevice()
-        guard device != nil else {return}
+    private func setup() {
+        (self.layer as! CAMetalLayer).drawableSize = self.bounds.size
         self.patternRenderer = MetalPatternRenderer()
-        self.patternRenderer.initWithMetalKitView(mtkView: self)
-        self.delegate = self
-        self.clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are pre-multipled by alpha, any RGB component that is > the alpha component is undefined through the hardware’s blending.
+        self.patternRenderer.initWithMetalLayer(metalLayer: self.layer as! CAMetalLayer)
+    }
+    
+    private func setupDisplayLink() {
+        self.displayLink = CADisplayLink(target: self, selector: #selector(render))
+        self.displayLink.add(to: RunLoop.main, forMode: .default)
     }
     
     private func createTiles() {
@@ -40,9 +45,10 @@ class MetalPatternView: MTKView {
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
+        
         var nextTranslation = self.diagonalOfDrawableTexture / 2.0
         let translationStep = width
-        for _ in 0..<numOfTiles {
+        for _ in 0 ..< numOfTiles {
             let newTile = MetalTile()
             newTile.translation = nextTranslation
             self.patternRenderer.tilesToRender.append(newTile) // TODO: should I reserve array capacity?
@@ -85,27 +91,22 @@ class MetalPatternView: MTKView {
             self.patternRenderer.tilesToRender.append(newT)
         }
     }
-}
-
-extension MetalPatternView: MTKViewDelegate {
-    func draw(in view: MTKView) {
+    
+    @objc private func render() {
+        print("render")
         self.translateTiles()
         self.updateTiles()
-        self.patternRenderer.draw(in: view, of: self.viewportSize)
-    }
-    
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.viewportSize = size // cache for performance
+        self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
     }
 }
 
 extension MetalPatternView: PatternView {
     func setUpAndRender(pattern: Pattern) {
         self.pattern = pattern
-        self.setUpMetal()
+        self.setup()
         self.createTiles()
+        self.setupDisplayLink()
         self.backgroundColor = UIColor.clear
-        
     }
     
     func updatePattern(newPattern: Pattern) {
