@@ -16,6 +16,8 @@ class MetalPatternRenderer: NSObject {
     
     private var renderPassDescriptor: MTLRenderPassDescriptor!
     
+    private var textureDescriptor: MTLTextureDescriptor!
+    private var multiSampleTexture: MTLTexture!
     
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
@@ -25,7 +27,7 @@ class MetalPatternRenderer: NSObject {
     private var vertexBuffers: Array<MTLBuffer> = []
     private var currentBufferIndex: Int = 0
     
-    private var viewportSize: packed_float2 = [0.0, 0.0]
+    private var viewportSize: packed_float2 = [0.0, 0.0] // unit: pixel
     var tilesToRender: Array<MetalTile>! // sorted: the first element always has the most positive translation value
     private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
     
@@ -35,8 +37,18 @@ class MetalPatternRenderer: NSObject {
         
         self.renderPassDescriptor = MTLRenderPassDescriptor.init()
         self.renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadAction.clear
-        self.renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.store
+        self.renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.storeAndMultisampleResolve
         self.renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are pre-multipled by alpha, any RGB component that is > the alpha component is undefined through the hardware’s blending.
+        
+        self.textureDescriptor = MTLTextureDescriptor.init()
+        self.textureDescriptor.sampleCount = 4
+        self.textureDescriptor.pixelFormat = metalLayer.pixelFormat
+        self.textureDescriptor.width = Int(ceil(metalLayer.drawableSize.width))
+        self.textureDescriptor.height = Int(ceil(metalLayer.drawableSize.height))
+        self.textureDescriptor.usage = MTLTextureUsage.renderTarget
+        self.textureDescriptor.textureType = MTLTextureType.type2DMultisample
+        self.multiSampleTexture = self.device.makeTexture(descriptor: self.textureDescriptor)// might need 3 of these!
+        
         let defaultLibrary = self.device!.makeDefaultLibrary()!
         let fragmentFunction = defaultLibrary.makeFunction(name: "basic_fragment")
         let vertexFunction = defaultLibrary.makeFunction(name: "basic_vertex")
@@ -46,6 +58,9 @@ class MetalPatternRenderer: NSObject {
         pipelineStateDescriptor.fragmentFunction = fragmentFunction
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = metalLayer.pixelFormat // pixel format for the output buffer
         pipelineStateDescriptor.vertexBuffers[Int(VertexInputIndexVertices.rawValue)].mutability = MTLMutability.immutable
+        
+        pipelineStateDescriptor.sampleCount = 4
+        
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
@@ -92,7 +107,9 @@ class MetalPatternRenderer: NSObject {
         commandBuffer.label = "MyCommand"
         
         guard let currentDrawable = metalLayer.nextDrawable() else {return}
-        self.renderPassDescriptor.colorAttachments[0].texture = currentDrawable.texture
+        self.renderPassDescriptor.colorAttachments[0].texture = self.multiSampleTexture
+        
+        self.renderPassDescriptor.colorAttachments[0].resolveTexture = currentDrawable.texture
         
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: self.renderPassDescriptor)!
         renderEncoder.label = "MyRenderEncoder"
@@ -109,7 +126,7 @@ class MetalPatternRenderer: NSObject {
                                      vertexCount: self.totalVertexCount)
         renderEncoder.endEncoding()
         
-        commandBuffer.present(currentDrawable)//view.currentDrawable!)
+        commandBuffer.present(currentDrawable)
         
         commandBuffer.addCompletedHandler({_ in self.inFlightSemaphore.signal()})
         

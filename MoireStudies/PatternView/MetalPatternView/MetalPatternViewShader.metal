@@ -30,5 +30,5 @@ basic_vertex(unsigned int vertexID [[ vertex_id ]],
 }
 
 fragment half4 basic_fragment(RasterizerData inData [[stage_in]]) {
-    return half4(0.0, 0.0, 0.0, 1.0); // always in black for now
+    return half4(0.0, 0.0, 0.0, 1.0); // always in black at least for now
 }
