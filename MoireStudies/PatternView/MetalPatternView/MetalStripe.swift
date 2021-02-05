@@ -1,5 +1,5 @@
 //
-//  MetalTile.swift
+//  MetalStroke.swift
 //  MoireStudies
 //
 //  Created by Jialiang Xiang on 2021-01-28.
@@ -8,7 +8,7 @@
 import Foundation
 import MetalKit
 
-class MetalTile: NSObject {
+class MetalStripe: NSObject {
     var length: Float = 204.8 // 13 inch iPad pro 2020 resolution
     private var halfLength: Float {get {return self.length / 2.0}}
     var width: Float = 20.0
@@ -20,7 +20,7 @@ class MetalTile: NSObject {
         = [[1.0, 1.0], [1.0, -1.0], [-1.0, 1.0],
            [-1.0, -1.0], [1.0, -1.0], [-1.0, 1.0]]
     
-    private var _vertexCount: Int = MetalTile.defaultVertices.count
+    private var _vertexCount: Int = MetalStripe.defaultVertices.count
     var vertexCount: Int {get {return _vertexCount}}
     
     static func makeRotationMatrix(angleRad: Float) -> float2x2 {
@@ -30,11 +30,11 @@ class MetalTile: NSObject {
     
     func calcVertexAt(index: Int) -> packed_float2 {
         var vertex: packed_float2
-        vertex = MetalTile.defaultVertices[index]
+        vertex = MetalStripe.defaultVertices[index]
         vertex.x = vertex.x * self.halfLength // stretch to fit the screen
         vertex.y = vertex.y * self.halfWidth // set the width of the strip
         vertex.y = vertex.y + self.translation // perform translation
-        vertex = vertex * MetalTile.makeRotationMatrix(angleRad: self.orientation)
+        vertex = vertex * MetalStripe.makeRotationMatrix(angleRad: self.orientation)
         return vertex
     }
 }

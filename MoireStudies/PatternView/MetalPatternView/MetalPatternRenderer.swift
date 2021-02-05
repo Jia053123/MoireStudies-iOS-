@@ -9,7 +9,7 @@ import Foundation
 import MetalKit
 
 /**
- Summary: responsible for rendering the tiles assigned by MetalPatternView
+ Summary: responsible for rendering the stripes assigned by MetalPatternView
  */
 class MetalPatternRenderer: NSObject {
     private var device: MTLDevice!
@@ -24,8 +24,8 @@ class MetalPatternRenderer: NSObject {
     private var currentBufferIndex: Int = 0
     
     private var viewportSize: packed_float2 = [0.0, 0.0] // unit: pixel
-    var tilesToRender: Array<MetalTile>! // sorted: the first element always has the most positive translation value
-    private var totalVertexCount: Int {get {return self.tilesToRender.count * self.tilesToRender.first!.vertexCount}}
+    var stripesToRender: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
+    private var totalVertexCount: Int {get {return self.stripesToRender.count * self.stripesToRender.first!.vertexCount}}
     
     func initWithMetalLayer(metalLayer: CAMetalLayer) {
         self.device = MTLCreateSystemDefaultDevice()
@@ -64,7 +64,7 @@ class MetalPatternRenderer: NSObject {
     }
 
     private func initVertexBuffers() {
-        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalTile.defaultVertices[0])
+        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
         for _ in 0 ..< self.MaxFramesInFlight {
             let vb = device.makeBuffer(length: dataSize, options: [])!
             self.vertexBuffers.append(vb)
@@ -77,10 +77,10 @@ class MetalPatternRenderer: NSObject {
         }
         let vertexBuffer = self.vertexBuffers[currentBufferIndex]
         
-        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalTile.defaultVertices[0]))
+        let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0]))
 
-        for i in 0 ..< self.tilesToRender.count {
-            let t = self.tilesToRender[i]
+        for i in 0 ..< self.stripesToRender.count {
+            let t = self.stripesToRender[i]
             for j in 0 ..< t.vertexCount {
                 vBufferContents[i*t.vertexCount + j] = t.calcVertexAt(index: j)
             }
@@ -88,7 +88,7 @@ class MetalPatternRenderer: NSObject {
     }
     
     /**
-     Summary: to be called for each frame to render the tiles
+     Summary: to be called for each frame to render the stripes
      */
     func draw(in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
         self.viewportSize.x = Float(viewportSize.width)

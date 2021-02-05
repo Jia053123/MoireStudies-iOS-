@@ -15,7 +15,7 @@ class MetalPatternView: UIView {
     
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
-    private var recycledTiles: Array<MetalTile> = []
+    private var recycledStripes: Array<MetalStripe> = []
     private lazy var viewportSize: CGSize = (self.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float {
         get {return Float(sqrt(pow(self.viewportSize.width, 2) + pow(self.viewportSize.height, 2)))}
@@ -42,112 +42,112 @@ class MetalPatternView: UIView {
         self.displayLink.add(to: RunLoop.main, forMode: .default)
     }
     
-    private func updateExistingTiles() {
-        for t in self.patternRenderer.tilesToRender {
+    private func updateExistingStripes() {
+        for t in self.patternRenderer.stripesToRender {
             t.length = self.diagonalOfDrawableTexture
             t.width = self.blackWidthInPixel
             t.orientation = self.directionInRad
         }
     }
     
-    private func createTiles() {
-        self.patternRenderer.tilesToRender = []
+    private func createStripes() {
+        self.patternRenderer.stripesToRender = []
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
-        let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
+        let numOfStripes: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the stripes reach the corners whatever the orientation
         var nextTranslation = self.diagonalOfDrawableTexture / 2.0
-        for _ in 0 ..< numOfTiles {
-            let newTile = MetalTile()
-            newTile.translation = nextTranslation
-            self.patternRenderer.tilesToRender.append(newTile) // TODO: should I reserve array capacity?
+        for _ in 0 ..< numOfStripes {
+            let newStripe = MetalStripe()
+            newStripe.translation = nextTranslation
+            self.patternRenderer.stripesToRender.append(newStripe) // TODO: should I reserve array capacity?
             nextTranslation -= width
         }
-        self.updateExistingTiles()
+        self.updateExistingStripes()
     }
     
     /**
-     Summary: make sure all tiles are spaced corrently and cover the whole translation range, adding or removing tiles when necessary
+     Summary: make sure all stripes are spaced corrently and cover the whole translation range, adding or removing stripes when necessary
      */
     private func tileView() {
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         
-        func fitMoreTilesToTheEndIfNecessary() {
-            let lastTile = self.patternRenderer.tilesToRender.last!
-            if lastTile.translation - self.translationRange.lowerBound >= width {
-                let newTile = MetalTile()
-                newTile.translation = lastTile.translation - width
-                self.patternRenderer.tilesToRender.append(newTile)
-                fitMoreTilesToTheEndIfNecessary()
+        func fitMoreStripesToTheEndIfNecessary() {
+            let lastStripe = self.patternRenderer.stripesToRender.last!
+            if lastStripe.translation - self.translationRange.lowerBound >= width {
+                let newStripe = MetalStripe()
+                newStripe.translation = lastStripe.translation - width
+                self.patternRenderer.stripesToRender.append(newStripe)
+                fitMoreStripesToTheEndIfNecessary()
             } else {
                 return
             }
         }
-        func fitMoreTilesToTheBeginningIfNecessary() {
-            let firstTile = self.patternRenderer.tilesToRender.first!
-            if self.translationRange.upperBound - firstTile.translation >= width {
-                let newTile = MetalTile()
-                newTile.translation = firstTile.translation + width
-                self.patternRenderer.tilesToRender.insert(newTile, at: 0) // note: O(n)
-                fitMoreTilesToTheBeginningIfNecessary()
+        func fitMoreStripesToTheBeginningIfNecessary() {
+            let firstStripe = self.patternRenderer.stripesToRender.first!
+            if self.translationRange.upperBound - firstStripe.translation >= width {
+                let newStripe = MetalStripe()
+                newStripe.translation = firstStripe.translation + width
+                self.patternRenderer.stripesToRender.insert(newStripe, at: 0) // note: O(n)
+                fitMoreStripesToTheBeginningIfNecessary()
             } else {
                 return
             }
         }
-        // start by picking the center tile as the anchor point
-        let existingTileCount = self.patternRenderer.tilesToRender.count
-        let middleIndex: Int = (existingTileCount - 1) / 2 // remember index starts with 0
+        // start by picking the center stripe as the anchor point
+        let existingStripeCount = self.patternRenderer.stripesToRender.count
+        let middleIndex: Int = (existingStripeCount - 1) / 2 // remember index starts with 0
         // first operate in the ascending direction
-        for i in (middleIndex + 1) ..< existingTileCount {
-            self.patternRenderer.tilesToRender[i].translation = self.patternRenderer.tilesToRender[i-1].translation - width
-            if !self.translationRange.contains(self.patternRenderer.tilesToRender[i].translation) {
-                self.patternRenderer.tilesToRender.removeSubrange(i..<existingTileCount) // TODO: use recycled tiles
+        for i in (middleIndex + 1) ..< existingStripeCount {
+            self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i-1].translation - width
+            if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
+                self.patternRenderer.stripesToRender.removeSubrange(i..<existingStripeCount) // TODO: use recycled stripes
                 break
             }
         }
-        fitMoreTilesToTheEndIfNecessary()
+        fitMoreStripesToTheEndIfNecessary()
         // then operate in the descending direction
         for i in (0 ..< middleIndex).reversed() {
-            self.patternRenderer.tilesToRender[i].translation = self.patternRenderer.tilesToRender[i+1].translation + width
-            if !self.translationRange.contains(self.patternRenderer.tilesToRender[i].translation) {
-                self.patternRenderer.tilesToRender.removeSubrange(0...i) // TODO: use recycled tiles
+            self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i+1].translation + width
+            if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
+                self.patternRenderer.stripesToRender.removeSubrange(0...i) // TODO: use recycled stripes
                 break
             }
         }
-        fitMoreTilesToTheBeginningIfNecessary()
+        fitMoreStripesToTheBeginningIfNecessary()
     }
     
-    private func translateTiles() { // always move from negative towards positive
-        let tileCount = self.patternRenderer.tilesToRender.count
+    private func translateStripes() { // always move from negative towards positive
+        let stripeCount = self.patternRenderer.stripesToRender.count
         print("speed: ", self.speedInPixel)
         // translate
-        for i in (0 ..< tileCount).reversed() {
-            let tile = self.patternRenderer.tilesToRender[i]
-            tile.translation += self.speedInPixel * Float(self.displayLink.duration)
+        for i in (0 ..< stripeCount).reversed() {
+            let stripe = self.patternRenderer.stripesToRender[i]
+            stripe.translation += self.speedInPixel * Float(self.displayLink.duration)
         }
-        // remove offscreen tiles
+        // remove offscreen stripes
         repeat {
-            let firstT = self.patternRenderer.tilesToRender.first!
+            let firstT = self.patternRenderer.stripesToRender.first!
             if !self.translationRange.contains(firstT.translation) {
-                self.recycledTiles.append(self.patternRenderer.tilesToRender.removeFirst())
+                self.recycledStripes.append(self.patternRenderer.stripesToRender.removeFirst())
             } else {
-                break // all tiles after this should also be within bound
+                break // all stripes after this should also be within bound
             }
         } while true
-        // append removed tiles to the end
+        // append removed stripes to the end
         let step = self.blackWidthInPixel + self.whiteWidthInPixel // TODO: verify correctness
-        let recycledTileCount = self.recycledTiles.count
-        for _ in (0 ..< recycledTileCount).reversed() {
-            let lastTile = self.patternRenderer.tilesToRender.last!
-            let newT = self.recycledTiles.removeLast()
-            newT.translation = lastTile.translation - step
-            self.patternRenderer.tilesToRender.append(newT)
+        let recycledStripeCount = self.recycledStripes.count
+        for _ in (0 ..< recycledStripeCount).reversed() {
+            let lastStripe = self.patternRenderer.stripesToRender.last!
+            let newT = self.recycledStripes.removeLast()
+            newT.translation = lastStripe.translation - step
+            self.patternRenderer.stripesToRender.append(newT)
         }
     }
     
     @objc private func render() {
         self.tileView()
-        self.updateExistingTiles()
-        self.translateTiles()
+        self.updateExistingStripes()
+        self.translateStripes()
         self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
     }
 }
@@ -156,14 +156,14 @@ extension MetalPatternView: PatternView {
     func setUpAndRender(pattern: Pattern) {
         self.pattern = pattern
         self.setup()
-        self.createTiles()
+        self.createStripes()
         self.setupDisplayLink()
         self.backgroundColor = UIColor.clear
     }
     
     func updatePattern(newPattern: Pattern) {
         self.pattern = newPattern
-        self.updateExistingTiles()
+        self.updateExistingStripes()
     }
     
     func pauseAnimations() {
