@@ -95,9 +95,9 @@ class MainView: UIView {
         self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
     }
     
-    func pauseMoire() {
+    func viewControllerLosingFocus() {
         for pv in patternViews {
-            pv.pauseAnimations()
+            pv.viewControllerLosingFocus()
         }
     }
     

@@ -171,8 +171,8 @@ extension MetalPatternView: PatternView {
         self.updateExistingStripes()
     }
     
-    func pauseAnimations() {
-        print("TODO: pauseRendering")
+    func viewControllerLosingFocus() {
+        // nothing necessary
     }
 }
 

@@ -126,6 +126,11 @@ extension CoreAnimPatternView: PatternView {
         }
     }
     
+    func viewControllerLosingFocus() {
+        // pause animation to avoid graphics issue
+        self.pauseAnimations()
+    }
+    
     func pauseAnimations() {
         // official Apple code
         let layer = self.layer

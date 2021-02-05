@@ -112,7 +112,7 @@ extension MainViewController {
     }
     
     func pauseMoire() {
-        self.mainView.pauseMoire()
+        self.mainView.viewControllerLosingFocus()
     }
 }
 
