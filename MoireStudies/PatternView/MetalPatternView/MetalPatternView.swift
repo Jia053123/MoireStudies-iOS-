@@ -52,6 +52,8 @@ class MetalPatternView: UIView {
     
     private func createStripes() {
         self.patternRenderer.stripesToRender = []
+        let numToReserve: Int = Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1
+        self.patternRenderer.stripesToRender.reserveCapacity(numToReserve)
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfStripes: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the stripes reach the corners whatever the orientation
@@ -59,7 +61,7 @@ class MetalPatternView: UIView {
         for _ in 0 ..< numOfStripes {
             let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
             newStripe.translation = nextTranslation
-            self.patternRenderer.stripesToRender.append(newStripe) // TODO: should I reserve array capacity?
+            self.patternRenderer.stripesToRender.append(newStripe)
             nextTranslation -= width
         }
         self.updateExistingStripes()
@@ -122,7 +124,6 @@ class MetalPatternView: UIView {
     
     private func translateStripes() { // always move from negative towards positive
         let stripeCount = self.patternRenderer.stripesToRender.count
-        print("speed: ", self.speedInPixel)
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternRenderer.stripesToRender[i]
