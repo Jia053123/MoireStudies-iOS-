@@ -13,15 +13,11 @@ import MetalKit
  */
 class MetalPatternRenderer: NSObject {
     private var device: MTLDevice!
-    
     private var renderPassDescriptor: MTLRenderPassDescriptor!
-    
-    private var textureDescriptor: MTLTextureDescriptor!
-    private var multiSampleTexture: MTLTexture!
-    
     private var pipelineState: MTLRenderPipelineState!
     private var commandQueue: MTLCommandQueue!
     
+    private let MultiSamplingCount: Int = 4
     private var inFlightSemaphore: DispatchSemaphore!
     private let MaxFramesInFlight: Int = 3
     private var vertexBuffers: Array<MTLBuffer> = []
@@ -40,26 +36,26 @@ class MetalPatternRenderer: NSObject {
         self.renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreAction.storeAndMultisampleResolve
         self.renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(0.0, 0.0, 0.0, 0.0) // When RGB are pre-multipled by alpha, any RGB component that is > the alpha component is undefined through the hardware’s blending.
         
-        self.textureDescriptor = MTLTextureDescriptor.init()
-        self.textureDescriptor.sampleCount = 4
-        self.textureDescriptor.pixelFormat = metalLayer.pixelFormat
-        self.textureDescriptor.width = Int(ceil(metalLayer.drawableSize.width))
-        self.textureDescriptor.height = Int(ceil(metalLayer.drawableSize.height))
-        self.textureDescriptor.usage = MTLTextureUsage.renderTarget
-        self.textureDescriptor.textureType = MTLTextureType.type2DMultisample
-        self.multiSampleTexture = self.device.makeTexture(descriptor: self.textureDescriptor)// might need 3 of these!
+        let textureDescriptor = MTLTextureDescriptor.init()
+        textureDescriptor.sampleCount = self.MultiSamplingCount
+        textureDescriptor.pixelFormat = metalLayer.pixelFormat
+        textureDescriptor.width = Int(ceil(metalLayer.drawableSize.width))
+        textureDescriptor.height = Int(ceil(metalLayer.drawableSize.height))
+        textureDescriptor.usage = MTLTextureUsage.renderTarget
+        textureDescriptor.textureType = MTLTextureType.type2DMultisample
+        let multiSampleTexture = self.device.makeTexture(descriptor: textureDescriptor) // I don't think I need MaxFramesInFlight# of this becasuse it holds the GPU output which is always behind of CPU
+        self.renderPassDescriptor.colorAttachments[0].texture = multiSampleTexture
         
         let defaultLibrary = self.device!.makeDefaultLibrary()!
-        let fragmentFunction = defaultLibrary.makeFunction(name: "basic_fragment")
-        let vertexFunction = defaultLibrary.makeFunction(name: "basic_vertex")
+        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")
+        let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")
         let pipelineStateDescriptor = MTLRenderPipelineDescriptor()
-        pipelineStateDescriptor.label = "Simple Pipeline"
+        pipelineStateDescriptor.label = "Pipeline"
         pipelineStateDescriptor.vertexFunction = vertexFunction
         pipelineStateDescriptor.fragmentFunction = fragmentFunction
         pipelineStateDescriptor.colorAttachments[0].pixelFormat = metalLayer.pixelFormat // pixel format for the output buffer
         pipelineStateDescriptor.vertexBuffers[Int(VertexInputIndexVertices.rawValue)].mutability = MTLMutability.immutable
-        
-        pipelineStateDescriptor.sampleCount = 4
+        pipelineStateDescriptor.sampleCount = self.MultiSamplingCount
         
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
@@ -104,15 +100,13 @@ class MetalPatternRenderer: NSObject {
         self.updateBuffer() // buffers must be setup before this
         
         guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {return}
-        commandBuffer.label = "MyCommand"
+        commandBuffer.label = "CommandBuffer"
         
         guard let currentDrawable = metalLayer.nextDrawable() else {return}
-        self.renderPassDescriptor.colorAttachments[0].texture = self.multiSampleTexture
-        
         self.renderPassDescriptor.colorAttachments[0].resolveTexture = currentDrawable.texture
         
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: self.renderPassDescriptor)!
-        renderEncoder.label = "MyRenderEncoder"
+        renderEncoder.label = "RenderEncoder"
         renderEncoder.setViewport(MTLViewport.init(originX: 0.0, originY: 0.0, width: Double(self.viewportSize.x), height: Double(self.viewportSize.y), znear: 0.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.pipelineState)
         renderEncoder.setVertexBuffer(self.vertexBuffers[currentBufferIndex],

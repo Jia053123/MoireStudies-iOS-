@@ -47,7 +47,6 @@ class MetalPatternView: UIView {
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
-        
         var nextTranslation = self.diagonalOfDrawableTexture / 2.0
         let translationStep = width
         for _ in 0 ..< numOfTiles {

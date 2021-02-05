@@ -15,7 +15,7 @@ struct RasterizerData {
 };
 
 vertex RasterizerData
-basic_vertex(unsigned int vertexID [[ vertex_id ]],
+vertexShader(unsigned int vertexID [[ vertex_id ]],
              const device packed_float2 *vertices [[ buffer(VertexInputIndexVertices) ]],
              const device packed_float2 *viewportSizePointer [[ buffer(VertexInputIndexViewportSize)]]) {
     RasterizerData out;
@@ -29,6 +29,6 @@ basic_vertex(unsigned int vertexID [[ vertex_id ]],
     return out;
 }
 
-fragment half4 basic_fragment(RasterizerData inData [[stage_in]]) {
+fragment half4 fragmentShader(RasterizerData inData [[stage_in]]) {
     return half4(0.0, 0.0, 0.0, 1.0); // always in black at least for now
 }
