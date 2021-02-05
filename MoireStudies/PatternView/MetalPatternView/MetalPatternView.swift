@@ -163,10 +163,10 @@ extension MetalPatternView: PatternView {
         if self.pattern != newPattern {
             let oldPattern = self.pattern!
             self.pattern = newPattern
-            self.updateExistingStripes()
             if oldPattern.blackWidth != self.pattern.blackWidth || oldPattern.whiteWidth != self.pattern.whiteWidth {
                 self.tileView()
             }
+            self.updateExistingStripes()
         }
     }
     
