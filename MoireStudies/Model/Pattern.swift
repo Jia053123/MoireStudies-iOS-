@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct Pattern: Equatable, Codable {
-    var speed: CGFloat // unit: point/s
+    var speed: CGFloat // unit: point/sec
     var direction: CGFloat // unit: rad
     var blackWidth: CGFloat // unit: point
     var whiteWidth: CGFloat // unit: point

@@ -42,23 +42,7 @@ class MetalPatternView: UIView {
         self.displayLink.add(to: RunLoop.main, forMode: .default)
     }
     
-    private func createTiles() {
-        self.patternRenderer.tilesToRender = []
-        
-        let width = self.blackWidthInPixel + self.whiteWidthInPixel
-        let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
-        var nextTranslation = self.diagonalOfDrawableTexture / 2.0
-        let translationStep = width
-        for _ in 0 ..< numOfTiles {
-            let newTile = MetalTile()
-            newTile.translation = nextTranslation
-            self.patternRenderer.tilesToRender.append(newTile) // TODO: should I reserve array capacity?
-            nextTranslation -= translationStep
-        }
-        self.updateTiles()
-    }
-    
-    private func updateTiles() {
+    private func updateExistingTiles() {
         for t in self.patternRenderer.tilesToRender {
             t.length = self.diagonalOfDrawableTexture
             t.width = self.blackWidthInPixel
@@ -66,8 +50,75 @@ class MetalPatternView: UIView {
         }
     }
     
+    private func createTiles() {
+        self.patternRenderer.tilesToRender = []
+        
+        let width = self.blackWidthInPixel + self.whiteWidthInPixel
+        let numOfTiles: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the tiles reach the corners whatever the orientation
+        var nextTranslation = self.diagonalOfDrawableTexture / 2.0
+        for _ in 0 ..< numOfTiles {
+            let newTile = MetalTile()
+            newTile.translation = nextTranslation
+            self.patternRenderer.tilesToRender.append(newTile) // TODO: should I reserve array capacity?
+            nextTranslation -= width
+        }
+        self.updateExistingTiles()
+    }
+    
+    /**
+     Summary: make sure all tiles are spaced corrently and cover the whole translation range, adding or removing tiles when necessary
+     */
+    private func tileView() {
+        let width = self.blackWidthInPixel + self.whiteWidthInPixel
+        
+        func fitMoreTilesToTheEndIfNecessary() {
+            let lastTile = self.patternRenderer.tilesToRender.last!
+            if lastTile.translation - self.translationRange.lowerBound >= width {
+                let newTile = MetalTile()
+                newTile.translation = lastTile.translation - width
+                self.patternRenderer.tilesToRender.append(newTile)
+                fitMoreTilesToTheEndIfNecessary()
+            } else {
+                return
+            }
+        }
+        func fitMoreTilesToTheBeginningIfNecessary() {
+            let firstTile = self.patternRenderer.tilesToRender.first!
+            if self.translationRange.upperBound - firstTile.translation >= width {
+                let newTile = MetalTile()
+                newTile.translation = firstTile.translation + width
+                self.patternRenderer.tilesToRender.insert(newTile, at: 0) // note: O(n)
+                fitMoreTilesToTheBeginningIfNecessary()
+            } else {
+                return
+            }
+        }
+        // start by picking the center tile as the anchor point
+        let existingTileCount = self.patternRenderer.tilesToRender.count
+        let middleIndex: Int = (existingTileCount - 1) / 2 // remember index starts with 0
+        // first operate in the ascending direction
+        for i in (middleIndex + 1) ..< existingTileCount {
+            self.patternRenderer.tilesToRender[i].translation = self.patternRenderer.tilesToRender[i-1].translation - width
+            if !self.translationRange.contains(self.patternRenderer.tilesToRender[i].translation) {
+                self.patternRenderer.tilesToRender.removeSubrange(i..<existingTileCount) // TODO: use recycled tiles
+                break
+            }
+        }
+        fitMoreTilesToTheEndIfNecessary()
+        // then operate in the descending direction
+        for i in (0 ..< middleIndex).reversed() {
+            self.patternRenderer.tilesToRender[i].translation = self.patternRenderer.tilesToRender[i+1].translation + width
+            if !self.translationRange.contains(self.patternRenderer.tilesToRender[i].translation) {
+                self.patternRenderer.tilesToRender.removeSubrange(0...i) // TODO: use recycled tiles
+                break
+            }
+        }
+        fitMoreTilesToTheBeginningIfNecessary()
+    }
+    
     private func translateTiles() { // always move from negative towards positive
         let tileCount = self.patternRenderer.tilesToRender.count
+        print("speed: ", self.speedInPixel)
         // translate
         for i in (0 ..< tileCount).reversed() {
             let tile = self.patternRenderer.tilesToRender[i]
@@ -94,8 +145,9 @@ class MetalPatternView: UIView {
     }
     
     @objc private func render() {
+        self.tileView()
+        self.updateExistingTiles()
         self.translateTiles()
-        self.updateTiles()
         self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
     }
 }
@@ -111,7 +163,7 @@ extension MetalPatternView: PatternView {
     
     func updatePattern(newPattern: Pattern) {
         self.pattern = newPattern
-        self.updateTiles()
+        self.updateExistingTiles()
     }
     
     func pauseAnimations() {
