@@ -24,7 +24,7 @@ class MetalPatternView: UIView {
         get {return -1 * self.diagonalOfDrawableTexture / 2.0 ... self.diagonalOfDrawableTexture / 2.0}
     }
     private var pattern: Pattern!
-    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}
+    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale * 5)}}  // TODO: why do I need *5 to get about the same speed as core animation? 
     private var directionInRad: Float {get {return Float(self.pattern.direction)}}
     private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
     private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
@@ -72,7 +72,6 @@ class MetalPatternView: UIView {
      */
     private func tileView() {
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
-        
         func fitMoreStripesToTheEndIfNecessary() {
             let lastStripe = self.patternRenderer.stripesToRender.last!
             if lastStripe.translation - self.translationRange.lowerBound >= width {
@@ -123,6 +122,7 @@ class MetalPatternView: UIView {
     }
     
     private func translateStripes() { // always move from negative towards positive
+        print("recycled strips count: ", self.recycledStripes.count)
         let stripeCount = self.patternRenderer.stripesToRender.count
         // translate
         for i in (0 ..< stripeCount).reversed() {
@@ -137,7 +137,7 @@ class MetalPatternView: UIView {
                 let offScreenStripe = self.patternRenderer.stripesToRender.removeFirst()
                 let lastStripe = self.patternRenderer.stripesToRender.last!
                 offScreenStripe.translation = lastStripe.translation - width
-                self.recycledStripes.append(offScreenStripe)
+                self.patternRenderer.stripesToRender.append(offScreenStripe)
             } else {
                 break // all stripes after this should also be within bound
             }
@@ -145,8 +145,6 @@ class MetalPatternView: UIView {
     }
     
     @objc private func render() {
-        self.tileView()
-        self.updateExistingStripes()
         self.translateStripes()
         self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
     }
@@ -162,8 +160,14 @@ extension MetalPatternView: PatternView {
     }
     
     func updatePattern(newPattern: Pattern) {
-        self.pattern = newPattern
-        self.updateExistingStripes()
+        if self.pattern != newPattern {
+            let oldPattern = self.pattern!
+            self.pattern = newPattern
+            self.updateExistingStripes()
+            if oldPattern.blackWidth != self.pattern.blackWidth || oldPattern.whiteWidth != self.pattern.whiteWidth {
+                self.tileView()
+            }
+        }
     }
     
     func viewControllerLosingFocus() {

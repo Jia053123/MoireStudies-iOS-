@@ -43,6 +43,7 @@ class MetalPatternRenderer: NSObject {
         textureDescriptor.height = Int(ceil(metalLayer.drawableSize.height))
         textureDescriptor.usage = MTLTextureUsage.renderTarget
         textureDescriptor.textureType = MTLTextureType.type2DMultisample
+        textureDescriptor.storageMode = MTLStorageMode.private
         let multiSampleTexture = self.device.makeTexture(descriptor: textureDescriptor) // I don't think I need MaxFramesInFlight# of this becasuse it holds the GPU output which is always behind of CPU
         self.renderPassDescriptor.colorAttachments[0].texture = multiSampleTexture
         
