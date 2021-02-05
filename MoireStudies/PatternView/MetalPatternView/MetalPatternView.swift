@@ -57,7 +57,7 @@ class MetalPatternView: UIView {
         let numOfStripes: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the stripes reach the corners whatever the orientation
         var nextTranslation = self.diagonalOfDrawableTexture / 2.0
         for _ in 0 ..< numOfStripes {
-            let newStripe = MetalStripe()
+            let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
             newStripe.translation = nextTranslation
             self.patternRenderer.stripesToRender.append(newStripe) // TODO: should I reserve array capacity?
             nextTranslation -= width
@@ -74,7 +74,7 @@ class MetalPatternView: UIView {
         func fitMoreStripesToTheEndIfNecessary() {
             let lastStripe = self.patternRenderer.stripesToRender.last!
             if lastStripe.translation - self.translationRange.lowerBound >= width {
-                let newStripe = MetalStripe()
+                let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = lastStripe.translation - width
                 self.patternRenderer.stripesToRender.append(newStripe)
                 fitMoreStripesToTheEndIfNecessary()
@@ -85,7 +85,7 @@ class MetalPatternView: UIView {
         func fitMoreStripesToTheBeginningIfNecessary() {
             let firstStripe = self.patternRenderer.stripesToRender.first!
             if self.translationRange.upperBound - firstStripe.translation >= width {
-                let newStripe = MetalStripe()
+                let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = firstStripe.translation + width
                 self.patternRenderer.stripesToRender.insert(newStripe, at: 0) // note: O(n)
                 fitMoreStripesToTheBeginningIfNecessary()
@@ -100,7 +100,9 @@ class MetalPatternView: UIView {
         for i in (middleIndex + 1) ..< existingStripeCount {
             self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i-1].translation - width
             if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
-                self.patternRenderer.stripesToRender.removeSubrange(i..<existingStripeCount) // TODO: use recycled stripes
+                let rangeToRecycle = i ..< existingStripeCount
+                self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
+                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle) // TODO: use recycled stripes
                 break
             }
         }
@@ -109,7 +111,9 @@ class MetalPatternView: UIView {
         for i in (0 ..< middleIndex).reversed() {
             self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i+1].translation + width
             if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
-                self.patternRenderer.stripesToRender.removeSubrange(0...i) // TODO: use recycled stripes
+                let rangeToRecycle = 0...i
+                self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
+                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle) // TODO: use recycled stripes
                 break
             }
         }
