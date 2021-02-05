@@ -104,7 +104,7 @@ class MetalPatternView: UIView {
             if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
                 let rangeToRecycle = i ..< existingStripeCount
                 self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
-                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle) // TODO: use recycled stripes
+                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle)
                 break
             }
         }
@@ -115,7 +115,7 @@ class MetalPatternView: UIView {
             if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
                 let rangeToRecycle = 0...i
                 self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
-                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle) // TODO: use recycled stripes
+                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle)
                 break
             }
         }
@@ -127,26 +127,21 @@ class MetalPatternView: UIView {
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternRenderer.stripesToRender[i]
-            stripe.translation += self.speedInPixel * Float(self.displayLink.duration)
+            stripe.translation += Float(Double(self.speedInPixel) * self.displayLink.duration)
         }
-        // remove offscreen stripes
+        // remove offscreen stripes and append them to the rear
+        let width = self.blackWidthInPixel + self.whiteWidthInPixel
         repeat {
             let firstT = self.patternRenderer.stripesToRender.first!
             if !self.translationRange.contains(firstT.translation) {
-                self.recycledStripes.append(self.patternRenderer.stripesToRender.removeFirst())
+                let offScreenStripe = self.patternRenderer.stripesToRender.removeFirst()
+                let lastStripe = self.patternRenderer.stripesToRender.last!
+                offScreenStripe.translation = lastStripe.translation - width
+                self.recycledStripes.append(offScreenStripe)
             } else {
                 break // all stripes after this should also be within bound
             }
         } while true
-        // append removed stripes to the end
-        let step = self.blackWidthInPixel + self.whiteWidthInPixel // TODO: verify correctness
-        let recycledStripeCount = self.recycledStripes.count
-        for _ in (0 ..< recycledStripeCount).reversed() {
-            let lastStripe = self.patternRenderer.stripesToRender.last!
-            let newT = self.recycledStripes.removeLast()
-            newT.translation = lastStripe.translation - step
-            self.patternRenderer.stripesToRender.append(newT)
-        }
     }
     
     @objc private func render() {
