@@ -52,7 +52,7 @@ class MainView: UIView {
     func resetMoireView(patterns: Array<Pattern>) {
         self.moireView.frame = self.bounds
         for sv in self.moireView.subviews {
-            sv.removeFromSuperview()
+            sv.removeFromSuperview() // TODO: reuse the expensive pattern views 
         }
         patternViews = []
         for pattern in patterns {
@@ -103,18 +103,26 @@ class MainView: UIView {
     }
     
     func takeMoireScreenshot() -> UIImage? {
+        // get screenshot for each pattern view
         for pv in patternViews {
             pv.mask?.backgroundColor = UIColor.black
         }
-        UIGraphicsBeginImageContext(self.moireView.frame.size)
-        guard let currentContext = UIGraphicsGetCurrentContext() else {return nil}
-        self.moireView.layer.render(in: currentContext)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
+        var imgs: Array<UIImage> = []
+        for pv in patternViews {
+            guard let r = pv.takeScreenShot() else {return nil}
+            imgs.append(r)
+        }
         for pv in patternViews {
             pv.mask?.backgroundColor = UIColor.clear
         }
-        return img
+        // overlay them together
+        let size = Constants.Data.previewImageSize
+        UIGraphicsBeginImageContext(size)
+        for img in imgs {
+            img.draw(in: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+        }
+        let overlayedImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return overlayedImg
     }
 }

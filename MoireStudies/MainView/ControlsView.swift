@@ -18,7 +18,7 @@ class ControlsView: UIView {
     
     func reset(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         for sv in self.subviews {
-            sv.removeFromSuperview()
+            sv.removeFromSuperview() // TODO: reuse instead
         }
         for cvc in self.controlViewControllers {
             cvc.view.removeFromSuperview()

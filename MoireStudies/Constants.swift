@@ -22,4 +22,18 @@ struct Constants {
         static let blackWidthRange: ClosedRange<CGFloat> = Constants.UI.tileHeight/2.0...50.0
         static let whiteWidthRange: ClosedRange<CGFloat> = Constants.UI.tileHeight/2.0...50.0
     }
+    
+    struct Data {
+        static var previewImageSize: CGSize {
+            get {
+                let minDim = 500.0
+                let aspectRatio: Double = Double(UIScreen.main.bounds.width / UIScreen.main.bounds.height)
+                if aspectRatio > 1 {
+                    return CGSize.init(width: minDim * aspectRatio, height: minDim)
+                } else {
+                    return CGSize.init(width: minDim, height: minDim / aspectRatio)
+                }
+            }
+        }
+    }
 }

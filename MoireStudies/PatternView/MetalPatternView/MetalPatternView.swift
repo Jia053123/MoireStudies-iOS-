@@ -17,7 +17,7 @@ class MetalPatternView: UIView {
     private var patternRenderer: MetalPatternRenderer!
     private var recycledStripes: Array<MetalStripe> = []
     private lazy var viewportSize: CGSize = (self.layer as! CAMetalLayer).drawableSize
-    private var diagonalOfDrawableTexture: Float {
+    private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?
         get {return Float(sqrt(pow(self.viewportSize.width, 2) + pow(self.viewportSize.height, 2)))}
     }
     private var translationRange: ClosedRange<Float> {
@@ -171,6 +171,26 @@ extension MetalPatternView: PatternView {
     
     func viewControllerLosingFocus() {
         // nothing necessary
+    }
+    
+    func takeScreenShot() -> UIImage? {
+        let out: UIImage?
+        self.displayLink.isPaused = true
+        self.patternRenderer.screenShotSwitch = true
+        (self.layer as! CAMetalLayer).framebufferOnly = false
+        
+        self.patternRenderer.draw(in: self.layer as! CAMetalLayer, of: self.viewportSize)
+        if let texture = self.patternRenderer.screenShot, let ciImg = CIImage.init(mtlTexture: texture, options: nil) {
+            out = UIImage.init(ciImage: ciImg)
+        } else {
+            out = nil
+        }
+        self.patternRenderer.screenShot = nil
+        
+        (self.layer as! CAMetalLayer).framebufferOnly = true
+        self.patternRenderer.screenShotSwitch = false
+        self.displayLink.isPaused = false
+        return out
     }
 }
 

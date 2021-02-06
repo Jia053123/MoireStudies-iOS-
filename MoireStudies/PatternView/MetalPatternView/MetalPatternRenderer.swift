@@ -27,6 +27,9 @@ class MetalPatternRenderer: NSObject {
     var stripesToRender: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
     private var totalVertexCount: Int {get {return self.stripesToRender.count * self.stripesToRender.first!.vertexCount}}
     
+    var screenShotSwitch: Bool = false
+    var screenShot: MTLTexture?
+    
     func initWithMetalLayer(metalLayer: CAMetalLayer) {
         self.device = MTLCreateSystemDefaultDevice()
         metalLayer.device = self.device
@@ -123,6 +126,12 @@ class MetalPatternRenderer: NSObject {
         commandBuffer.present(currentDrawable)
         
         commandBuffer.addCompletedHandler({_ in self.inFlightSemaphore.signal()})
+        
+        if self.screenShotSwitch {
+            print("renderer taking a screen shot")
+            self.screenShot = currentDrawable.texture
+            self.screenShotSwitch = false
+        }
         
         commandBuffer.commit()
     }

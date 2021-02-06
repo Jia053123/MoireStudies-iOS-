@@ -93,6 +93,7 @@ class CoreAnimPatternView: UIView {
 }
 
 extension CoreAnimPatternView: PatternView {
+    
     func setUpAndRender(pattern: Pattern) {
         self.backgroundColor = UIColor.clear
         let diagonalLength = Double(sqrt(pow(Float(self.bounds.width), 2) + pow(Float(self.bounds.height), 2)))
@@ -149,6 +150,15 @@ extension CoreAnimPatternView: PatternView {
         layer.beginTime = 0.0 // assign this for now so that convertTime work correctly
         let timeSincePause = layer.convertTime(CACurrentMediaTime(), from: nil) - pausedTime
         layer.beginTime = timeSincePause // minus timeSincePause from the layer's time, and now layer's time is pausedTime
+    }
+    
+    func takeScreenShot() -> UIImage? {
+        UIGraphicsBeginImageContext(self.frame.size)
+        guard let currentContext = UIGraphicsGetCurrentContext() else {return nil}
+        self.layer.render(in: currentContext)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img
     }
 }
 
