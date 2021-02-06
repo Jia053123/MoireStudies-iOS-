@@ -166,6 +166,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewTarget) -> Bool {
+        print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             print("speed out of bound")
             return false

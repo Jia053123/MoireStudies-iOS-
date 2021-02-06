@@ -11,7 +11,8 @@ import MetalKit
 
 class MetalPatternView: UIView {
     override class var layerClass: AnyClass {get {return CAMetalLayer.self}}
-    var displayLink: CADisplayLink!
+//    private var displayLink: CADisplayLink!
+    private var displayLinkWrapper: DisplayLinkWrapper!
     
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
@@ -24,7 +25,7 @@ class MetalPatternView: UIView {
         get {return -1 * self.diagonalOfDrawableTexture / 2.0 ... self.diagonalOfDrawableTexture / 2.0}
     }
     private var pattern: Pattern!
-    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale * 5)}}  // TODO: why do I need *5 to get about the same speed as core animation? 
+    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}  // TODO: why do I need *5 to get about the same speed as core animation?
     private var directionInRad: Float {get {return Float(self.pattern.direction)}}
     private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
     private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
@@ -38,9 +39,10 @@ class MetalPatternView: UIView {
     }
     
     private func setupDisplayLink() {
-        self.displayLink = CADisplayLink(target: self, selector: #selector(render))
-        self.displayLink.preferredFramesPerSecond = 30
-        self.displayLink.add(to: RunLoop.main, forMode: .default)
+        self.displayLinkWrapper = DisplayLinkWrapper.init(target: self, selector: #selector(render), frameRate: 30)
+//        self.displayLink = CADisplayLink(target: self, selector: #selector(render))
+//        self.displayLink.preferredFramesPerSecond = 30
+//        self.displayLink.add(to: RunLoop.main, forMode: .default)
     }
     
     private func updateExistingStripes() {
@@ -123,12 +125,11 @@ class MetalPatternView: UIView {
     }
     
     private func translateStripes() { // always move from negative towards positive
-//        print("recycled strips count: ", self.recycledStripes.count)
         let stripeCount = self.patternRenderer.stripesToRender.count
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternRenderer.stripesToRender[i]
-            stripe.translation += Float(Double(self.speedInPixel) * self.displayLink.duration)
+            stripe.translation += Float(Double(self.speedInPixel) * (self.displayLinkWrapper.frameDuration ?? 0.0)) //(self.displayLink.targetTimestamp - self.displayLink.timestamp))
         }
         // remove offscreen stripes and append them to the rear
         let width = self.blackWidthInPixel + self.whiteWidthInPixel

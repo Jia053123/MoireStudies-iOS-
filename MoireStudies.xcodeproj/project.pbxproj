@@ -21,6 +21,7 @@
 		8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */; };
 		8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */; };
 		8E3144B325A04F4200BB0399 /* CtrlViewSch2Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */; };
+		8E3223FE25CF2C200040B4C8 /* DisplayLinkWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3223FD25CF2C200040B4C8 /* DisplayLinkWrapper.swift */; };
 		8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */; };
 		8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */; };
 		8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74925931669004BC2F3 /* GestureControlView.swift */; };
@@ -87,6 +88,7 @@
 		8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch2.xib; sourceTree = "<group>"; };
 		8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch2.swift; sourceTree = "<group>"; };
 		8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewSch2Target.swift; sourceTree = "<group>"; };
+		8E3223FD25CF2C200040B4C8 /* DisplayLinkWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLinkWrapper.swift; sourceTree = "<group>"; };
 		8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCtrlViewSch1.xib; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch1.swift; sourceTree = "<group>"; };
 		8E36F74925931669004BC2F3 /* GestureControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureControlView.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				8E2BB6E2259329440018D913 /* MetalPatternView.swift */,
+				8E3223FD25CF2C200040B4C8 /* DisplayLinkWrapper.swift */,
 				8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */,
 				8E6EF2E425C3CB080009905C /* MetalStripe.swift */,
 				8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */,
@@ -508,6 +511,7 @@
 				8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
+				8E3223FE25CF2C200040B4C8 /* DisplayLinkWrapper.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,
 				8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */,
