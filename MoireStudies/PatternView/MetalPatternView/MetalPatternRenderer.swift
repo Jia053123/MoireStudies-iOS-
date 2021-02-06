@@ -87,7 +87,6 @@ class MetalPatternRenderer: NSObject {
             }
         }
     }
-    
     /**
      Summary: to be called for each frame to render the stripes
      */

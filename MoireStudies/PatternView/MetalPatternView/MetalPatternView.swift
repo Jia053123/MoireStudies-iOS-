@@ -39,6 +39,7 @@ class MetalPatternView: UIView {
     
     private func setupDisplayLink() {
         self.displayLink = CADisplayLink(target: self, selector: #selector(render))
+        self.displayLink.preferredFramesPerSecond = 30
         self.displayLink.add(to: RunLoop.main, forMode: .default)
     }
     
@@ -122,7 +123,7 @@ class MetalPatternView: UIView {
     }
     
     private func translateStripes() { // always move from negative towards positive
-        print("recycled strips count: ", self.recycledStripes.count)
+//        print("recycled strips count: ", self.recycledStripes.count)
         let stripeCount = self.patternRenderer.stripesToRender.count
         // translate
         for i in (0 ..< stripeCount).reversed() {

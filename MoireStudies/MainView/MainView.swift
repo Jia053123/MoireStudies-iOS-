@@ -65,6 +65,7 @@ class MainView: UIView {
     }
     
     func setUpMasks() {
+        // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead. 
         let maskView1 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[0])
         self.patternViews[1].mask = maskView1
         let maskView2 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[1])
