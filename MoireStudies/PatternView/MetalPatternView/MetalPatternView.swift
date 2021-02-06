@@ -67,7 +67,6 @@ class MetalPatternView: UIView {
         }
         self.updateExistingStripes()
     }
-    
     /**
      Summary: make sure all stripes are spaced corrently and cover the whole translation range, adding or removing stripes when necessary
      */

@@ -195,6 +195,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
+        print("setting blackWidth to: ", blackWidth)
         guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
             return false

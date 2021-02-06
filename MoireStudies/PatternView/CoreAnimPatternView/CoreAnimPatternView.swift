@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 class CoreAnimPatternView: UIView {
-    private var pattern: Pattern = Pattern.defaultPattern() // TODO: use ! instead
+    private var pattern: Pattern = Pattern.defaultPattern()
+    private var SpeedFactor: CGFloat = 0.2 // to compensate for the speed increase caused by scaling
     private var tileHeight: CGFloat = Constants.UI.tileHeight
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0
@@ -41,7 +42,8 @@ class CoreAnimPatternView: UIView {
         for i in 0..<numOfTile {
             let xPos : CGFloat = backingView.bounds.width / 2.0
             let yPos : CGFloat = CGFloat(i) * tileHeight
-            let newTile = TileLayer() // TODO: do I need to set contentscale here? 
+            let newTile = TileLayer()
+            newTile.contentsScale = UIScreen.main.scale
             newTile.anchorPoint = CGPoint(x: 0.5, y: 0.5)
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
             newTile.position = CGPoint(x: xPos, y: yPos)
@@ -55,12 +57,12 @@ class CoreAnimPatternView: UIView {
     }
     
     private func animateTile(tile: TileLayer) {
-        // all tiles move towards the bottom of the backing view at the same speed TODO: towards the top instead
-        let remainingDistance: CGFloat = backingView.bounds.height - tile.position.y
-        let duration = remainingDistance / self.pattern.speed
+        // all tiles move towards the top of the backing view at the same speed
+        let remainingDistance: CGFloat = tile.position.y
+        let duration = remainingDistance / (self.pattern.speed * self.SpeedFactor)
         let moveDownAnim = CABasicAnimation(keyPath: "position")
         moveDownAnim.fromValue = CGPoint(x: tile.position.x, y: tile.position.y)
-        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: backingView.bounds.height)
+        moveDownAnim.toValue = CGPoint(x: tile.position.x, y: 0)
         moveDownAnim.duration = CFTimeInterval(duration)
         moveDownAnim.delegate = self;
         moveDownAnim.fillMode = CAMediaTimingFillMode.forwards
@@ -74,7 +76,6 @@ class CoreAnimPatternView: UIView {
             self.animateTile(tile: t)
         }
     }
-    
     /**
      Summary: Set model layers to presentation layers, interrupt animations and redo animations
      */
