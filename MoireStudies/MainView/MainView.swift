@@ -22,8 +22,8 @@ class MainView: UIView {
     typealias PatternViewClass = MetalPatternView //CoreAnimPatternView
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private var moireView: UIView = UIView()
-    private var patternViews: Array<PatternView> = []
-    private var highlightedViews: Array<PatternView> = []
+    private var patternViewContainers: Array<WeakPatternViewContainer> = []
+    private var highlightedViewContainers: Array<WeakPatternViewContainer> = []
     private var dimView: UIView = UIView()
     
     override init(frame: CGRect) {
@@ -46,18 +46,18 @@ class MainView: UIView {
     }
     
     func numOfPatternViews() -> Int {
-        return self.patternViews.count
+        return self.patternViewContainers.count
     }
     
     func resetMoireView(patterns: Array<Pattern>) {
         self.moireView.frame = self.bounds
         for sv in self.moireView.subviews {
-            sv.removeFromSuperview() // TODO: reuse the expensive pattern views 
+            sv.removeFromSuperview() // TODO: reuse the expensive pattern views
         }
-        patternViews = []
+        self.patternViewContainers = []
         for pattern in patterns {
             let newPatternView: PatternView = PatternViewClass.init(frame: self.moireView.bounds)
-            patternViews.append(newPatternView)
+            self.patternViewContainers.append(WeakPatternViewContainer.init(content: newPatternView))
             self.moireView.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
@@ -67,52 +67,55 @@ class MainView: UIView {
     func setUpMasks() {
         // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead. 
         let maskView1 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[0])
-        self.patternViews[1].mask = maskView1
+        self.patternViewContainers[1].content!.mask = maskView1
+        
         let maskView2 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[1])
-        self.patternViews[0].mask = maskView2
+        self.patternViewContainers[0].content!.mask = maskView2
+        
     }
     
     func highlightPatternView(patternViewIndex: Int) {
-        let pv = patternViews[patternViewIndex]
+        let pvc = patternViewContainers[patternViewIndex]
+        let pv = pvc.content!
         dimView.frame = self.moireView.bounds
         dimView.backgroundColor = UIColor(white: 1, alpha: 0.5)
         self.moireView.addSubview(dimView)
-        highlightedViews.append(pv)
+        highlightedViewContainers.append(pvc)
         self.moireView.bringSubviewToFront(pv)
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {
-        let pv = patternViews[patternViewIndex]
-        if let i = highlightedViews.firstIndex(where: {$0 == pv}) {
-            highlightedViews.remove(at: i)
+        let pvc = patternViewContainers[patternViewIndex]
+        let pv = pvc.content!
+        if let i = highlightedViewContainers.firstIndex(where: {$0 == pvc}) {
+            highlightedViewContainers.remove(at: i)
         }
-        if highlightedViews.count == 0 {
+        if highlightedViewContainers.count == 0 {
             dimView.removeFromSuperview()
         }
         self.sendSubviewToBack(pv)
     }
     
     func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {
-        self.patternViews[patternViewIndex].updatePattern(newPattern: newPattern)
+        self.patternViewContainers[patternViewIndex].content!.updatePattern(newPattern: newPattern)
     }
     
     func viewControllerLosingFocus() {
-        for pv in patternViews {
-            pv.viewControllerLosingFocus()
+        for pvc in patternViewContainers {
+            pvc.content!.viewControllerLosingFocus()
         }
     }
     
     func takeMoireScreenshot() -> UIImage? {
         // get screenshot for each pattern view
-        for pv in patternViews {
-            pv.mask?.backgroundColor = UIColor.black
-        }
         var imgs: Array<UIImage> = []
-        for pv in patternViews {
+        for pvc in patternViewContainers {
+            let pv = pvc.content!
+            pv.mask?.backgroundColor = UIColor.black
+            
             guard let r = pv.takeScreenShot() else {return nil}
             imgs.append(r)
-        }
-        for pv in patternViews {
+            
             pv.mask?.backgroundColor = UIColor.clear
         }
         // overlay them together

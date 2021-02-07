@@ -132,7 +132,7 @@ class MetalPatternRenderer: NSObject {
             self.screenShot = currentDrawable.texture
             self.screenShotSwitch = false
         }
-        
+
         commandBuffer.commit()
     }
 }
