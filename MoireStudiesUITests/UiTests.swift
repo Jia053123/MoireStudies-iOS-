@@ -119,9 +119,9 @@ class UiTests: XCTestCase {
         self.mainViewCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count == 3)
-        self.dismissPopOver()
+//        self.dismissPopOver()
         // load: would need a title for each save file and the a label for the main view to be effective
-        app.buttons["SaveFilesButton"].tap()
+//        app.buttons["SaveFilesButton"].tap()
         self.saveFilePickerCheck()
         numOfCells = app.collectionViews.cells.count
         app.collectionViews.children(matching: .any).element(boundBy: 0).tap()
