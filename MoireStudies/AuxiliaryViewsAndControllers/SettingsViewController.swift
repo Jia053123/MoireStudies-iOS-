@@ -89,6 +89,8 @@ class SettingsViewController: UITableViewController {
         print("prepare for segue")
         let mvc: MainViewController = segue.destination as! MainViewController
         mvc.initSettings = self.initSettings
-        mvc.updateMainView()
+        if mvc.isViewLoaded {
+            mvc.updateMainView()
+        }
     }
 }

@@ -16,15 +16,34 @@ class MainViewController: UIViewController {
     private var currentMoire: Moire?
     var initSettings: InitSettings?
     private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
-    private var controlsView: ControlsView = ControlsView()
+    private var controlsView: ControlsView = ControlsView() // TODO: weak
+    
+    private var moireViewController = MoireViewController()
+    
     private var mainView: MainView {
-        get {return self.view as! MainView}
+//        get {return self.view as! MainView}
+        get{return self.moireViewController.view as! MainView}
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        print("init with coder")
+        
+    }
+    
+    override func viewDidLoad() {
+        print("viewdidload")
+        super.viewDidLoad()
+        self.addChild(self.moireViewController)
+        self.moireViewController.view.frame = self.view.bounds //
+        self.view.addSubview(self.moireViewController.view)
+        self.moireViewController.didMove(toParent: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController: view will appear")
         super.viewWillAppear(animated)
-        self.controlsView.backgroundColor = UIColor.clear
+        self.controlsView.backgroundColor = UIColor.clear // TODO: move to viewDidLoad
         self.mainView.addSubview(self.controlsView)
         // set up must be done in the order below!
         self.initCurrentMoire()
@@ -176,7 +195,7 @@ extension MainViewController: PatternManager {
         }
         currentMoire!.patterns[index].speed = speed
         let mv = self.mainView
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -190,7 +209,7 @@ extension MainViewController: PatternManager {
         }
         currentMoire!.patterns[index].direction = direction
         let mv = self.mainView
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -205,7 +224,7 @@ extension MainViewController: PatternManager {
         }
         currentMoire!.patterns[index].blackWidth = blackWidth
         let mv = self.mainView
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -219,7 +238,7 @@ extension MainViewController: PatternManager {
         }
         currentMoire!.patterns[index].whiteWidth = whiteWidth
         let mv = self.mainView
-        mv.modifiyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     

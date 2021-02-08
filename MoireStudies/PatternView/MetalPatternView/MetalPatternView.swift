@@ -11,7 +11,7 @@ import MetalKit
 
 class MetalPatternView: UIView {
     override class var layerClass: AnyClass {get {return CAMetalLayer.self}}
-    private var displayLink: CADisplayLink!
+    private var displayLink: CADisplayLink! // TODO: retain cycle! refactor to child controller
     
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!

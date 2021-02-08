@@ -21,7 +21,7 @@ import Foundation
 class MainView: UIView {
     typealias PatternViewClass = MetalPatternView //CoreAnimPatternView
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
-    private var moireView: UIView = UIView()
+    private var moireView: UIView = UIView() // TODO: make this weak
     private var patternViewContainers: Array<WeakPatternViewContainer> = []
     private var highlightedViewContainers: Array<WeakPatternViewContainer> = []
     private var dimView: UIView = UIView()
@@ -71,7 +71,6 @@ class MainView: UIView {
         
         let maskView2 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[1])
         self.patternViewContainers[0].content!.mask = maskView2
-        
     }
     
     func highlightPatternView(patternViewIndex: Int) {
@@ -96,7 +95,7 @@ class MainView: UIView {
         self.sendSubviewToBack(pv)
     }
     
-    func modifiyPatternView(patternViewIndex: Int, newPattern: Pattern) {
+    func modifyPatternView(patternViewIndex: Int, newPattern: Pattern) {
         self.patternViewContainers[patternViewIndex].content!.updatePattern(newPattern: newPattern)
     }
     

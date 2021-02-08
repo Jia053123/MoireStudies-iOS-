@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ControlsView: UIView {
-    private var controlViewControllers: Array<CtrlViewTarget> = []
+    private var controlViewControllers: Array<CtrlViewTarget> = [] // TODO: retain cycles. make these child controllers?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     
     func setup(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {

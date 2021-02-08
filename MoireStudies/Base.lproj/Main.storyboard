@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pci-Ue-xWn">
-    <device id="retina4_7" orientation="landscape" appearance="light"/>
+    <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -14,12 +14,12 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="MainView" customModule="MoireStudies" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
-                                <rect key="frame" x="631.5" y="3" width="25.5" height="30"/>
+                                <rect key="frame" x="988.5" y="3" width="25.5" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SettingsButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hYG-uG-xgh"/>
@@ -33,7 +33,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coU-E5-Qvx">
-                                <rect key="frame" x="586.5" y="3" width="35" height="30"/>
+                                <rect key="frame" x="943.5" y="3" width="35" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="SaveFilesButton"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="rfG-j2-0qP"/>
@@ -74,15 +74,15 @@
             <objects>
                 <tableViewController title="SettingsViewController" id="Pci-Ue-xWn" customClass="SettingsViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fMj-Wm-nSm">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="G6c-PS-Gi4">
-                                <rect key="frame" x="0.0" y="28" width="667" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="704" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G6c-PS-Gi4" id="IqD-62-CDJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="667" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -106,11 +106,11 @@
             <objects>
                 <viewController id="KRW-Dp-kSv" customClass="SaveFilesViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZI-Af-clz">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vbo-Wf-lJn">
-                                <rect key="frame" x="20" y="40" width="627" height="335"/>
+                                <rect key="frame" x="20" y="40" width="664" height="688"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LOZ-pb-rfJ">
                                     <size key="itemSize" width="155" height="125"/>
@@ -135,7 +135,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-7G-qwP">
-                                <rect key="frame" x="295.5" y="11" width="76" height="21"/>
+                                <rect key="frame" x="314" y="11" width="76" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="Ga4-RH-ySP"/>
                                     <constraint firstAttribute="height" constant="21" id="YBQ-rx-CUg"/>
@@ -155,7 +155,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1GL-Gr-rS1">
-                                <rect key="frame" x="613" y="6.5" width="34" height="30"/>
+                                <rect key="frame" x="650" y="6.5" width="34" height="30"/>
                                 <accessibility key="accessibilityConfiguration" identifier="LoadButton"/>
                                 <state key="normal" title="Load"/>
                                 <connections>
