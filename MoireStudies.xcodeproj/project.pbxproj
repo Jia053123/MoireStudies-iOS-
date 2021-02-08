@@ -81,7 +81,7 @@
 		8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = MetalPatternViewShader.metal; sourceTree = "<group>"; };
 		8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternRenderer.swift; sourceTree = "<group>"; };
 		8E1B9EBF25C34C440021D398 /* ShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderConstants.h; sourceTree = "<group>"; };
-		8E28187025D0FA67007C3E3D /* MoireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoireViewController.swift; path = MoireStudies/MainView/MoireViewController.swift; sourceTree = SOURCE_ROOT; };
+		8E28187025D0FA67007C3E3D /* MoireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoireViewController.swift; path = "MoireStudies/Moire Rendering/MoireViewController.swift"; sourceTree = SOURCE_ROOT; };
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* MetalPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternView.swift; sourceTree = "<group>"; };
@@ -160,16 +160,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8E1B9E9525C0B96B0021D398 /* MainView */ = {
-			isa = PBXGroup;
-			children = (
-				8E314489259F030000BB0399 /* MaskView.swift */,
-				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
-				8E28187025D0FA67007C3E3D /* MoireViewController.swift */,
-			);
-			path = MainView;
-			sourceTree = "<group>";
-		};
 		8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,22 +183,75 @@
 			path = MetalPatternView;
 			sourceTree = "<group>";
 		};
-		8E1B9E9825C0BA060021D398 /* Scheme1 */ = {
+		8E2E462225D1EA3C00B0EA23 /* Moire Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				8E28187025D0FA67007C3E3D /* MoireViewController.swift */,
+				8E314489259F030000BB0399 /* MaskView.swift */,
+				8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */,
+				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
+				8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */,
+				8E1B9E9725C0B9C50021D398 /* MetalPatternView */,
+			);
+			path = "Moire Rendering";
+			sourceTree = "<group>";
+		};
+		8E2E462325D1EA9B00B0EA23 /* Moire Controlling */ = {
+			isa = PBXGroup;
+			children = (
+				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
+				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
+				8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */,
+				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
+				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
+			);
+			path = "Moire Controlling";
+			sourceTree = "<group>";
+		};
+		8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */ = {
 			isa = PBXGroup;
 			children = (
 				8E36F74E25931796004BC2F3 /* CtrlViewSch1Target.swift */,
 				8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */,
+				8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */,
+				8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */,
+				8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */,
+				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
 			);
-			path = Scheme1;
+			path = "Control Scheme 1";
 			sourceTree = "<group>";
 		};
-		8E1B9E9925C0BA130021D398 /* Scheme2 */ = {
+		8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */ = {
 			isa = PBXGroup;
 			children = (
 				8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */,
 				8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */,
+				8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */,
+				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
+				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
 			);
-			path = Scheme2;
+			path = "Control Scheme 2";
+			sourceTree = "<group>";
+		};
+		8E2E462E25D1ECD900B0EA23 /* Auxiliary Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8E60787525A3D3C6002EB000 /* InitSettings.swift */,
+				8E60787D25A3DB56002EB000 /* SettingsViewController.swift */,
+				8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */,
+				8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */,
+			);
+			path = "Auxiliary Controllers";
+			sourceTree = "<group>";
+		};
+		8E2E463225D1EFBA00B0EA23 /* Main Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
+				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
+				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
+			);
+			path = "Main Controller";
 			sourceTree = "<group>";
 		};
 		8E96B798257F33CF007527E2 = {
@@ -242,12 +285,11 @@
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E31449125A0393A00BB0399 /* Constants.swift */,
 				8E6EF2E925C85B0C0009905C /* Utilities.swift */,
-				8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */,
+				8E2E462E25D1ECD900B0EA23 /* Auxiliary Controllers */,
 				8EE29F7925A0591500FF2539 /* Model */,
-				8EE29F7E25A059B900FF2539 /* ViewControllers */,
-				8E1B9E9525C0B96B0021D398 /* MainView */,
-				8EE29F7825A058E100FF2539 /* PatternView */,
-				8EE29F7A25A0594700FF2539 /* ControlView */,
+				8E2E463225D1EFBA00B0EA23 /* Main Controller */,
+				8E2E462325D1EA9B00B0EA23 /* Moire Controlling */,
+				8E2E462225D1EA3C00B0EA23 /* Moire Rendering */,
 				8E96B7B0257F33D3007527E2 /* Assets.xcassets */,
 				8E96B7B5257F33D3007527E2 /* Info.plist */,
 				8E96B7B6257F33D3007527E2 /* main.m */,
@@ -277,17 +319,6 @@
 			path = MoireStudiesUITests;
 			sourceTree = "<group>";
 		};
-		8EE29F7825A058E100FF2539 /* PatternView */ = {
-			isa = PBXGroup;
-			children = (
-				8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */,
-				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
-				8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */,
-				8E1B9E9725C0B9C50021D398 /* MetalPatternView */,
-			);
-			path = PatternView;
-			sourceTree = "<group>";
-		};
 		8EE29F7925A0591500FF2539 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,61 +327,6 @@
 				8E5BABDF25AE82F4003FC799 /* MoireModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		8EE29F7A25A0594700FF2539 /* ControlView */ = {
-			isa = PBXGroup;
-			children = (
-				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
-				8EE29F8225A05B0100FF2539 /* Scheme1 */,
-				8EE29F8325A05B0800FF2539 /* Scheme2 */,
-			);
-			path = ControlView;
-			sourceTree = "<group>";
-		};
-		8EE29F7E25A059B900FF2539 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
-				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
-				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
-				8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */,
-				8E1B9E9825C0BA060021D398 /* Scheme1 */,
-				8E1B9E9925C0BA130021D398 /* Scheme2 */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		8EE29F8225A05B0100FF2539 /* Scheme1 */ = {
-			isa = PBXGroup;
-			children = (
-				8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */,
-				8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */,
-				8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */,
-				8E36F74925931669004BC2F3 /* GestureControlView.swift */,
-			);
-			path = Scheme1;
-			sourceTree = "<group>";
-		};
-		8EE29F8325A05B0800FF2539 /* Scheme2 */ = {
-			isa = PBXGroup;
-			children = (
-				8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */,
-				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
-				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
-			);
-			path = Scheme2;
-			sourceTree = "<group>";
-		};
-		8EEBABA025AEAF7900857C96 /* AuxiliaryViewsAndControllers */ = {
-			isa = PBXGroup;
-			children = (
-				8E60787525A3D3C6002EB000 /* InitSettings.swift */,
-				8E60787D25A3DB56002EB000 /* SettingsViewController.swift */,
-				8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */,
-				8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */,
-			);
-			path = AuxiliaryViewsAndControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
