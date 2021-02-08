@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 import MetalKit
 
-class MetalPatternView: UIView {
+class MetalPatternView: UIView { // TODO: move most of the logic to the controller? 
     override class var layerClass: AnyClass {get {return CAMetalLayer.self}}
-    private var displayLink: CADisplayLink! // TODO: retain cycle! refactor to child controller
+    private var displayLink: CADisplayLink? // TODO: retain cycle! refactor to child controller
     
     private var vertexBuffer: MTLBuffer!
     private var patternRenderer: MetalPatternRenderer!
@@ -39,9 +39,14 @@ class MetalPatternView: UIView {
     }
     
     private func setupDisplayLink() {
+        self.displayLink?.invalidate()
         self.displayLink = CADisplayLink(target: self, selector: #selector(render))
-        self.displayLink.preferredFramesPerSecond = 30
-        self.displayLink.add(to: RunLoop.main, forMode: .default)
+        self.displayLink!.preferredFramesPerSecond = 60
+        self.displayLink!.add(to: RunLoop.main, forMode: .default)
+    }
+    
+    func invalidateDisplayLink() {
+        self.displayLink?.invalidate()
     }
     
     private func updateExistingStripes() {
@@ -127,7 +132,7 @@ class MetalPatternView: UIView {
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternRenderer.stripesToRender[i]
-            stripe.translation += Float(Double(self.speedInPixel) * (self.displayLink.targetTimestamp - self.displayLink.timestamp))
+            stripe.translation += Float(Double(self.speedInPixel) * (self.displayLink!.targetTimestamp - self.displayLink!.timestamp))
         }
         // remove offscreen stripes and append them to the rear
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
@@ -176,7 +181,7 @@ extension MetalPatternView: PatternView {
     
     func takeScreenShot() -> UIImage? {
         let out: UIImage?
-        self.displayLink.isPaused = true
+        self.displayLink!.isPaused = true
         self.patternRenderer.screenShotSwitch = true
         (self.layer as! CAMetalLayer).framebufferOnly = false
         
@@ -190,7 +195,7 @@ extension MetalPatternView: PatternView {
         
         (self.layer as! CAMetalLayer).framebufferOnly = true
         self.patternRenderer.screenShotSwitch = false
-        self.displayLink.isPaused = false
+        self.displayLink!.isPaused = false
         return out
     }
 }

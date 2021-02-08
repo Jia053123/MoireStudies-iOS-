@@ -13,6 +13,10 @@ class MetalPatternViewController: UIViewController {
     override func loadView() {
         self.view = MetalPatternView()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        (self.view as! MetalPatternView).invalidateDisplayLink()
+    }
 }
 
 extension MetalPatternViewController: PatternViewController {
