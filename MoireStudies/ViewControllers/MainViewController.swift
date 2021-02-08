@@ -8,6 +8,17 @@
 import Foundation
 import UIKit
 
+/**
+ View Hierarchy:
+ - MainViewController
+    - UIButton
+    - ControlsViewContainerController
+        - ControlViewController (n)
+    - MoireViewController (1)
+        - DimView (0..1)
+        - PatternViewController (n)
+            - MaskView(1) in mask property
+ */
 class MainViewController: UIViewController {
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!

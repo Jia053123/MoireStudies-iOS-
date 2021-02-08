@@ -17,6 +17,7 @@
 		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* MetalPatternView.swift */; };
 		8E2E45F125D1BA0B00B0EA23 /* MoireModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */; };
+		8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */; };
 		8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */; };
 		8E31448A259F030000BB0399 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E314489259F030000BB0399 /* MaskView.swift */; };
 		8E31449225A0393A00BB0399 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31449125A0393A00BB0399 /* Constants.swift */; };
@@ -84,6 +85,7 @@
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* MetalPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternView.swift; sourceTree = "<group>"; };
+		8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternViewController.swift; sourceTree = "<group>"; };
 		8E31447E259EBA8E00BB0399 /* CtrlViewControllerSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch1.swift; sourceTree = "<group>"; };
 		8E314489259F030000BB0399 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		8E31449125A0393A00BB0399 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */ = {
 			isa = PBXGroup;
 			children = (
+				8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */,
 				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
 				8E36F75625931993004BC2F3 /* TileLayer.swift */,
 			);
@@ -489,6 +492,7 @@
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
+				8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
