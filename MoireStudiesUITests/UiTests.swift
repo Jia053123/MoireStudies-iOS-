@@ -27,19 +27,21 @@ class UiTests: XCTestCase {
     }
 
     func mainViewCheckSch1() {
+        let patternViewId = "MetalPatternView"
         XCTAssert(app.otherElements["MainView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch1").count == 2)
-        XCTAssert(app.otherElements["CoreAnimPatternView"].exists)
-        XCTAssert(app.otherElements.matching(identifier: "CoreAnimPatternView").count == 2)
+        XCTAssert(app.otherElements[patternViewId].exists)
+        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
     func mainViewCheckSch2() {
+        let patternViewId = "MetalPatternView"
         XCTAssert(app.otherElements["MainView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch2"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)
-        XCTAssert(app.otherElements["CoreAnimPatternView"].exists)
-        XCTAssert(app.otherElements.matching(identifier: "CoreAnimPatternView").count == 2)
+        XCTAssert(app.otherElements[patternViewId].exists)
+        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
     func dismissPopOver() {

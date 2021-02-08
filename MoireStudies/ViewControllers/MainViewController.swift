@@ -16,41 +16,36 @@ class MainViewController: UIViewController {
     private var currentMoire: Moire?
     var initSettings: InitSettings?
     private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
-    private var controlsView: ControlsView = ControlsView() // TODO: weak
     
     private var moireViewController = MoireViewController()
-    
-    private var mainView: MainView {
-//        get {return self.view as! MainView}
-        get{return self.moireViewController.view as! MainView}
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        print("init with coder")
-        
-    }
+    private var controlsView: ControlsView = ControlsView() // TODO: weak
     
     override func viewDidLoad() {
-        print("viewdidload")
         super.viewDidLoad()
+        // setup MoireViewController
         self.addChild(self.moireViewController)
-        self.moireViewController.view.frame = self.view.bounds //
+        self.moireViewController.view.frame = self.view.bounds
         self.view.addSubview(self.moireViewController.view)
         self.moireViewController.didMove(toParent: self)
+        
+        // setup ControlsViewController
+        self.controlsView.backgroundColor = UIColor.clear
+        self.view.addSubview(self.controlsView)
+        self.view.bringSubviewToFront(self.controlsView)
+        
+        // setup Buttons
+        self.view.bringSubviewToFront(gearButton)
+        self.view.bringSubviewToFront(fileButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         print("MainViewController: view will appear")
         super.viewWillAppear(animated)
-        self.controlsView.backgroundColor = UIColor.clear // TODO: move to viewDidLoad
-        self.mainView.addSubview(self.controlsView)
         // set up must be done in the order below!
         self.initCurrentMoire()
         self.initInitSettings()
         self.initMainView()
         self.initControls()
-        self.initButtons()
     }
     
     func updateMainView() {
@@ -60,9 +55,8 @@ class MainViewController: UIViewController {
         if self.currentMoire == nil || self.moireIdToInit != self.currentMoire?.id {
             self.initCurrentMoire()
         }
-        self.mainView.resetMoireView(patterns: self.currentMoire!.patterns)
+        self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns)
         self.initControls()
-        self.initButtons()
     }
     
     func initCurrentMoire() {
@@ -97,17 +91,12 @@ class MainViewController: UIViewController {
     }
     
     func initMainView() {
-        self.mainView.setUp(patterns: currentMoire!.patterns)
+        self.moireViewController.setUp(patterns: currentMoire!.patterns)
     }
     
     func initControls() {
-        self.controlsView.frame = self.mainView.bounds
+        self.controlsView.frame = self.moireViewController.view.bounds
         self.controlsView.reset(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
-    }
-    
-    func initButtons() {
-        self.mainView.bringSubviewToFront(gearButton)
-        self.mainView.bringSubviewToFront(fileButton)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -118,7 +107,7 @@ class MainViewController: UIViewController {
 extension MainViewController {
     func saveMoire() -> Bool {
         // save preview
-        if let img = self.mainView.takeMoireScreenshot() {
+        if let img = self.moireViewController.takeMoireScreenshot() {
             self.currentMoire?.preview = img
         } else {print("failed to take screenshot")}
         // write to disk
@@ -131,7 +120,7 @@ extension MainViewController {
     }
     
     func pauseMoire() {
-        self.mainView.viewControllerLosingFocus()
+        self.moireViewController.viewControllerLosingFocus()
     }
 }
 
@@ -170,8 +159,7 @@ extension MainViewController: PatternManager {
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        let mv = self.mainView
-        mv.highlightPatternView(patternViewIndex: index)
+        moireViewController.highlightPatternView(patternViewIndex: index)
         return true
     }
     
@@ -179,8 +167,7 @@ extension MainViewController: PatternManager {
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
-        let mv = self.mainView
-        mv.unhighlightPatternView(patternViewIndex: index)
+        moireViewController.unhighlightPatternView(patternViewIndex: index)
         return true
     }
     
@@ -194,8 +181,7 @@ extension MainViewController: PatternManager {
             return false
         }
         currentMoire!.patterns[index].speed = speed
-        let mv = self.mainView
-        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -208,8 +194,7 @@ extension MainViewController: PatternManager {
             return false
         }
         currentMoire!.patterns[index].direction = direction
-        let mv = self.mainView
-        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -223,8 +208,7 @@ extension MainViewController: PatternManager {
             return false
         }
         currentMoire!.patterns[index].blackWidth = blackWidth
-        let mv = self.mainView
-        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
@@ -237,8 +221,7 @@ extension MainViewController: PatternManager {
             return false
         }
         currentMoire!.patterns[index].whiteWidth = whiteWidth
-        let mv = self.mainView
-        mv.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
         return true
     }
     
