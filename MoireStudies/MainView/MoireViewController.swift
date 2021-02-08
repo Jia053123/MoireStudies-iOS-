@@ -11,21 +11,12 @@ import UIKit
 class MoireViewController: UIViewController {
     typealias PatternViewClass = MetalPatternView //CoreAnimPatternView
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
-    private var moireView: UIView = UIView() // TODO: make this weak
     private var patternViewContainers: Array<WeakPatternViewContainer> = []
     private var highlightedViewContainers: Array<WeakPatternViewContainer> = []
     private var dimView: UIView = UIView()
     
-//    override func loadView() {
-//        let mv = MainView()
-//        self.moireView.backgroundColor = UIColor.white
-//        mv.addSubview(self.moireView)
-//        self.view = mv
-//    }
-    
     func setUp(patterns: Array<Pattern>) {
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(self.moireView)
         self.resetMoireView(patterns: patterns)
     }
     
@@ -34,15 +25,14 @@ class MoireViewController: UIViewController {
     }
     
     func resetMoireView(patterns: Array<Pattern>) {
-        self.moireView.frame = self.view.bounds
-        for sv in self.moireView.subviews {
+        for sv in self.view.subviews {
             sv.removeFromSuperview() // TODO: reuse the expensive pattern views
         }
         self.patternViewContainers = []
         for pattern in patterns {
-            let newPatternView: PatternView = PatternViewClass.init(frame: self.moireView.bounds)
+            let newPatternView: PatternView = PatternViewClass.init(frame: self.view.bounds)
             self.patternViewContainers.append(WeakPatternViewContainer.init(content: newPatternView))
-            self.moireView.addSubview(newPatternView)
+            self.view.addSubview(newPatternView)
             newPatternView.setUpAndRender(pattern: pattern)
         }
         self.setUpMasks()
@@ -50,21 +40,21 @@ class MoireViewController: UIViewController {
     
     func setUpMasks() {
         // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
-        let maskView1 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[0])
+        let maskView1 = MaskView.init(frame: self.view.bounds, maskFrame: self.controlFrames[0])
         self.patternViewContainers[1].content!.mask = maskView1
         
-        let maskView2 = MaskView.init(frame: self.moireView.bounds, maskFrame: self.controlFrames[1])
+        let maskView2 = MaskView.init(frame: self.view.bounds, maskFrame: self.controlFrames[1])
         self.patternViewContainers[0].content!.mask = maskView2
     }
     
     func highlightPatternView(patternViewIndex: Int) {
         let pvc = patternViewContainers[patternViewIndex]
         let pv = pvc.content!
-        dimView.frame = self.moireView.bounds
+        dimView.frame = self.view.bounds
         dimView.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        self.moireView.addSubview(dimView)
+        self.view.addSubview(dimView)
         highlightedViewContainers.append(pvc)
-        self.moireView.bringSubviewToFront(pv)
+        self.view.bringSubviewToFront(pv)
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {

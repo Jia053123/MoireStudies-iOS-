@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(self.moireViewController.view)
         self.moireViewController.didMove(toParent: self)
         
-        // setup ControlsViewController
+        // TODO: setup ControlsViewController
         self.controlsView.backgroundColor = UIColor.clear
         self.view.addSubview(self.controlsView)
         self.view.bringSubviewToFront(self.controlsView)
