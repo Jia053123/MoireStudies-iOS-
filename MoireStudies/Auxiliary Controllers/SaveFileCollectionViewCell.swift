@@ -9,18 +9,20 @@ import Foundation
 import UIKit
 
 class SaveFileCollectionViewCell: UICollectionViewCell {
-    private var previewView: UIImageView = UIImageView()
+    private weak var previewView: UIImageView?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.previewView.contentMode = ContentMode.scaleAspectFill
-        self.addSubview(previewView)
+        let pv = UIImageView()
+        pv.contentMode = ContentMode.scaleAspectFill
+        self.addSubview(pv)
+        self.previewView = pv
     }
     
     func setUp(previewImage: UIImage) {
         self.backgroundColor = UIColor.white
-        self.previewView.frame = self.bounds
-        self.previewView.image = previewImage
+        self.previewView!.frame = self.bounds
+        self.previewView!.image = previewImage
     }
     
     func highlight() {
