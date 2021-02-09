@@ -27,7 +27,7 @@ class UiTests: XCTestCase {
     }
 
     func mainViewCheckSch1() {
-        let patternViewId = "MetalPatternView"
+        let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
         XCTAssert(app.otherElements["MainView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch1").count == 2)
@@ -36,7 +36,7 @@ class UiTests: XCTestCase {
     }
     
     func mainViewCheckSch2() {
-        let patternViewId = "MetalPatternView"
+        let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
         XCTAssert(app.otherElements["MainView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch2"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)

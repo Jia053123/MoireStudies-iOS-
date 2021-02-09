@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController {
-    typealias PatternViewControllerClass = MetalPatternViewController
+    typealias PatternViewControllerClass = CoreAnimPatternViewController //MetalPatternViewController
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private weak var highlightedPatternViewController: PatternViewController?
     private var dimView: UIView = UIView()
