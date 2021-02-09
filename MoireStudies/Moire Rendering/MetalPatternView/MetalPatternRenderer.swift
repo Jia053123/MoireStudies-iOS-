@@ -75,7 +75,7 @@ class MetalPatternRenderer: NSObject {
         }
     }
     
-    func updateBuffer() {
+    private func updateBuffer() {
         if self.vertexBuffers.isEmpty {
             self.initVertexBuffers()
         }
@@ -94,6 +94,10 @@ class MetalPatternRenderer: NSObject {
      Summary: to be called for each frame to render the stripes
      */
     func draw(in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
+        guard !self.stripesToRender.isEmpty else {
+            return
+        }
+        
         self.viewportSize.x = Float(viewportSize.width)
         self.viewportSize.y = Float(viewportSize.height)
         
