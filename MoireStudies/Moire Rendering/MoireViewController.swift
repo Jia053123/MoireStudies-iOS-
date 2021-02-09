@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController {
-    typealias PatternViewControllerClass = CoreAnimPatternViewController //MetalPatternViewController
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private weak var highlightedPatternViewController: PatternViewController?
     private weak var dimView: UIView?
@@ -26,15 +25,15 @@ class MoireViewController: UIViewController {
         self.dimView = dv
     }
     
-    func setUp(patterns: Array<Pattern>) {
-        self.resetMoireView(patterns: patterns)
+    func setUp(patterns: Array<Pattern>, settings: InitSettings) {
+        self.resetMoireView(patterns: patterns, settings: settings)
     }
     
     func numOfPatternViews() -> Int {
         return self.children.count
     }
     
-    func resetMoireView(patterns: Array<Pattern>) {
+    func resetMoireView(patterns: Array<Pattern>, settings: InitSettings) {
         for c in self.children {
             c.willMove(toParent: nil)
             c.view.removeFromSuperview() // TODO: reuse the expensive pattern views
@@ -42,7 +41,13 @@ class MoireViewController: UIViewController {
         }
         
         for pattern in patterns {
-            let pvc: PatternViewController = PatternViewControllerClass()
+            var pvc: PatternViewController
+            switch settings.renderSetting {
+            case RenderSettings.coreAnimation:
+                pvc = CoreAnimPatternViewController()
+            case RenderSettings.metal:
+                pvc = MetalPatternViewController()
+            }
             self.addChild(pvc)
             pvc.view.frame = self.view.bounds
             self.view.addSubview(pvc.view)

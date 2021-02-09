@@ -9,12 +9,17 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    let schemeSettingItems = ["Fill Ratio and Scale Factor", "Black Width and White Width"]
-    let actionItems = ["Reset Moire"]
+    static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
+    static let BlackWidthAndWhiteWidth = "Black Width and White Width"
+    let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth]
+    static let CoreAnimation = "Core Animation"
+    static let Metal = "Metal"
+    let renderSettingItems = [CoreAnimation, Metal]
+    
     var initSettings = InitSettings()
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -22,7 +27,7 @@ class SettingsViewController: UITableViewController {
         case 0:
             return "Set a Control Scheme: "
         case 1:
-            return "Actions: "
+            return "Set a Render Method: "
         default:
             return "Section Title"
         }
@@ -31,9 +36,9 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return schemeSettingItems.count
+            return controlSettingItems.count
         case 1:
-            return actionItems.count
+            return renderSettingItems.count
         default:
             return 0
         }
@@ -43,9 +48,9 @@ class SettingsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell")!
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = schemeSettingItems[indexPath.row]
+            cell.textLabel?.text = controlSettingItems[indexPath.row]
         case 1:
-            cell.textLabel?.text = actionItems[indexPath.row]
+            cell.textLabel?.text = renderSettingItems[indexPath.row]
         default:
             cell.textLabel?.text = "Cell Title"
         }
@@ -55,16 +60,23 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
-            switch schemeSettingItems[indexPath.row] {
-            case "Fill Ratio and Scale Factor":
+            switch controlSettingItems[indexPath.row] {
+            case SettingsViewController.FillRatioAndScaleFactor:
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
-            case "Black Width and White Width":
+            case SettingsViewController.BlackWidthAndWhiteWidth:
                 self.initSettings.interfaceSetting = UISettings.controlScheme2Slider
             default:
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
             }
         case 1:
-            break
+            switch renderSettingItems[indexPath.row] {
+            case SettingsViewController.CoreAnimation:
+                self.initSettings.renderSetting = RenderSettings.coreAnimation
+            case SettingsViewController.Metal:
+                self.initSettings.renderSetting = RenderSettings.metal
+            default:
+                self.initSettings.renderSetting = RenderSettings.metal
+            }
         default:
             break
         }

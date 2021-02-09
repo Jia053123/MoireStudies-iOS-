@@ -69,7 +69,7 @@ class MainViewController: UIViewController {
         if self.currentMoire == nil || self.moireIdToInit != self.currentMoire?.id {
             self.initCurrentMoire()
         }
-        self.moireViewController!.resetMoireView(patterns: self.currentMoire!.patterns)
+        self.moireViewController!.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
         self.initControls()
     }
     
@@ -105,7 +105,7 @@ class MainViewController: UIViewController {
     }
     
     func initMainView() {
-        self.moireViewController!.setUp(patterns: currentMoire!.patterns)
+        self.moireViewController!.setUp(patterns: currentMoire!.patterns, settings: self.initSettings!)
     }
     
     func initControls() {

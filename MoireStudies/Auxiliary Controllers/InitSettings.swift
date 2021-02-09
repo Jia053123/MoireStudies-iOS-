@@ -8,17 +8,17 @@
 import Foundation
 
 struct InitSettings: Codable { 
-    var renderSetting: RenderSettings = RenderSettings.coreAnimation
+    var renderSetting: RenderSettings = RenderSettings.metal
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
-}
-
-enum RenderSettings: String, Codable {
-    case coreAnimation
-    case metal
 }
 
 enum UISettings: String, Codable {
     case controlScheme1Slider
     case controlScheme1Gesture
     case controlScheme2Slider
+}
+
+enum RenderSettings: String, Codable {
+    case coreAnimation
+    case metal
 }
