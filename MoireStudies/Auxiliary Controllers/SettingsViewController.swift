@@ -9,14 +9,17 @@ import Foundation
 import UIKit
 
 class SettingsViewController: UIViewController {
-    static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
-    static let BlackWidthAndWhiteWidth = "Black Width and White Width"
-    let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth]
-    static let CoreAnimation = "Core Animation"
-    static let Metal = "Metal"
-    let renderSettingItems = [CoreAnimation, Metal]
-    
     var initSettings = InitSettings()
+    private static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
+    private static let BlackWidthAndWhiteWidth = "Black Width and White Width"
+    private let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth]
+    private static let CoreAnimation = "Core Animation"
+    private static let Metal = "Metal"
+    private let renderSettingItems = [CoreAnimation, Metal]
+    
+    private var selectedIndexPathSec0: IndexPath?
+    private var selectedIndexPathSec1: IndexPath?
+    @IBOutlet weak var Done: UIButton!
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -35,6 +38,15 @@ class SettingsViewController: UIViewController {
             mvc.updateMainView()
         }
     }
+    
+    @IBAction func doneButtonPressed(_ sender: Any) {
+        if (self.presentingViewController as? MainViewController) == nil {
+            self.performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -82,6 +94,12 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
+            if let sip0 = self.selectedIndexPathSec0 {
+                tableView.cellForRow(at: sip0)?.accessoryType = UITableViewCell.AccessoryType.none
+            }
+            self.selectedIndexPathSec0 = indexPath
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            
             switch controlSettingItems[indexPath.row] {
             case SettingsViewController.FillRatioAndScaleFactor:
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
@@ -91,6 +109,12 @@ extension SettingsViewController: UITableViewDelegate {
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
             }
         case 1:
+            if let sip1 = self.selectedIndexPathSec1 {
+                tableView.cellForRow(at: sip1)?.accessoryType = UITableViewCell.AccessoryType.none
+            }
+            self.selectedIndexPathSec1 = indexPath
+            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            
             switch renderSettingItems[indexPath.row] {
             case SettingsViewController.CoreAnimation:
                 self.initSettings.renderSetting = RenderSettings.coreAnimation
@@ -101,11 +125,6 @@ extension SettingsViewController: UITableViewDelegate {
             }
         default:
             break
-        }
-        if (self.presentingViewController as? MainViewController) == nil {
-            self.performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
-        } else {
-            self.dismiss(animated: true, completion: nil)
         }
     }
 }
