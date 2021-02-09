@@ -14,7 +14,7 @@ struct InitSettings: Codable {
 
 enum RenderSettings: String, Codable {
     case coreAnimation
-    case OpenGL
+    case metal
 }
 
 enum UISettings: String, Codable {

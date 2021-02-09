@@ -41,7 +41,7 @@ class MetalPatternView: UIView { // TODO: move most of the logic to the controll
     private func setupDisplayLink() {
         self.displayLink?.invalidate()
         self.displayLink = CADisplayLink(target: self, selector: #selector(render))
-        self.displayLink!.preferredFramesPerSecond = 60
+//        self.displayLink!.preferredFramesPerSecond = 60
         self.displayLink!.add(to: RunLoop.main, forMode: .default)
     }
     
