@@ -14,7 +14,7 @@ class CoreAnimPatternViewController: UIViewController {
     private var tileHeight: CGFloat = Constants.UI.tileHeight
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0
-    private var tiles: Array<TileLayer> = Array() // TODO: retain cycle
+    private var tileContainers: Array<WeakTileLayerContainer> = Array()
     private weak var lastTile: TileLayer? // keep track of the tile at the end to ensure the next recycled tile fit seamlessly
     private weak var backingView: UIView? // the subview that holds all the tiles. It can be scaled
     private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
@@ -40,7 +40,7 @@ class CoreAnimPatternViewController: UIViewController {
             newTile.position = CGPoint(x: xPos, y: yPos)
             newTile.setUp(fillRatio: fr)
             backingView!.layer.addSublayer(newTile)
-            tiles.append(newTile)
+            tileContainers.append(WeakTileLayerContainer.init(tileLayer: newTile))
             if i == 0 {
                 lastTile = newTile
             }
@@ -63,21 +63,21 @@ class CoreAnimPatternViewController: UIViewController {
     }
     
     private func animateTiles() {
-        for t in tiles {
-            self.animateTile(tile: t)
+        for wtc in tileContainers {
+            self.animateTile(tile: wtc.tileLayer!)
         }
     }
     /**
      Summary: Set model layers to presentation layers, interrupt animations and redo animations
      */
     private func reAnimateTiles() {
-        for tile in tiles {
-            if let pl = tile.presentation() {
-                tile.position = pl.position
+        for wtc in tileContainers {
+            if let pl = wtc.tileLayer!.presentation() {
+                wtc.tileLayer!.position = pl.position
             }
         }
-        for tile in tiles {
-            tile.removeAnimation(forKey: "move down")
+        for wtc in tileContainers {
+            wtc.tileLayer!.removeAnimation(forKey: "move down")
         }
         self.animateTiles()
     }
@@ -133,8 +133,8 @@ extension CoreAnimPatternViewController: PatternViewController {
                 backingViewDefaultTransf.rotated(by: newPattern.direction).scaledBy(x: newR.scaleFactor, y: newR.scaleFactor)
         }
         if oldR.fillRatio != newR.fillRatio {
-            for tile in tiles {
-                tile.fillRatio = newR.fillRatio
+            for wtc in tileContainers {
+                wtc.tileLayer!.fillRatio = newR.fillRatio
             }
         }
     }
