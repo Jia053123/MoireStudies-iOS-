@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pci-Ue-xWn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DoN-VN-dz5">
     <device id="ipad9_7" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -61,45 +61,13 @@
                     <connections>
                         <outlet property="fileButton" destination="coU-E5-Qvx" id="odG-dq-jVX"/>
                         <outlet property="gearButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
-                        <segue destination="Pci-Ue-xWn" kind="presentation" identifier="showSettingsView" id="ocz-K8-uQg"/>
                         <segue destination="KRW-Dp-kSv" kind="presentation" identifier="showSaveFilesView" id="Kp4-kX-h2s"/>
+                        <segue destination="DoN-VN-dz5" kind="presentation" identifier="showSettingsView" id="1nu-6f-lwe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-228" y="158"/>
-        </scene>
-        <!--SettingsViewController-->
-        <scene sceneID="muL-zt-Gr6">
-            <objects>
-                <tableViewController title="SettingsViewController" id="Pci-Ue-xWn" customClass="SettingsViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fMj-Wm-nSm">
-                        <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="G6c-PS-Gi4">
-                                <rect key="frame" x="0.0" y="28" width="704" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G6c-PS-Gi4" id="IqD-62-CDJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="Pci-Ue-xWn" id="Cdi-RD-gG9"/>
-                            <outlet property="delegate" destination="Pci-Ue-xWn" id="xrc-ST-7Hf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="fm4-e5-AaX"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSettingsView" animates="NO" modalPresentationStyle="fullScreen" id="e76-fr-0c3"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LUo-d3-GCG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-228" y="-823"/>
+            <point key="canvasLocation" x="-168" y="172"/>
         </scene>
         <!--Save Files View Controller-->
         <scene sceneID="Anb-Bu-Mm6">
@@ -188,6 +156,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlg-ci-xqr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="482.60869565217394" y="-823.20000000000005"/>
+        </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="dtD-WU-lsV">
+            <objects>
+                <viewController id="DoN-VN-dz5" customClass="SettingsViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vfv-CG-IJ3">
+                        <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gQV-eO-Ryg">
+                                <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="a0x-SP-65t">
+                                        <rect key="frame" x="0.0" y="28" width="704" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a0x-SP-65t" id="w0G-4e-xyf">
+                                            <rect key="frame" x="0.0" y="0.0" width="704" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="DoN-VN-dz5" id="q1b-tA-mAk"/>
+                                    <outlet property="delegate" destination="DoN-VN-dz5" id="7ST-hn-bfU"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="M60-6N-64f"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DSb-Ug-TmP"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSettingsView" animates="NO" modalPresentationStyle="fullScreen" id="oGA-lI-3oy"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kx2-x7-zWp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-168.1640625" y="-823.4375"/>
         </scene>
     </scenes>
     <resources>

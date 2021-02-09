@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SettingsViewController: UITableViewController {
+class SettingsViewController: UIViewController {
     static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
     static let BlackWidthAndWhiteWidth = "Black Width and White Width"
     let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth]
@@ -18,11 +18,31 @@ class SettingsViewController: UITableViewController {
     
     var initSettings = InitSettings()
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed {
+            if let mvc = self.presentingViewController as? MainViewController {
+                mvc.initSettings = self.initSettings
+                mvc.updateMainView()
+            }
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("prepare for segue")
+        let mvc: MainViewController = segue.destination as! MainViewController
+        mvc.initSettings = self.initSettings
+        if mvc.isViewLoaded {
+            mvc.updateMainView()
+        }
+    }
+}
+
+extension SettingsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
         case 0:
             return "Set a Control Scheme: "
@@ -33,7 +53,7 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
             return controlSettingItems.count
@@ -44,7 +64,7 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell")!
         switch indexPath.section {
         case 0:
@@ -56,8 +76,10 @@ class SettingsViewController: UITableViewController {
         }
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+}
+
+extension SettingsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
             switch controlSettingItems[indexPath.row] {
@@ -84,25 +106,6 @@ class SettingsViewController: UITableViewController {
             self.performSegue(withIdentifier: "showMainViewFromSettingsView", sender: self)
         } else {
             self.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if isBeingDismissed {
-            if let mvc = self.presentingViewController as? MainViewController {
-                mvc.initSettings = self.initSettings
-                mvc.updateMainView()
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepare for segue")
-        let mvc: MainViewController = segue.destination as! MainViewController
-        mvc.initSettings = self.initSettings
-        if mvc.isViewLoaded {
-            mvc.updateMainView()
         }
     }
 }
