@@ -25,26 +25,32 @@ class UiTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func mainViewCheckSch1() {
-        let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
+    
+    private func moireViewCheckMetal() {
+        let patternViewId = "MetalPatternView"
         XCTAssert(app.otherElements["MoireView"].exists)
+        XCTAssert(app.otherElements[patternViewId].exists)
+        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
+    }
+    
+    private func moireViewCheckCoreAnim() {
+        let patternViewId = "CoreAnimPatternView"
+        XCTAssert(app.otherElements["MoireView"].exists)
+        XCTAssert(app.otherElements[patternViewId].exists)
+        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
+    }
+    
+    private func controlViewsCheckSch1() {
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch1").count == 2)
-        XCTAssert(app.otherElements[patternViewId].exists)
-        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
-    func mainViewCheckSch2() {
-        let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
-        XCTAssert(app.otherElements["MoireView"].exists)
+    private func controlViewsCheckSch2() {
         XCTAssert(app.otherElements["SliderCtrlViewSch2"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)
-        XCTAssert(app.otherElements[patternViewId].exists)
-        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
-    func dismissPopOver() {
+    private func dismissPopOver() {
 //        app.otherElements["PopoverDismissRegion"].tap()
 //        app.otherElements["dismiss popup"].tap()
 //        app.windows.element(boundBy: 0).tap()
@@ -55,49 +61,59 @@ class UiTests: XCTestCase {
         app = XCUIApplication()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
         app.buttons["SettingsDoneButton"].tap()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count >= 1)
         self.dismissPopOver()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SettingsButton"].tap()
         self.dismissPopOver()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
         app.buttons["SettingsDoneButton"].tap()
         self.dismissPopOver()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
         app.buttons["SettingsDoneButton"].tap()
-        self.mainViewCheckSch2()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
     }
     
     func testScheme2OpeningControllers() throws {
         app = XCUIApplication()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
         app.buttons["SettingsDoneButton"].tap()
-        self.mainViewCheckSch2()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count >= 1)
         self.dismissPopOver()
-        self.mainViewCheckSch2()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
         app.buttons["SettingsButton"].tap()
         self.dismissPopOver()
-        self.mainViewCheckSch2()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
         app.buttons["SettingsDoneButton"].tap()
         self.dismissPopOver()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
         app.buttons["SettingsDoneButton"].tap()
-        self.mainViewCheckSch2()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
     }
     
-    func saveFilePickerCheck()  {
+    private func saveFilePickerCheck()  {
         let numOfCells = app.collectionViews.cells.count
         XCTAssert(numOfCells >= 2)
         XCTAssert(app.collectionViews.cells.containing(.image, identifier:"Add Slide").children(matching: .other).element.exists)
@@ -115,7 +131,8 @@ class UiTests: XCTestCase {
         for _ in 0..<numOfCells - 1 {
             app.buttons["DeleteButton"].tap()
         }
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count == 2)
         self.dismissPopOver()
@@ -123,7 +140,8 @@ class UiTests: XCTestCase {
         app.buttons["SaveFilesButton"].tap()
         self.saveFilePickerCheck()
         app.collectionViews.cells.containing(.image, identifier:"Add Slide").children(matching: .other).element.tap()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count == 3)
         self.dismissPopOver()
@@ -133,9 +151,104 @@ class UiTests: XCTestCase {
         numOfCells = app.collectionViews.cells.count
         app.collectionViews.children(matching: .any).element(boundBy: 0).tap()
         app.buttons["LoadButton"].tap()
-        self.mainViewCheckSch1()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(numOfCells == app.collectionViews.cells.count)
         self.dismissPopOver()
+    }
+    
+    func testSettingsPanelStartupSingleSelection() throws {
+        app = XCUIApplication()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+    }
+    
+    func testSettingsPanelStartupMultipleSelections() throws {
+        app = XCUIApplication()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+    }
+    
+    func testSettingsPanelStartupPartialSelectionControlScheme() throws {
+        app = XCUIApplication()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch2()
+    }
+    
+    func testSettingsPanelStartupPartialSelectionRenderMethod() throws {
+        app = XCUIApplication()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckCoreAnim()
+        self.controlViewsCheckSch1()
+    }
+    
+    func testSettingsPanelStartupNoSelection() throws {
+        app = XCUIApplication()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+    }
+    
+    func testSettingsPanel() throws {
+        app = XCUIApplication()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        self.dismissPopOver()
+        self.moireViewCheckCoreAnim()
+        self.controlViewsCheckSch2()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Metal"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        self.dismissPopOver()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch1()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.buttons["SettingsDoneButton"].tap()
+        self.moireViewCheckCoreAnim()
+        self.controlViewsCheckSch1()
     }
 }
