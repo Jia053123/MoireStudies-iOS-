@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 protocol ControlViewSch1 : UIView {
-    var target: CtrlViewSch1Target? { get set }
+    var target: CtrlViewControllerSch1? { get set }
     func matchControlsWithValues(speed: CGFloat, direction: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat)
 }

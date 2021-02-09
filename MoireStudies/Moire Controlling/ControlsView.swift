@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ControlsView: UIView {
-    private var controlViewControllers: Array<CtrlViewTarget> = [] // TODO: retain cycles. make these child controllers?
+    private var controlViewControllers: Array<CtrlViewController> = [] // TODO: retain cycles. make these child controllers?
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     
     func setup(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
@@ -26,7 +26,7 @@ class ControlsView: UIView {
         self.controlViewControllers = []
         assert(controlFrames.count >= patterns.count)
         for i in 0..<patterns.count {
-            var cvc: CtrlViewTarget?
+            var cvc: CtrlViewController?
             let id = matcher.getCtrlViewControllerId(indexOfPatternControlled: i)
             switch settings.interfaceSetting {
             case UISettings.controlScheme1Slider:
@@ -53,7 +53,7 @@ class ControlsView: UIView {
         return index
     }
     
-    private func findControlViewIndex(controlViewController: CtrlViewTarget) -> Int? {
+    private func findControlViewIndex(controlViewController: CtrlViewController) -> Int? {
         guard let i = controlViewController.id else {
             return nil
         }

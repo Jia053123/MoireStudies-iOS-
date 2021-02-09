@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class GestureControlView: UIView, ControlViewSch1 {
-    var target: CtrlViewSch1Target?
+    var target: CtrlViewControllerSch1?
     
     func matchControlsWithValues(speed: CGFloat, direction: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat) {
         

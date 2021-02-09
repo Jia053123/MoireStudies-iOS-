@@ -29,7 +29,7 @@ class CtrlViewControllerSch2: UIViewController {
     }
 }
 
-extension CtrlViewControllerSch2: CtrlViewTarget {
+extension CtrlViewControllerSch2: CtrlViewController {
     func highlightPattern() {
         _ = delegate?.highlightPattern(caller: self)
     }

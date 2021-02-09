@@ -22,7 +22,7 @@ class CtrlAndPatternMatcher {
         return index
     }
     
-    func findIndexOfPatternControlled(controlViewController: CtrlViewTarget) -> Int? {
+    func findIndexOfPatternControlled(controlViewController: CtrlViewController) -> Int? {
         guard let i = controlViewController.id else {
             return nil
         }

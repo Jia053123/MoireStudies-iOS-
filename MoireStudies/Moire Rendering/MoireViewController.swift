@@ -30,7 +30,7 @@ class MoireViewController: UIViewController {
     }
     
     func resetMoireView(patterns: Array<Pattern>) {
-        for sv in self.view.subviews {
+        for sv in self.view.subviews { // TODO: refactor to one loop! WillMove()
             sv.removeFromSuperview() // TODO: reuse the expensive pattern views
         }
         for c in self.children {

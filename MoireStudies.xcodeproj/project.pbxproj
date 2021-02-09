@@ -53,7 +53,7 @@
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */; };
 		8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */; };
-		8EE29F8825A05BC100FF2539 /* CtrlViewTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */; };
+		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 		8EE29F9625A2A6B000FF2539 /* CtrlViewControllerSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,7 +133,7 @@
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F5C25A055AB00FF2539 /* ControlViewSch1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlViewSch1.swift; sourceTree = "<group>"; };
 		8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewSch2.swift; sourceTree = "<group>"; };
-		8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewTarget.swift; sourceTree = "<group>"; };
+		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 		8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,7 +204,7 @@
 				8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */,
 				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
 				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
-				8EE29F8725A05BC000FF2539 /* CtrlViewTarget.swift */,
+				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
 				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
 			);
@@ -250,8 +250,8 @@
 		8E2E463225D1EFBA00B0EA23 /* Main Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
 				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
+				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 			);
 			path = "Main Controller";
@@ -482,7 +482,7 @@
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
-				8EE29F8825A05BC100FF2539 /* CtrlViewTarget.swift in Sources */,
+				8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */,
 				8EE29F9625A2A6B000FF2539 /* CtrlViewControllerSch2.swift in Sources */,
 				8E2E463725D1F08000B0EA23 /* ControlsViewController.swift in Sources */,
 				8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */,

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol CtrlViewTarget: UIViewController {
+protocol CtrlViewController: UIViewController {
     var id: Int? { get }
     var delegate: PatternManager? { get set }
     init(id: Int, frame: CGRect, pattern: Pattern?)

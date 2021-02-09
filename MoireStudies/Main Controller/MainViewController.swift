@@ -168,7 +168,7 @@ extension MainViewController {
 }
 
 extension MainViewController: PatternManager {
-    func highlightPattern(caller: CtrlViewTarget) -> Bool {
+    func highlightPattern(caller: CtrlViewController) -> Bool {
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
@@ -176,7 +176,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func unhighlightPattern(caller: CtrlViewTarget) -> Bool {
+    func unhighlightPattern(caller: CtrlViewController) -> Bool {
         guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
             return false
         }
@@ -184,7 +184,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func modifyPattern(speed: CGFloat, caller: CtrlViewTarget) -> Bool {
+    func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
         print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             print("speed out of bound")
@@ -198,7 +198,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func modifyPattern(direction: CGFloat, caller: CtrlViewTarget) -> Bool {
+    func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool {
         guard Constants.Bounds.directionRange.contains(direction) else {
             print("direction out of bound")
             return false
@@ -211,7 +211,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func modifyPattern(blackWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
+    func modifyPattern(blackWidth: CGFloat, caller: CtrlViewController) -> Bool {
         print("setting blackWidth to: ", blackWidth)
         guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
@@ -225,7 +225,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewTarget) -> Bool {
+    func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewController) -> Bool {
         guard Constants.Bounds.whiteWidthRange.contains(whiteWidth) else {
             print("whiteWidth out of bound")
             return false
@@ -238,7 +238,7 @@ extension MainViewController: PatternManager {
         return true
     }
     
-    func getPattern(caller: CtrlViewTarget) -> Pattern? {
+    func getPattern(caller: CtrlViewController) -> Pattern? {
         guard let i = caller.id else {
             return nil
         }
