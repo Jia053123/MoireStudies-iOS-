@@ -13,7 +13,6 @@
 		8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */; };
 		8E28187125D0FA67007C3E3D /* MoireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28187025D0FA67007C3E3D /* MoireViewController.swift */; };
 		8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6D52593277E0018D913 /* Pattern.swift */; };
-		8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */; };
 		8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BB6E2259329440018D913 /* MetalPatternView.swift */; };
 		8E2E45F125D1BA0B00B0EA23 /* MoireModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */; };
 		8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */; };
@@ -29,7 +28,6 @@
 		8E36F74A25931669004BC2F3 /* GestureControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74925931669004BC2F3 /* GestureControlView.swift */; };
 		8E36F74F25931796004BC2F3 /* CtrlViewSch1Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F74E25931796004BC2F3 /* CtrlViewSch1Target.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
-		8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75E25931B33004BC2F3 /* PatternView.swift */; };
 		8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */; };
 		8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */; };
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
@@ -82,7 +80,6 @@
 		8E1B9EBF25C34C440021D398 /* ShaderConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderConstants.h; sourceTree = "<group>"; };
 		8E28187025D0FA67007C3E3D /* MoireViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoireViewController.swift; path = "MoireStudies/Moire Rendering/MoireViewController.swift"; sourceTree = SOURCE_ROOT; };
 		8E2BB6D52593277E0018D913 /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
-		8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternView.swift; sourceTree = "<group>"; };
 		8E2BB6E2259329440018D913 /* MetalPatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternView.swift; sourceTree = "<group>"; };
 		8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternViewController.swift; sourceTree = "<group>"; };
 		8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +94,6 @@
 		8E36F74925931669004BC2F3 /* GestureControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureControlView.swift; sourceTree = "<group>"; };
 		8E36F74E25931796004BC2F3 /* CtrlViewSch1Target.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewSch1Target.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
-		8E36F75E25931B33004BC2F3 /* PatternView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
 		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
 		8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFilesViewController.swift; sourceTree = "<group>"; };
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -164,7 +160,6 @@
 			isa = PBXGroup;
 			children = (
 				8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */,
-				8E2BB6DD2593292C0018D913 /* CoreAnimPatternView.swift */,
 				8E36F75625931993004BC2F3 /* TileLayer.swift */,
 			);
 			path = CoreAnimPatternView;
@@ -189,7 +184,6 @@
 				8E28187025D0FA67007C3E3D /* MoireViewController.swift */,
 				8E314489259F030000BB0399 /* MaskView.swift */,
 				8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */,
-				8E36F75E25931B33004BC2F3 /* PatternView.swift */,
 				8E1B9E9625C0B98E0021D398 /* CoreAnimPatternView */,
 				8E1B9E9725C0B9C50021D398 /* MetalPatternView */,
 			);
@@ -474,8 +468,6 @@
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
-				8E2BB6DE2593292C0018D913 /* CoreAnimPatternView.swift in Sources */,
-				8E36F75F25931B33004BC2F3 /* PatternView.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
