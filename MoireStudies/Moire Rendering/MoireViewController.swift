@@ -15,6 +15,7 @@ class MoireViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.accessibilityIdentifier = "MoireView"
         self.view.backgroundColor = UIColor.white
         
         let dv: UIView = UIView()

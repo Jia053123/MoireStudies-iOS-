@@ -53,7 +53,6 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("MainViewController: view will appear")
         super.viewWillAppear(animated)
         // set up must be done in the order below!
         self.initCurrentMoire()

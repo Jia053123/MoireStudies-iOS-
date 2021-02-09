@@ -28,7 +28,7 @@ class UiTests: XCTestCase {
 
     func mainViewCheckSch1() {
         let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
-        XCTAssert(app.otherElements["MainView"].exists)
+        XCTAssert(app.otherElements["MoireView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch1").count == 2)
         XCTAssert(app.otherElements[patternViewId].exists)
@@ -37,7 +37,7 @@ class UiTests: XCTestCase {
     
     func mainViewCheckSch2() {
         let patternViewId = "MetalPatternView" // "CoreAnimPatternView"
-        XCTAssert(app.otherElements["MainView"].exists)
+        XCTAssert(app.otherElements["MoireView"].exists)
         XCTAssert(app.otherElements["SliderCtrlViewSch2"].exists)
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)
         XCTAssert(app.otherElements[patternViewId].exists)
@@ -54,6 +54,7 @@ class UiTests: XCTestCase {
     func testScheme1OpeningControllers() throws {
         app = XCUIApplication()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.mainViewCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count >= 1)
@@ -64,16 +65,19 @@ class UiTests: XCTestCase {
         self.mainViewCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.dismissPopOver()
         self.mainViewCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.mainViewCheckSch2()
     }
     
     func testScheme2OpeningControllers() throws {
         app = XCUIApplication()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.mainViewCheckSch2()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count >= 1)
@@ -84,10 +88,12 @@ class UiTests: XCTestCase {
         self.mainViewCheckSch2()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.dismissPopOver()
         self.mainViewCheckSch1()
         app.buttons["SettingsButton"].tap()
         app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         self.mainViewCheckSch2()
     }
     
@@ -101,6 +107,7 @@ class UiTests: XCTestCase {
         var numOfCells: Int
         app = XCUIApplication()
         app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.buttons["SettingsDoneButton"].tap()
         // delete all
         app.buttons["SaveFilesButton"].tap()
         self.saveFilePickerCheck()
@@ -119,9 +126,9 @@ class UiTests: XCTestCase {
         self.mainViewCheckSch1()
         app.buttons["SaveFilesButton"].tap()
         XCTAssert(app.collectionViews.cells.count == 3)
-//        self.dismissPopOver()
+        self.dismissPopOver()
         // load: would need a title for each save file and the a label for the main view to be effective
-//        app.buttons["SaveFilesButton"].tap()
+        app.buttons["SaveFilesButton"].tap()
         self.saveFilePickerCheck()
         numOfCells = app.collectionViews.cells.count
         app.collectionViews.children(matching: .any).element(boundBy: 0).tap()

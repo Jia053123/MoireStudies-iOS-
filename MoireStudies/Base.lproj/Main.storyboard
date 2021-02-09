@@ -194,6 +194,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1K-fl-3A1">
                                 <rect key="frame" x="647" y="6.5" width="37" height="30"/>
+                                <accessibility key="accessibilityConfiguration" identifier="SettingsDoneButton"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
                                     <action selector="doneButtonPressed:" destination="DoN-VN-dz5" eventType="touchUpInside" id="VXX-wv-w0o"/>
