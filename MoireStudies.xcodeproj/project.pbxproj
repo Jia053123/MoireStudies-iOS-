@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E1B9E6F25B684480021D398 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E6E25B684480021D398 /* ControlsView.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
@@ -75,7 +74,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E1B9E6E25B684480021D398 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 			isa = PBXGroup;
 			children = (
 				8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */,
-				8E1B9E6E25B684480021D398 /* ControlsView.swift */,
 				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
@@ -493,7 +490,6 @@
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
-				8E1B9E6F25B684480021D398 /* ControlsView.swift in Sources */,
 				8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */,
 				8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
