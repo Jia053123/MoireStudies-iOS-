@@ -12,16 +12,21 @@ class MoireViewController: UIViewController {
     typealias PatternViewControllerClass = CoreAnimPatternViewController //MetalPatternViewController
     private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
     private weak var highlightedPatternViewController: PatternViewController?
-    private var dimView: UIView = UIView()
+    private weak var dimView: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dimView.frame = self.view.bounds
-        dimView.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        self.view.backgroundColor = UIColor.white
+        
+        let dv: UIView = UIView()
+        dv.frame = self.view.bounds
+        dv.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        dv.isHidden = true
+        self.view.addSubview(dv)
+        self.dimView = dv
     }
     
     func setUp(patterns: Array<Pattern>) {
-        self.view.backgroundColor = UIColor.white // TODO: move to viewDidLoad()
         self.resetMoireView(patterns: patterns)
     }
     
@@ -30,10 +35,9 @@ class MoireViewController: UIViewController {
     }
     
     func resetMoireView(patterns: Array<Pattern>) {
-        for sv in self.view.subviews { // TODO: refactor to one loop! WillMove()
-            sv.removeFromSuperview() // TODO: reuse the expensive pattern views
-        }
         for c in self.children {
+            c.willMove(toParent: nil)
+            c.view.removeFromSuperview() // TODO: reuse the expensive pattern views
             c.removeFromParent()
         }
         
@@ -59,7 +63,8 @@ class MoireViewController: UIViewController {
     
     func highlightPatternView(patternViewIndex: Int) {
         let pvc = self.children[patternViewIndex]
-        self.view.addSubview(self.dimView)
+        self.view.bringSubviewToFront(self.dimView!)
+        self.dimView!.isHidden = false
         self.highlightedPatternViewController = (pvc as! PatternViewController)
         self.view.bringSubviewToFront(pvc.view)
     }
@@ -67,7 +72,8 @@ class MoireViewController: UIViewController {
     func unhighlightPatternView(patternViewIndex: Int) {
         let pvc = self.children[patternViewIndex]
         self.highlightedPatternViewController = nil
-        self.dimView.removeFromSuperview()
+        self.view.sendSubviewToBack(self.dimView!)
+        self.dimView!.isHidden = true
         self.view.sendSubviewToBack(pvc.view)
     }
     
