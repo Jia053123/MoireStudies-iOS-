@@ -15,8 +15,8 @@ class CoreAnimPatternViewController: UIViewController {
     private var tileLength: CGFloat?
     private var numOfTile: Int = 0
     private var tiles: Array<TileLayer> = Array() // TODO: retain cycle
-    private var lastTile: TileLayer? // keep track of the tile at the end to ensure the next recycled tile fit seamlessly
-    private var backingView: UIView = UIView() // the view that holds all the tiles TODO: weak!!!
+    private weak var lastTile: TileLayer? // keep track of the tile at the end to ensure the next recycled tile fit seamlessly
+    private weak var backingView: UIView? // the subview that holds all the tiles. It can be scaled
     private var backingViewDefaultTransf: CGAffineTransform = CGAffineTransform()
     
     override func viewDidLoad() {
@@ -27,11 +27,11 @@ class CoreAnimPatternViewController: UIViewController {
     private func createTiles() {
         let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth).fillRatio
         // the tiles are placed to fill the backing view
-        tileLength = backingView.bounds.width
-        numOfTile = Int(ceil(backingView.bounds.height / tileHeight)) + 1
+        tileLength = backingView!.bounds.width
+        numOfTile = Int(ceil(backingView!.bounds.height / tileHeight)) + 1
 
         for i in 0..<numOfTile {
-            let xPos : CGFloat = backingView.bounds.width / 2.0
+            let xPos : CGFloat = backingView!.bounds.width / 2.0
             let yPos : CGFloat = CGFloat(i) * tileHeight
             let newTile = TileLayer()
             newTile.contentsScale = UIScreen.main.scale
@@ -39,7 +39,7 @@ class CoreAnimPatternViewController: UIViewController {
             newTile.frame = CGRect(x: 0, y: 0, width: tileLength!, height: tileHeight)
             newTile.position = CGPoint(x: xPos, y: yPos)
             newTile.setUp(fillRatio: fr)
-            backingView.layer.addSublayer(newTile)
+            backingView!.layer.addSublayer(newTile)
             tiles.append(newTile)
             if i == 0 {
                 lastTile = newTile
@@ -105,11 +105,14 @@ class CoreAnimPatternViewController: UIViewController {
 extension CoreAnimPatternViewController: PatternViewController {
     func setUpAndRender(pattern: Pattern) {
         let diagonalLength = Double(sqrt(pow(Float(self.view.bounds.width), 2) + pow(Float(self.view.bounds.height), 2)))
-        backingView.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
-//        backingView.frame = CGRect(x: 0, y: 0, width: self.bounds.height, height: self.bounds.height) //uncomment to show the whole backing view for debuging
-        backingView.center = self.view.center
-        self.view.addSubview(backingView)
-        backingViewDefaultTransf = backingView.transform
+        let bv = UIView()
+        bv.frame = CGRect(x: 0, y: 0, width: diagonalLength, height: diagonalLength)
+//        bv.frame = CGRect(x: 0, y: 0, width: self.view.bounds.height, height: self.view.bounds.height) //uncomment to show the whole backing view for debuging
+        bv.center = self.view.center
+        self.view.addSubview(bv)
+        backingViewDefaultTransf = bv.transform
+        self.backingView = bv
+        
         self.createTiles()
         self.animateTiles()
         self.updatePattern(newPattern: pattern)
@@ -126,7 +129,7 @@ extension CoreAnimPatternViewController: PatternViewController {
         let newR = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth,
                                                               whiteWidth: newPattern.whiteWidth)
         if oldPattern.direction != newPattern.direction || oldR.scaleFactor != newR.scaleFactor {
-            backingView.transform =
+            backingView!.transform =
                 backingViewDefaultTransf.rotated(by: newPattern.direction).scaledBy(x: newR.scaleFactor, y: newR.scaleFactor)
         }
         if oldR.fillRatio != newR.fillRatio {
@@ -155,7 +158,7 @@ extension CoreAnimPatternViewController: CAAnimationDelegate {
         if (flag) { // in case this method is triggered by removing the animation
             let tile: TileLayer? = anim.value(forKey: "tileLayer") as? TileLayer
             if let t = tile, let lt = lastTile {
-                t.position = CGPoint(x: backingView.bounds.width/2.0,
+                t.position = CGPoint(x: backingView!.bounds.width/2.0,
                                      y: (lt.presentation()?.position.y ?? lt.position.y) - tileHeight)
                 t.removeAnimation(forKey: "move down")
                 lastTile = t
