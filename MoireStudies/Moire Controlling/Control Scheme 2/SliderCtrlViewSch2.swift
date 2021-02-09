@@ -37,6 +37,8 @@ class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
         blackSlider.maximumValue = 20.0
         whiteSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
         whiteSlider.maximumValue = 20.0
+        let attri = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        speedSegmentedControl.setTitleTextAttributes(attri, for: UIControl.State.normal)
     }
     
     @IBAction func patternEditing(_ sender: Any) {
