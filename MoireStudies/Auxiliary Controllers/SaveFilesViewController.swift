@@ -26,7 +26,7 @@ class SaveFilesViewController: UIViewController {
     private lazy var moireIdToLoad: String? = currentMoireId
     private var moireModel: MoireModel = MoireModel.init()
     private var allMoiresCache: Array<Moire>
-    private var highlightedCell: SaveFileCollectionViewCell?
+    private weak var highlightedCell: SaveFileCollectionViewCell?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
