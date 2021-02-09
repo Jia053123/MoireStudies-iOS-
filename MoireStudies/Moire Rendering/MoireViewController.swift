@@ -42,6 +42,7 @@ class MoireViewController: UIViewController {
             self.addChild(pvc)
             pvc.view.frame = self.view.bounds
             self.view.addSubview(pvc.view)
+            pvc.didMove(toParent: self)
             pvc.setUpAndRender(pattern: pattern)
         }
         self.setUpMasks()
