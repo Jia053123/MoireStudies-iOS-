@@ -27,7 +27,7 @@ class SaveFileCollectionViewCell: UICollectionViewCell {
     
     func highlight() {
         self.layer.borderWidth = 3.0
-        self.layer.borderColor = UIColor.cyan.cgColor
+        self.layer.borderColor = CGColor.init(red: 20/255, green: 126/255, blue: 251/255, alpha: 255/255)
     }
     
     func unhighlight() {

@@ -33,7 +33,7 @@ struct Pattern: Equatable, Codable {
     static func demoPattern1() -> Pattern {
         let r = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat.random(in: 0.3...0.7),
                                                            scaleFactor: CGFloat.random(in: 1.6...2.9))
-        return Pattern(speed: 30.0, direction: CGFloat.pi/4, blackWidth: r.blackWidth, whiteWidth: r.whiteWidth)
+        return Pattern(speed: 20.0, direction: CGFloat.pi/4, blackWidth: r.blackWidth, whiteWidth: r.whiteWidth)
     }
     
     static func demoPattern2() -> Pattern {
