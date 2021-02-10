@@ -24,8 +24,8 @@ class MetalPatternRenderer: NSObject {
     private var currentBufferIndex: Int = 0
     
     private var viewportSize: packed_float2 = [0.0, 0.0] // unit: pixel
-    var stripesToRender: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
-    private var totalVertexCount: Int {get {return self.stripesToRender.count * self.stripesToRender.first!.vertexCount}}
+//    var stripesToRender: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
+//    private var totalVertexCount: Int {get {return self.stripesToRender.count * self.stripesToRender.first!.vertexCount}}
     
     var screenShotSwitch: Bool = false
     var screenShot: MTLTexture?
@@ -67,24 +67,28 @@ class MetalPatternRenderer: NSObject {
         self.inFlightSemaphore = DispatchSemaphore.init(value: MaxFramesInFlight)
     }
 
-    private func initVertexBuffers() {
-        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
+    private func calcTotalVertexCount(stripes: Array<MetalStripe>)  -> Int{
+        return stripes.count * stripes.first!.vertexCount
+    }
+    
+    private func initVertexBuffers(dataSize: Int) {
+//        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
         for _ in 0 ..< self.MaxFramesInFlight {
             let vb = device.makeBuffer(length: dataSize, options: [])!
             self.vertexBuffers.append(vb)
         }
     }
     
-    private func updateBuffer() {
+    private func updateBuffer(stripesToRender: Array<MetalStripe>) {
         if self.vertexBuffers.isEmpty {
-            self.initVertexBuffers()
+            self.initVertexBuffers(dataSize: self.calcTotalVertexCount(stripes: stripesToRender) * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0]))
         }
         let vertexBuffer = self.vertexBuffers[currentBufferIndex]
         
         let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0]))
 
-        for i in 0 ..< self.stripesToRender.count {
-            let t = self.stripesToRender[i]
+        for i in 0 ..< stripesToRender.count {
+            let t = stripesToRender[i]
             for j in 0 ..< t.vertexCount {
                 vBufferContents[i*t.vertexCount + j] = t.calcVertexAt(index: j)
             }
@@ -93,10 +97,8 @@ class MetalPatternRenderer: NSObject {
     /**
      Summary: to be called for each frame to render the stripes
      */
-    func draw(in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
-        guard !self.stripesToRender.isEmpty else {
-            return
-        }
+    func draw(stripesToRender: Array<MetalStripe>, in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
+        guard !stripesToRender.isEmpty else {return}
         
         self.viewportSize.x = Float(viewportSize.width)
         self.viewportSize.y = Float(viewportSize.height)
@@ -104,7 +106,7 @@ class MetalPatternRenderer: NSObject {
         _ = self.inFlightSemaphore.wait(timeout: .distantFuture)
         
         self.currentBufferIndex = (self.currentBufferIndex + 1) % MaxFramesInFlight
-        self.updateBuffer() // buffers must be setup before this
+        self.updateBuffer(stripesToRender: stripesToRender) // buffers must be initialized before this
         
         guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {return}
         commandBuffer.label = "CommandBuffer"
@@ -124,7 +126,7 @@ class MetalPatternRenderer: NSObject {
                                      index: Int(VertexInputIndexViewportSize.rawValue))
         renderEncoder.drawPrimitives(type: MTLPrimitiveType.triangle,
                                      vertexStart: 0,
-                                     vertexCount: self.totalVertexCount)
+                                     vertexCount: self.calcTotalVertexCount(stripes: stripesToRender))
         renderEncoder.endEncoding()
         
         commandBuffer.present(currentDrawable)

@@ -172,8 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				8E7FD9C225D0D1430064A0A6 /* MetalPatternViewController.swift */,
-				8E2BB6E2259329440018D913 /* MetalPatternView.swift */,
 				8E1B9EB525C265440021D398 /* MetalPatternRenderer.swift */,
+				8E2BB6E2259329440018D913 /* MetalPatternView.swift */,
 				8E6EF2E425C3CB080009905C /* MetalStripe.swift */,
 				8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */,
 				8E1B9EBF25C34C440021D398 /* ShaderConstants.h */,

@@ -9,8 +9,16 @@ import Foundation
 import UIKit
 
 class MetalPatternViewController: UIViewController {
+    private var pattern: Pattern!
+    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}
+    private var directionInRad: Float {get {return Float(self.pattern.direction)}}
+    private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
+    private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
+    
     private var patternRenderer: MetalPatternRenderer!
+    private var patternStripes: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
     private var recycledStripes: Array<MetalStripe> = []
+    
     private lazy var viewportSizePixel: CGSize = (self.view.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?
         get {return Float(sqrt(pow(self.viewportSizePixel.width, 2) + pow(self.viewportSizePixel.height, 2)))}
@@ -18,11 +26,6 @@ class MetalPatternViewController: UIViewController {
     private var translationRange: ClosedRange<Float> {
         get {return -1 * self.diagonalOfDrawableTexture / 2.0 ... self.diagonalOfDrawableTexture / 2.0}
     }
-    private var pattern: Pattern!
-    private var speedInPixel: Float {get {return Float(self.pattern.speed * UIScreen.main.scale)}}
-    private var directionInRad: Float {get {return Float(self.pattern.direction)}}
-    private var blackWidthInPixel: Float {get {return Float(self.pattern.blackWidth * UIScreen.main.scale)}}
-    private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
     
     override func loadView() {
         self.view = MetalPatternView()
@@ -32,18 +35,22 @@ class MetalPatternViewController: UIViewController {
         (self.view as! MetalPatternView).invalidateDisplayLink()
     }
     
+    private func updateStripe(stripe: MetalStripe) {
+        stripe.length = self.diagonalOfDrawableTexture
+        stripe.width = self.blackWidthInPixel
+        stripe.orientation = self.directionInRad
+    }
+    
     private func updateExistingStripes() {
-        for t in self.patternRenderer.stripesToRender {
-            t.length = self.diagonalOfDrawableTexture
-            t.width = self.blackWidthInPixel
-            t.orientation = self.directionInRad
+        for s in self.patternStripes {
+            self.updateStripe(stripe: s)
         }
     }
     
     private func createStripes() {
-        self.patternRenderer.stripesToRender = []
+        self.patternStripes = []
         let numToReserve: Int = Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1
-        self.patternRenderer.stripesToRender.reserveCapacity(numToReserve)
+        self.patternStripes.reserveCapacity(numToReserve)
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfStripes: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the stripes reach the corners whatever the orientation
@@ -51,7 +58,7 @@ class MetalPatternViewController: UIViewController {
         for _ in 0 ..< numOfStripes {
             let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
             newStripe.translation = nextTranslation
-            self.patternRenderer.stripesToRender.append(newStripe)
+            self.patternStripes.append(newStripe)
             nextTranslation -= width
         }
         self.updateExistingStripes()
@@ -62,48 +69,54 @@ class MetalPatternViewController: UIViewController {
     private func tileView() {
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         func fitMoreStripesToTheEndIfNecessary() {
-            let lastStripe = self.patternRenderer.stripesToRender.last!
+            let lastStripe = self.patternStripes.last!
             if lastStripe.translation - self.translationRange.lowerBound >= width {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = lastStripe.translation - width
-                self.patternRenderer.stripesToRender.append(newStripe)
+                print("fit new stripe with translation: ", newStripe.translation)
+//                self.updateStripe(stripe: newStripe)
+                
+                self.patternStripes.append(newStripe)
                 fitMoreStripesToTheEndIfNecessary()
             } else {
                 return
             }
         }
         func fitMoreStripesToTheBeginningIfNecessary() {
-            let firstStripe = self.patternRenderer.stripesToRender.first!
+            let firstStripe = self.patternStripes.first!
             if self.translationRange.upperBound - firstStripe.translation >= width {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = firstStripe.translation + width
-                self.patternRenderer.stripesToRender.insert(newStripe, at: 0) // note: O(n)
+                
+//                self.updateStripe(stripe: newStripe)
+                
+                self.patternStripes.insert(newStripe, at: 0) // note: O(n)
                 fitMoreStripesToTheBeginningIfNecessary()
             } else {
                 return
             }
         }
         // start by picking the center stripe as the anchor point
-        let existingStripeCount = self.patternRenderer.stripesToRender.count
+        let existingStripeCount = self.patternStripes.count
         let middleIndex: Int = (existingStripeCount - 1) / 2 // remember index starts with 0
         // first operate in the ascending direction
         for i in (middleIndex + 1) ..< existingStripeCount {
-            self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i-1].translation - width
-            if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
+            self.patternStripes[i].translation = self.patternStripes[i-1].translation - width
+            if !self.translationRange.contains(self.patternStripes[i].translation) {
                 let rangeToRecycle = i ..< existingStripeCount
-                self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
-                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle)
+                self.recycledStripes.append(contentsOf: self.patternStripes[rangeToRecycle])
+                self.patternStripes.removeSubrange(rangeToRecycle)
                 break
             }
         }
         fitMoreStripesToTheEndIfNecessary()
         // then operate in the descending direction
         for i in (0 ..< middleIndex).reversed() {
-            self.patternRenderer.stripesToRender[i].translation = self.patternRenderer.stripesToRender[i+1].translation + width
-            if !self.translationRange.contains(self.patternRenderer.stripesToRender[i].translation) {
+            self.patternStripes[i].translation = self.patternStripes[i+1].translation + width
+            if !self.translationRange.contains(self.patternStripes[i].translation) {
                 let rangeToRecycle = 0...i
-                self.recycledStripes.append(contentsOf: self.patternRenderer.stripesToRender[rangeToRecycle])
-                self.patternRenderer.stripesToRender.removeSubrange(rangeToRecycle)
+                self.recycledStripes.append(contentsOf: self.patternStripes[rangeToRecycle])
+                self.patternStripes.removeSubrange(rangeToRecycle)
                 break
             }
         }
@@ -111,21 +124,21 @@ class MetalPatternViewController: UIViewController {
     }
     
     private func translateStripes(frameDuration: CFTimeInterval) { // always move from negative towards positive
-        let stripeCount = self.patternRenderer.stripesToRender.count
+        let stripeCount = self.patternStripes.count
         // translate
         for i in (0 ..< stripeCount).reversed() {
-            let stripe = self.patternRenderer.stripesToRender[i]
+            let stripe = self.patternStripes[i]
             stripe.translation += Float(Double(self.speedInPixel) * frameDuration) //(self.displayLink!.targetTimestamp - self.displayLink!.timestamp))
         }
         // remove offscreen stripes and append them to the rear
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         repeat {
-            let firstT = self.patternRenderer.stripesToRender.first!
+            let firstT = self.patternStripes.first!
             if !self.translationRange.contains(firstT.translation) {
-                let offScreenStripe = self.patternRenderer.stripesToRender.removeFirst()
-                let lastStripe = self.patternRenderer.stripesToRender.last!
+                let offScreenStripe = self.patternStripes.removeFirst()
+                let lastStripe = self.patternStripes.last!
                 offScreenStripe.translation = lastStripe.translation - width
-                self.patternRenderer.stripesToRender.append(offScreenStripe)
+                self.patternStripes.append(offScreenStripe)
             } else {
                 break // all stripes after this should also be within bound
             }
@@ -134,7 +147,7 @@ class MetalPatternViewController: UIViewController {
     
     func render(frameDuration: CFTimeInterval) {
         self.translateStripes(frameDuration: frameDuration)
-        self.patternRenderer.draw(in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
+        self.patternRenderer.draw(stripesToRender: self.patternStripes, in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
     }
 }
 
@@ -170,7 +183,7 @@ extension MetalPatternViewController: PatternViewController {
         self.patternRenderer.screenShotSwitch = true
         (self.view.layer as! CAMetalLayer).framebufferOnly = false
         
-        self.patternRenderer.draw(in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
+        self.patternRenderer.draw(stripesToRender: self.patternStripes, in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
         if let texture = self.patternRenderer.screenShot, let ciImg = CIImage.init(mtlTexture: texture, options: nil) {
             out = UIImage.init(ciImage: ciImg)
         } else {

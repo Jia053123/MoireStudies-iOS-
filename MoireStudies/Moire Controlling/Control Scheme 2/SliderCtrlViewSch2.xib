@@ -47,6 +47,7 @@
                         <segment title="3"/>
                         <segment title="4"/>
                     </segments>
+                    <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="ShQ-O8-iVh"/>
                         <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="jLy-b3-YeX"/>
