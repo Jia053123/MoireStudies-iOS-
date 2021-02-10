@@ -24,8 +24,6 @@ class MetalPatternRenderer: NSObject {
     private var currentBufferIndex: Int = 0
     
     private var viewportSize: packed_float2 = [0.0, 0.0] // unit: pixel
-//    var stripesToRender: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
-//    private var totalVertexCount: Int {get {return self.stripesToRender.count * self.stripesToRender.first!.vertexCount}}
     
     var screenShotSwitch: Bool = false
     var screenShot: MTLTexture?
@@ -46,7 +44,7 @@ class MetalPatternRenderer: NSObject {
         textureDescriptor.height = Int(ceil(metalLayer.drawableSize.height))
         textureDescriptor.usage = MTLTextureUsage.renderTarget
         textureDescriptor.textureType = MTLTextureType.type2DMultisample
-        textureDescriptor.storageMode = MTLStorageMode.private
+        textureDescriptor.storageMode = MTLStorageMode.private // can't use memoryless because my iPad is not new enough
         let multiSampleTexture = self.device.makeTexture(descriptor: textureDescriptor) // I don't think I need MaxFramesInFlight# of this becasuse it holds the GPU output which is always behind of CPU
         self.renderPassDescriptor.colorAttachments[0].texture = multiSampleTexture
         

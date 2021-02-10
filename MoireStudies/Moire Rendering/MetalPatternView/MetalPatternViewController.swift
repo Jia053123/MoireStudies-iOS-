@@ -16,8 +16,9 @@ class MetalPatternViewController: UIViewController {
     private var whiteWidthInPixel: Float {get {return Float(self.pattern.whiteWidth * UIScreen.main.scale)}}
     
     private var patternRenderer: MetalPatternRenderer!
-    private var patternStripes: Array<MetalStripe>! // sorted: the first element always has the most positive translation value
+    private var patternStripes: Array<MetalStripe>! // must be sorted: the first element always has the most positive translation value
     private var recycledStripes: Array<MetalStripe> = []
+    private let CheckDataIntegrity = false
     
     private lazy var viewportSizePixel: CGSize = (self.view.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?
@@ -33,6 +34,17 @@ class MetalPatternViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         (self.view as! MetalPatternView).invalidateDisplayLink()
+    }
+    
+    private func checkDataIntegrity() -> Bool {
+        // check if patternStripes are sorted by translation in ascending order
+        for i in 1 ..< self.patternStripes.count {
+            if self.patternStripes[i-1].translation <= self.patternStripes[i].translation {
+                print("rendering data integrity check failed between indexes: ", i-1, " and ", i)
+                return false
+            }
+        }
+        return true
     }
     
     private func updateStripe(stripe: MetalStripe) {
@@ -73,7 +85,7 @@ class MetalPatternViewController: UIViewController {
             if lastStripe.translation - self.translationRange.lowerBound >= width {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = lastStripe.translation - width
-                print("fit new stripe with translation: ", newStripe.translation)
+//                print("fit new stripe with translation: ", newStripe.translation)
 //                self.updateStripe(stripe: newStripe)
                 
                 self.patternStripes.append(newStripe)
@@ -128,7 +140,7 @@ class MetalPatternViewController: UIViewController {
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternStripes[i]
-            stripe.translation += Float(Double(self.speedInPixel) * frameDuration) //(self.displayLink!.targetTimestamp - self.displayLink!.timestamp))
+            stripe.translation += Float(Double(self.speedInPixel) * frameDuration)
         }
         // remove offscreen stripes and append them to the rear
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
@@ -147,6 +159,8 @@ class MetalPatternViewController: UIViewController {
     
     func render(frameDuration: CFTimeInterval) {
         self.translateStripes(frameDuration: frameDuration)
+        
+        if self.checkDataIntegrity(){assert(self.checkDataIntegrity())}
         self.patternRenderer.draw(stripesToRender: self.patternStripes, in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
     }
 }
