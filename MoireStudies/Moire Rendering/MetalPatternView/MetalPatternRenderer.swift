@@ -28,7 +28,7 @@ class MetalPatternRenderer: NSObject {
     var screenShotSwitch: Bool = false
     var screenShot: MTLTexture?
     
-    func initWithMetalLayer(metalLayer: CAMetalLayer) {
+    func initWithMetalLayer(metalLayer: CAMetalLayer, initBufferSizeInBytes: Int) {
         self.device = MTLCreateSystemDefaultDevice()
         metalLayer.device = self.device
         
@@ -62,6 +62,8 @@ class MetalPatternRenderer: NSObject {
         self.pipelineState = try! self.device!.makeRenderPipelineState(descriptor: pipelineStateDescriptor)
         self.commandQueue = self.device!.makeCommandQueue()
         
+        self.initVertexBuffers(dataSize: initBufferSizeInBytes)
+        
         self.inFlightSemaphore = DispatchSemaphore.init(value: MaxFramesInFlight)
     }
 
@@ -70,7 +72,7 @@ class MetalPatternRenderer: NSObject {
     }
     
     private func initVertexBuffers(dataSize: Int) {
-//        let dataSize = self.totalVertexCount * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
+        self.vertexBuffers = []
         for _ in 0 ..< self.MaxFramesInFlight {
             let vb = device.makeBuffer(length: dataSize, options: [])!
             self.vertexBuffers.append(vb)
@@ -78,10 +80,14 @@ class MetalPatternRenderer: NSObject {
     }
     
     private func updateBuffer(stripesToRender: Array<MetalStripe>) {
-        if self.vertexBuffers.isEmpty {
-            self.initVertexBuffers(dataSize: self.calcTotalVertexCount(stripes: stripesToRender) * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0]))
-        }
+        precondition(!self.vertexBuffers.isEmpty)
         let vertexBuffer = self.vertexBuffers[currentBufferIndex]
+        // make sure the vertex buffer is large enough
+        let necessarySize = self.calcTotalVertexCount(stripes: stripesToRender) * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
+        if vertexBuffer.length < necessarySize {
+            print("MetalPatternRenderer: re-initializing vertex buffer to expand capacity")
+            self.initVertexBuffers(dataSize: Int(Double(necessarySize) * 1.25))
+        }
         
         let vBufferContents = vertexBuffer.contents().bindMemory(to: packed_float2.self, capacity: vertexBuffer.length / MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0]))
 

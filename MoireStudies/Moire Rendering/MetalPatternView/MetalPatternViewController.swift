@@ -18,7 +18,8 @@ class MetalPatternViewController: UIViewController {
     private var patternRenderer: MetalPatternRenderer!
     private var patternStripes: Array<MetalStripe>! // must be sorted: the first element always has the most positive translation value
     private var recycledStripes: Array<MetalStripe> = []
-    private let CheckDataIntegrity = false
+    private let CheckDataIntegrityPerFrame = false
+    private var estimatedMaxNumOfStripes: Int {get{return Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1}} // this is used to reserve data structure capacity for this class and the renderer. It may not be strictly the maximum possible number
     
     private lazy var viewportSizePixel: CGSize = (self.view.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?
@@ -61,8 +62,7 @@ class MetalPatternViewController: UIViewController {
     
     private func createStripes() {
         self.patternStripes = []
-        let numToReserve: Int = Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1
-        self.patternStripes.reserveCapacity(numToReserve)
+        self.patternStripes.reserveCapacity(self.estimatedMaxNumOfStripes)
         
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
         let numOfStripes: Int = Int(ceil(self.diagonalOfDrawableTexture / width)) + 1 // use the diagonal length to make sure the stripes reach the corners whatever the orientation
@@ -153,7 +153,6 @@ class MetalPatternViewController: UIViewController {
     
     func render(frameDuration: CFTimeInterval) {
         self.translateStripes(frameDuration: frameDuration)
-        print("num of stripes to render: ", self.patternStripes.count)
         if self.checkDataIntegrity(){assert(self.checkDataIntegrity())}
         self.patternRenderer.draw(stripesToRender: self.patternStripes, in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
     }
@@ -165,20 +164,20 @@ extension MetalPatternViewController: PatternViewController {
         
         (self.view as! MetalPatternView).setup(delegate: self)
         self.patternRenderer = MetalPatternRenderer()
-        self.patternRenderer.initWithMetalLayer(metalLayer: self.view.layer as! CAMetalLayer)
+        let bytesToReserve = self.estimatedMaxNumOfStripes * MetalStripe.defaultVertices.count * MemoryLayout.size(ofValue: MetalStripe.defaultVertices[0])
+        self.patternRenderer.initWithMetalLayer(metalLayer: self.view.layer as! CAMetalLayer, initBufferSizeInBytes: bytesToReserve)
         
-        self.createStripes() // must have the renderer ready before this
+        self.createStripes()
     }
     
     func updatePattern(newPattern: Pattern) {
-        if self.pattern != newPattern {
-            let oldPattern = self.pattern!
-            self.pattern = newPattern
-            if oldPattern.blackWidth != self.pattern.blackWidth || oldPattern.whiteWidth != self.pattern.whiteWidth {
-                self.tileView()
-            }
-            self.updateExistingStripes()
+        guard self.pattern != newPattern else {return}
+        let oldPattern = self.pattern!
+        self.pattern = newPattern
+        if oldPattern.blackWidth != self.pattern.blackWidth || oldPattern.whiteWidth != self.pattern.whiteWidth {
+            self.tileView()
         }
+        self.updateExistingStripes()
     }
     
     func viewControllerLosingFocus() {
