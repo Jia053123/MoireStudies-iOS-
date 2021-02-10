@@ -46,7 +46,6 @@ class SettingsViewController: UIViewController {
             self.dismiss(animated: true, completion: nil)
         }
     }
-    
 }
 
 extension SettingsViewController: UITableViewDataSource {
@@ -80,11 +79,36 @@ extension SettingsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingCell")!
         switch indexPath.section {
         case 0:
-            cell.textLabel?.text = controlSettingItems[indexPath.row]
+            cell.textLabel!.text = controlSettingItems[indexPath.row]
         case 1:
-            cell.textLabel?.text = renderSettingItems[indexPath.row]
+            cell.textLabel!.text = renderSettingItems[indexPath.row]
         default:
-            cell.textLabel?.text = "Cell Title"
+            cell.textLabel!.text = "Cell Title"
+        }
+        // tick the current settings
+        switch indexPath.section {
+        case 0:
+            let selectedSetting = self.initSettings.interfaceSetting
+            switch (selectedSetting, cell.textLabel!.text) {
+            case (UISettings.controlScheme1Slider, SettingsViewController.FillRatioAndScaleFactor),
+                 (UISettings.controlScheme2Slider, SettingsViewController.BlackWidthAndWhiteWidth):
+                self.selectedIndexPathSec0 = indexPath
+                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            default:
+                cell.accessoryType = UITableViewCell.AccessoryType.none
+            }
+        case 1:
+            let selectedSetting = self.initSettings.renderSetting
+            switch (selectedSetting, cell.textLabel!.text) {
+            case (RenderSettings.coreAnimation, SettingsViewController.CoreAnimation),
+                 (RenderSettings.metal, SettingsViewController.Metal):
+                self.selectedIndexPathSec1 = indexPath
+                cell.accessoryType = UITableViewCell.AccessoryType.checkmark
+            default:
+                cell.accessoryType = UITableViewCell.AccessoryType.none
+            }
+        default:
+            break
         }
         return cell
     }

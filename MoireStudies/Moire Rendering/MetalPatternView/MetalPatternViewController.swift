@@ -85,9 +85,6 @@ class MetalPatternViewController: UIViewController {
             if lastStripe.translation - self.translationRange.lowerBound >= width {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = lastStripe.translation - width
-//                print("fit new stripe with translation: ", newStripe.translation)
-//                self.updateStripe(stripe: newStripe)
-                
                 self.patternStripes.append(newStripe)
                 fitMoreStripesToTheEndIfNecessary()
             } else {
@@ -99,9 +96,6 @@ class MetalPatternViewController: UIViewController {
             if self.translationRange.upperBound - firstStripe.translation >= width {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = firstStripe.translation + width
-                
-//                self.updateStripe(stripe: newStripe)
-                
                 self.patternStripes.insert(newStripe, at: 0) // note: O(n)
                 fitMoreStripesToTheBeginningIfNecessary()
             } else {
@@ -159,7 +153,7 @@ class MetalPatternViewController: UIViewController {
     
     func render(frameDuration: CFTimeInterval) {
         self.translateStripes(frameDuration: frameDuration)
-        
+        print("num of stripes to render: ", self.patternStripes.count)
         if self.checkDataIntegrity(){assert(self.checkDataIntegrity())}
         self.patternRenderer.draw(stripesToRender: self.patternStripes, in: self.view.layer as! CAMetalLayer, of: self.viewportSizePixel)
     }
