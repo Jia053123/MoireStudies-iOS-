@@ -201,6 +201,8 @@ extension MetalPatternViewController: PatternViewController {
         (self.view.layer as! CAMetalLayer).framebufferOnly = true
         self.patternRenderer.screenShotSwitch = false
         (self.view as! MetalPatternView).resumeDisplayLink()
-        return out
+        
+        let fixedOutput = out?.withHorizontallyFlippedOrientation() // don't know why the screenshots come out flipped...
+        return fixedOutput
     }
 }
