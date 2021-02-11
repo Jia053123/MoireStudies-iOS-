@@ -1,11 +1,11 @@
 # MOIRE EDITOR
 
 ## Intentions of the Project
-By designing a computation tool for a niche art form from a blank slate, I intend to study how the tools are shaped by the art forms they create, and how the works of art in turn reflects their creation processes. 
+By designing a computation tool for a niche form of art from a blank slate, I intend to study how the tools are shaped by the art forms they create, and how the works of art in turn reflects the creation processes. 
 
 ## Software Architecture
 ### Requirements
-Iterative UI prototyping requires components to be swappable, ideally without restarting the app
+Iterative UI prototyping requires interface components to be swappable, ideally without restarting the app
 
 ### Assumptions 
 A moire is consisted of one or more overlaid moving patterns of the same size. A pattern isn’t necessarily consisted of uniform stripes. 
@@ -19,10 +19,10 @@ A moire is consisted of one or more overlaid moving patterns of the same size. A
   This alleviates the synchronization issue between the model and the ControlViews
 #### The views that render each pattern of the moire: PatternViewController protocol
   - Each PatternView knows the pattern it’s rendering but cannot modify it. 
-##### The controller connecting the model, the controls and the views: PatternManager protocol
+#### The controller connecting the model, the controls and the views: PatternManager protocol
   - It manages the pairing between the ControlViews and the PatternViews, and decides which changes from the ControlViews to apply to avoid breaking the PatternViews. 
   
-###	View Controllers Hierachy
+###	Major Components Hierachy
 - MainViewController: PatternManager
   - MoireModel
   - ControlsViewController
@@ -35,7 +35,7 @@ A moire is consisted of one or more overlaid moving patterns of the same size. A
 Currently this number is 2 but it’s not hardcoded into any major component. With some work on the UI I will try to have up to 4 patterns per moire. 
 
 ### Representation of patterns
-Currently, a pattern is consisted of identical stripes placed at uniform spacings. It is represented by four attributes only: speed, direction, blackWidth and whiteWidth
+Currently, a pattern is consisted of identical stripes placed at uniform spacings. It is represented by four attributes only: speed, direction, blackWidth and whiteWidth. 
 An alternative representation I used earlier was speed, direction, fillRatio and scaleFactor. It is less straightforward but maps well onto the Core Animation PatternView I initially built. 
 One-to-one conversion between these two systems is done by the Utilities class. 
 The next step may be to represent distorted stripes with nonuniform spacings, though I’m still working on the details. 
