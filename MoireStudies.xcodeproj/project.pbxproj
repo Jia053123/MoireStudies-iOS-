@@ -32,6 +32,7 @@
 		8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */; };
 		8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */; };
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
+		8E5816DE25E7074400FFE709 /* SliderCtrlViewSch3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */; };
 		8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BABDF25AE82F4003FC799 /* MoireModel.swift */; };
 		8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* UtilitiesTests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
@@ -99,6 +100,7 @@
 		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
 		8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFilesViewController.swift; sourceTree = "<group>"; };
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch3.xib; sourceTree = "<group>"; };
 		8E5BABDF25AE82F4003FC799 /* MoireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModel.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E60786725A2F049002EB000 /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
 				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
+				8E5816D925E7063D00FFE709 /* Control Scheme 3 */,
 			);
 			path = "Moire Controlling";
 			sourceTree = "<group>";
@@ -249,6 +252,14 @@
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 			);
 			path = "Main Controller";
+			sourceTree = "<group>";
+		};
+		8E5816D925E7063D00FFE709 /* Control Scheme 3 */ = {
+			isa = PBXGroup;
+			children = (
+				8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */,
+			);
+			path = "Control Scheme 3";
 			sourceTree = "<group>";
 		};
 		8E96B798257F33CF007527E2 = {
@@ -436,6 +447,7 @@
 				8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */,
 				8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */,
 				8E96B7AF257F33CF007527E2 /* Main.storyboard in Resources */,
+				8E5816DE25E7074400FFE709 /* SliderCtrlViewSch3.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
