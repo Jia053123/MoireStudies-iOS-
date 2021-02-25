@@ -9,14 +9,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderCtrlViewSch3" customModule="MoireStudies" customModuleProvider="target">
             <connections>
-                <outlet property="blackSlider" destination="EeR-r3-5Tp" id="NjE-jS-kWX"/>
                 <outlet property="blackWidthSlider" destination="EeR-r3-5Tp" id="Hk7-xi-jiH"/>
                 <outlet property="directionSlider" destination="JvY-7a-rPz" id="F38-OQ-u1R"/>
                 <outlet property="fillRatioSlider" destination="V3X-UX-Yku" id="9J0-Am-tpl"/>
                 <outlet property="highlightButton" destination="dHM-LJ-fiF" id="vJb-Zb-G74"/>
                 <outlet property="scaleFactorSlider" destination="9qB-ed-vKY" id="UvM-VB-Qdc"/>
                 <outlet property="speedSlider" destination="Vdk-Nc-9b1" id="HgK-0N-i7A"/>
-                <outlet property="whiteSlider" destination="PI2-Sz-5kM" id="1Kn-QM-reZ"/>
                 <outlet property="whiteWidthSlider" destination="PI2-Sz-5kM" id="fHP-ze-V4B"/>
             </connections>
         </placeholder>
@@ -65,36 +63,18 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>
                     </constraints>
-                    <connections>
-                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="2id-Bk-dgj"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="boc-gp-LWB"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="rH1-u3-jXD"/>
-                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="Bje-AC-0vt"/>
-                    </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="BlackWidthSlider">
                     <rect key="frame" x="8" y="120" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
                     </constraints>
-                    <connections>
-                        <action selector="blackWidthChanged:" destination="-1" eventType="valueChanged" id="ErS-Hf-UJY"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="2fN-Dy-ND2"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="csj-mT-xQC"/>
-                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="9oo-5p-85l"/>
-                    </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="WhiteWidthSlider">
                     <rect key="frame" x="8" y="169.5" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
                     </constraints>
-                    <connections>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="ozx-iS-f43"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="rXW-DN-3Ld"/>
-                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="lZP-UO-zFe"/>
-                        <action selector="whiteWidthChanged:" destination="-1" eventType="valueChanged" id="hs0-gp-of7"/>
-                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPEED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-Z6-FY6">
                     <rect key="frame" x="80.5" y="5" width="40" height="14"/>
@@ -186,12 +166,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Lm6-mm-bzn"/>
                     </constraints>
-                    <connections>
-                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="Db4-oS-XgY"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpOutside" id="OgC-fX-JLG"/>
-                        <action selector="patternEdited:" destination="-1" eventType="touchUpInside" id="TDy-2h-3OH"/>
-                        <action selector="patternEditing:" destination="-1" eventType="touchDown" id="gKi-iV-2Te"/>
-                    </connections>
                 </slider>
             </subviews>
             <viewLayoutGuide key="safeArea" id="MIZ-pY-bGK"/>

@@ -218,6 +218,7 @@
                     <navigationItem key="navigationItem" id="DSb-Ug-TmP"/>
                     <connections>
                         <outlet property="Done" destination="V1K-fl-3A1" id="Qbc-mU-xxI"/>
+                        <outlet property="tableView" destination="gQV-eO-Ryg" id="tPc-fX-Y6F"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showMainViewFromSettingsView" animates="NO" modalPresentationStyle="fullScreen" id="oGA-lI-3oy"/>
                     </connections>
                 </viewController>

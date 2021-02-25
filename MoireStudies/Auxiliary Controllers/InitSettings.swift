@@ -16,6 +16,7 @@ enum UISettings: String, Codable {
     case controlScheme1Slider
     case controlScheme1Gesture
     case controlScheme2Slider
+    case controlScheme3Slider
 }
 
 enum RenderSettings: String, Codable {

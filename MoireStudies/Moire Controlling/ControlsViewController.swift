@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ControlsViewController: UIViewController {
-    private var controlFrames: Array<CGRect> = Constants.UI.defaultControlFrames
+    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesDefault
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clear
@@ -36,6 +36,8 @@ class ControlsViewController: UIViewController {
                 cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme1Gesture:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+            case UISettings.controlScheme3Slider:
+                cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             }
             cvc.delegate = delegate
             self.addChild(cvc)

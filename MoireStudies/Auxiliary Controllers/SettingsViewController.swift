@@ -8,11 +8,13 @@
 import Foundation
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController { // TODO: now we have a lot of scattered info. create a setting item struct type to consolidate
+    @IBOutlet weak var tableView: UITableView!
     var initSettings = InitSettings()
     private static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
     private static let BlackWidthAndWhiteWidth = "Black Width and White Width"
-    private let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth]
+    private static let CompositeControls = "Composite Controls (Metal Only)"
+    private let controlSettingItems = [FillRatioAndScaleFactor, BlackWidthAndWhiteWidth, CompositeControls]
     private static let CoreAnimation = "Core Animation"
     private static let Metal = "Metal"
     private let renderSettingItems = [CoreAnimation, Metal]
@@ -129,6 +131,12 @@ extension SettingsViewController: UITableViewDelegate {
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
             case SettingsViewController.BlackWidthAndWhiteWidth:
                 self.initSettings.interfaceSetting = UISettings.controlScheme2Slider
+            case SettingsViewController.CompositeControls:
+                self.initSettings.interfaceSetting = UISettings.controlScheme3Slider
+                if self.initSettings.renderSetting != RenderSettings.metal {
+                    self.initSettings.renderSetting = RenderSettings.metal
+                    self.tableView.reloadSections(IndexSet.init(integer: 1), with: UITableView.RowAnimation.none)
+                }
             default:
                 self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
             }
@@ -142,6 +150,10 @@ extension SettingsViewController: UITableViewDelegate {
             switch renderSettingItems[indexPath.row] {
             case SettingsViewController.CoreAnimation:
                 self.initSettings.renderSetting = RenderSettings.coreAnimation
+                if self.initSettings.interfaceSetting == UISettings.controlScheme3Slider {
+                    self.initSettings.interfaceSetting = UISettings.controlScheme1Slider
+                    self.tableView.reloadSections(IndexSet.init(integer: 0), with: UITableView.RowAnimation.none)
+                }
             case SettingsViewController.Metal:
                 self.initSettings.renderSetting = RenderSettings.metal
             default:
