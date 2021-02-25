@@ -33,6 +33,9 @@
 		8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */; };
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
 		8E5816DE25E7074400FFE709 /* SliderCtrlViewSch3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */; };
+		8E5816E325E7438200FFE709 /* CtrlViewControllerSch3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E225E7438200FFE709 /* CtrlViewControllerSch3.swift */; };
+		8E5816E825E743A100FFE709 /* SliderCtrlViewSch3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E725E743A100FFE709 /* SliderCtrlViewSch3.swift */; };
+		8E5816F325E74AEF00FFE709 /* ControlViewSch3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816F225E74AEF00FFE709 /* ControlViewSch3.swift */; };
 		8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BABDF25AE82F4003FC799 /* MoireModel.swift */; };
 		8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* UtilitiesTests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
@@ -101,6 +104,9 @@
 		8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFilesViewController.swift; sourceTree = "<group>"; };
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch3.xib; sourceTree = "<group>"; };
+		8E5816E225E7438200FFE709 /* CtrlViewControllerSch3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3.swift; sourceTree = "<group>"; };
+		8E5816E725E743A100FFE709 /* SliderCtrlViewSch3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch3.swift; sourceTree = "<group>"; };
+		8E5816F225E74AEF00FFE709 /* ControlViewSch3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlViewSch3.swift; sourceTree = "<group>"; };
 		8E5BABDF25AE82F4003FC799 /* MoireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModel.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E60786725A2F049002EB000 /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
@@ -227,8 +233,8 @@
 				8E3144B225A04F4200BB0399 /* CtrlViewSch2Target.swift */,
 				8EE29F9525A2A6B000FF2539 /* CtrlViewControllerSch2.swift */,
 				8EE29F6425A0563D00FF2539 /* ControlViewSch2.swift */,
-				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
 				8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */,
+				8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */,
 			);
 			path = "Control Scheme 2";
 			sourceTree = "<group>";
@@ -257,6 +263,9 @@
 		8E5816D925E7063D00FFE709 /* Control Scheme 3 */ = {
 			isa = PBXGroup;
 			children = (
+				8E5816E225E7438200FFE709 /* CtrlViewControllerSch3.swift */,
+				8E5816F225E74AEF00FFE709 /* ControlViewSch3.swift */,
+				8E5816E725E743A100FFE709 /* SliderCtrlViewSch3.swift */,
 				8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */,
 			);
 			path = "Control Scheme 3";
@@ -481,6 +490,7 @@
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* MoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
+				8E5816F325E74AEF00FFE709 /* ControlViewSch3.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
@@ -503,6 +513,7 @@
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
 				8E7FD9C325D0D1430064A0A6 /* MetalPatternViewController.swift in Sources */,
+				8E5816E325E7438200FFE709 /* CtrlViewControllerSch3.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,
 				8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */,
@@ -510,6 +521,7 @@
 				8E31447F259EBA8E00BB0399 /* CtrlViewControllerSch1.swift in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 				8E28187125D0FA67007C3E3D /* MoireViewController.swift in Sources */,
+				8E5816E825E743A100FFE709 /* SliderCtrlViewSch3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
