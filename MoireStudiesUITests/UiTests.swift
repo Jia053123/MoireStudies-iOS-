@@ -50,6 +50,11 @@ class UiTests: XCTestCase {
         XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)
     }
     
+    private func controlViewsCheckSch3() {
+        XCTAssert(app.otherElements["SliderCtrlViewSch3"].exists)
+        XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch3").count == 2)
+    }
+    
     private func dismissPopOver() {
 //        app.otherElements["PopoverDismissRegion"].tap()
 //        app.otherElements["dismiss popup"].tap()
@@ -250,5 +255,28 @@ class UiTests: XCTestCase {
         app.buttons["SettingsDoneButton"].tap()
         self.moireViewCheckCoreAnim()
         self.controlViewsCheckSch1()
+        // for scheme3
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Composite Controls (Metal Only)"].tap()
+        self.dismissPopOver()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch3()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Fill Ratio and Scale Factor"].tap()
+        app.tables.cells.staticTexts["Composite Controls (Metal Only)"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        self.dismissPopOver()
+        self.moireViewCheckCoreAnim()
+        self.controlViewsCheckSch1()
+        app.buttons["SettingsButton"].tap()
+        app.tables.cells.staticTexts["Composite Controls (Metal Only)"].tap()
+        app.tables.cells.staticTexts["Core Animation"].tap()
+        app.tables.cells.staticTexts["Black Width and White Width"].tap()
+        app.tables.cells.staticTexts["Composite Controls (Metal Only)"].tap()
+        self.dismissPopOver()
+        self.moireViewCheckMetal()
+        self.controlViewsCheckSch3()
     }
 }

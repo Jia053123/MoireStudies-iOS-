@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController {
-    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesDefault
+    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesTall//controlFramesDefault
     private weak var highlightedPatternViewController: PatternViewController?
     private weak var dimView: UIView?
     

@@ -14,8 +14,8 @@ struct Constants {
         static let tileHeight: CGFloat = Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound // for CoreAnimPatternView only: the less the height, the more the num of strips rendered on screen, the thinner the minimum black/white width
         static let controlFramesDefault: Array<CGRect> = [CGRect(x: 10, y: 10, width: 150, height: 200),
                                                           CGRect(x: 170, y: 10, width: 150, height: 200)]
-        static let controlFramesTall: Array<CGRect> = [CGRect(x: 10, y: 10, width: 150, height: 400),
-                                                       CGRect(x: 170, y: 10, width: 150, height: 400)]
+        static let controlFramesTall: Array<CGRect> = [CGRect(x: 10, y: 10, width: 150, height: 300),
+                                                       CGRect(x: 170, y: 10, width: 150, height: 300)]
     }
     
     struct Bounds {

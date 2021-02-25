@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ControlsViewController: UIViewController {
-    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesDefault
+    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesTall//controlFramesDefault
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clear
