@@ -29,22 +29,8 @@ class CtrlViewControllerSch2: UIViewController {
     }
 }
 
-extension CtrlViewControllerSch2: CtrlViewController {
-    func highlightPattern() {
-        _ = delegate?.highlightPattern(caller: self)
-    }
-    
-    func unhighlightPattern() {
-        _ = delegate?.unhighlightPattern(caller: self)
-    }
-    
-    func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch2
-        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
-    }
-}
-
-extension CtrlViewControllerSch2: CtrlViewSch2Target {
+extension CtrlViewControllerSch2 {
+    // these functions return false when the action is illegal, otherwise they return true and the action is performed
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
@@ -59,6 +45,21 @@ extension CtrlViewControllerSch2: CtrlViewSch2Target {
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
         return delegate?.modifyPattern(whiteWidth: whiteWidth, caller: self) ?? false
+    }
+}
+
+extension CtrlViewControllerSch2: CtrlViewController {
+    func highlightPattern() {
+        _ = delegate?.highlightPattern(caller: self)
+    }
+    
+    func unhighlightPattern() {
+        _ = delegate?.unhighlightPattern(caller: self)
+    }
+    
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch2
+        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
     }
 }
 

@@ -29,26 +29,8 @@ class CtrlViewControllerSch1: UIViewController {
     }
 }
 
-extension CtrlViewControllerSch1: CtrlViewController {
-    func highlightPattern() {
-        _ = delegate?.highlightPattern(caller: self)
-    }
-    
-    func unhighlightPattern() {
-        _ = delegate?.unhighlightPattern(caller: self)
-    }
-    
-    func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch1
-        let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
-        cv.matchControlsWithValues(speed: pattern.speed,
-                                   direction: pattern.direction,
-                                   fillRatio: result.fillRatio,
-                                   scaleFactor: result.scaleFactor)
-    }
-}
-
-extension CtrlViewControllerSch1: CtrlViewSch1Target {
+extension CtrlViewControllerSch1 {
+    // these functions return false when the action is illegal, otherwise they return true and the action is performed
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false
     }
@@ -77,6 +59,25 @@ extension CtrlViewControllerSch1: CtrlViewSch1Target {
         let r1 = d.modifyPattern(blackWidth: result.blackWidth, caller: self)
         let r2 = d.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
         return r1 && r2
+    }
+}
+
+extension CtrlViewControllerSch1: CtrlViewController {
+    func highlightPattern() {
+        _ = delegate?.highlightPattern(caller: self)
+    }
+    
+    func unhighlightPattern() {
+        _ = delegate?.unhighlightPattern(caller: self)
+    }
+    
+    func matchControlsWithModel(pattern: Pattern) {
+        let cv = self.view as! ControlViewSch1
+        let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
+        cv.matchControlsWithValues(speed: pattern.speed,
+                                   direction: pattern.direction,
+                                   fillRatio: result.fillRatio,
+                                   scaleFactor: result.scaleFactor)
     }
 }
 
