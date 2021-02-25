@@ -6,10 +6,23 @@
 //
 
 import Foundation
+import UIKit
 
 struct InitSettings: Codable { 
     var renderSetting: RenderSettings = RenderSettings.metal
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
+    var controlFrames: Array<CGRect> {
+        get {
+            switch self.interfaceSetting {
+            case UISettings.controlScheme1Slider, UISettings.controlScheme2Slider:
+                return Constants.UI.controlFramesDefault
+            case UISettings.controlScheme3Slider:
+                return Constants.UI.controlFramesTall
+            default:
+                return Constants.UI.controlFramesDefault
+            }
+        }
+    }
 }
 
 enum UISettings: String, Codable {

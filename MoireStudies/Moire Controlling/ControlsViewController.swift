@@ -9,8 +9,6 @@ import Foundation
 import UIKit
 
 class ControlsViewController: UIViewController {
-    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesTall//controlFramesDefault
-    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clear
     }
@@ -25,6 +23,7 @@ class ControlsViewController: UIViewController {
             c.view.removeFromSuperview()
             c.removeFromParent()  // TODO: reuse?
         }
+        let controlFrames = settings.controlFrames
         assert(controlFrames.count >= patterns.count)
         for i in 0..<patterns.count {
             var cvc: CtrlViewController

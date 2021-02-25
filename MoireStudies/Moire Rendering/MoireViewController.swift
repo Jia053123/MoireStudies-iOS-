@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController {
-    private var controlFrames: Array<CGRect> = Constants.UI.controlFramesTall//controlFramesDefault
     private weak var highlightedPatternViewController: PatternViewController?
     private weak var dimView: UIView?
     
@@ -55,15 +54,15 @@ class MoireViewController: UIViewController {
             pvc.didMove(toParent: self)
             pvc.setUpAndRender(pattern: pattern)
         }
-        self.setUpMasks()
+        self.setUpMasks(with: settings.controlFrames)
     }
     
-    func setUpMasks() {
+    func setUpMasks(with frames: Array<CGRect>) {
         // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
-        let maskView1 = MaskView.init(frame: self.view.bounds, maskFrame: self.controlFrames[0])
+        let maskView1 = MaskView.init(frame: self.view.bounds, maskFrame: frames[0])
         self.children[1].view.mask = maskView1
         
-        let maskView2 = MaskView.init(frame: self.view.bounds, maskFrame: self.controlFrames[1])
+        let maskView2 = MaskView.init(frame: self.view.bounds, maskFrame: frames[1])
         self.children[0].view.mask = maskView2
     }
     
