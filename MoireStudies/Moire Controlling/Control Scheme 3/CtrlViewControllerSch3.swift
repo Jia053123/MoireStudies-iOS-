@@ -31,7 +31,9 @@ class CtrlViewControllerSch3: UIViewController {
 
 extension CtrlViewControllerSch3: CtrlViewController {
     func matchControlsWithModel(pattern: Pattern) {
-        print("TODO: matchControlsWithModel")
+        let cv = self.view as! ControlViewSch3
+        let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
+        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
     }
     
     func highlightPattern() {

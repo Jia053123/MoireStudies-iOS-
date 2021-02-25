@@ -34,6 +34,8 @@ class SliderCtrlViewSch3: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
+        speedSlider.minimumValue = Float(Constants.Bounds.speedRange.lowerBound)
+        speedSlider.maximumValue = 45.0
         directionSlider.minimumValue = 0.0
         directionSlider.maximumValue = 2 * Float.pi
         blackWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
@@ -48,8 +50,13 @@ class SliderCtrlViewSch3: UIView {
 }
 
 extension SliderCtrlViewSch3: ControlViewSch3 {
-    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, blackWidth: CGFloat, whiteWidth: CGFloat, fillRatio: CGFloat, scaleFActor: CGFloat) {
-        print("TODO: matchControlsWithValues")
+    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, blackWidth: CGFloat, whiteWidth: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat) {
+        self.speedSlider.value = Float(speed)
+        self.directionSlider.value = Float(direction)
+        self.blackWidthSlider.value = Float(blackWidth)
+        self.whiteWidthSlider.value = Float(whiteWidth)
+        self.fillRatioSlider.value = Float(fillRatio)
+        self.scaleFactorSlider.value = Float(scaleFactor)
     }
 }
 
