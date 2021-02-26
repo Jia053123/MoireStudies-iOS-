@@ -108,6 +108,7 @@
 		8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsManagerTests.swift; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch1.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
+		8E3B3E0825E9A567000A6EAB /* MoireStudies.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MoireStudies.entitlements; sourceTree = "<group>"; };
 		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
 		8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFilesViewController.swift; sourceTree = "<group>"; };
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -326,6 +327,7 @@
 		8E96B7A3257F33CF007527E2 /* MoireStudies */ = {
 			isa = PBXGroup;
 			children = (
+				8E3B3E0825E9A567000A6EAB /* MoireStudies.entitlements */,
 				8E96B7A4257F33CF007527E2 /* AppDelegate.h */,
 				8E96B7A5257F33CF007527E2 /* AppDelegate.m */,
 				8E96B7A7257F33CF007527E2 /* SceneDelegate.h */,
@@ -737,6 +739,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MoireStudies/MoireStudies.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JN39R4EL8;
 				INFOPLIST_FILE = MoireStudies/Info.plist;
@@ -746,10 +749,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudies/MoireStudies-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -759,6 +763,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = MoireStudies/MoireStudies.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3JN39R4EL8;
 				INFOPLIST_FILE = MoireStudies/Info.plist;
@@ -768,9 +773,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = JX.MoireStudies;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "MoireStudies/MoireStudies-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
