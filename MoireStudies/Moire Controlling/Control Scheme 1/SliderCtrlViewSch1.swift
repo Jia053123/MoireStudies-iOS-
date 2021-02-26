@@ -36,7 +36,7 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
-        scaleFactorSlider.maximumValue = 5.0
+        scaleFactorSlider.maximumValue = 10.0
         let attri = [NSAttributedString.Key.foregroundColor: UIColor.white]
         speedSegmentedControl.setTitleTextAttributes(attri, for: UIControl.State.normal)
     }

@@ -23,6 +23,8 @@ struct Constants {
         static let directionRange: ClosedRange<CGFloat> = -1*CGFloat.infinity...CGFloat.infinity
         static let blackWidthRange: ClosedRange<CGFloat> = 2.0...50.0
         static let whiteWidthRange: ClosedRange<CGFloat> = 2.0...50.0
+        
+        static let numOfPatternsPerMoire: ClosedRange<Int> = 1...4
     }
     
     struct Data {
