@@ -49,43 +49,67 @@ class SliderCtrlViewSch3: UIView {
     }
     
     @IBAction func startEditing(_ sender: Any) {
-        
+        self.target?.highlightPattern()
     }
     
     @IBAction func finishedEditing(_ sender: Any) {
-        
+        self.target?.unhighlightPattern()
     }
     
     @IBAction func speedChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(speed: CGFloat(speedSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func directionChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(direction: CGFloat(directionSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func blackWidthChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(blackWidth: CGFloat(blackWidthSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func whiteWidthChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(whiteWidth: CGFloat(whiteWidthSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func fillRatioChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(fillRatio: CGFloat(fillRatioSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func scaleFactorChanged(_ sender: Any) {
-        
+        if let t = self.target {
+            _ = t.modifyPattern(scaleFactor: CGFloat(scaleFactorSlider.value))
+        } else {
+            print("target for SliderControlView not set")
+        }
     }
     
     @IBAction func highlightButtonPressed(_ sender: Any) {
-        
+        self.target?.highlightPattern()
     }
     
     @IBAction func highlightButtonReleased(_ sender: Any) {
-        
+        self.target?.unhighlightPattern()
     }
 }
 

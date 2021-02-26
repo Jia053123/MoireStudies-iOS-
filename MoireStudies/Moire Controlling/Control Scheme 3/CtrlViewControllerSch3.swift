@@ -47,7 +47,6 @@ class CtrlViewControllerSch3: UIViewController {
     
     func modifyPattern(fillRatio: CGFloat) -> Bool {
         guard let d = self.delegate else {return false}
-        
         let p: Pattern = d.getPattern(caller: self)!
         let sf = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fillRatio, scaleFactor: sf)
@@ -58,7 +57,6 @@ class CtrlViewControllerSch3: UIViewController {
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
         guard let d = self.delegate else {return false}
-        
         let p: Pattern = d.getPattern(caller: self)!
         let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fr, scaleFactor: scaleFactor)
