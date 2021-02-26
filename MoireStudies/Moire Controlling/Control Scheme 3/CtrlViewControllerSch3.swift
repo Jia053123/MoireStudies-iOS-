@@ -74,10 +74,10 @@ extension CtrlViewControllerSch3: CtrlViewController {
     }
     
     func highlightPattern() {
-        print("TODO: highlightPattern")
+        _ = delegate?.highlightPattern(caller: self)
     }
     
     func unhighlightPattern() {
-        print("TODO: unhighlightPattern")
+        _ = delegate?.unhighlightPattern(caller: self)
     }
 }
