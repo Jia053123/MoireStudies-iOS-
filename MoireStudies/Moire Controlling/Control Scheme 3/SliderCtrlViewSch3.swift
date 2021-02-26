@@ -45,7 +45,7 @@ class SliderCtrlViewSch3: UIView {
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
-        scaleFactorSlider.maximumValue = 5.0
+        scaleFactorSlider.maximumValue = 10.0
     }
     
     @IBAction func startEditing(_ sender: Any) {

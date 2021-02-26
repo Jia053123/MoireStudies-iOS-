@@ -57,6 +57,7 @@
                 </segmentedControl>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-7a-rPz" userLabel="DirectionSlider">
                     <rect key="frame" x="7.5" y="86.5" width="186" height="26"/>
+                    <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.90000000000000002"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>
                     </constraints>

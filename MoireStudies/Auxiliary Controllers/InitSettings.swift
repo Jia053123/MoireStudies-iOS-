@@ -11,7 +11,7 @@ import UIKit
 struct InitSettings: Codable { 
     var renderSetting: RenderSettings = RenderSettings.metal
     var interfaceSetting: UISettings = UISettings.controlScheme1Slider
-    var controlFrames: Array<CGRect> {
+    var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames
         get {
             switch self.interfaceSetting {
             case UISettings.controlScheme1Slider, UISettings.controlScheme2Slider:
