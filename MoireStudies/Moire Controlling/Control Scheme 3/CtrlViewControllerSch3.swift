@@ -27,7 +27,9 @@ class CtrlViewControllerSch3: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+}
 
+extension CtrlViewControllerSch3 {
     // these functions return false when the action is illegal, otherwise they return true and the action is performed
     func modifyPattern(speed: CGFloat) -> Bool {
         return delegate?.modifyPattern(speed: speed, caller: self) ?? false

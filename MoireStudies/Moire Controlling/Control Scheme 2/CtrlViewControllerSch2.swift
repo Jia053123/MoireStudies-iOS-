@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch2: UIViewController { // TODO: remove this class and use the scheme3 controller
+class CtrlViewControllerSch2: UIViewController { // TODO: remove this class and use the scheme3 controller? 
     typealias CtrlViewSch2Subclass = SliderCtrlViewSch2
     var id: Int?
     weak var delegate: PatternManager?
