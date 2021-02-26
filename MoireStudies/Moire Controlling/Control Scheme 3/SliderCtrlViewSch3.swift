@@ -118,13 +118,25 @@ extension SliderCtrlViewSch3 {
 }
 
 extension SliderCtrlViewSch3: ControlViewSch3 {
-    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, blackWidth: CGFloat, whiteWidth: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat) {
-        self.speedSlider.value = Float(speed)
-        self.directionSlider.value = Float(direction)
-        self.blackWidthSlider.value = Float(blackWidth)
-        self.whiteWidthSlider.value = Float(whiteWidth)
-        self.fillRatioSlider.value = Float(fillRatio)
-        self.scaleFactorSlider.value = Float(scaleFactor)
+    func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?) {
+        if let s = speed {
+            self.speedSlider.value = Float(s)
+        }
+        if let d = direction {
+            self.directionSlider.value = Float(d)
+        }
+        if let b = blackWidth {
+            self.blackWidthSlider.value = Float(b)
+        }
+        if let w = whiteWidth {
+            self.whiteWidthSlider.value = Float(w)
+        }
+        if let f = fillRatio {
+            self.fillRatioSlider.value = Float(f)
+        }
+        if let s = scaleFactor {
+            self.scaleFactorSlider.value = Float(s)
+        }
     }
 }
 

@@ -38,31 +38,67 @@ class CtrlViewControllerSch3: UIViewController {
     }
     
     func modifyPattern(blackWidth: CGFloat) -> Bool {
-        return delegate?.modifyPattern(blackWidth: blackWidth, caller: self) ?? false
+        guard let del = self.delegate else {return false}
+        let success = del.modifyPattern(blackWidth: blackWidth, caller: self)
+        if success {
+            let newPattern = del.getPattern(caller: self)!
+            let cv = self.view as! ControlViewSch3
+            let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth)
+            
+            cv.matchControlsWithValues(speed: newPattern.speed, direction: newPattern.direction, blackWidth: nil, whiteWidth: newPattern.whiteWidth, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
+        }
+        return success
     }
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
-        return delegate?.modifyPattern(whiteWidth: whiteWidth, caller: self) ?? false
+        guard let del = self.delegate else {return false}
+        let success = del.modifyPattern(whiteWidth: whiteWidth, caller: self)
+        if success {
+            let newPattern = del.getPattern(caller: self)!
+            let cv = self.view as! ControlViewSch3
+            let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth)
+            
+            cv.matchControlsWithValues(speed: newPattern.speed, direction: newPattern.direction, blackWidth: newPattern.blackWidth, whiteWidth: nil, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
+        }
+        return success
     }
     
     func modifyPattern(fillRatio: CGFloat) -> Bool {
-        guard let d = self.delegate else {return false}
-        let p: Pattern = d.getPattern(caller: self)!
+        guard let del = self.delegate else {return false}
+        let p: Pattern = del.getPattern(caller: self)!
         let sf = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fillRatio, scaleFactor: sf)
-        let r1 = d.modifyPattern(blackWidth: result.blackWidth, caller: self)
-        let r2 = d.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
-        return r1 && r2
+        let r1 = del.modifyPattern(blackWidth: result.blackWidth, caller: self)
+        let r2 = del.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
+        
+        let success = r1 && r2
+        if success {
+            let newPattern = del.getPattern(caller: self)!
+            let cv = self.view as! ControlViewSch3
+            let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth)
+            
+            cv.matchControlsWithValues(speed: newPattern.speed, direction: newPattern.direction, blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth, fillRatio: nil, scaleFactor: result.scaleFactor)
+        }
+        return success
     }
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
-        guard let d = self.delegate else {return false}
-        let p: Pattern = d.getPattern(caller: self)!
+        guard let del = self.delegate else {return false}
+        let p: Pattern = del.getPattern(caller: self)!
         let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fr, scaleFactor: scaleFactor)
-        let r1 = d.modifyPattern(blackWidth: result.blackWidth, caller: self)
-        let r2 = d.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
-        return r1 && r2
+        let r1 = del.modifyPattern(blackWidth: result.blackWidth, caller: self)
+        let r2 = del.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
+        
+        let success = r1 && r2
+        if success {
+            let newPattern = del.getPattern(caller: self)!
+            let cv = self.view as! ControlViewSch3
+            let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth)
+            
+            cv.matchControlsWithValues(speed: newPattern.speed, direction: newPattern.direction, blackWidth: newPattern.blackWidth, whiteWidth: newPattern.whiteWidth, fillRatio: result.fillRatio, scaleFactor: nil)
+        }
+        return success
     }
 }
 
