@@ -27,6 +27,45 @@ class CtrlViewControllerSch3: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+
+    // these functions return false when the action is illegal, otherwise they return true and the action is performed
+    func modifyPattern(speed: CGFloat) -> Bool {
+        return delegate?.modifyPattern(speed: speed, caller: self) ?? false
+    }
+    
+    func modifyPattern(direction: CGFloat) -> Bool {
+        return delegate?.modifyPattern(direction: direction, caller: self) ?? false
+    }
+    
+    func modifyPattern(blackWidth: CGFloat) -> Bool {
+        return delegate?.modifyPattern(blackWidth: blackWidth, caller: self) ?? false
+    }
+    
+    func modifyPattern(whiteWidth: CGFloat) -> Bool {
+        return delegate?.modifyPattern(whiteWidth: whiteWidth, caller: self) ?? false
+    }
+    
+    func modifyPattern(fillRatio: CGFloat) -> Bool {
+        guard let d = self.delegate else {return false}
+        
+        let p: Pattern = d.getPattern(caller: self)!
+        let sf = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
+        let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fillRatio, scaleFactor: sf)
+        let r1 = d.modifyPattern(blackWidth: result.blackWidth, caller: self)
+        let r2 = d.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
+        return r1 && r2
+    }
+    
+    func modifyPattern(scaleFactor: CGFloat) -> Bool {
+        guard let d = self.delegate else {return false}
+        
+        let p: Pattern = d.getPattern(caller: self)!
+        let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
+        let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fr, scaleFactor: scaleFactor)
+        let r1 = d.modifyPattern(blackWidth: result.blackWidth, caller: self)
+        let r2 = d.modifyPattern(whiteWidth: result.whiteWidth, caller: self)
+        return r1 && r2
+    }
 }
 
 extension CtrlViewControllerSch3: CtrlViewController {

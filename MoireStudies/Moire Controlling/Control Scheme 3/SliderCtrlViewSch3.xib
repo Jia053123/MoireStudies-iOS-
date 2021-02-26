@@ -63,18 +63,36 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="x7G-gU-mEM"/>
                     </constraints>
+                    <connections>
+                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="V52-Xg-rM0"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="cxJ-GK-csS"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="e3n-eR-Qh8"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="2TQ-RE-51k"/>
+                    </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="BlackWidthSlider">
                     <rect key="frame" x="8" y="120" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
                     </constraints>
+                    <connections>
+                        <action selector="blackWidthChanged:" destination="-1" eventType="valueChanged" id="tOg-CR-W0P"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="k33-Af-Gjl"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="tIf-E8-MVa"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="jEw-cF-VVs"/>
+                    </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="WhiteWidthSlider">
                     <rect key="frame" x="8" y="169.5" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
                     </constraints>
+                    <connections>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="GSb-31-lCi"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="aPt-aT-uVW"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="b2j-eJ-L7S"/>
+                        <action selector="whiteWidthChanged:" destination="-1" eventType="valueChanged" id="W0J-zF-T3r"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPEED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PcE-Z6-FY6">
                     <rect key="frame" x="80.5" y="5" width="40" height="14"/>
@@ -125,6 +143,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Q3t-pl-SmW"/>
                     </constraints>
+                    <connections>
+                        <action selector="fillRatioChanged:" destination="-1" eventType="valueChanged" id="TII-f8-391"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="4AP-5W-hNa"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="rQd-4V-cHR"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="mOe-VC-Qt4"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pX-Br-oCy">
                     <rect key="frame" x="87.5" y="203" width="26" height="14"/>
@@ -142,6 +166,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="wvV-S7-OLd"/>
                     </constraints>
+                    <connections>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="N2k-Ve-fgL"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="ita-rD-cjQ"/>
+                        <action selector="scaleFactorChanged:" destination="-1" eventType="valueChanged" id="bz3-yM-gOB"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="0Ue-eM-MOI"/>
+                    </connections>
                 </slider>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCALE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qc-Vf-FzV">
                     <rect key="frame" x="80.5" y="252.5" width="40" height="14"/>
@@ -160,12 +190,23 @@
                         <constraint firstAttribute="height" constant="30" id="vZx-by-0Ki"/>
                     </constraints>
                     <state key="normal" title="HIGHLIGHT"/>
+                    <connections>
+                        <action selector="highlightButtonPressed:" destination="-1" eventType="touchDown" id="gYy-lS-SHA"/>
+                        <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpOutside" id="61z-y2-S0X"/>
+                        <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpInside" id="ORn-V0-igM"/>
+                    </connections>
                 </button>
                 <slider opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Vdk-Nc-9b1" userLabel="DirectionSlider">
                     <rect key="frame" x="8" y="21" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Lm6-mm-bzn"/>
                     </constraints>
+                    <connections>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpOutside" id="0zc-b7-xME"/>
+                        <action selector="finishedEditing:" destination="-1" eventType="touchUpInside" id="Rg4-Rw-eM4"/>
+                        <action selector="speedChanged:" destination="-1" eventType="valueChanged" id="lki-sa-85I"/>
+                        <action selector="startEditing:" destination="-1" eventType="touchDown" id="sW0-rU-vuu"/>
+                    </connections>
                 </slider>
             </subviews>
             <viewLayoutGuide key="safeArea" id="MIZ-pY-bGK"/>

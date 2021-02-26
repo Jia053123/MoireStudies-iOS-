@@ -47,6 +47,50 @@ class SliderCtrlViewSch3: UIView {
         scaleFactorSlider.minimumValue = 1.0
         scaleFactorSlider.maximumValue = 5.0
     }
+    
+    @IBAction func startEditing(_ sender: Any) {
+        
+    }
+    
+    @IBAction func finishedEditing(_ sender: Any) {
+        
+    }
+    
+    @IBAction func speedChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func directionChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func blackWidthChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func whiteWidthChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func fillRatioChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func scaleFactorChanged(_ sender: Any) {
+        
+    }
+    
+    @IBAction func highlightButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func highlightButtonReleased(_ sender: Any) {
+        
+    }
+}
+
+extension SliderCtrlViewSch3 {
+    
 }
 
 extension SliderCtrlViewSch3: ControlViewSch3 {
