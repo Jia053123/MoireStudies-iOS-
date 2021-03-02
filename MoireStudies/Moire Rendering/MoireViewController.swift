@@ -58,12 +58,18 @@ class MoireViewController: UIViewController {
     }
     
     func setUpMasks(with frames: Array<CGRect>) {
-        // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
-        let maskView1 = MaskView.init(frame: self.view.bounds, maskFrame: frames[0])
-        self.children[1].view.mask = maskView1
-        
-        let maskView2 = MaskView.init(frame: self.view.bounds, maskFrame: frames[1])
-        self.children[0].view.mask = maskView2
+        // TODO: (with two patterns) at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
+        assert(frames.count >= self.children.count)
+        for i in 0...(self.children.count - 1) {
+            var maskFrames: Array<CGRect> = []
+            for j in 0...(self.children.count - 1) {
+                if j != i {
+                    maskFrames.append(frames[j])
+                }
+            }
+            let maskView = MaskView.init(frame: self.view.bounds, maskFrames: maskFrames)
+            self.children[i].view.mask = maskView
+        }
     }
     
     func highlightPatternView(patternViewIndex: Int) {
