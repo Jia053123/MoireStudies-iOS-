@@ -183,6 +183,22 @@ extension MainViewController: PatternManager {
         return true
     }
     
+    func dimPattern(caller: CtrlViewController) -> Bool {
+        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+            return false
+        }
+        self.moireViewController!.dimPatternView(patternViewIndex: index)
+        return true
+    }
+    
+    func undimPattern(caller: CtrlViewController) -> Bool {
+        guard self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) != nil else {
+            return false
+        }
+        self.moireViewController!.undimPatternViews()
+        return true
+    }
+    
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
         print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {

@@ -57,6 +57,14 @@ extension CtrlViewControllerSch2: CtrlViewController {
         _ = delegate?.unhighlightPattern(caller: self)
     }
     
+    func dimPattern() {
+        _ = delegate?.dimPattern(caller: self)
+    }
+    
+    func undimPattern() {
+        _ = delegate?.undimPattern(caller: self)
+    }
+    
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! ControlViewSch2
         cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)

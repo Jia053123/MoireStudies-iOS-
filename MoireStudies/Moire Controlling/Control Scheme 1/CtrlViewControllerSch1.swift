@@ -71,6 +71,14 @@ extension CtrlViewControllerSch1: CtrlViewController {
         _ = delegate?.unhighlightPattern(caller: self)
     }
     
+    func dimPattern() {
+        _ = delegate?.dimPattern(caller: self)
+    }
+    
+    func undimPattern() {
+        _ = delegate?.undimPattern(caller: self)
+    }
+    
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! ControlViewSch1
         let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)

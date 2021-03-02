@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController {
-    private weak var highlightedPatternViewController: PatternViewController?
     private weak var dimView: UIView?
     
     override func viewDidLoad() {
@@ -76,16 +75,26 @@ class MoireViewController: UIViewController {
         let pvc = self.children[patternViewIndex]
         self.view.bringSubviewToFront(self.dimView!)
         self.dimView!.isHidden = false
-        self.highlightedPatternViewController = (pvc as! PatternViewController)
         self.view.bringSubviewToFront(pvc.view)
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {
         let pvc = self.children[patternViewIndex]
-        self.highlightedPatternViewController = nil
         self.view.sendSubviewToBack(self.dimView!)
         self.dimView!.isHidden = true
         self.view.sendSubviewToBack(pvc.view)
+    }
+    
+    func dimPatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        self.view.sendSubviewToBack(self.dimView!)
+        self.dimView!.isHidden = false
+        self.view.sendSubviewToBack(pvc.view)
+    }
+    
+    func undimPatternViews() {
+        self.view.sendSubviewToBack(self.dimView!)
+        self.dimView!.isHidden = true
     }
     
     func modifyPatternView(patternViewIndex: Int, newPattern: Pattern) {

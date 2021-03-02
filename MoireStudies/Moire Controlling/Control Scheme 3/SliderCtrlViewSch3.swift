@@ -17,6 +17,7 @@ class SliderCtrlViewSch3: UIView {
     @IBOutlet weak var fillRatioSlider: UISlider!
     @IBOutlet weak var scaleFactorSlider: UISlider!
     @IBOutlet weak var highlightButton: UIButton!
+    @IBOutlet weak var dimButton: UIButton!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -111,6 +112,15 @@ class SliderCtrlViewSch3: UIView {
     @IBAction func highlightButtonReleased(_ sender: Any) {
         self.target?.unhighlightPattern()
     }
+    
+    @IBAction func dimButtonPressed(_ sender: Any) {
+        self.target?.dimPattern()
+    }
+    
+    @IBAction func dimButtonReleased(_ sender: Any) {
+        self.target?.undimPattern()
+    }
+    
 }
 
 extension SliderCtrlViewSch3 {

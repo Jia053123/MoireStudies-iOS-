@@ -15,4 +15,6 @@ protocol CtrlViewController: UIViewController {
     func matchControlsWithModel(pattern: Pattern)
     func highlightPattern()
     func unhighlightPattern()
+    func dimPattern()
+    func undimPattern()
 }

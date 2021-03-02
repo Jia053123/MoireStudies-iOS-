@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderCtrlViewSch3" customModule="MoireStudies" customModuleProvider="target">
             <connections>
                 <outlet property="blackWidthSlider" destination="EeR-r3-5Tp" id="Hk7-xi-jiH"/>
+                <outlet property="dimButton" destination="v0Q-Po-AwO" id="a3c-LC-Cp8"/>
                 <outlet property="directionSlider" destination="JvY-7a-rPz" id="F38-OQ-u1R"/>
                 <outlet property="fillRatioSlider" destination="V3X-UX-Yku" id="9J0-Am-tpl"/>
                 <outlet property="highlightButton" destination="dHM-LJ-fiF" id="vJb-Zb-G74"/>
@@ -199,17 +201,29 @@
                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-LJ-fiF">
-                    <rect key="frame" x="59.5" y="302" width="82" height="30"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-LJ-fiF">
+                    <rect key="frame" x="10" y="302" width="33" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="vZx-by-0Ki"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                    <state key="normal" title="HIGHLIGHT"/>
+                    <state key="normal" image="eye.fill" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
+                    </state>
                     <connections>
                         <action selector="highlightButtonPressed:" destination="-1" eventType="touchDown" id="gYy-lS-SHA"/>
                         <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpOutside" id="61z-y2-S0X"/>
                         <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpInside" id="ORn-V0-igM"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-Po-AwO">
+                    <rect key="frame" x="159" y="293.5" width="32" height="42.5"/>
+                    <state key="normal">
+                        <imageReference key="image" image="eye" catalog="system" symbolScale="large"/>
+                    </state>
+                    <connections>
+                        <action selector="dimButtonPressed:" destination="-1" eventType="touchDown" id="7CA-Oh-x6P"/>
+                        <action selector="dimButtonReleased:" destination="-1" eventType="touchUpOutside" id="XI6-Qz-ASE"/>
+                        <action selector="dimButtonReleased:" destination="-1" eventType="touchUpInside" id="h6R-mL-cXf"/>
                     </connections>
                 </button>
             </subviews>
@@ -235,6 +249,7 @@
                 <constraint firstItem="5pX-Br-oCy" firstAttribute="centerX" secondItem="V3X-UX-Yku" secondAttribute="centerX" id="Jn3-Gf-Fbc"/>
                 <constraint firstItem="wjM-mO-Qzw" firstAttribute="top" secondItem="dHM-LJ-fiF" secondAttribute="bottom" id="KMx-mB-FQM"/>
                 <constraint firstItem="dHM-LJ-fiF" firstAttribute="top" secondItem="gK1-fR-jhi" secondAttribute="bottom" id="Kg4-7H-keR"/>
+                <constraint firstItem="v0Q-Po-AwO" firstAttribute="top" secondItem="gK1-fR-jhi" secondAttribute="top" id="LBy-RI-Nua"/>
                 <constraint firstItem="NPb-OV-8LQ" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="MDf-l7-DV1"/>
                 <constraint firstItem="9qB-ed-vKY" firstAttribute="top" secondItem="8Qc-Vf-FzV" secondAttribute="bottom" constant="2" id="NsA-cJ-KMQ"/>
                 <constraint firstItem="Czy-mw-wc6" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="OpI-MV-Uhj"/>
@@ -244,9 +259,9 @@
                 <constraint firstItem="JvY-7a-rPz" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.9" id="S6G-da-uUM"/>
                 <constraint firstItem="NPb-OV-8LQ" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="SH6-2x-ck5"/>
                 <constraint firstItem="wjM-mO-Qzw" firstAttribute="height" secondItem="COa-BD-Z5T" secondAttribute="height" multiplier="0.5" id="SIe-cI-Eoz"/>
-                <constraint firstItem="dHM-LJ-fiF" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="SZm-zX-Z4t"/>
                 <constraint firstItem="Vdk-Nc-9b1" firstAttribute="top" secondItem="PcE-Z6-FY6" secondAttribute="bottom" constant="2" id="UMg-hF-Cfk"/>
                 <constraint firstItem="ZWX-sj-wB0" firstAttribute="centerX" secondItem="EeR-r3-5Tp" secondAttribute="centerX" id="Uri-Gd-U0y"/>
+                <constraint firstItem="v0Q-Po-AwO" firstAttribute="bottom" secondItem="wjM-mO-Qzw" secondAttribute="bottom" id="Vh3-yf-E17"/>
                 <constraint firstItem="Va3-0N-J4w" firstAttribute="height" secondItem="COa-BD-Z5T" secondAttribute="height" id="Vrb-vm-eTK"/>
                 <constraint firstItem="V3X-UX-Yku" firstAttribute="top" secondItem="5pX-Br-oCy" secondAttribute="bottom" constant="2" id="X5o-9X-Ey4"/>
                 <constraint firstItem="Vdk-Nc-9b1" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.9" id="Yv0-KS-YeJ"/>
@@ -254,6 +269,7 @@
                 <constraint firstItem="Va3-0N-J4w" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="aTH-Lj-e60"/>
                 <constraint firstItem="Z4c-No-WpR" firstAttribute="top" secondItem="NPb-OV-8LQ" secondAttribute="bottom" id="bBP-s0-MGN"/>
                 <constraint firstItem="Va3-0N-J4w" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="cWD-E5-Hhx"/>
+                <constraint firstItem="v0Q-Po-AwO" firstAttribute="trailing" secondItem="Vdk-Nc-9b1" secondAttribute="trailing" id="crl-TX-6xB"/>
                 <constraint firstItem="MIZ-pY-bGK" firstAttribute="bottom" secondItem="wjM-mO-Qzw" secondAttribute="bottom" id="dd7-FQ-ceG"/>
                 <constraint firstItem="ZWX-sj-wB0" firstAttribute="top" secondItem="GLw-JF-ocz" secondAttribute="bottom" id="ecr-Ng-e9j"/>
                 <constraint firstItem="gK1-fR-jhi" firstAttribute="top" secondItem="9qB-ed-vKY" secondAttribute="bottom" id="efG-jo-I4O"/>
@@ -262,6 +278,7 @@
                 <constraint firstItem="PcE-Z6-FY6" firstAttribute="centerX" secondItem="Vdk-Nc-9b1" secondAttribute="centerX" id="h8f-u8-g1H"/>
                 <constraint firstItem="COa-BD-Z5T" firstAttribute="height" secondItem="GLw-JF-ocz" secondAttribute="height" id="hHH-GP-W44"/>
                 <constraint firstItem="PcE-Z6-FY6" firstAttribute="top" secondItem="HIh-Ms-d8D" secondAttribute="top" constant="5" id="iMa-Kr-A7Z"/>
+                <constraint firstItem="dHM-LJ-fiF" firstAttribute="leading" secondItem="Vdk-Nc-9b1" secondAttribute="leading" id="igU-Ly-Shl"/>
                 <constraint firstItem="5pX-Br-oCy" firstAttribute="top" secondItem="Czy-mw-wc6" secondAttribute="bottom" id="in0-4H-hit"/>
                 <constraint firstItem="COa-BD-Z5T" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="jJU-YS-kiR"/>
                 <constraint firstItem="9qB-ed-vKY" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.9" id="jUL-jA-aTk"/>
@@ -285,6 +302,8 @@
         </view>
     </objects>
     <resources>
+        <image name="eye" catalog="system" width="128" height="81"/>
+        <image name="eye.fill" catalog="system" width="128" height="78"/>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

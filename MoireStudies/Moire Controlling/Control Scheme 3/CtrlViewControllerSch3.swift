@@ -118,4 +118,12 @@ extension CtrlViewControllerSch3: CtrlViewController {
     func unhighlightPattern() {
         _ = delegate?.unhighlightPattern(caller: self)
     }
+    
+    func dimPattern() {
+        _ = delegate?.dimPattern(caller: self)
+    }
+    
+    func undimPattern() {
+        _ = delegate?.undimPattern(caller: self)
+    }
 }
