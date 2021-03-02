@@ -10,7 +10,7 @@ import UIKit
 
 struct InitSettings: Codable { 
     var renderSetting: RenderSettings = RenderSettings.metal
-    var interfaceSetting: UISettings = UISettings.controlScheme1Slider
+    var interfaceSetting: UISettings = UISettings.controlScheme3Slider
     var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames
         get {
             switch self.interfaceSetting {

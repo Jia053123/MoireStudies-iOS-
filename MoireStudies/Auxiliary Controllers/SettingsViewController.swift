@@ -93,7 +93,8 @@ extension SettingsViewController: UITableViewDataSource {
             let selectedSetting = self.initSettings.interfaceSetting
             switch (selectedSetting, cell.textLabel!.text) {
             case (UISettings.controlScheme1Slider, SettingsViewController.FillRatioAndScaleFactor),
-                 (UISettings.controlScheme2Slider, SettingsViewController.BlackWidthAndWhiteWidth):
+                 (UISettings.controlScheme2Slider, SettingsViewController.BlackWidthAndWhiteWidth),
+                 (UISettings.controlScheme3Slider, SettingsViewController.CompositeControls):
                 self.selectedIndexPathSec0 = indexPath
                 cell.accessoryType = UITableViewCell.AccessoryType.checkmark
             default:
