@@ -11,7 +11,7 @@ import UIKit
 class SliderCtrlViewSch3: UIView {
     weak var target: CtrlViewControllerSch3?
     @IBOutlet weak var speedSlider: UISlider!
-    @IBOutlet weak var directionSlider: UISlider!
+    @IBOutlet weak var directionSlider: UISlider! // TODO: subclass to allow finer control
     @IBOutlet weak var blackWidthSlider: UISlider!
     @IBOutlet weak var whiteWidthSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
