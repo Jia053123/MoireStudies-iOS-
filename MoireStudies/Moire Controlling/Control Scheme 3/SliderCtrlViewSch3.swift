@@ -18,6 +18,7 @@ class SliderCtrlViewSch3: UIView {
     @IBOutlet weak var scaleFactorSlider: UISlider!
     @IBOutlet weak var highlightButton: UIButton!
     @IBOutlet weak var dimButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -47,6 +48,12 @@ class SliderCtrlViewSch3: UIView {
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
         scaleFactorSlider.maximumValue = 10.0
+        
+        let delete = UIAction(title: "Delete", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
+        let duplicate = UIAction(title: "Duplicate", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
+        let patternMenu = UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [duplicate, delete])
+        menuButton.showsMenuAsPrimaryAction = true
+        menuButton.menu = patternMenu
     }
     
     @IBAction func startEditing(_ sender: Any) {
@@ -120,11 +127,16 @@ class SliderCtrlViewSch3: UIView {
     @IBAction func dimButtonReleased(_ sender: Any) {
         self.target?.undimPattern()
     }
-    
 }
 
 extension SliderCtrlViewSch3 {
+    @objc func deletePattern() {
+        print("TODO: deletePattern")
+    }
     
+    @objc func duplicatePattern() {
+        print("TODO: duplicatePattern")
+    }
 }
 
 extension SliderCtrlViewSch3: ControlViewSch3 {
