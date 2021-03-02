@@ -65,7 +65,7 @@ class MainViewController: UIViewController {
         if self.initSettings == nil {
             self.initInitSettings()
         }
-        if self.currentMoire == nil || self.moireIdToInit != self.currentMoire?.id {
+        if self.currentMoire == nil || (self.moireIdToInit != nil && self.moireIdToInit != self.currentMoire?.id) {
             self.initCurrentMoire()
         }
         self.moireViewController!.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
@@ -77,7 +77,7 @@ class MainViewController: UIViewController {
             print("init moire from id: " + miti)
             self.currentMoire = self.moireModel.read(moireId: miti)
         } else {
-            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNew()
+            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemo()
         }
     }
     
@@ -258,6 +258,21 @@ extension MainViewController: PatternManager {
             return nil
         }
         return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)]
+    }
+    
+    func createPattern(caller: CtrlViewController, newPattern: Pattern) -> Bool {
+        self.currentMoire?.patterns.append(newPattern)
+        self.updateMainView()
+        print("num of patterns after creating new: ", self.currentMoire!.patterns.count)
+        return true
+    }
+    
+    func deletePattern(caller: CtrlViewController) -> Bool {
+        guard let i = caller.id else {return false}
+        self.currentMoire!.patterns.remove(at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        print("num of patterns after deletion: ", self.currentMoire!.patterns.count)
+        self.updateMainView()
+        return true
     }
 }
 

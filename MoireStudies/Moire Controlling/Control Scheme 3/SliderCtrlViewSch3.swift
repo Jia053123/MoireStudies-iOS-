@@ -49,8 +49,8 @@ class SliderCtrlViewSch3: UIView {
         scaleFactorSlider.minimumValue = 1.0
         scaleFactorSlider.maximumValue = 10.0
         
-        let delete = UIAction(title: "Delete", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
-        let duplicate = UIAction(title: "Duplicate", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
+        let delete = UIAction(title: "Delete Layer", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
+        let duplicate = UIAction(title: "Duplicate Layer", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
         let patternMenu = UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [duplicate, delete])
         menuButton.showsMenuAsPrimaryAction = true
         menuButton.menu = patternMenu
@@ -131,11 +131,11 @@ class SliderCtrlViewSch3: UIView {
 
 extension SliderCtrlViewSch3 {
     @objc func deletePattern() {
-        print("TODO: deletePattern")
+        self.target?.deletePattern()
     }
     
     @objc func duplicatePattern() {
-        print("TODO: duplicatePattern")
+        self.target?.duplicatePattern()
     }
 }
 

@@ -25,16 +25,16 @@ class MoireModelTests: XCTestCase {
         count = moireModel1.numOfMoires()
         XCTAssert(count == 0, String(format: "current count: %d", count))
         
-        _ = moireModel1.createNew()
+        _ = moireModel1.createNewDemo()
         count = moireModel1.numOfMoires()
         XCTAssert(count == 1, String(format: "current count: %d", count))
         
-        _ = moireModel1.createNew()
-        _ = moireModel1.createNew()
+        _ = moireModel1.createNewDemo()
+        _ = moireModel1.createNewDemo()
         count = moireModel1.numOfMoires()
         XCTAssert(count == 3, String(format: "current count: %d", count))
         
-        _ = moireModel1.createNew()
+        _ = moireModel1.createNewDemo()
         let moireModel2 = MoireModel()
         count = moireModel2.numOfMoires()
         XCTAssert(count == 4, String(format: "current count: %d", count))
@@ -48,9 +48,9 @@ class MoireModelTests: XCTestCase {
         count = moireModel1.numOfMoires()
         XCTAssert(count == 0, String(format: "current count: %d", count))
         
-        let m1 = moireModel1.createNew()
-        let m2 = moireModel1.createNew()
-        let m3 = moireModel1.createNew()
+        let m1 = moireModel1.createNewDemo()
+        let m2 = moireModel1.createNewDemo()
+        let m3 = moireModel1.createNewDemo()
         count = moireModel1.numOfMoires()
         XCTAssert(count == 3, String(format: "current count: %d", count))
         
@@ -84,7 +84,7 @@ class MoireModelTests: XCTestCase {
         var success: Bool
         let moireModel1 = MoireModel()
         
-        let m1 = moireModel1.createNew()
+        let m1 = moireModel1.createNewDemo()
         assert(m1.patterns[1].direction != 1.531)
         m1.patterns[1].direction = 1.531
         let i1 = m1.id
@@ -127,11 +127,11 @@ class MoireModelTests: XCTestCase {
         ms2 = moireModel1.readAllMoiresSortedByLastCreated()
         XCTAssert(ms2.count == 0)
         
-        let m1 = moireModel1.createNew()
+        let m1 = moireModel1.createNewDemo()
         let i1 = m1.id
-        let m2 = moireModel1.createNew()
+        let m2 = moireModel1.createNewDemo()
         let i2 = m2.id
-        let m3 = moireModel1.createNew()
+        let m3 = moireModel1.createNewDemo()
         let i3 = m3.id
         
         ms1 = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
@@ -166,7 +166,7 @@ class MoireModelTests: XCTestCase {
         XCTAssert(m != nil)
         XCTAssert(m?.id == i2)
         
-        let m4 = moireModel1.createNew()
+        let m4 = moireModel1.createNewDemo()
         let i4 = m4.id
         ms1 = moireModel1.readAllMoiresSortedByLastCreatedOrModified()
         ids = ms1.compactMap({$0.id})

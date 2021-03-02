@@ -47,7 +47,7 @@ class MoireModel {
         }
     }
     
-    func createNew() -> Moire {
+    func createNewDemo() -> Moire {
         let newM = Moire()
         _ = self.saveFileIO.save(moire: newM)
         return newM
