@@ -261,11 +261,12 @@ extension MainViewController: PatternManager {
     }
     
     func createPattern(caller: CtrlViewController, newPattern: Pattern) -> Bool {
+        guard let i = caller.id else {return false}
         guard self.currentMoire!.patterns.count < Constants.Bounds.numOfPatternsPerMoire.upperBound else {
             print("creation failed: maximum number of patterns per moire reached")
             return false
         }
-        self.currentMoire!.patterns.append(newPattern)
+        self.currentMoire!.patterns.insert(newPattern, at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)+1)
         self.updateMainView()
         print("num of patterns after creating new: ", self.currentMoire!.patterns.count)
         return true
