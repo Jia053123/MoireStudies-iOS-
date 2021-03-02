@@ -56,6 +56,7 @@ class Moire: Codable {
         self._patterns.append(Pattern.demoPattern2())
         self._patterns.append(Pattern.demoPattern3())
         self._patterns.append(Pattern.demoPattern4())
+        self._patterns.append(Pattern.demoPattern5())
         _previewData = nil
     }
 }

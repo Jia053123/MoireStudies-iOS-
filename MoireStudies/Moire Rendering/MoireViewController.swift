@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MoireViewController: UIViewController {
+class MoireViewController: UIViewController { // TODO: remove the core animation implementation and render all patterns in a single metal layer and benchmark (currently the memory usage is quite high with more patterns per moire)
     private weak var dimView: UIView?
     
     override func viewDidLoad() {
@@ -92,7 +92,7 @@ class MoireViewController: UIViewController {
         self.view.sendSubviewToBack(pvc.view)
     }
     
-    func undimPatternViews() {
+    func undimPatternViews() { // TODO: add parameter to enable multiple highlights/dims
         self.view.sendSubviewToBack(self.dimView!)
         self.dimView!.isHidden = true
     }

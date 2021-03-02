@@ -39,7 +39,7 @@ struct Constants {
         static let blackWidthRange: ClosedRange<CGFloat> = 2.0...50.0
         static let whiteWidthRange: ClosedRange<CGFloat> = 2.0...50.0
         
-        static let numOfPatternsPerMoire: ClosedRange<Int> = 1...4
+        static let numOfPatternsPerMoire: ClosedRange<Int> = 1...5
     }
     
     struct Data {
