@@ -41,4 +41,10 @@ struct Pattern: Equatable, Codable {
                                                            scaleFactor: CGFloat.random(in: 1.3...2.6))
         return Pattern(speed: 30.0, direction: CGFloat.pi/4.0 + 0.025, blackWidth: r.blackWidth, whiteWidth: r.whiteWidth)
     }
+    
+    static func demoPattern3() -> Pattern {
+        let r = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat.random(in: 0.3...0.7),
+                                                           scaleFactor: CGFloat.random(in: 1.0...2.3))
+        return Pattern(speed: 40.0, direction: CGFloat.pi/4.0 + 0.5, blackWidth: r.blackWidth, whiteWidth: r.whiteWidth)
+    }
 }
