@@ -211,7 +211,7 @@
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                     </state>
                     <connections>
-                        <action selector="highlightButtonPressed:" destination="-1" eventType="touchDown" id="gYy-lS-SHA"/>
+                        <action selector="highlightButtonHeld:" destination="-1" eventType="touchDown" id="gYy-lS-SHA"/>
                         <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpOutside" id="61z-y2-S0X"/>
                         <action selector="highlightButtonReleased:" destination="-1" eventType="touchUpInside" id="ORn-V0-igM"/>
                     </connections>
@@ -222,7 +222,7 @@
                         <imageReference key="image" image="eye" catalog="system" symbolScale="large"/>
                     </state>
                     <connections>
-                        <action selector="dimButtonPressed:" destination="-1" eventType="touchDown" id="7CA-Oh-x6P"/>
+                        <action selector="dimButtonHeld:" destination="-1" eventType="touchDown" id="7CA-Oh-x6P"/>
                         <action selector="dimButtonReleased:" destination="-1" eventType="touchUpOutside" id="XI6-Qz-ASE"/>
                         <action selector="dimButtonReleased:" destination="-1" eventType="touchUpInside" id="h6R-mL-cXf"/>
                     </connections>

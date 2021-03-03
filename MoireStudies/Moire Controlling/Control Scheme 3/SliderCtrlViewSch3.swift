@@ -112,7 +112,7 @@ class SliderCtrlViewSch3: UIView {
         }
     }
     
-    @IBAction func highlightButtonPressed(_ sender: Any) {
+    @IBAction func highlightButtonHeld(_ sender: Any) {
         self.target?.highlightPattern()
     }
     
@@ -120,7 +120,7 @@ class SliderCtrlViewSch3: UIView {
         self.target?.unhighlightPattern()
     }
     
-    @IBAction func dimButtonPressed(_ sender: Any) {
+    @IBAction func dimButtonHeld(_ sender: Any) {
         self.target?.dimPattern()
     }
     
