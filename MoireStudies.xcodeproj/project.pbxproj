@@ -40,6 +40,10 @@
 		8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EB6FD25A52EBF007EA799 /* Moire.swift */; };
 		8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E425C3CB080009905C /* MetalStripe.swift */; };
 		8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E925C85B0C0009905C /* Utilities.swift */; };
+		8E72F3DA25F01B18004E98DF /* HighDegreeCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72F3D925F01B18004E98DF /* HighDegreeCtrlViewController.swift */; };
+		8E72F3DF25F01DCC004E98DF /* HighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72F3DE25F01DCC004E98DF /* HighDegreeCtrlView.swift */; };
+		8E72F3E425F01E62004E98DF /* SliderHighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72F3E325F01E62004E98DF /* SliderHighDegreeCtrlView.swift */; };
+		8E72F3E925F01FCB004E98DF /* SliderHighDegreeCtrlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E72F3E825F01FCB004E98DF /* SliderHighDegreeCtrlView.xib */; };
 		8E7FD9BE25D0D08A0064A0A6 /* PatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */; };
 		8E7FD9C325D0D1430064A0A6 /* MetalPatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FD9C225D0D1430064A0A6 /* MetalPatternViewController.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
@@ -110,6 +114,10 @@
 		8E6EB6FD25A52EBF007EA799 /* Moire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moire.swift; sourceTree = "<group>"; };
 		8E6EF2E425C3CB080009905C /* MetalStripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalStripe.swift; sourceTree = "<group>"; };
 		8E6EF2E925C85B0C0009905C /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		8E72F3D925F01B18004E98DF /* HighDegreeCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewController.swift; sourceTree = "<group>"; };
+		8E72F3DE25F01DCC004E98DF /* HighDegreeCtrlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlView.swift; sourceTree = "<group>"; };
+		8E72F3E325F01E62004E98DF /* SliderHighDegreeCtrlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHighDegreeCtrlView.swift; sourceTree = "<group>"; };
+		8E72F3E825F01FCB004E98DF /* SliderHighDegreeCtrlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderHighDegreeCtrlView.xib; sourceTree = "<group>"; };
 		8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternViewController.swift; sourceTree = "<group>"; };
 		8E7FD9C225D0D1430064A0A6 /* MetalPatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternViewController.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -204,6 +212,7 @@
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
 				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
 				8E5816D925E7063D00FFE709 /* Control Scheme 3 */,
+				8E72F3D825F01A46004E98DF /* High Degree Control */,
 			);
 			path = "Moire Controlling";
 			sourceTree = "<group>";
@@ -260,6 +269,17 @@
 				8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */,
 			);
 			path = "Control Scheme 3";
+			sourceTree = "<group>";
+		};
+		8E72F3D825F01A46004E98DF /* High Degree Control */ = {
+			isa = PBXGroup;
+			children = (
+				8E72F3D925F01B18004E98DF /* HighDegreeCtrlViewController.swift */,
+				8E72F3DE25F01DCC004E98DF /* HighDegreeCtrlView.swift */,
+				8E72F3E325F01E62004E98DF /* SliderHighDegreeCtrlView.swift */,
+				8E72F3E825F01FCB004E98DF /* SliderHighDegreeCtrlView.xib */,
+			);
+			path = "High Degree Control";
 			sourceTree = "<group>";
 		};
 		8E96B798257F33CF007527E2 = {
@@ -442,6 +462,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E72F3E925F01FCB004E98DF /* SliderHighDegreeCtrlView.xib in Resources */,
 				8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */,
 				8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */,
 				8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */,
@@ -472,6 +493,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E72F3DA25F01B18004E98DF /* HighDegreeCtrlViewController.swift in Sources */,
 				8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */,
 				8E7FD9BE25D0D08A0064A0A6 /* PatternViewController.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
@@ -486,6 +508,7 @@
 				8EE29F5D25A055AB00FF2539 /* ControlViewSch1.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
+				8E72F3DF25F01DCC004E98DF /* HighDegreeCtrlView.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
 				8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */,
 				8E1EDFDA25D2650E002572C3 /* WeakTileLayerContainer.swift in Sources */,
@@ -493,6 +516,7 @@
 				8E2E463725D1F08000B0EA23 /* ControlsViewController.swift in Sources */,
 				8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
+				8E72F3E425F01E62004E98DF /* SliderHighDegreeCtrlView.swift in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8EE29F6525A0563D00FF2539 /* ControlViewSch2.swift in Sources */,
