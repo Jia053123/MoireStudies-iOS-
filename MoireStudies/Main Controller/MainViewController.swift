@@ -51,9 +51,6 @@ class MainViewController: UIViewController {
         self.controlsViewController = cvc
         // setup Buttons
         self.view.bringSubviewToFront(buttonsContainerView)
-//        self.view.bringSubviewToFront(gearButton)
-//        self.view.bringSubviewToFront(fileButton)
-//        self.view.bringSubviewToFront(newPatternButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {

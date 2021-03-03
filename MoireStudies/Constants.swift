@@ -31,6 +31,8 @@ struct Constants {
             }
             return frames
         }()
+        
+        static let highDegreeControlFrame = CGRect(x: 15, y: 315, width: 150, height: 300)
     }
     
     struct Bounds {
