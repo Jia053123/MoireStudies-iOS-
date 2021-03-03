@@ -49,11 +49,8 @@ class SliderCtrlViewSch3: UIView {
         scaleFactorSlider.minimumValue = 1.0
         scaleFactorSlider.maximumValue = 10.0
         
-        let delete = UIAction(title: "Delete Layer", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
-        let duplicate = UIAction(title: "Duplicate Layer", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
-        let patternMenu = UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [duplicate, delete])
         menuButton.showsMenuAsPrimaryAction = true
-        menuButton.menu = patternMenu
+        menuButton.menu = self.makeMenu(isHidden: false)
     }
     
     @IBAction func startEditing(_ sender: Any) {
@@ -130,6 +127,34 @@ class SliderCtrlViewSch3: UIView {
 }
 
 extension SliderCtrlViewSch3 {
+    private func makeMenu(isHidden: Bool) -> UIMenu {
+        let hide = UIAction(title: "Hide Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.hidePattern()})
+        
+        let unhide = UIAction(title: "Unhide Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.unhidePattern()})
+        
+        let duplicate = UIAction(title: "Duplicate Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
+        
+        let delete = UIAction(title: "Delete Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
+        
+        if isHidden {
+            return UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [unhide, duplicate, delete])
+        } else {
+            return UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [hide, duplicate, delete])
+        }
+    }
+    
+    @objc func hidePattern() {
+        let success = self.target!.hidePattern()
+        if success {
+            menuButton.menu = self.makeMenu(isHidden: true)
+        }
+    }
+    
+    @objc func unhidePattern() {
+        self.target?.unhidePattern()
+        menuButton.menu = self.makeMenu(isHidden: false)
+    }
+    
     @objc func deletePattern() {
         self.target?.deletePattern()
     }

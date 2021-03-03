@@ -97,6 +97,16 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
         self.dimView!.isHidden = true
     }
     
+    func hidePatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        pvc.view.isHidden = true
+    }
+    
+    func unhidePatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        pvc.view.isHidden = false
+    }
+    
     func modifyPatternView(patternViewIndex: Int, newPattern: Pattern) {
         (self.children[patternViewIndex] as! PatternViewController).updatePattern(newPattern: newPattern)
     }

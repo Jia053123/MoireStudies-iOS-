@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class CtrlViewControllerSch3: UIViewController {
+    private(set) var isHidden: Bool = false
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
     var id: Int?
     var delegate: PatternManager?
@@ -123,6 +124,21 @@ extension CtrlViewControllerSch3 {
 }
 
 extension CtrlViewControllerSch3 {
+    func hidePattern() -> Bool {
+        let success = delegate!.hidePattern(caller: self)
+        if success {
+            self.isHidden = true
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func unhidePattern() {
+        _ = delegate?.unhidePattern(caller: self)
+        self.isHidden = false
+    }
+    
     func duplicatePattern() {
         guard let del = self.delegate else {return}
         let newP: Pattern = del.getPattern(caller: self)!

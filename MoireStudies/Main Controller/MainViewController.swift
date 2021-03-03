@@ -268,6 +268,18 @@ extension MainViewController: PatternManager {
         return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)]
     }
     
+    func hidePattern(caller: CtrlViewController) -> Bool {
+        guard let i = caller.id else {return false}
+        self.moireViewController?.hidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        return true
+    }
+    
+    func unhidePattern(caller: CtrlViewController) -> Bool {
+        guard let i = caller.id else {return false}
+        self.moireViewController?.unhidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        return true
+    }
+    
     func createPattern(caller: CtrlViewController?, newPattern: Pattern) -> Bool {
         guard self.currentMoire!.patterns.count < Constants.Bounds.numOfPatternsPerMoire.upperBound else {
             print("creation failed: maximum number of patterns per moire reached")
