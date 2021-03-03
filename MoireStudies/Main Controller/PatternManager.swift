@@ -19,6 +19,6 @@ protocol PatternManager: UIViewController {
     func modifyPattern(blackWidth: CGFloat, caller: CtrlViewController) -> Bool
     func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewController) -> Bool
     func getPattern(caller: CtrlViewController) -> Pattern?
-    func createPattern(caller: CtrlViewController, newPattern: Pattern) -> Bool
+    func createPattern(caller: CtrlViewController?, newPattern: Pattern) -> Bool
     func deletePattern(caller: CtrlViewController) -> Bool
 }

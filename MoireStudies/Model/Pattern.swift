@@ -30,6 +30,15 @@ struct Pattern: Equatable, Codable {
                        whiteWidth: CGFloat.random(in: 5...15))
     }
     
+    static func randomDemoPattern() -> Pattern {
+        let r = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat.random(in: 0.3...0.7),
+                                                           scaleFactor: CGFloat.random(in: 1.0...4.0))
+        return Pattern(speed: CGFloat.random(in: 0.0...40.0),
+                       direction: CGFloat.pi/4 + CGFloat.random(in: -0.3...0.3) + [CGFloat(0.0), CGFloat.pi].randomElement()!,
+                       blackWidth: r.blackWidth,
+                       whiteWidth: r.whiteWidth)
+    }
+    
     static func demoPattern1() -> Pattern {
         let r = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: CGFloat.random(in: 0.3...0.7),
                                                            scaleFactor: CGFloat.random(in: 1.6...2.9))

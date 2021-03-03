@@ -18,56 +18,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
-                                <rect key="frame" x="988.5" y="3" width="25.5" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="SettingsButton"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkF-Ph-85z" userLabel="ButtonsContainer">
+                                <rect key="frame" x="874" y="0.0" width="150" height="55"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ifa-h7-T8I">
+                                        <rect key="frame" x="114.5" y="12.5" width="25.5" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="SettingsButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="hYG-uG-xgh"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <color key="titleShadowColor" systemColor="labelColor"/>
+                                            <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coU-E5-Qvx">
+                                        <rect key="frame" x="69.5" y="12.5" width="35" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="SaveFilesButton"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="rfG-j2-0qP"/>
+                                            <constraint firstAttribute="width" constant="35" id="yUb-G4-yUt"/>
+                                        </constraints>
+                                        <state key="normal">
+                                            <imageReference key="image" image="folder.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="fileButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jcb-4y-1PW"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tw-nO-UOy">
+                                        <rect key="frame" x="27.5" y="15.5" width="32" height="24"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="plus.rectangle.fill.on.rectangle.fill" catalog="system" symbolScale="large"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="newPatternButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Zq-36-0Zn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="hYG-uG-xgh"/>
+                                    <constraint firstItem="5tw-nO-UOy" firstAttribute="centerY" secondItem="KkF-Ph-85z" secondAttribute="centerY" id="4oh-uR-fmL"/>
+                                    <constraint firstItem="ifa-h7-T8I" firstAttribute="centerY" secondItem="KkF-Ph-85z" secondAttribute="centerY" id="8OW-MR-rIW"/>
+                                    <constraint firstItem="ifa-h7-T8I" firstAttribute="leading" secondItem="coU-E5-Qvx" secondAttribute="trailing" constant="10" id="N61-lG-nIU"/>
+                                    <constraint firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="Vs6-Ze-saf"/>
+                                    <constraint firstAttribute="height" constant="55" id="WQY-aC-nzf"/>
+                                    <constraint firstAttribute="width" constant="150" id="jnw-Wa-bDM"/>
+                                    <constraint firstItem="coU-E5-Qvx" firstAttribute="centerY" secondItem="KkF-Ph-85z" secondAttribute="centerY" id="ovb-NW-Xwv"/>
+                                    <constraint firstItem="coU-E5-Qvx" firstAttribute="leading" secondItem="5tw-nO-UOy" secondAttribute="trailing" constant="10" id="s5v-Fy-kqx"/>
                                 </constraints>
-                                <state key="normal">
-                                    <color key="titleShadowColor" systemColor="labelColor"/>
-                                    <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
-                                </state>
-                                <connections>
-                                    <action selector="gearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coU-E5-Qvx">
-                                <rect key="frame" x="943.5" y="3" width="35" height="30"/>
-                                <accessibility key="accessibilityConfiguration" identifier="SaveFilesButton"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="rfG-j2-0qP"/>
-                                    <constraint firstAttribute="width" constant="35" id="yUb-G4-yUt"/>
-                                </constraints>
-                                <state key="normal">
-                                    <imageReference key="image" image="folder.fill" catalog="system" symbolScale="large"/>
-                                </state>
-                                <connections>
-                                    <action selector="fileButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jcb-4y-1PW"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration" identifier="MainView"/>
                         <constraints>
-                            <constraint firstItem="ifa-h7-T8I" firstAttribute="leading" secondItem="coU-E5-Qvx" secondAttribute="trailing" constant="10" id="5dN-dy-w0U"/>
-                            <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="3" id="RFr-pC-Lpc"/>
-                            <constraint firstItem="coU-E5-Qvx" firstAttribute="centerY" secondItem="ifa-h7-T8I" secondAttribute="centerY" id="cwa-hr-D0D"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ifa-h7-T8I" secondAttribute="trailing" constant="10" id="lVc-fs-e00"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KkF-Ph-85z" secondAttribute="trailing" id="F3s-mr-v40"/>
+                            <constraint firstItem="KkF-Ph-85z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zej-Xn-8Ri"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>
+                        <outlet property="buttonsContainerView" destination="KkF-Ph-85z" id="8Q9-rY-li9"/>
                         <outlet property="fileButton" destination="coU-E5-Qvx" id="odG-dq-jVX"/>
                         <outlet property="gearButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
+                        <outlet property="newPatternButton" destination="5tw-nO-UOy" id="h8X-5h-2jV"/>
                         <segue destination="KRW-Dp-kSv" kind="presentation" identifier="showSaveFilesView" id="Kp4-kX-h2s"/>
                         <segue destination="DoN-VN-dz5" kind="presentation" identifier="showSettingsView" id="1nu-6f-lwe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-168" y="172"/>
+            <point key="canvasLocation" x="-168.1640625" y="171.875"/>
         </scene>
         <!--Save Files View Controller-->
         <scene sceneID="Anb-Bu-Mm6">
@@ -230,6 +255,7 @@
     <resources>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
+        <image name="plus.rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

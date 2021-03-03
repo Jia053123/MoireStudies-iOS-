@@ -22,6 +22,8 @@ import UIKit
 class MainViewController: UIViewController {
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!
+    @IBOutlet weak var newPatternButton: UIButton!
+    @IBOutlet weak var buttonsContainerView: UIView!
     private var moireModel: MoireModel = MoireModel.init()
     var moireIdToInit: String?
     private var currentMoire: Moire?
@@ -48,8 +50,10 @@ class MainViewController: UIViewController {
         cvc.didMove(toParent: self)
         self.controlsViewController = cvc
         // setup Buttons
-        self.view.bringSubviewToFront(gearButton)
-        self.view.bringSubviewToFront(fileButton)
+        self.view.bringSubviewToFront(buttonsContainerView)
+//        self.view.bringSubviewToFront(gearButton)
+//        self.view.bringSubviewToFront(fileButton)
+//        self.view.bringSubviewToFront(newPatternButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -137,6 +141,10 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    @IBAction func newPatternButtonPressed(_ sender: Any) {
+        _ = self.createPattern(caller: nil, newPattern: Pattern.randomDemoPattern())
+    }
+    
     @IBAction func gearButtonPressed(_ sender: Any) {
         _ = self.saveMoire()
         performSegue(withIdentifier: "showSettingsView", sender: self.gearButton)
@@ -260,13 +268,17 @@ extension MainViewController: PatternManager {
         return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)]
     }
     
-    func createPattern(caller: CtrlViewController, newPattern: Pattern) -> Bool {
-        guard let i = caller.id else {return false}
+    func createPattern(caller: CtrlViewController?, newPattern: Pattern) -> Bool {
         guard self.currentMoire!.patterns.count < Constants.Bounds.numOfPatternsPerMoire.upperBound else {
             print("creation failed: maximum number of patterns per moire reached")
             return false
         }
-        self.currentMoire!.patterns.insert(newPattern, at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)+1)
+        if let c = caller {
+            guard let i = c.id else {return false}
+            self.currentMoire!.patterns.insert(newPattern, at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)+1)
+        } else {
+            self.currentMoire!.patterns.append(newPattern)
+        }
         self.updateMainView()
         print("num of patterns after creating new: ", self.currentMoire!.patterns.count)
         return true
