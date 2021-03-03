@@ -30,29 +30,24 @@ class UiTests: XCTestCase {
         let patternViewId = "MetalPatternView"
         XCTAssert(app.otherElements["MoireView"].exists)
         XCTAssert(app.otherElements[patternViewId].exists)
-        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
     private func moireViewCheckCoreAnim() {
         let patternViewId = "CoreAnimPatternView"
         XCTAssert(app.otherElements["MoireView"].exists)
         XCTAssert(app.otherElements[patternViewId].exists)
-        XCTAssert(app.otherElements.matching(identifier: patternViewId).count == 2)
     }
     
     private func controlViewsCheckSch1() {
         XCTAssert(app.otherElements["SliderCtrlViewSch1"].exists)
-        XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch1").count == 2)
     }
     
     private func controlViewsCheckSch2() {
         XCTAssert(app.otherElements["SliderCtrlViewSch2"].exists)
-        XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch2").count == 2)
     }
     
     private func controlViewsCheckSch3() {
         XCTAssert(app.otherElements["SliderCtrlViewSch3"].exists)
-        XCTAssert(app.otherElements.matching(identifier: "SliderCtrlViewSch3").count == 2)
     }
     
     private func dismissPopOver() {
@@ -209,7 +204,7 @@ class UiTests: XCTestCase {
         app = XCUIApplication()
         app.buttons["SettingsDoneButton"].tap()
         self.moireViewCheckMetal()
-        self.controlViewsCheckSch1()
+        self.controlViewsCheckSch3()
     }
     
     func testSettingsPanel() throws {
