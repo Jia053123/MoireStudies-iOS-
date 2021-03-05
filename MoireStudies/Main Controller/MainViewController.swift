@@ -173,7 +173,7 @@ extension MainViewController {
 
 extension MainViewController: PatternManager {
     func highlightPattern(caller: CtrlViewController) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         self.moireViewController!.highlightPatternView(patternViewIndex: index)
@@ -181,7 +181,7 @@ extension MainViewController: PatternManager {
     }
     
     func unhighlightPattern(caller: CtrlViewController) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         self.moireViewController!.unhighlightPatternView(patternViewIndex: index)
@@ -189,7 +189,7 @@ extension MainViewController: PatternManager {
     }
     
     func dimPattern(caller: CtrlViewController) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         self.moireViewController!.dimPatternView(patternViewIndex: index)
@@ -197,7 +197,7 @@ extension MainViewController: PatternManager {
     }
     
     func undimPattern(caller: CtrlViewController) -> Bool {
-        guard self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) != nil else {
+        guard self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller) != nil else {
             return false
         }
         self.moireViewController!.undimPatternViews()
@@ -210,7 +210,7 @@ extension MainViewController: PatternManager {
             print("speed out of bound")
             return false
         }
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         currentMoire!.patterns[index].speed = speed
@@ -223,7 +223,7 @@ extension MainViewController: PatternManager {
             print("direction out of bound")
             return false
         }
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         currentMoire!.patterns[index].direction = direction
@@ -237,7 +237,7 @@ extension MainViewController: PatternManager {
             print("blackWidth out of bound")
             return false
         }
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         currentMoire!.patterns[index].blackWidth = blackWidth
@@ -250,7 +250,7 @@ extension MainViewController: PatternManager {
             print("whiteWidth out of bound")
             return false
         }
-        guard let index = self.ctrlAndPatternMatcher.findIndexOfPatternControlled(controlViewController: caller) else {
+        guard let index = self.ctrlAndPatternMatcher.findIndexesOfPatternControlled(controlViewController: caller)?.first else {
             return false
         }
         currentMoire!.patterns[index].whiteWidth = whiteWidth
@@ -259,21 +259,26 @@ extension MainViewController: PatternManager {
     }
     
     func getPattern(caller: CtrlViewController) -> Pattern? {
-        guard let i = caller.id else {
+        guard let id = caller.id else {return nil}
+        
+        if let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)?.first {
+            return self.currentMoire!.patterns[index]
+        } else {
             return nil
         }
-        return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)]
     }
     
     func hidePattern(caller: CtrlViewController) -> Bool {
-        guard let i = caller.id else {return false}
-        self.moireViewController?.hidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        guard let id = caller.id else {return false}
+        guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)?.first else {return false}
+        self.moireViewController?.hidePatternView(patternViewIndex: index)
         return true
     }
     
     func unhidePattern(caller: CtrlViewController) -> Bool {
-        guard let i = caller.id else {return false}
-        self.moireViewController?.unhidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        guard let id = caller.id else {return false}
+        guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)?.first else {return false}
+        self.moireViewController?.unhidePatternView(patternViewIndex: index)
         return true
     }
     
@@ -283,8 +288,9 @@ extension MainViewController: PatternManager {
             return false
         }
         if let c = caller {
-            guard let i = c.id else {return false}
-            self.currentMoire!.patterns.insert(newPattern, at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i)+1)
+            guard let id = c.id else {return false}
+            guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)?.first else {return false}
+            self.currentMoire!.patterns.insert(newPattern, at: index+1)
         } else {
             self.currentMoire!.patterns.append(newPattern)
         }
@@ -294,12 +300,13 @@ extension MainViewController: PatternManager {
     }
     
     func deletePattern(caller: CtrlViewController) -> Bool {
-        guard let i = caller.id else {return false}
+        guard let id = caller.id else {return false}
         guard self.currentMoire!.patterns.count > Constants.Bounds.numOfPatternsPerMoire.lowerBound else {
             print("deletion failed: minimum number of patterns per moire reached")
             return false
         }
-        self.currentMoire!.patterns.remove(at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: i))
+        guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)?.first else {return false}
+        self.currentMoire!.patterns.remove(at: index)
         print("num of patterns after deletion: ", self.currentMoire!.patterns.count)
         self.updateMainView()
         return true

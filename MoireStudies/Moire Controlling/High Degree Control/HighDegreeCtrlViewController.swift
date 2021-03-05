@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 class HighDegreeCtrlViewController: UIViewController {
-    var id: Int?
+    var id: String?
     var delegate: PatternManager?
     
-    required init(id: Int, frame: CGRect, pattern: Pattern?) {
+    required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
         // stub

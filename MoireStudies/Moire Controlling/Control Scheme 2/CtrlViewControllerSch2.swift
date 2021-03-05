@@ -10,10 +10,10 @@ import UIKit
 
 class CtrlViewControllerSch2: UIViewController { // TODO: remove this class and use the scheme3 controller? 
     typealias CtrlViewSch2Subclass = SliderCtrlViewSch2
-    var id: Int?
+    var id: String?
     weak var delegate: PatternManager?
     
-    required init(id: Int, frame: CGRect, pattern: Pattern?) {
+    required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
         let controlView: ControlViewSch2 = CtrlViewSch2Subclass.init(frame: frame)

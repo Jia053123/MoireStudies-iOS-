@@ -27,7 +27,7 @@ class ControlsViewController: UIViewController {
         assert(controlFrames.count >= patterns.count)
         for i in 0..<patterns.count {
             var cvc: CtrlViewController
-            let id = matcher.getCtrlViewControllerId(indexOfPatternControlled: i)
+            let id = matcher.getCtrlViewControllerId(indexesOfPatternControlled: [i])
             switch settings.interfaceSetting {
             case UISettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])

@@ -11,10 +11,10 @@ import UIKit
 class CtrlViewControllerSch3: UIViewController {
     private(set) var isHidden: Bool = false
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
-    var id: Int?
+    var id: String?
     var delegate: PatternManager?
     
-    required init(id: Int, frame: CGRect, pattern: Pattern?) {
+    required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
         let controlView: ControlViewSch3 = CtrlViewSch3Subclass.init(frame: frame)
