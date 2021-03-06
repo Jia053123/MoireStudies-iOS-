@@ -81,7 +81,7 @@ class SliderCtrlViewSch1 : UIView {
         }
     }
     
-    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat { // TODO: move to controller
+    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat { // TODO: move to controller? 
         return (CGFloat(speedSegmentIndex) + 1.0) * 8.0 + 10.0
     }
     

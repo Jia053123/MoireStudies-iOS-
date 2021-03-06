@@ -7,7 +7,6 @@
 
 import Foundation
 import XCTest
-
 @testable import MoireStudies
 
 class MoireModelTests: XCTestCase {

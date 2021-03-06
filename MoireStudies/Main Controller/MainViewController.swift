@@ -51,9 +51,6 @@ class MainViewController: UIViewController {
         self.controlsViewController = cvc
         // setup Buttons
         self.view.bringSubviewToFront(buttonsContainerView)
-//        self.view.bringSubviewToFront(gearButton)
-//        self.view.bringSubviewToFront(fileButton)
-//        self.view.bringSubviewToFront(newPatternButton)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -208,7 +205,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool {
-        print("setting speed to: ", speed)
+//        print("setting speed to: ", speed)
         guard Constants.Bounds.speedRange.contains(speed) else {
             print("speed out of bound")
             return false
@@ -235,7 +232,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(blackWidth: CGFloat, caller: CtrlViewController) -> Bool {
-        print("setting blackWidth to: ", blackWidth)
+//        print("setting blackWidth to: ", blackWidth)
         guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
             return false
