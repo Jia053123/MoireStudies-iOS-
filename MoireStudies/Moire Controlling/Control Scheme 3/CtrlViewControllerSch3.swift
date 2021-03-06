@@ -16,7 +16,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     required init(id: Int, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
-        let controlView: ControlViewSch3 = CtrlViewSch3Subclass.init(frame: frame)
+        let controlView: CtrlViewSch3Subclass = CtrlViewSch3Subclass.init(frame: frame)
         self.view = controlView
         controlView.target = self
         if let p = pattern {
@@ -29,7 +29,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     }
 
     func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch3
+        let cv = self.view as! CtrlViewSch3Subclass
         let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
         cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
     }

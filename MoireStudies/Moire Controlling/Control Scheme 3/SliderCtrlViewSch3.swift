@@ -164,7 +164,7 @@ extension SliderCtrlViewSch3 {
     }
 }
 
-extension SliderCtrlViewSch3: ControlViewSch3 {
+extension SliderCtrlViewSch3 {
     func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?) {
         if let s = speed {
             self.speedSlider.value = Float(s)

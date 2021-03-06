@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
+class SliderCtrlViewSch1 : UIView {
     weak var target: BasicCtrlViewController?
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!

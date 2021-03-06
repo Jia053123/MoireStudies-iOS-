@@ -15,7 +15,7 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     required init(id: Int, frame: CGRect, pattern: Pattern?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
-        let controlView: ControlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
+        let controlView: SliderCtrlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
         self.view = controlView
         controlView.target = self
         if let p = pattern {
@@ -28,7 +28,7 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     }
 
     func matchControlsWithModel(pattern: Pattern) {
-        let cv = self.view as! ControlViewSch2
+        let cv = self.view as! SliderCtrlViewSch2
         cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
     }
 }
