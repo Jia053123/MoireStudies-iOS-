@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
-    weak var target: CtrlViewControllerSch2?
+    weak var target: BasicCtrlViewController?
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var blackSlider: UISlider!
@@ -81,7 +81,7 @@ class SliderCtrlViewSch2 : UIView, ControlViewSch2 {
         }
     }
     
-    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat {
+    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat { // TODO: move to controller
         return (CGFloat(speedSegmentIndex) + 1.0) * 8.0 + 10.0
     }
     

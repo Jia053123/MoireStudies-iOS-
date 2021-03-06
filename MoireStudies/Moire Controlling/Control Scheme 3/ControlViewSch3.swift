@@ -9,6 +9,6 @@ import Foundation
 import UIKit
 
 protocol ControlViewSch3 : UIView {
-    var target: CtrlViewControllerSch3? { get set }
+    var target: BasicCtrlViewController? { get set }
     func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?)
 }
