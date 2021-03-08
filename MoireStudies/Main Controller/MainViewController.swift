@@ -66,7 +66,7 @@ class MainViewController: UIViewController {
         if self.initSettings == nil {
             self.initInitSettings()
         }
-        if self.currentMoire == nil || (self.moireIdToInit != nil && self.moireIdToInit != self.currentMoire?.id) {
+        if self.currentMoire == nil || ((self.moireIdToInit != nil) && (self.moireIdToInit != self.currentMoire?.id)) {
             self.initCurrentMoire()
         }
         self.moireViewController!.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
