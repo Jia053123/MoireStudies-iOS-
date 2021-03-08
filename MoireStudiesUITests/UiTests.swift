@@ -54,7 +54,7 @@ class UiTests: XCTestCase {
 //        app.otherElements["PopoverDismissRegion"].tap()
 //        app.otherElements["dismiss popup"].tap()
 //        app.windows.element(boundBy: 0).tap()
-        app.swipeDown()
+        app.swipeDown(velocity: XCUIGestureVelocity.fast)
     }
     
     func testScheme1OpeningControllers() throws {
@@ -119,6 +119,7 @@ class UiTests: XCTestCase {
         XCTAssert(app.collectionViews.cells.containing(.image, identifier:"Add Slide").children(matching: .other).element.exists)
     }
     
+    /// Warning: running this wipes saved data
     func testSaveFilePicker() throws {
         var numOfCells: Int
         app = XCUIApplication()
