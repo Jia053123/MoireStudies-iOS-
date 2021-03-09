@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     private weak var moireViewController: MoireViewController?
     private weak var controlsViewController: ControlsViewController?
     
-    private func setUpModelAndChildControllers(with moireModel: MoireModel = LocalMoireModel.init(),
+    private func setUpModelAndChildControllers(moireModel: MoireModel = LocalMoireModel.init(),
                                                moireViewController: MoireViewController = MoireViewController(),
                                                controlsViewController: ControlsViewController = ControlsViewController()) {
         // setup MoireModel
@@ -56,12 +56,9 @@ class MainViewController: UIViewController {
         self.setUpModelAndChildControllers()
     }
     
-    init?(forTestsWith coder: NSCoder,
-          mockMoireModel: MoireModel,
-          mockMoireViewController: MoireViewController,
-          mockControlsViewController: ControlsViewController) {
+    init?(forTestsWith coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
         super.init(coder: coder)
-        self.setUpModelAndChildControllers(with: mockMoireModel,
+        self.setUpModelAndChildControllers(moireModel: mockMoireModel,
                                            moireViewController: mockMoireViewController,
                                            controlsViewController: mockControlsViewController)
     }
