@@ -35,6 +35,7 @@ class MockMoireViewController: MoireViewController {
     override func setUp(patterns: Array<Pattern>, settings: InitSettings) {
         super.setUp(patterns: patterns, settings: settings)
         self.setUpPerformed = true
+        self.currentPatterns = patterns
     }
     
     override func resetMoireView(patterns: Array<Pattern>, settings: InitSettings) {

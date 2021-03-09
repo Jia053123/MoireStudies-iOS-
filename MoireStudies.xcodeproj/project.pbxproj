@@ -19,6 +19,7 @@
 		8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */; };
 		8E2E463725D1F08000B0EA23 /* ControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */; };
 		8E2ED93225F7334800C7E817 /* MockMoireViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2ED93125F7334800C7E817 /* MockMoireViewController.swift */; };
+		8E2ED93A25F74ECD00C7E817 /* MockControlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2ED93925F74ECD00C7E817 /* MockControlsViewController.swift */; };
 		8E31448A259F030000BB0399 /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E314489259F030000BB0399 /* MaskView.swift */; };
 		8E31449225A0393A00BB0399 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E31449125A0393A00BB0399 /* Constants.swift */; };
 		8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */; };
@@ -89,6 +90,7 @@
 		8E2E460E25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreAnimPatternViewController.swift; sourceTree = "<group>"; };
 		8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewController.swift; sourceTree = "<group>"; };
 		8E2ED93125F7334800C7E817 /* MockMoireViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMoireViewController.swift; sourceTree = "<group>"; };
+		8E2ED93925F74ECD00C7E817 /* MockControlsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockControlsViewController.swift; sourceTree = "<group>"; };
 		8E314489259F030000BB0399 /* MaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		8E31449125A0393A00BB0399 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch2.xib; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				8E2ED93125F7334800C7E817 /* MockMoireViewController.swift */,
+				8E2ED93925F74ECD00C7E817 /* MockControlsViewController.swift */,
 			);
 			path = "Mock Classes";
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */,
+				8E2ED93A25F74ECD00C7E817 /* MockControlsViewController.swift in Sources */,
 				8E2ED93225F7334800C7E817 /* MockMoireViewController.swift in Sources */,
 				8E2E45F125D1BA0B00B0EA23 /* MoireModelTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
