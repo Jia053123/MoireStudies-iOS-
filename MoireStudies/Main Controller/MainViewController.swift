@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     @IBOutlet weak var newPatternButton: UIButton!
     @IBOutlet weak var buttonsContainerView: UIView!
-    private var moireModel: MoireModel = MoireModel.init()
+    private var moireModel: LocalMoireModel = LocalMoireModel.init()
     var moireIdToInit: String?
     private var currentMoire: Moire?
     var initSettings: InitSettings?
