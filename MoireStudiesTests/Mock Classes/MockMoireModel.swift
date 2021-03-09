@@ -42,7 +42,7 @@ class MockMoireModel: MoireModel {
         return true
     }
     
-    func createNewDemo() -> Moire {
+    func createNewDemoMoire() -> Moire {
         let newDemo = Moire()
         self.mockMoires.append(newDemo)
         return newDemo

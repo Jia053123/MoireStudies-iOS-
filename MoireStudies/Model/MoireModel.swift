@@ -13,7 +13,7 @@ protocol MoireModel {
     func read(moireId: String) -> Moire?
     func readLastCreatedOrEdited() -> Moire?
     func saveOrModify(moire: Moire) -> Bool
-    func createNewDemo() -> Moire
+    func createNewDemoMoire() -> Moire
     func delete(moireId: String) -> Bool
     func deleteAllSaves() -> Bool
 }

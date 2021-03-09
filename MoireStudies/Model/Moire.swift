@@ -52,8 +52,6 @@ class Moire: Codable, Equatable {
     
     func resetAndInit() {
         self._patterns = []
-        self._patterns.append(Pattern.demoPattern1())
-        self._patterns.append(Pattern.demoPattern2())
         _previewData = nil
     }
     

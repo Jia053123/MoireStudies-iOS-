@@ -55,7 +55,7 @@ class SaveFilesViewController: UIViewController {
     }
     
     private func createNewMoire() {
-        let newMoire = self.moireModel.createNewDemo()
+        let newMoire = self.moireModel.createNewDemoMoire()
         self.reloadCells()
         self.selectedMoireId = newMoire.id
     }

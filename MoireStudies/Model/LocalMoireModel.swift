@@ -10,7 +10,7 @@ import Foundation
 class LocalMoireModel: MoireModel {
     private var saveFileIO = SaveFileIO.init()
     
-    func numOfMoires() -> Int {
+    func numOfMoires() -> Int {  // TODO: handle the case when save files are corrupted
         return saveFileIO.numOfMoire() ?? 0
     }
     
@@ -44,8 +44,16 @@ class LocalMoireModel: MoireModel {
         }
     }
     
-    func createNewDemo() -> Moire {
+    func createNewEmptyMoire() -> Moire {
         let newM = Moire()
+        _ = self.saveFileIO.save(moire: newM)
+        return newM
+    }
+    
+    func createNewDemoMoire() -> Moire {
+        let newM = Moire()
+        newM.patterns.append(Pattern.demoPattern1())
+        newM.patterns.append(Pattern.demoPattern2())
         _ = self.saveFileIO.save(moire: newM)
         return newM
     }

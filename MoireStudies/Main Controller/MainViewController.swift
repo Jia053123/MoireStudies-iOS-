@@ -102,7 +102,7 @@ class MainViewController: UIViewController {
             print("init moire from id: " + miti)
             self.currentMoire = self.moireModel.read(moireId: miti)
         } else {
-            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemo()
+            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemoMoire()
         }
     }
     
