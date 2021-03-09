@@ -44,7 +44,6 @@ class MainViewControllerTests: XCTestCase {
     func testSetUpDependencies() throws {
         let m1 = Moire()
         self.mockMoireModel.setMockMoires(moires: [m1])
-        
         self.prepareMainViewController()
         
         XCTAssertTrue(self.mockControlsViewController.setUpPerformed)

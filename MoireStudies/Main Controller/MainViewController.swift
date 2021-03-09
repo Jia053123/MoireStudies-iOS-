@@ -64,7 +64,6 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidLoad() {
-        print("MainVC: viewDidLoad")
         super.viewDidLoad()
         // setup MoireViewController
         self.moireViewController!.view.frame = self.view.bounds
@@ -79,7 +78,6 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("MainVC: viewWillAppear")
         super.viewWillAppear(animated)
         // set up must be done in the order below!
         self.initCurrentMoire()

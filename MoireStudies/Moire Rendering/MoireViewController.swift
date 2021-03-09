@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController { // TODO: remove the core animation implementation and render all patterns in a single metal layer and benchmark? (currently the memory usage is quite high with more patterns per moire)
-    private weak var dimView: UIView?
+    private weak var dimView: UIView? // TODO: implement this properly by changing color in renderer
     
     override func viewDidLoad() {
         super.viewDidLoad()

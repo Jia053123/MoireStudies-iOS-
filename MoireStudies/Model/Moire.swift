@@ -11,7 +11,7 @@ import UIKit
 /**
  Summary: represent the model of a single moire
  */
-class Moire: Codable {
+class Moire: Codable, Equatable {
     private var _id: String?
     var id: String {
         get {
@@ -28,7 +28,7 @@ class Moire: Codable {
     var patterns: Array<Pattern> { 
         get {
             if _patterns.isEmpty {
-                self.reset()
+                self.resetAndInit()
             }
             return _patterns
         }
@@ -50,10 +50,15 @@ class Moire: Codable {
         }
     }
     
-    func reset() {
+    func resetAndInit() {
         self._patterns = []
         self._patterns.append(Pattern.demoPattern1())
         self._patterns.append(Pattern.demoPattern2())
         _previewData = nil
+    }
+    
+    /// two moires are equal iff their IDs are identical and their patterns are equal and in the same order
+    static func == (lhs: Moire, rhs: Moire) -> Bool {
+        return (lhs.id == rhs.id) && (lhs.patterns == rhs.patterns)
     }
 }
