@@ -24,7 +24,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     @IBOutlet weak var newPatternButton: UIButton!
     @IBOutlet weak var buttonsContainerView: UIView!
-    private var moireModel: LocalMoireModel = LocalMoireModel.init()
+    private var moireModel: MoireModel!
     var moireIdToInit: String?
     private var currentMoire: Moire?
     var initSettings: InitSettings?
@@ -33,33 +33,37 @@ class MainViewController: UIViewController {
     private weak var moireViewController: MoireViewController?
     private weak var controlsViewController: ControlsViewController?
     
-    private func setUpChildControllers(with moireViewController: MoireViewController = MoireViewController(),
-                                       controlsViewController: ControlsViewController = ControlsViewController()) {
+    private func setUpModelAndChildControllers(with moireModel: MoireModel = LocalMoireModel.init(),
+                                               moireViewController: MoireViewController = MoireViewController(),
+                                               controlsViewController: ControlsViewController = ControlsViewController()) {
+        // setup MoireModel
+        self.moireModel = moireModel
         // setup MoireViewController
-        let mvc = moireViewController
-        self.addChild(mvc)
-        self.moireViewController = mvc
+        self.addChild(moireViewController)
+        self.moireViewController = moireViewController
         // setup ControlsViewController
-        let cvc = controlsViewController
-        self.addChild(cvc)
-        self.controlsViewController = cvc
+        self.addChild(controlsViewController)
+        self.controlsViewController = controlsViewController
     }
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.setUpChildControllers()
+        self.setUpModelAndChildControllers()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setUpChildControllers()
+        self.setUpModelAndChildControllers()
     }
     
     init?(forTestsWith coder: NSCoder,
+          mockMoireModel: MoireModel,
           mockMoireViewController: MoireViewController,
           mockControlsViewController: ControlsViewController) {
         super.init(coder: coder)
-        self.setUpChildControllers(with: mockMoireViewController, controlsViewController: mockControlsViewController)
+        self.setUpModelAndChildControllers(with: mockMoireModel,
+                                           moireViewController: mockMoireViewController,
+                                           controlsViewController: mockControlsViewController)
     }
     
     override func viewDidLoad() {
