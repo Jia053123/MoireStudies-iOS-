@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// each stored moire must have a unique id. Having two moires of the same id in the model is illegal
 protocol MoireModel {
     func numOfMoires() -> Int
     ///returns:  a sorted array of moires sorted in ascending order by its creation date or modification date, whichever comes later
