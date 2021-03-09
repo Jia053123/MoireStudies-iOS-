@@ -50,7 +50,7 @@
 		8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B0257F33D3007527E2 /* Assets.xcassets */; };
 		8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */; };
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
-		8EAA4DE925F3423A00B9DC81 /* BasicCtrlViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* BasicCtrlViewControllerTests.swift */; };
+		8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */; };
 		8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */; };
 		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
@@ -130,7 +130,7 @@
 		8E96B7C2257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8EAA4DE825F3423A00B9DC81 /* BasicCtrlViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCtrlViewControllerTests.swift; sourceTree = "<group>"; };
+		8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3Tests.swift; sourceTree = "<group>"; };
 		8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
 				8E6BF3F025AEC880005FE7CA /* MoireModelTests.swift */,
 				8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */,
-				8EAA4DE825F3423A00B9DC81 /* BasicCtrlViewControllerTests.swift */,
+				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
 				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */,
 				8E96B7C2257F33D4007527E2 /* Info.plist */,
 				8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */,
@@ -521,7 +521,7 @@
 				8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */,
 				8E2E45F125D1BA0B00B0EA23 /* MoireModelTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
-				8EAA4DE925F3423A00B9DC81 /* BasicCtrlViewControllerTests.swift in Sources */,
+				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
 				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

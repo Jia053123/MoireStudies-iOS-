@@ -33,22 +33,45 @@ class MainViewController: UIViewController {
     private weak var moireViewController: MoireViewController?
     private weak var controlsViewController: ControlsViewController?
     
+    private func setUpChildControllers(with moireViewController: MoireViewController = MoireViewController(),
+                                       controlsViewController: ControlsViewController = ControlsViewController()) {
+        // setup MoireViewController
+        let mvc = moireViewController
+        self.addChild(mvc)
+        self.moireViewController = mvc
+        // setup ControlsViewController
+        let cvc = controlsViewController
+        self.addChild(cvc)
+        self.controlsViewController = cvc
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.setUpChildControllers()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setUpChildControllers()
+    }
+    
+    init?(forTestsWith coder: NSCoder,
+          mockMoireViewController: MoireViewController,
+          mockControlsViewController: ControlsViewController) {
+        super.init(coder: coder)
+        self.setUpChildControllers(with: mockMoireViewController, controlsViewController: mockControlsViewController)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup MoireViewController
-        let mvc = MoireViewController()
-        self.addChild(mvc)
-        mvc.view.frame = self.view.bounds
-        self.view.addSubview(mvc.view)
-        mvc.didMove(toParent: self)
-        self.moireViewController = mvc
+        self.moireViewController!.view.frame = self.view.bounds
+        self.view.addSubview(self.moireViewController!.view)
+        self.moireViewController!.didMove(toParent: self)
         // setup ControlsViewController
-        let cvc = ControlsViewController()
-        self.addChild(cvc)
-        cvc.view.frame = self.view.bounds
-        self.view.addSubview(cvc.view)
-        cvc.didMove(toParent: self)
-        self.controlsViewController = cvc
+        self.controlsViewController!.view.frame = self.view.bounds
+        self.view.addSubview(self.controlsViewController!.view)
+        self.controlsViewController!.didMove(toParent: self)
         // setup Buttons
         self.view.bringSubviewToFront(buttonsContainerView)
     }
