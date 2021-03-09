@@ -13,7 +13,7 @@ class ControlsViewController: UIViewController {
         self.view.backgroundColor = UIColor.clear
     }
     
-    func setup(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
+    func setUp(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         self.reset(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
     }
     

@@ -56,7 +56,7 @@ class MainViewController: UIViewController {
         self.setUpModelAndChildControllers()
     }
     
-    init?(forTestsWith coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
+    init?(coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
         super.init(coder: coder)
         self.setUpModelAndChildControllers(moireModel: mockMoireModel,
                                            moireViewController: mockMoireViewController,
@@ -64,6 +64,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        print("MainVC: viewDidLoad")
         super.viewDidLoad()
         // setup MoireViewController
         self.moireViewController!.view.frame = self.view.bounds
@@ -78,6 +79,7 @@ class MainViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        print("MainVC: viewWillAppear")
         super.viewWillAppear(animated)
         // set up must be done in the order below!
         self.initCurrentMoire()
@@ -94,7 +96,7 @@ class MainViewController: UIViewController {
             self.initCurrentMoire()
         }
         self.moireViewController!.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
-        self.initControls()
+        self.controlsViewController!.reset(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
     }
     
     func initCurrentMoire() {
@@ -133,7 +135,7 @@ class MainViewController: UIViewController {
     }
     
     func initControls() {
-        self.controlsViewController!.reset(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
+        self.controlsViewController!.setUp(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
     }
     
     override var prefersStatusBarHidden: Bool {

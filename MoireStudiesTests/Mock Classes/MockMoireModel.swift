@@ -9,7 +9,7 @@
 import Foundation
 
 class MockMoireModel: MoireModel {
-    /// make sure the last created or edited is the last element
+    // make sure the last created or edited is the last element
     private(set) var mockMoires: Array<Moire> = []
     
     func setMockMoires(moires: Array<Moire>) {
