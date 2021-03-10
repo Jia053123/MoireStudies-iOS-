@@ -100,7 +100,7 @@ class MainViewController: UIViewController {
     func initCurrentMoire() {
         if let miti = self.moireIdToInit {
             print("init moire from id: " + miti)
-            self.currentMoire = self.moireModel.read(moireId: miti)
+            self.currentMoire = self.moireModel.read(moireId: miti) ?? self.moireModel.createNewDemoMoire()
         } else {
             self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemoMoire()
         }

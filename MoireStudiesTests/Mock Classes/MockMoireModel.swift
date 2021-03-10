@@ -10,51 +10,53 @@ import Foundation
 
 class MockMoireModel: MoireModel {
     // make sure the last created or edited is the last element
-    private(set) var mockMoires: Array<Moire> = []
+    private(set) var currentMoires: Array<Moire> = []
     
     func setMockMoires(moires: Array<Moire>) {
-        self.mockMoires = moires
+        self.currentMoires = moires
     }
     
     func numOfMoires() -> Int {
-        return self.mockMoires.count
+        return self.currentMoires.count
     }
     
     func read(moireId: String) -> Moire? {
-        return self.mockMoires.first(where: {m -> Bool in
+        return self.currentMoires.first(where: {m -> Bool in
             return m.id == moireId
         })
     }
     
     func readLastCreatedOrEdited() -> Moire? {
-        return self.mockMoires.last
+        return self.currentMoires.last
     }
     
     func saveOrModify(moire: Moire) -> Bool {
-        let index = self.mockMoires.firstIndex(where: {m -> Bool in
+        let index = self.currentMoires.firstIndex(where: {m -> Bool in
             return m.id == moire.id
         })
         if let i = index {
             // moire already exists
-            self.mockMoires.remove(at: i)
+            self.currentMoires.remove(at: i)
         }
-        self.mockMoires.append(moire)
+        self.currentMoires.append(moire) // append to the end since it's the latest
         return true
     }
     
     func createNewDemoMoire() -> Moire {
         let newDemo = Moire()
-        self.mockMoires.append(newDemo)
+        newDemo.patterns.append(Pattern.randomDemoPattern())
+        newDemo.patterns.append(Pattern.randomDemoPattern())
+        self.currentMoires.append(newDemo)
         return newDemo
     }
     
     func delete(moireId: String) -> Bool {
-        let index = self.mockMoires.firstIndex(where: {m -> Bool in
+        let index = self.currentMoires.firstIndex(where: {m -> Bool in
             return m.id == moireId
         })
         if let i = index {
             // moire exists
-            self.mockMoires.remove(at: i)
+            self.currentMoires.remove(at: i)
             return true
         } else {
             return false
@@ -62,7 +64,7 @@ class MockMoireModel: MoireModel {
     }
     
     func deleteAllSaves() -> Bool {
-        self.mockMoires = []
+        self.currentMoires = []
         return true
     }
 }

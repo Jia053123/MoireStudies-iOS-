@@ -12,7 +12,7 @@ import UIKit
  Summary: represent the model of a single moire
  */
 class Moire: Codable, Equatable {
-    let id: String!
+    let id: String
     var patterns: Array<Pattern> = []
     
     private var _previewData: Data?
