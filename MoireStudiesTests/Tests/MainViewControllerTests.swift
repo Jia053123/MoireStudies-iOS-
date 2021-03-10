@@ -58,7 +58,7 @@ class MainViewControllerTests: XCTestCase {
     }
 }
 
-/// test loading moire from model
+/// test loading the initial moire from model
 extension MainViewControllerTests {
     func testLoadMoire_NoInitIdAndModelHasOneMoire_LoadTheMoire() {
         let m1 = Moire()
