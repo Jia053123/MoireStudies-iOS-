@@ -30,13 +30,13 @@ class ControlsViewController: UIViewController {
             let id = matcher.getCtrlViewControllerId(indexOfPatternControlled: i)
             switch settings.interfaceSetting {
             case UISettings.controlScheme1Slider:
-                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme2Slider:
-                cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch2.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme1Gesture:
-                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme3Slider:
-                cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch3.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
             }
             cvc.delegate = delegate
             self.addChild(cvc)

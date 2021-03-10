@@ -11,21 +11,14 @@ import Foundation
  summary: translate among control view object, control view id, and the index of the pattern its controling
  */
 class CtrlAndPatternMatcher {
-    func getCtrlViewControllerId(indexOfPatternControlled: Int) -> Int {
+    func getCtrlViewControllerId(indexOfPatternControlled: Int) -> Int? {
         let id = indexOfPatternControlled
         assert(self.getIndexOfPatternControlled(id: id) == indexOfPatternControlled, "reverse conversion test failed")
         return id
     }
     
-    func getIndexOfPatternControlled(id: Int) -> Int {
+    func getIndexOfPatternControlled(id: Int) -> Int? {
         let index = id
         return index
-    }
-    
-    func findIndexOfPatternControlled(controlViewController: CtrlViewController) -> Int? {
-        guard let i = controlViewController.id else {
-            return nil
-        }
-        return self.getIndexOfPatternControlled(id: i)
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
     var _isHidden: Bool = false
     var isHidden: Bool {get {return _isHidden}}
-    var id: Int?
+    var id: Int!
     var delegate: PatternManager?
     
     required init(id: Int, frame: CGRect, pattern: Pattern?) {

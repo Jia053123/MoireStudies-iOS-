@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
-    var id: Int?
+    var id: Int!
     var delegate: PatternManager?
     
     required init(id: Int, frame: CGRect, pattern: Pattern?) {

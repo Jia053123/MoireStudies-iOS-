@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MockControlsViewController: ControlsViewController {
-    private(set) var currentPatterns: Array<Pattern>?
+    private(set) var initPatterns: Array<Pattern>?
     private(set) var setUpPerformed: Bool = false
     private(set) var resetPerformed: Bool = false
     
@@ -23,12 +23,12 @@ class MockControlsViewController: ControlsViewController {
     override func setUp(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         super.setUp(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
         self.setUpPerformed = true
-        self.currentPatterns = patterns
+        self.initPatterns = patterns
     }
     
     override func reset(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         super.reset(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
         self.resetPerformed = true
-        self.currentPatterns = patterns
+        self.initPatterns = patterns
     }
 }
