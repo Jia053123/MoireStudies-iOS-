@@ -35,7 +35,7 @@ struct Constants {
     
     struct Bounds {
         static let speedRange: ClosedRange<CGFloat> = 0.0...50.0
-        static let directionRange: ClosedRange<CGFloat> = -1*CGFloat.infinity...CGFloat.infinity
+        static let directionRange: ClosedRange<CGFloat> = 0.0...CGFloat.pi*2
         static let blackWidthRange: ClosedRange<CGFloat> = 2.0...50.0
         static let whiteWidthRange: ClosedRange<CGFloat> = 2.0...50.0
         

@@ -50,3 +50,5 @@ class MainViewControllerTests: XCTestCase {
         XCTAssertTrue(self.mockMoireViewController.setUpPerformed)
     }
 }
+
+
