@@ -16,7 +16,7 @@ class MockControlsViewController: ControlsViewController {
     private(set) var controlAndPatternMatcher: CtrlAndPatternMatcher?
     
     func resetTestingRecords() {
-        self.currentPatterns = nil
+        self.initPatterns = nil
         self.setUpPerformed = false
         self.resetPerformed = false
         self.controlAndPatternMatcher = nil
@@ -33,6 +33,6 @@ class MockControlsViewController: ControlsViewController {
         super.reset(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
         self.resetPerformed = true
         self.initPatterns = patterns
-        self.controlAndPatternMatcher = matcher
+        
     }
 }
