@@ -222,6 +222,71 @@ extension MainViewControllerTests {
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
     }
+    
+    func testModifyMoire_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
+        let m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 4)
+        let m1C = m1.copy() as! Moire
+        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.prepareMainViewController()
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+        
+        let matcher = self.mockControlsViewController.controlAndPatternMatcher
+        XCTAssertNotNil(matcher)
+        
+        let p2Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 2)!
+        let unexpectedSpeed2 = CGFloat(100000)
+        let unexpectedDirection2 = CGFloat(100000)
+        let unexpectedBlackWidth2 = CGFloat(100000)
+        let unexpectedWhiteWidth2 = CGFloat(100000)
+        assert(!Constants.Bounds.speedRange.contains(unexpectedSpeed2))
+        assert(!Constants.Bounds.directionRange.contains(unexpectedDirection2))
+        assert(!Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(!Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(m1C.patterns[2].speed != unexpectedSpeed2)
+        assert(m1C.patterns[2].direction != unexpectedDirection2)
+        assert(m1C.patterns[2].blackWidth != unexpectedBlackWidth2)
+        assert(m1C.patterns[2].whiteWidth != unexpectedWhiteWidth2)
+        XCTAssertFalse(self.mainViewController.modifyPattern(speed: unexpectedSpeed2, callerId: p2Id))
+        XCTAssertFalse(self.mainViewController.modifyPattern(direction: unexpectedDirection2, callerId: p2Id))
+        XCTAssertFalse(self.mainViewController.modifyPattern(blackWidth: unexpectedBlackWidth2, callerId: p2Id))
+        XCTAssertFalse(self.mainViewController.modifyPattern(whiteWidth: unexpectedWhiteWidth2, callerId: p2Id))
+        // m1C keeps it's original values
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+        XCTAssertTrue(self.mainViewController.saveMoire())
+        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+    }
+    
+    func testModifyMoire_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
+        let m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 4)
+        let m1C = m1.copy() as! Moire
+        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.prepareMainViewController()
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+        
+        let invalidId = -14365276
+        let unexpectedSpeed2 = CGFloat(100000)
+        let unexpectedDirection2 = CGFloat(100000)
+        let unexpectedBlackWidth2 = CGFloat(100000)
+        let unexpectedWhiteWidth2 = CGFloat(100000)
+        assert(!Constants.Bounds.speedRange.contains(unexpectedSpeed2))
+        assert(!Constants.Bounds.directionRange.contains(unexpectedDirection2))
+        assert(!Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(!Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(m1C.patterns[2].speed != unexpectedSpeed2)
+        assert(m1C.patterns[2].direction != unexpectedDirection2)
+        assert(m1C.patterns[2].blackWidth != unexpectedBlackWidth2)
+        assert(m1C.patterns[2].whiteWidth != unexpectedWhiteWidth2)
+        XCTAssertFalse(self.mainViewController.modifyPattern(speed: unexpectedSpeed2, callerId: invalidId))
+        XCTAssertFalse(self.mainViewController.modifyPattern(direction: unexpectedDirection2, callerId: invalidId))
+        XCTAssertFalse(self.mainViewController.modifyPattern(blackWidth: unexpectedBlackWidth2, callerId: invalidId))
+        XCTAssertFalse(self.mainViewController.modifyPattern(whiteWidth: unexpectedWhiteWidth2, callerId: invalidId))
+        // m1C keeps it's original values
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+        XCTAssertTrue(self.mainViewController.saveMoire())
+        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+    }
 }
 
 /// test modifying patterns' display properties
