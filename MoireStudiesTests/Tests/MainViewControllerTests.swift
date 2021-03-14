@@ -321,11 +321,62 @@ extension MainViewControllerTests {
 /// test modifying patterns' display properties
 extension MainViewControllerTests {
     func testModifyDisplayProperties_ValidId_CorrectMethodsCalled() {
+        let m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 4)
+        let m1C = m1.copy() as! Moire
+        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.prepareMainViewController()
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         
+        let matcher = self.mockControlsViewController.controlAndPatternMatcher
+        XCTAssertNotNil(matcher)
+        
+        let p0Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 0)!
+        let p1Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 1)!
+        let p2Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 2)!
+        let p3Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 3)!
+        XCTAssertTrue(self.mainViewController.highlightPattern(callerId: p0Id))
+        XCTAssertTrue(self.mainViewController.highlightPattern(callerId: p1Id))
+        XCTAssertTrue(self.mainViewController.unhighlightPattern(callerId: p1Id))
+        XCTAssertTrue(self.mainViewController.dimPattern(callerId: p2Id))
+        XCTAssertTrue(self.mainViewController.undimPattern(callerId: p2Id))
+        XCTAssertTrue(self.mainViewController.dimPattern(callerId: p3Id))
+        XCTAssertTrue(self.mainViewController.hidePattern(callerId: p0Id))
+        XCTAssertTrue(self.mainViewController.hidePattern(callerId: p3Id))
+        XCTAssertTrue(self.mainViewController.unhidePattern(callerId: p0Id))
+        XCTAssert(self.mockMoireViewController.highlightedPatternIndexes == [0, 1])
+        XCTAssert(self.mockMoireViewController.unhighlightedPatternIndexes == [1])
+        XCTAssert(self.mockMoireViewController.dimmedPatternIndexes == [2, 3])
+        XCTAssert(self.mockMoireViewController.patternsUndimmed == true)
+        XCTAssert(self.mockMoireViewController.hiddenPatternIndexes == [0, 3])
+        XCTAssert(self.mockMoireViewController.unhiddenPatternIndexes == [0])
     }
     
     func testModifyDisplayProperties_InvalidId_ReturnFalseAndMethodsNotCalled() {
+        let m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 4)
+        let m1C = m1.copy() as! Moire
+        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.prepareMainViewController()
+        XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         
+        let invalidId1 = 4
+        let invalidId2 = 14365276
+        XCTAssertFalse(self.mainViewController.highlightPattern(callerId: invalidId1))
+        XCTAssertFalse(self.mainViewController.highlightPattern(callerId: invalidId2))
+        XCTAssertFalse(self.mainViewController.unhighlightPattern(callerId: invalidId1))
+        XCTAssertFalse(self.mainViewController.dimPattern(callerId: invalidId2))
+        XCTAssertFalse(self.mainViewController.undimPattern(callerId: invalidId1))
+        XCTAssertFalse(self.mainViewController.dimPattern(callerId: invalidId1))
+        XCTAssertFalse(self.mainViewController.hidePattern(callerId: invalidId2))
+        XCTAssertFalse(self.mainViewController.hidePattern(callerId: invalidId1))
+        XCTAssertFalse(self.mainViewController.unhidePattern(callerId: invalidId2))
+        XCTAssert(self.mockMoireViewController.highlightedPatternIndexes == [])
+        XCTAssert(self.mockMoireViewController.unhighlightedPatternIndexes == [])
+        XCTAssert(self.mockMoireViewController.dimmedPatternIndexes == [])
+        XCTAssert(self.mockMoireViewController.patternsUndimmed == false)
+        XCTAssert(self.mockMoireViewController.hiddenPatternIndexes == [])
+        XCTAssert(self.mockMoireViewController.unhiddenPatternIndexes == [])
     }
 }
 

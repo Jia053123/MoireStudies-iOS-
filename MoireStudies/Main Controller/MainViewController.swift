@@ -197,33 +197,25 @@ extension MainViewController {
 
 extension MainViewController: PatternManager {
     func highlightPattern(callerId: Int) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {
-            return false
-        }
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
         self.moireViewController.highlightPatternView(patternViewIndex: index)
         return true
     }
     
     func unhighlightPattern(callerId: Int) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {
-            return false
-        }
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
         self.moireViewController.unhighlightPatternView(patternViewIndex: index)
         return true
     }
     
     func dimPattern(callerId: Int) -> Bool {
-        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {
-            return false
-        }
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
         self.moireViewController.dimPatternView(patternViewIndex: index)
         return true
     }
     
     func undimPattern(callerId: Int) -> Bool {
-        guard self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) != nil else {
-            return false
-        }
+        guard self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) != nil else {return false}
         self.moireViewController.undimPatternViews()
         return true
     }
@@ -287,12 +279,14 @@ extension MainViewController: PatternManager {
     }
     
     func hidePattern(callerId: Int) -> Bool {
-        self.moireViewController?.hidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId)!)
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
+        self.moireViewController?.hidePatternView(patternViewIndex: index)
         return true
     }
     
     func unhidePattern(callerId: Int) -> Bool {
-        self.moireViewController?.unhidePatternView(patternViewIndex: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId)!)
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
+        self.moireViewController?.unhidePatternView(patternViewIndex: index)
         return true
     }
     
