@@ -275,7 +275,8 @@ extension MainViewController: PatternManager {
     }
     
     func getPattern(callerId: Int) -> Pattern? {
-        return self.currentMoire!.patterns[self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId)!]
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return nil}
+        return self.currentMoire!.patterns[index]
     }
     
     func hidePattern(callerId: Int) -> Bool {

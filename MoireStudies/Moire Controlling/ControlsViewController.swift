@@ -16,7 +16,7 @@ class ControlsViewController: UIViewController {
     func setUp(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         self.reset(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
     }
-    
+    // TODO: return a list of ids, not the bare matcher so that it is the responsibility of the mainController to validify the ids and the matcher can be seen as a sub component of the mainController
     func reset(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
         for c in self.children {
             c.willMove(toParent: nil)
