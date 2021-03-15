@@ -73,11 +73,10 @@ class MainViewControllerTests: XCTestCase {
 
 /// test sending  ControlsViewController valid ids corresponding to the current moire
 extension MainViewControllerTests {
-    func testSendControlIds_SendIdsThatAreValidAndComplete() {
+    func testSendControlIds_SendIdsThatAreComplete() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         XCTAssertNotNil(self.mockControlsViewController.ids)
         XCTAssertEqual(self.mockControlsViewController.ids!.count, 4)
-        
     }
 }
 

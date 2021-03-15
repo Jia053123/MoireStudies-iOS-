@@ -13,6 +13,10 @@ import Foundation
 class CtrlAndPatternMatcher {
     private var registeredIds: Set<Int> = []
     
+    private func isRegistered(id: Int) -> Bool {
+        return self.registeredIds.contains(id)
+    }
+    
     func getOrCreateCtrlViewControllerId(indexOfPatternControlled: Int) -> Int? {
         let id = indexOfPatternControlled
         if !self.registeredIds.contains(id) {
@@ -24,7 +28,7 @@ class CtrlAndPatternMatcher {
     }
     
     func getIndexOfPatternControlled(id: Int) -> Int? {
-        if self.registeredIds.contains(id) {
+        if self.isRegistered(id: id) {
             let index = id
             return index
         } else {
