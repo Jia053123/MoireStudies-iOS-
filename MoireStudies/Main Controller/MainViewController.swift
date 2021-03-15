@@ -94,7 +94,7 @@ class MainViewController: UIViewController {
             self.initCurrentMoire()
         }
         self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
-        self.controlsViewController.reset(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
+        self.resetControls()
     }
     
     func initCurrentMoire() {
@@ -133,7 +133,15 @@ class MainViewController: UIViewController {
     }
     
     func initControls() {
-        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, settings: self.initSettings!, matcher: self.ctrlAndPatternMatcher, delegate: self)
+        var ids: Array<Int> = []
+        for i in 0..<self.currentMoire!.patterns.count {
+            ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexOfPatternControlled: i)!)
+        }
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, settings: self.initSettings!, ids: ids, delegate: self)
+    }
+    
+    func resetControls() {
+        self.initControls()
     }
     
     override var prefersStatusBarHidden: Bool {

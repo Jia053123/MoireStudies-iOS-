@@ -13,11 +13,11 @@ class ControlsViewController: UIViewController {
         self.view.backgroundColor = UIColor.clear
     }
     
-    func setUp(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
-        self.reset(patterns: patterns, settings: settings, matcher: matcher, delegate: delegate)
+    func setUp(patterns: Array<Pattern>, settings: InitSettings, ids: Array<Int>, delegate: PatternManager) {
+        self.reset(patterns: patterns, settings: settings, ids: ids, delegate: delegate)
     }
-    // TODO: return a list of ids, not the bare matcher so that it is the responsibility of the mainController to validify the ids and the matcher can be seen as a sub component of the mainController
-    func reset(patterns: Array<Pattern>, settings: InitSettings, matcher: CtrlAndPatternMatcher, delegate: PatternManager) {
+
+    func reset(patterns: Array<Pattern>, settings: InitSettings, ids: Array<Int>, delegate: PatternManager) {
         for c in self.children {
             c.willMove(toParent: nil)
             c.view.removeFromSuperview()
@@ -27,16 +27,16 @@ class ControlsViewController: UIViewController {
         assert(controlFrames.count >= patterns.count)
         for i in 0..<patterns.count {
             var cvc: CtrlViewController
-            let id = matcher.getOrCreateCtrlViewControllerId(indexOfPatternControlled: i)
+            let id = ids[i]
             switch settings.interfaceSetting {
             case UISettings.controlScheme1Slider:
-                cvc = CtrlViewControllerSch1.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme2Slider:
-                cvc = CtrlViewControllerSch2.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme1Gesture:
-                cvc = CtrlViewControllerSch1.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case UISettings.controlScheme3Slider:
-                cvc = CtrlViewControllerSch3.init(id: id!, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             }
             cvc.delegate = delegate
             self.addChild(cvc)

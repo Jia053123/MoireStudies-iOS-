@@ -52,6 +52,15 @@ class MainViewControllerTests: XCTestCase {
         }
     }
     
+    private func setUpOneMoireAndLoad(numOfPatterns: Int) {
+        m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: numOfPatterns)
+        m1C = m1.copy() as? Moire
+        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.prepareMainViewController()
+        assert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+    }
+    
     func testSettingUpDependencies() throws {
         let m1 = Moire()
         self.mockMoireModel.setMockMoires(moires: [m1])
@@ -59,6 +68,16 @@ class MainViewControllerTests: XCTestCase {
         
         XCTAssertTrue(self.mockControlsViewController.setUpPerformed)
         XCTAssertTrue(self.mockMoireViewController.setUpPerformed)
+    }
+}
+
+/// test sending  ControlsViewController valid ids corresponding to the current moire
+extension MainViewControllerTests {
+    func testSendControlIds_SendIdsThatAreValidAndComplete() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 4)
+        XCTAssertNotNil(self.mockControlsViewController.ids)
+        XCTAssertEqual(self.mockControlsViewController.ids!.count, 4)
+        
     }
 }
 
@@ -145,22 +164,11 @@ extension MainViewControllerTests {
 
 /// test modifying and saving moires
 extension MainViewControllerTests {
-    private func setUpOneMoireAndLoad(numOfPatterns: Int) {
-        m1 = Moire()
-        self.resetAndPopulate(moire: m1, numOfPatterns: numOfPatterns)
-        m1C = m1.copy() as? Moire
-        self.mockMoireModel.setMockMoires(moires: [m1])
-        self.prepareMainViewController()
-        assert(self.mockMoireViewController.currentPatterns == m1C.patterns)
-    }
-    
     func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSave() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
-        let p0Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 0)!
+        let ids = self.mockControlsViewController.ids!
+        let p0Id = ids[0]
         let expectedSpeedValue0 = CGFloat(10.153)
         assert(Constants.Bounds.speedRange.contains(expectedSpeedValue0))
         assert(m1C.patterns[0].speed != expectedSpeedValue0)
@@ -170,7 +178,7 @@ extension MainViewControllerTests {
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
         
-        let p1Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 1)!
+        let p1Id = ids[1]
         let expectedDirectionValue1 = CGFloat(1.111)
         assert(Constants.Bounds.directionRange.contains(expectedDirectionValue1))
         assert(m1C.patterns[1].direction != expectedDirectionValue1)
@@ -181,7 +189,7 @@ extension MainViewControllerTests {
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
         
-        let p3Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 3)!
+        let p3Id = ids[3]
         let expectedSpeed3 = CGFloat(9.251)
         let expectedDirection3 = CGFloat(1.212)
         let expectedBlackWidth3 = CGFloat(5.953)
@@ -216,9 +224,6 @@ extension MainViewControllerTests {
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 3)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
         let invalidId1 = 3 // an invalid id that looks just like a valid one except it's not registered within the matcher
         let invalidId2 = -14365276
         let unexpectedSpeed2 = CGFloat(9.251)
@@ -250,9 +255,6 @@ extension MainViewControllerTests {
     func testModifyMoire_InvalidIdNoPatternLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 0)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
         let invalidId1 = 0
         let invalidId2 = -14365276
         let unexpectedSpeed2 = CGFloat(9.251)
@@ -280,10 +282,8 @@ extension MainViewControllerTests {
     func testModifyMoire_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
-        let p2Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 2)!
+        let ids = self.mockControlsViewController.ids!
+        let p2Id = ids[2]
         let unexpectedSpeed2 = CGFloat(100000)
         let unexpectedDirection2 = CGFloat(100000)
         let unexpectedBlackWidth2 = CGFloat(100000)
@@ -308,9 +308,6 @@ extension MainViewControllerTests {
     
     func testModifyMoire_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
-        
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
         
         let invalidId1 = 4 // an invalid id that looks just like a valid one except it's not registered within the matcher
         let invalidId2 = 9195939096
@@ -346,13 +343,11 @@ extension MainViewControllerTests {
     func testModifyDisplayProperties_ValidId_CorrectMethodsCalled() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
-        let p0Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 0)!
-        let p1Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 1)!
-        let p2Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 2)!
-        let p3Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 3)!
+        let ids = self.mockControlsViewController.ids!
+        let p0Id = ids[0]
+        let p1Id = ids[1]
+        let p2Id = ids[2]
+        let p3Id = ids[3]
         XCTAssertTrue(self.mainViewController.highlightPattern(callerId: p0Id))
         XCTAssertTrue(self.mainViewController.highlightPattern(callerId: p1Id))
         XCTAssertTrue(self.mainViewController.unhighlightPattern(callerId: p1Id))
@@ -398,12 +393,9 @@ extension MainViewControllerTests {
     func testRetrievePattern_ValidId_ReturnCorrespondingPatternOfTheCurrentMoire() {
         self.setUpOneMoireAndLoad(numOfPatterns: 3)
         
-        let matcher = self.mockControlsViewController.controlAndPatternMatcher
-        XCTAssertNotNil(matcher)
-        
-        let p0Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 0)!
-        let p1Id = matcher!.getOrCreateCtrlViewControllerId(indexOfPatternControlled: 1)!
-        
+        let ids = self.mockControlsViewController.ids!
+        let p0Id = ids[0]
+        let p1Id = ids[1]
         assert(self.mainViewController.modifyPattern(speed: 13.252, callerId: p0Id))
         assert(self.mainViewController.modifyPattern(direction: 1.234, callerId: p1Id))
         m1C.patterns[0].speed = 13.252
