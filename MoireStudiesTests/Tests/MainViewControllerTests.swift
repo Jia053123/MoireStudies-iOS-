@@ -47,8 +47,17 @@ class MainViewControllerTests: XCTestCase {
     
     private func resetAndPopulate(moire: Moire, numOfPatterns: Int) {
         moire.resetData()
-        for _ in 0..<numOfPatterns {
-            moire.patterns.append(Pattern.randomPattern()) // TODO: DON'T USE RANDOM IN UNIT TESTS!
+        let basePattern = Pattern.init(speed: 10.0, direction: 1.0, blackWidth: 5.0, whiteWidth: 6.0)
+        for i in 0..<numOfPatterns {
+            let newPattern = Pattern.init(speed: basePattern.speed + CGFloat(i) * 0.01,
+                                          direction: basePattern.direction + CGFloat(i) * 0.01,
+                                          blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
+                                          whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
+            assert(Constants.Bounds.speedRange.contains(newPattern.speed))
+            assert(Constants.Bounds.directionRange.contains(newPattern.direction))
+            assert(Constants.Bounds.blackWidthRange.contains(newPattern.blackWidth))
+            assert(Constants.Bounds.whiteWidthRange.contains(newPattern.whiteWidth))
+            moire.patterns.append(newPattern)
         }
     }
     
