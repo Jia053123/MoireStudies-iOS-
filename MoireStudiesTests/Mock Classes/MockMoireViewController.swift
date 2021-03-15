@@ -28,49 +28,40 @@ class MockMoireViewController: MoireViewController {
     }
     
     override func setUp(patterns: Array<Pattern>, settings: InitSettings) {
-        super.setUp(patterns: patterns, settings: settings)
         self.setUpPerformed = true
         self.currentPatterns = patterns
     }
     
     override func resetMoireView(patterns: Array<Pattern>, settings: InitSettings) {
-        super.resetMoireView(patterns: patterns, settings: settings)
         self.resetPerformed = true
         self.currentPatterns = patterns
     }
     
     override func highlightPatternView(patternViewIndex: Int) {
-        super.highlightPatternView(patternViewIndex: patternViewIndex)
         self.highlightedPatternIndexes.insert(patternViewIndex)
     }
     
     override func unhighlightPatternView(patternViewIndex: Int) {
-        super.unhighlightPatternView(patternViewIndex: patternViewIndex)
         self.unhighlightedPatternIndexes.insert(patternViewIndex)
     }
     
     override func dimPatternView(patternViewIndex: Int) {
-        super.dimPatternView(patternViewIndex: patternViewIndex)
         self.dimmedPatternIndexes.insert(patternViewIndex)
     }
     
     override func undimPatternViews() {
-        super.undimPatternViews()
         self.patternsUndimmed = true
     }
     
     override func hidePatternView(patternViewIndex: Int) {
-        super.hidePatternView(patternViewIndex: patternViewIndex)
         self.hiddenPatternIndexes.insert(patternViewIndex)
     }
     
     override func unhidePatternView(patternViewIndex: Int) {
-        super.unhidePatternView(patternViewIndex: patternViewIndex)
         self.unhiddenPatternIndexes.insert(patternViewIndex)
     }
     
     override func modifyPatternView(patternViewIndex: Int, newPattern: Pattern) {
-        super.modifyPatternView(patternViewIndex: patternViewIndex, newPattern: newPattern)
         self.currentPatterns?[patternViewIndex] = newPattern
     }
 }
