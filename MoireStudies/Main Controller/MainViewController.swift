@@ -319,7 +319,8 @@ extension MainViewController: PatternManager {
             print("deletion failed: minimum number of patterns per moire reached")
             return false
         }
-        self.currentMoire!.patterns.remove(at: self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId)!)
+        guard let index = self.ctrlAndPatternMatcher.getIndexOfPatternControlled(id: callerId) else {return false}
+        self.currentMoire!.patterns.remove(at: index)
         print("num of patterns after deletion: ", self.currentMoire!.patterns.count)
         self.updateMainView()
         return true

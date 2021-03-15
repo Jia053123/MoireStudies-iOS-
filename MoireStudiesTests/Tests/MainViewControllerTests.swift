@@ -461,10 +461,11 @@ extension MainViewControllerTests {
     }
     
     func testAppendPattern_MoireNotEmptyPatternBeyondLimitNoCaller_ReturnFailureMoireStaySame() {
-        self.setUpOneMoireAndLoad(numOfPatterns: Constants.Bounds.numOfPatternsPerMoire.upperBound)
+        let upperbound = Constants.Bounds.numOfPatternsPerMoire.upperBound
+        self.setUpOneMoireAndLoad(numOfPatterns: upperbound)
         XCTAssertFalse(self.mainViewController.createPattern(callerId: nil, newPattern: Pattern.debugPattern()))
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 5)
-        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 5)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, upperbound)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, upperbound)
         for i in 0..<5 {
             XCTAssertEqual(self.mockMoireViewController.currentPatterns?[i], m1C.patterns[i])
             XCTAssertEqual(self.mockControlsViewController.initPatterns?[i], m1C.patterns[i])
@@ -472,11 +473,12 @@ extension MainViewControllerTests {
     }
     
     func testAppendPattern_MoireNotEmptyPatternBeyondLimitHaveCaller_ReturnFailureMoireStaySame() {
-        self.setUpOneMoireAndLoad(numOfPatterns: Constants.Bounds.numOfPatternsPerMoire.upperBound)
+        let upperbound = Constants.Bounds.numOfPatternsPerMoire.upperBound
+        self.setUpOneMoireAndLoad(numOfPatterns: upperbound)
         let ids = self.mockControlsViewController.ids!
         XCTAssertFalse(self.mainViewController.createPattern(callerId: ids[1], newPattern: Pattern.debugPattern()))
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 5)
-        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 5)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, upperbound)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, upperbound)
         for i in 0..<5 {
             XCTAssertEqual(self.mockMoireViewController.currentPatterns?[i], m1C.patterns[i])
             XCTAssertEqual(self.mockControlsViewController.initPatterns?[i], m1C.patterns[i])
@@ -486,4 +488,75 @@ extension MainViewControllerTests {
 
 /// test deleting patterns in moire
 extension MainViewControllerTests {
+    func testDeletePattern_PatternNotUnderLimitAndValidId_ReturnTrueAndDeletePattern() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 5)
+        assert(Constants.Bounds.numOfPatternsPerMoire.contains(5))
+        let ids = self.mockControlsViewController.ids!
+        
+        XCTAssertTrue(self.mainViewController.deletePattern(callerId: ids[1]))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 4)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[0])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[1], m1C.patterns[2])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[2], m1C.patterns[3])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[3], m1C.patterns[4])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 4)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[0])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[1], m1C.patterns[2])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[2], m1C.patterns[3])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[3], m1C.patterns[4])
+        
+        XCTAssertTrue(self.mainViewController.deletePattern(callerId: ids[0]))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 3)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[2])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[1], m1C.patterns[3])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[2], m1C.patterns[4])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 3)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[2])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[1], m1C.patterns[3])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[2], m1C.patterns[4])
+        
+        assert(Constants.Bounds.numOfPatternsPerMoire.contains(2))
+        XCTAssertTrue(self.mainViewController.deletePattern(callerId: ids[2]))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 2)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[2])
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[1], m1C.patterns[3])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 2)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[2])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[1], m1C.patterns[3])
+    }
+    
+    func testDeletePattern_PatternNotUnderLimitAndInvalidId_ReturnFalseAndPatternStaySame() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 3)
+        
+        XCTAssertFalse(self.mainViewController.deletePattern(callerId: 4))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 3)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 3)
+        for i in 0..<3 {
+            XCTAssertEqual(self.mockMoireViewController.currentPatterns?[i], m1C.patterns[i])
+            XCTAssertEqual(self.mockControlsViewController.initPatterns?[i], m1C.patterns[i])
+        }
+    }
+    
+    func testDeletePattern_PatternAtLimitAndValidId_ReturnFalseAndPatternStaySame() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 1)
+        assert(!Constants.Bounds.numOfPatternsPerMoire.contains(0))
+        
+        let ids = self.mockControlsViewController.ids!
+        XCTAssertFalse(self.mainViewController.deletePattern(callerId: ids[0]))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 1)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[0])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[0])
+    }
+    
+    func testDeletePattern_PatternAtLimitAndInvalidId_ReturnFalseAndPatternStaySame() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 1)
+        assert(!Constants.Bounds.numOfPatternsPerMoire.contains(0))
+        
+        XCTAssertFalse(self.mainViewController.deletePattern(callerId: 8))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 1)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[0])
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[0])
+    }
 }
