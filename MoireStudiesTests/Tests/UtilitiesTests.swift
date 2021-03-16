@@ -8,7 +8,7 @@
 import XCTest
 @testable import MoireStudies
 
-class UtilitiesTests: XCTestCase {
+class UtilitiesTests: XCTestCase { // TODO: test more cases
     
     func testConvertToFillRatioAndScaleFactor() {
         let result1 = Utilities.convertToFillRatioAndScaleFactor(blackWidth: 10.0, whiteWidth: 10.0)

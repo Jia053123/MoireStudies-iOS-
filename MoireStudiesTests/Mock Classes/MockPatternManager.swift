@@ -118,7 +118,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
     }
 }
 
-class MockPatternManagerIlliegal: UIViewController, PatternManager {
+class MockPatternManagerIllegal: UIViewController, PatternManager {
     private(set) var modifySpeedCallers: Set<Int> = []
     private(set) var modifyDirectionCallers: Set<Int> = []
     private(set) var modifyBlackWidthCallers: Set<Int> = []
