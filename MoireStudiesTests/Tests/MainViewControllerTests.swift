@@ -80,6 +80,8 @@ class MainViewControllerTests: XCTestCase {
     }
 }
 
+/// TODO: test passing initialization settings to the ControlsViewController
+
 /// test sending  ControlsViewController valid ids corresponding to the current moire
 extension MainViewControllerTests {
     func testSendControlIds_SendIdsThatAreComplete() {

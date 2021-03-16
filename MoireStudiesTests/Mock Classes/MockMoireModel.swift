@@ -8,7 +8,7 @@
 @testable import MoireStudies
 import Foundation
 
-class MockMoireModel: MoireModel {
+class MockMoireModel: MoireModel { // TODO: add a corrupted version of this mock
     // make sure the last created or edited is the last element
     private(set) var currentMoires: Array<Moire> = []
     

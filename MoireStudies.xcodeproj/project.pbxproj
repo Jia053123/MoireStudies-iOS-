@@ -39,6 +39,7 @@
 		8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* UtilitiesTests.swift */; };
 		8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787525A3D3C6002EB000 /* InitSettings.swift */; };
 		8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60787D25A3DB56002EB000 /* SettingsViewController.swift */; };
+		8E64FF4A26005D47009A85DE /* MockPatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E64FF4926005D47009A85DE /* MockPatternManager.swift */; };
 		8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EB6FD25A52EBF007EA799 /* Moire.swift */; };
 		8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E425C3CB080009905C /* MetalStripe.swift */; };
 		8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E6EF2E925C85B0C0009905C /* Utilities.swift */; };
@@ -113,6 +114,7 @@
 		8E60786725A2F049002EB000 /* UtilitiesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitiesTests.swift; sourceTree = "<group>"; };
 		8E60787525A3D3C6002EB000 /* InitSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitSettings.swift; sourceTree = "<group>"; };
 		8E60787D25A3DB56002EB000 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8E64FF4926005D47009A85DE /* MockPatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPatternManager.swift; sourceTree = "<group>"; };
 		8E6BF3F025AEC880005FE7CA /* LocalMoireModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMoireModelTests.swift; sourceTree = "<group>"; };
 		8E6EB6FD25A52EBF007EA799 /* Moire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moire.swift; sourceTree = "<group>"; };
 		8E6EF2E425C3CB080009905C /* MetalStripe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalStripe.swift; sourceTree = "<group>"; };
@@ -278,6 +280,7 @@
 				8E2ED94425F7ED3400C7E817 /* MockMoireModel.swift */,
 				8E2ED93925F74ECD00C7E817 /* MockControlsViewController.swift */,
 				8E2ED93125F7334800C7E817 /* MockMoireViewController.swift */,
+				8E64FF4926005D47009A85DE /* MockPatternManager.swift */,
 			);
 			path = "Mock Classes";
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 			files = (
 				8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */,
 				8E2ED93A25F74ECD00C7E817 /* MockControlsViewController.swift in Sources */,
+				8E64FF4A26005D47009A85DE /* MockPatternManager.swift in Sources */,
 				8E2ED93225F7334800C7E817 /* MockMoireViewController.swift in Sources */,
 				8E2E45F125D1BA0B00B0EA23 /* LocalMoireModelTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
