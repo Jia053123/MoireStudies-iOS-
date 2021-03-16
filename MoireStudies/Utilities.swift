@@ -20,4 +20,12 @@ class Utilities: NSObject {
         let ww: CGFloat = (1-fillRatio) * Constants.UI.tileHeight * scaleFactor
         return (bw, ww)
     }
+    
+    static func isWithinBounds(pattern: Pattern) -> Bool {
+        if !Constants.Bounds.speedRange.contains(pattern.speed) {return false}
+        if !Constants.Bounds.directionRange.contains(pattern.direction) {return false}
+        if !Constants.Bounds.blackWidthRange.contains(pattern.blackWidth) {return false}
+        if !Constants.Bounds.whiteWidthRange.contains(pattern.whiteWidth) {return false}
+        return true
+    }
 }

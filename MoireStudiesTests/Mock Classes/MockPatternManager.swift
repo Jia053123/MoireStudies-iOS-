@@ -25,7 +25,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
     private(set) var createCallers: Set<Int?> = []
     private(set) var deleteCallers: Set<Int> = []
     
-    func setMockPatternControlledByCaller(initPattern: Pattern) {
+    func setCurrentPatternControlled(initPattern: Pattern) {
         self.modifiedPattern = initPattern
     }
     
