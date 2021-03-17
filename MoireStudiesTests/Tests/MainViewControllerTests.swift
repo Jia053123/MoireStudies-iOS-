@@ -11,7 +11,7 @@ import UIKit
 
 class MainViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var mockMoireModel: MockMoireModel!
+    var mockMoireModel: MockMoireModelFilesNotCorrupted!
     var mockMoireViewController: MockMoireViewController!
     var mockControlsViewController: MockControlsViewController!
     var mainViewController: MainViewController!
@@ -19,7 +19,7 @@ class MainViewControllerTests: XCTestCase {
     var m1C: Moire!
 
     override func setUpWithError() throws {
-        self.mockMoireModel = MockMoireModel()
+        self.mockMoireModel = MockMoireModelFilesNotCorrupted()
         self.mockMoireViewController = MockMoireViewController()
         self.mockControlsViewController = MockControlsViewController()
         self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
@@ -65,14 +65,14 @@ class MainViewControllerTests: XCTestCase {
         m1 = Moire()
         self.resetAndPopulate(moire: m1, numOfPatterns: numOfPatterns)
         m1C = m1.copy() as? Moire
-        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.mockMoireModel.setStoredMoires(moires: [m1])
         self.prepareMainViewController()
         assert(self.mockMoireViewController.currentPatterns == m1C.patterns)
     }
     
     func testSettingUpDependencies() throws {
         let m1 = Moire()
-        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.mockMoireModel.setStoredMoires(moires: [m1])
         self.prepareMainViewController()
         
         XCTAssertTrue(self.mockControlsViewController.setUpPerformed)
@@ -80,7 +80,8 @@ class MainViewControllerTests: XCTestCase {
     }
 }
 
-/// TODO: test passing initialization settings to the ControlsViewController
+// TODO: test passing initialization settings to the ControlsViewController
+// TODO: test init moire that's out of bound (force fit it into bounds)
 
 /// test sending  ControlsViewController valid ids corresponding to the current moire
 extension MainViewControllerTests {
@@ -97,7 +98,7 @@ extension MainViewControllerTests {
         let m1 = Moire()
         assert(m1.patterns.isEmpty)
         let m1C = m1.copy() as! Moire
-        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.mockMoireModel.setStoredMoires(moires: [m1])
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
     }
@@ -106,7 +107,7 @@ extension MainViewControllerTests {
         let m1 = Moire()
         self.resetAndPopulate(moire: m1, numOfPatterns: 4)
         let m1C = m1.copy() as! Moire
-        self.mockMoireModel.setMockMoires(moires: [m1])
+        self.mockMoireModel.setStoredMoires(moires: [m1])
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
     }
@@ -122,7 +123,7 @@ extension MainViewControllerTests {
         let m2C = m2.copy() as! Moire
         let m3C = m3.copy() as! Moire
         
-        self.mockMoireModel.setMockMoires(moires: [])
+        self.mockMoireModel.setStoredMoires(moires: [])
         _ = self.mockMoireModel.saveOrModify(moire: m1)
         _ = self.mockMoireModel.saveOrModify(moire: m2)
         _ = self.mockMoireModel.saveOrModify(moire: m3)
@@ -142,7 +143,7 @@ extension MainViewControllerTests {
         let m2C = m2.copy() as! Moire
         let m3C = m3.copy() as! Moire
         
-        self.mockMoireModel.setMockMoires(moires: [])
+        self.mockMoireModel.setStoredMoires(moires: [])
         _ = self.mockMoireModel.saveOrModify(moire: m1)
         _ = self.mockMoireModel.saveOrModify(moire: m2)
         _ = self.mockMoireModel.saveOrModify(moire: m3)
@@ -153,7 +154,7 @@ extension MainViewControllerTests {
     }
     
     func testLoadMoire_NoInitIdAndModelHasNoMoire_CreateNewAndSave() {
-        self.mockMoireModel.setMockMoires(moires: [])
+        self.mockMoireModel.setStoredMoires(moires: [])
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns != nil)
         XCTAssert(self.mockMoireViewController.currentPatterns!.count > 0)
@@ -162,7 +163,7 @@ extension MainViewControllerTests {
     }
     
     func testLoadMoire_WithInitIdAndModelHasNoMoire_CreateNewAndSave() {
-        self.mockMoireModel.setMockMoires(moires: [])
+        self.mockMoireModel.setStoredMoires(moires: [])
         self.mainViewController.moireIdToInit = "NonexistentMoire"
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns != nil)
