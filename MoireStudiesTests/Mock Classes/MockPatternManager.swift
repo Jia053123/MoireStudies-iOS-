@@ -11,6 +11,7 @@ import UIKit
 
 class MockPatternManagerLegal: UIViewController, PatternManager {
     private(set) var modifiedPattern: Pattern?
+    private(set) var createdPattern: Pattern?
     private(set) var modifySpeedCallers: Set<Int> = []
     private(set) var modifyDirectionCallers: Set<Int> = []
     private(set) var modifyBlackWidthCallers: Set<Int> = []
@@ -31,6 +32,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
     
     func resetTestingRecords() {
         self.modifiedPattern = nil
+        self.createdPattern = nil
         self.modifySpeedCallers = []
         self.modifyDirectionCallers = []
         self.modifyBlackWidthCallers = []
@@ -108,6 +110,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
     
     func createPattern(callerId: Int?, newPattern: Pattern) -> Bool {
         self.createCallers.insert(callerId)
+        self.createdPattern = newPattern
         return true
     }
     
@@ -119,6 +122,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
 }
 
 class MockPatternManagerIllegal: UIViewController, PatternManager {
+    var doesReturnPatternControlled: Bool = true
     private(set) var modifySpeedCallers: Set<Int> = []
     private(set) var modifyDirectionCallers: Set<Int> = []
     private(set) var modifyBlackWidthCallers: Set<Int> = []
@@ -191,7 +195,7 @@ class MockPatternManagerIllegal: UIViewController, PatternManager {
     
     func getPattern(callerId: Int) -> Pattern? {
         self.getCallers.insert(callerId)
-        return nil
+        return self.doesReturnPatternControlled ? Pattern.defaultPattern() : nil
     }
     
     func hidePattern(callerId: Int) -> Bool {
