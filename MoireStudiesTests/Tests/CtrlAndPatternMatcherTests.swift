@@ -5,9 +5,9 @@
 //  Created by Jialiang Xiang on 2021-03-05.
 //
 
+@testable import MoireStudies
 import Foundation
 import XCTest
-@testable import MoireStudies
 
 class CtrlAndPatternMatcherTests: XCTestCase {
     var matcher: CtrlAndPatternMatcher!

@@ -69,7 +69,7 @@ class MockMoireModelFilesNotCorrupted: MoireModel {
     }
 }
 
-/// When the model is corrupted, it reports more moires available than it is able to read (currently all files are corrupted) 
+/// When the model is corrupted, it saves successfully, but reports more moires available than it is able to read (currently all files are corrupted)
 class MockMoireModelFilesCorrupted: MoireModel {
     private var moiresSupposedToBeStored: Array<Moire> = []
     
@@ -98,7 +98,7 @@ class MockMoireModelFilesCorrupted: MoireModel {
             self.moiresSupposedToBeStored.remove(at: i)
         }
         self.moiresSupposedToBeStored.append(moire) // append to the end since it's the latest
-        return false
+        return true
     }
     
     func createNewDemoMoire() -> Moire {
@@ -106,6 +106,49 @@ class MockMoireModelFilesCorrupted: MoireModel {
         newDemo.patterns.append(Pattern.defaultPattern())
         newDemo.patterns.append(Pattern.defaultPattern())
         self.moiresSupposedToBeStored.append(newDemo)
+        return newDemo
+    }
+    
+    func delete(moireId: String) -> Bool {
+        return false
+    }
+    
+    func deleteAllSaves() -> Bool {
+        return false
+    }
+}
+
+/// A mock model that can't write to file system successfully e.g. a read only partition
+class MockMoireModelReadOnly: MoireModel {
+    private var existingMoires: Array<Moire> = []
+    
+    func setExistingMoires(moires: Array<Moire>) {
+        self.existingMoires = moires
+    }
+    
+    func numOfMoires() -> Int {
+        return self.existingMoires.count
+    }
+    
+    func read(moireId: String) -> Moire? {
+        return self.existingMoires.first(where: {m -> Bool in
+            return m.id == moireId
+        })
+    }
+    
+    func readLastCreatedOrEdited() -> Moire? {
+        return self.existingMoires.last
+    }
+    
+    func saveOrModify(moire: Moire) -> Bool {
+        return false
+    }
+    
+    func createNewDemoMoire() -> Moire {
+        let newDemo = Moire()
+        newDemo.patterns.append(Pattern.defaultPattern())
+        newDemo.patterns.append(Pattern.defaultPattern())
+        // doesn't save
         return newDemo
     }
     
