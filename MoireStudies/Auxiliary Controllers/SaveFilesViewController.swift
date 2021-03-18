@@ -23,8 +23,8 @@ class SaveFilesViewController: UIViewController {
             }
         }
     }
-    private lazy var moireIdToLoad: String? = currentMoireId
-    private var moireModel: LocalMoireModel = LocalMoireModel.init()
+    private lazy var moireIdToLoad: String? = currentMoireId // TODO: dependency inject
+    private var moireModel: LocalMoireModel = LocalMoireModel.init() // TODO: dependency inject
     private var allMoiresCache: Array<Moire>
     private weak var highlightedCell: SaveFileCollectionViewCell?
     @IBOutlet weak var collectionView: UICollectionView!

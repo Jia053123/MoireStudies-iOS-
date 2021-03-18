@@ -11,7 +11,7 @@ import UIKit
 
 class MainViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var mockMoireModel: MockMoireModelFilesNotCorrupted!
+    var mockMoireModel: MockMoireModelFilesNormal!
     var mockMoireViewController: MockMoireViewController!
     var mockControlsViewController: MockControlsViewController!
     var mainViewController: MainViewController!
@@ -19,7 +19,7 @@ class MainViewControllerTests: XCTestCase {
     var m1C: Moire!
 
     override func setUpWithError() throws {
-        self.mockMoireModel = MockMoireModelFilesNotCorrupted()
+        self.mockMoireModel = MockMoireModelFilesNormal()
         self.mockMoireViewController = MockMoireViewController()
         self.mockControlsViewController = MockControlsViewController()
         self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in

@@ -8,7 +8,7 @@
 @testable import MoireStudies
 import Foundation
 
-class MockMoireModelFilesNotCorrupted: MoireModel {
+class MockMoireModelFilesNormal: MoireModel {
     // make sure the last created or edited is the last element
     private(set) var currentMoires: Array<Moire> = []
     
