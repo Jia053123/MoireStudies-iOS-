@@ -34,10 +34,10 @@ struct Constants {
     }
     
     struct Bounds {
-        static let speedRange: ClosedRange<CGFloat> = 0.0...50.0
+        static let speedRange: ClosedRange<CGFloat> = -50.0...50.0
         static let directionRange: ClosedRange<CGFloat> = 0.0...CGFloat.pi*2
-        static let blackWidthRange: ClosedRange<CGFloat> = 2.0...50.0
-        static let whiteWidthRange: ClosedRange<CGFloat> = 2.0...50.0
+        static let blackWidthRange: ClosedRange<CGFloat> = 2.0...100.0
+        static let whiteWidthRange: ClosedRange<CGFloat> = 2.0...100.0
         
         static let numOfPatternsPerMoire: ClosedRange<Int> = 1...5
     }

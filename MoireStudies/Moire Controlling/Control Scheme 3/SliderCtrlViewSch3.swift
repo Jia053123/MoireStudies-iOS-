@@ -37,13 +37,13 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
             view.frame = self.bounds
         }
         speedSlider.minimumValue = Float(Constants.Bounds.speedRange.lowerBound)
-        speedSlider.maximumValue = 45.0
-        directionSlider.minimumValue = 0.0
-        directionSlider.maximumValue = 2 * Float.pi
-        blackWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        blackWidthSlider.maximumValue = 20.0
-        whiteWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        whiteWidthSlider.maximumValue = 20.0
+        speedSlider.maximumValue = Float(Constants.Bounds.speedRange.upperBound)
+        directionSlider.minimumValue = Float(Constants.Bounds.directionRange.lowerBound)
+        directionSlider.maximumValue = Float(Constants.Bounds.directionRange.upperBound)
+        blackWidthSlider.minimumValue = Float(Constants.Bounds.blackWidthRange.lowerBound)
+        blackWidthSlider.maximumValue = Float(Constants.Bounds.blackWidthRange.upperBound)
+        whiteWidthSlider.minimumValue = Float(Constants.Bounds.whiteWidthRange.lowerBound)
+        whiteWidthSlider.maximumValue = Float(Constants.Bounds.whiteWidthRange.upperBound)
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
