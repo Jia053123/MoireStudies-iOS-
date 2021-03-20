@@ -32,7 +32,7 @@ A moire is consisted of one or more overlaid moving patterns of the same size. A
   - MoireViewController
     - PatternViewController (1..) 
     
-## Progresses Made and Next Steps
+## Progress Made and Next Steps
 ### Number of patterns per moire
 Currently this number is 2 but it’s not hardcoded into any major component. With some work on the UI I will try to have up to 4 patterns per moire. 
 
