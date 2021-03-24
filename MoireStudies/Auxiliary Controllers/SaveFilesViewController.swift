@@ -23,17 +23,33 @@ class SaveFilesViewController: UIViewController {
             }
         }
     }
-    private lazy var moireIdToLoad: String? = currentMoireId // TODO: dependency inject
-    private var moireModel: LocalMoireModel = LocalMoireModel.init() // TODO: dependency inject
-    private var allMoiresCache: Array<Moire>
+    private lazy var moireIdToLoad: String? = currentMoireId // The moire to be edited by main view
+    private var moireModel: MoireModel!
+    private var allMoiresCache: Array<Moire>!
     private weak var highlightedCell: SaveFileCollectionViewCell?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
+    private func setUpWithModelAndMoireId(moireModel: MoireModel = LocalMoireModel.init(), id: String? = nil) {
+        self.moireModel = moireModel
+        self.currentMoireId = id
+        self.allMoiresCache = self.moireModel.readAllMoiresSortedByLastCreated()
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.setUpWithModelAndMoireId()
+    }
+    
     required init?(coder: NSCoder) {
-        allMoiresCache = moireModel.readAllMoiresSortedByLastCreated()
         super.init(coder: coder)
+        self.setUpWithModelAndMoireId()
+    }
+    
+    init?(coder: NSCoder, mockMoireIdToLoad: String?, mockMoireModel: MoireModel) {
+        super.init(coder: coder)
+        self.setUpWithModelAndMoireId()
     }
     
     private func reloadCache() {
