@@ -70,15 +70,33 @@ class SaveFilesViewControllerTestsNormal: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
-        
+        let m1 = self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
+        let m1Id = m1.id
+        let storedMoires = [m1,
+                            self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+        self.mockMoireModel.setStoredMoires(moires: storedMoires)
+        self.saveFilesViewController.initiallySelectedMoireId = m1Id
+        self.prepareSaveFilesViewController()
+        _ = self.testLoadCells()
     }
     
     func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
-        
+        let storedMoires = [self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+        self.mockMoireModel.setStoredMoires(moires: storedMoires)
+        self.saveFilesViewController.initiallySelectedMoireId = "-9009"
+        self.prepareSaveFilesViewController()
+        _ = self.testLoadCells()
     }
     
     func testSettingUp_ModelEmptyAndIdNotAvailable_NoRuntimeError() {
         self.prepareSaveFilesViewController()
+        self.mockMoireModel.setStoredMoires(moires: [])
+        self.saveFilesViewController.initiallySelectedMoireId = nil
+        _ = self.testLoadCells()
     }
 }
 
