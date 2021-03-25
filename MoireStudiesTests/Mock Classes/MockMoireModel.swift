@@ -14,6 +14,7 @@ class MockMoireModelFilesNormal: MoireModel {
     private(set) var currentMoiresSortedByLastCreated: Array<Moire> = []
     
     func setStoredMoires(moires: Array<Moire>) {
+        // assume the orders are the same for simplicity
         self.currentMoiresSortedByLastCreatedOrEdited = moires
         self.currentMoiresSortedByLastCreated = moires
     }

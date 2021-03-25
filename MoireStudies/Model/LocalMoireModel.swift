@@ -10,7 +10,8 @@ import Foundation
 class LocalMoireModel: MoireModel {
     private var saveFileIO = SaveFileIO.init()
     
-    func numOfMoires() -> Int {  // TODO: handle the case when save files are corrupted
+    /// Warning: good performance but will count corrupted files
+    func numOfMoires() -> Int {
         return saveFileIO.numOfMoire() ?? 0
     }
     
