@@ -9,68 +9,11 @@
 import XCTest
 import UIKit
 
-class SaveFilesViewControllerTestsNormal: XCTestCase {
+class SaveFilesViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var saveFilesViewController: SaveFilesViewController!
-    var mockMoireModel: MockMoireModelFilesNormal!
-    var initialMoireId: String?
     
-    override func setUpWithError() throws {
-        self.mockMoireModel = MockMoireModelFilesNormal()
-        self.saveFilesViewController = storyboard.instantiateViewController(identifier: "SaveFilesViewController") {coder in
-            return SaveFilesViewController.init(coder: coder, mockMoireModel: self.mockMoireModel)
-        }
-    }
-
-    override func tearDownWithError() throws {
-        self.mockMoireModel = nil
-        self.saveFilesViewController = nil
-    }
-    
-    private func prepareSaveFilesViewController() {
-        self.saveFilesViewController.loadViewIfNeeded()
-        self.saveFilesViewController.viewWillAppear(false)
-        self.saveFilesViewController.viewDidAppear(false)
-    }
-    
-    func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
-        
-    }
-    
-    func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
-        
-    }
-    
-    func testSettingUp_ModelEmptyAndIdNotAvailable_NoRuntimeError() {
-        self.prepareSaveFilesViewController()
-    }
-}
-
-class SaveFilesViewControllerTestsCorrupted: XCTestCase {
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var saveFilesViewController: SaveFilesViewController!
-    var mockMoireModel: MockMoireModelFilesCorrupted!
-    var initialMoireId: String?
-    
-    override func setUpWithError() throws {
-        self.mockMoireModel = MockMoireModelFilesCorrupted()
-        self.saveFilesViewController = storyboard.instantiateViewController(identifier: "SaveFilesViewController") {coder in
-            return SaveFilesViewController.init(coder: coder, mockMoireModel: self.mockMoireModel)
-        }
-    }
-
-    override func tearDownWithError() throws {
-        self.mockMoireModel = nil
-        self.saveFilesViewController = nil
-    }
-    
-    private func prepareSaveFilesViewController() {
-        self.saveFilesViewController.loadViewIfNeeded()
-        self.saveFilesViewController.viewWillAppear(false)
-        self.saveFilesViewController.viewDidAppear(false)
-    }
-    
-    private func createPseudoRandomMoire(numOfPatterns: Int, seed: CGFloat) -> Moire {
+    func createPseudoRandomMoire(numOfPatterns: Int, seed: CGFloat) -> Moire {
         let newMoire = Moire()
         newMoire.resetData()
         let adjustment = seed.truncatingRemainder(dividingBy: 1.0)
@@ -89,7 +32,7 @@ class SaveFilesViewControllerTestsCorrupted: XCTestCase {
         return newMoire
     }
     
-    private func testLoadCells() -> Array<UICollectionViewCell> { // not sure if this is the correct way to test it...
+    func testLoadCells() -> Array<UICollectionViewCell> { // not sure if this is the correct way to test it...
         var cells: Array<UICollectionViewCell> = []
         let numOfSection = self.saveFilesViewController.numberOfSections(in: self.saveFilesViewController.collectionView)
         for i in 0..<numOfSection {
@@ -101,6 +44,58 @@ class SaveFilesViewControllerTestsCorrupted: XCTestCase {
             }
         }
         return cells
+    }
+    
+    func prepareSaveFilesViewController() {
+        self.saveFilesViewController.loadViewIfNeeded()
+        self.saveFilesViewController.viewWillAppear(false)
+        self.saveFilesViewController.viewDidAppear(false)
+    }
+}
+
+class SaveFilesViewControllerTestsNormal: SaveFilesViewControllerTests {
+    var mockMoireModel: MockMoireModelFilesNormal!
+    var initialMoireId: String?
+    
+    override func setUpWithError() throws {
+        self.mockMoireModel = MockMoireModelFilesNormal()
+        self.saveFilesViewController = storyboard.instantiateViewController(identifier: "SaveFilesViewController") {coder in
+            return SaveFilesViewController.init(coder: coder, mockMoireModel: self.mockMoireModel)
+        }
+    }
+
+    override func tearDownWithError() throws {
+        self.mockMoireModel = nil
+        self.saveFilesViewController = nil
+    }
+    
+    func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
+        
+    }
+    
+    func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
+        
+    }
+    
+    func testSettingUp_ModelEmptyAndIdNotAvailable_NoRuntimeError() {
+        self.prepareSaveFilesViewController()
+    }
+}
+
+class SaveFilesViewControllerTestsCorrupted: SaveFilesViewControllerTests {
+    var mockMoireModel: MockMoireModelFilesCorrupted!
+    var initialMoireId: String?
+    
+    override func setUpWithError() throws {
+        self.mockMoireModel = MockMoireModelFilesCorrupted()
+        self.saveFilesViewController = storyboard.instantiateViewController(identifier: "SaveFilesViewController") {coder in
+            return SaveFilesViewController.init(coder: coder, mockMoireModel: self.mockMoireModel)
+        }
+    }
+
+    override func tearDownWithError() throws {
+        self.mockMoireModel = nil
+        self.saveFilesViewController = nil
     }
     
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
@@ -134,7 +129,7 @@ class SaveFilesViewControllerTestsCorrupted: XCTestCase {
     }
 }
 
-class SaveFilesViewControllerTestsReadOnly: XCTestCase {
+class SaveFilesViewControllerTestsReadOnly: SaveFilesViewControllerTests {
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
         
     }
