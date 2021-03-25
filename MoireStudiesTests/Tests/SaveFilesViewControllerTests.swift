@@ -10,6 +10,10 @@ import XCTest
 import UIKit
 
 class SaveFilesViewControllerTestsNormal: XCTestCase {
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var saveFilesViewController: SaveFilesViewController!
+    var mockMoireModel: MockMoireModelFilesNormal!
+    var initialMoireId: String?
     
     override func setUpWithError() throws {
         

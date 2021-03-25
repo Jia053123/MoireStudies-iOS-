@@ -10,35 +10,56 @@ import Foundation
 
 class MockMoireModelFilesNormal: MoireModel {
     // make sure the last created or edited is the last element
-    private(set) var currentMoires: Array<Moire> = []
+    private(set) var currentMoiresSortedByLastCreatedOrEdited: Array<Moire> = []
+    private(set) var currentMoiresSortedByLastCreated: Array<Moire> = []
     
     func setStoredMoires(moires: Array<Moire>) {
-        self.currentMoires = moires
+        self.currentMoiresSortedByLastCreatedOrEdited = moires
+        self.currentMoiresSortedByLastCreated = moires
     }
     
     func numOfMoires() -> Int {
-        return self.currentMoires.count
+        return self.currentMoiresSortedByLastCreatedOrEdited.count
     }
     
     func read(moireId: String) -> Moire? {
-        return self.currentMoires.first(where: {m -> Bool in
+        return self.currentMoiresSortedByLastCreatedOrEdited.first(where: {m -> Bool in
             return m.id == moireId
         })
     }
     
+    func readAllMoiresSortedByLastCreated() -> Array<Moire> {
+        assert(self.currentMoiresSortedByLastCreated.count == self.currentMoiresSortedByLastCreatedOrEdited.count)
+        for m in self.currentMoiresSortedByLastCreatedOrEdited {
+            assert(self.currentMoiresSortedByLastCreated.firstIndex(of: m) != nil)
+        }
+        
+        return self.currentMoiresSortedByLastCreated
+    }
+    
     func readLastCreatedOrEdited() -> Moire? {
-        return self.currentMoires.last
+        return self.currentMoiresSortedByLastCreatedOrEdited.last
     }
     
     func saveOrModify(moire: Moire) -> Bool {
-        let index = self.currentMoires.firstIndex(where: {m -> Bool in
+        let index1 = self.currentMoiresSortedByLastCreatedOrEdited.firstIndex(where: {m -> Bool in
             return m.id == moire.id
         })
-        if let i = index {
+        if let i = index1 {
             // moire already exists
-            self.currentMoires.remove(at: i)
+            self.currentMoiresSortedByLastCreatedOrEdited.remove(at: i)
         }
-        self.currentMoires.append(moire) // append to the end since it's the latest
+        self.currentMoiresSortedByLastCreatedOrEdited.append(moire) // append to the end since it's the latest
+        
+        let index2 = self.currentMoiresSortedByLastCreated.firstIndex(where: {m -> Bool in
+            return m.id == moire.id
+        })
+        if let i = index2 { // moire already exists
+            self.currentMoiresSortedByLastCreated[i] = moire
+        } else { // a new moire
+            self.currentMoiresSortedByLastCreated.append(moire)
+        }
+        
         return true
     }
     
@@ -46,17 +67,25 @@ class MockMoireModelFilesNormal: MoireModel {
         let newDemo = Moire()
         newDemo.patterns.append(Pattern.defaultPattern())
         newDemo.patterns.append(Pattern.defaultPattern())
-        self.currentMoires.append(newDemo)
+        self.currentMoiresSortedByLastCreatedOrEdited.append(newDemo)
+        self.currentMoiresSortedByLastCreated.append(newDemo)
         return newDemo
     }
     
     func delete(moireId: String) -> Bool {
-        let index = self.currentMoires.firstIndex(where: {m -> Bool in
+        let index1 = self.currentMoiresSortedByLastCreatedOrEdited.firstIndex(where: {m -> Bool in
             return m.id == moireId
         })
-        if let i = index {
+        if let i = index1 {
             // moire exists
-            self.currentMoires.remove(at: i)
+            self.currentMoiresSortedByLastCreatedOrEdited.remove(at: i)
+            
+            let index2 = self.currentMoiresSortedByLastCreated.firstIndex(where: {m -> Bool in
+                return m.id == moireId
+            })
+            assert(index2 != nil)
+            self.currentMoiresSortedByLastCreatedOrEdited.remove(at: index2!)
+            
             return true
         } else {
             return false
@@ -64,7 +93,8 @@ class MockMoireModelFilesNormal: MoireModel {
     }
     
     func deleteAllSaves() -> Bool {
-        self.currentMoires = []
+        self.currentMoiresSortedByLastCreatedOrEdited = []
+        self.currentMoiresSortedByLastCreated = []
         return true
     }
 }
@@ -83,6 +113,10 @@ class MockMoireModelFilesCorrupted: MoireModel {
     
     func read(moireId: String) -> Moire? {
         return nil
+    }
+    
+    func readAllMoiresSortedByLastCreated() -> Array<Moire> {
+        return []
     }
     
     func readLastCreatedOrEdited() -> Moire? {
@@ -134,6 +168,10 @@ class MockMoireModelReadOnly: MoireModel {
         return self.existingMoires.first(where: {m -> Bool in
             return m.id == moireId
         })
+    }
+    
+    func readAllMoiresSortedByLastCreated() -> Array<Moire> {
+        return self.existingMoires
     }
     
     func readLastCreatedOrEdited() -> Moire? {

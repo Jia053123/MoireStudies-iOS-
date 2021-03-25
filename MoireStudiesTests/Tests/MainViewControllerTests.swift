@@ -129,7 +129,7 @@ extension MainViewControllerTests {
         _ = self.mockMoireModel.saveOrModify(moire: m3)
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m3C.patterns)
-        XCTAssert(self.mockMoireModel.currentMoires == [m1C, m2C, m3C])
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
     }
     
     func testLoadMoire_WithInitIdAndModelHasTheOneWithId_LoadTheOneWithId() {
@@ -150,7 +150,7 @@ extension MainViewControllerTests {
         self.mainViewController.moireIdToInit = m2C.id
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m2C.patterns)
-        XCTAssert(self.mockMoireModel.currentMoires == [m1C, m2C, m3C])
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
     }
     
     func testLoadMoire_NoInitIdAndModelHasNoMoire_CreateNewAndSave() {
@@ -158,8 +158,8 @@ extension MainViewControllerTests {
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns != nil)
         XCTAssert(self.mockMoireViewController.currentPatterns!.count > 0)
-        XCTAssert(self.mockMoireModel.currentMoires.count == 1)
-        XCTAssert(self.mockMoireModel.currentMoires.first!.patterns == self.mockMoireViewController.currentPatterns!)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.count == 1)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first!.patterns == self.mockMoireViewController.currentPatterns!)
     }
     
     func testLoadMoire_WithInitIdAndModelHasNoMoire_CreateNewAndSave() {
@@ -168,8 +168,8 @@ extension MainViewControllerTests {
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns != nil)
         XCTAssert(self.mockMoireViewController.currentPatterns!.count > 0)
-        XCTAssert(self.mockMoireModel.currentMoires.count == 1)
-        XCTAssert(self.mockMoireModel.currentMoires.first!.patterns == self.mockMoireViewController.currentPatterns!)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.count == 1)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first!.patterns == self.mockMoireViewController.currentPatterns!)
     }
 }
 
@@ -187,7 +187,7 @@ extension MainViewControllerTests {
         m1C.patterns[0].speed = expectedSpeedValue0
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
         
         let p1Id = ids[1]
         let expectedDirectionValue1 = CGFloat(1.111)
@@ -198,7 +198,7 @@ extension MainViewControllerTests {
         m1C.patterns[1].direction = expectedDirectionValue1
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
         
         let p3Id = ids[3]
         let expectedSpeed3 = CGFloat(9.251)
@@ -229,7 +229,7 @@ extension MainViewControllerTests {
         m1C.patterns[3].whiteWidth = expectedWhiteWidth3
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -260,7 +260,7 @@ extension MainViewControllerTests {
         // m1C keeps it's original values
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
     func testModifyMoire_InvalidIdNoPatternLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -287,7 +287,7 @@ extension MainViewControllerTests {
         // m1C keeps it's original values
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
     func testModifyMoire_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -314,7 +314,7 @@ extension MainViewControllerTests {
         // m1C keeps it's original values
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
     func testModifyMoire_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -345,7 +345,7 @@ extension MainViewControllerTests {
         // m1C keeps it's original values
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
-        XCTAssert(self.mockMoireModel.currentMoires.first(where: {$0.id == m1C.id}) == m1C)
+        XCTAssert(self.mockMoireModel.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
 }
 
