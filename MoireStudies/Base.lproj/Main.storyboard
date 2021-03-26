@@ -80,6 +80,7 @@
                             <constraint firstItem="KkF-Ph-85z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zej-Xn-8Ri"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>
                         <outlet property="buttonsContainerView" destination="KkF-Ph-85z" id="8Q9-rY-li9"/>
