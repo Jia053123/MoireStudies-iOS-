@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
-    weak var target: CtrlViewControllerSch1?
+class SliderCtrlViewSch1 : UIView { // TODO: make the outlets private
+    weak var target: BasicCtrlViewController?
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
@@ -36,7 +36,7 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
-        scaleFactorSlider.maximumValue = 5.0
+        scaleFactorSlider.maximumValue = 10.0
         let attri = [NSAttributedString.Key.foregroundColor: UIColor.white]
         speedSegmentedControl.setTitleTextAttributes(attri, for: UIControl.State.normal)
     }
@@ -81,7 +81,7 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         }
     }
     
-    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat {
+    private func calcSpeed(speedSegmentIndex: Int) -> CGFloat { // TODO: move to controller? 
         return (CGFloat(speedSegmentIndex) + 1.0) * 8.0 + 10.0
     }
     
@@ -98,10 +98,7 @@ class SliderCtrlViewSch1 : UIView, ControlViewSch1 {
         }
     }
     
-    func matchControlsWithValues(speed: CGFloat,
-                                 direction: CGFloat,
-                                 fillRatio: CGFloat,
-                                 scaleFactor: CGFloat) {
+    func matchControlsWithValues(speed: CGFloat, direction: CGFloat, fillRatio: CGFloat, scaleFactor: CGFloat) {
         self.speedSegmentedControl.selectedSegmentIndex = self.calcSegmentIndex(speed: speed)
         self.directionSlider.value = Float(direction)
         self.fillRatioSlider.value = Float(fillRatio)

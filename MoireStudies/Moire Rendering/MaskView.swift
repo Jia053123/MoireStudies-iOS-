@@ -10,17 +10,17 @@ import UIKit
 import QuartzCore
 
 class MaskView: UIView {
-    private var maskFrame: CGRect
+    private var maskFrames: Array<CGRect>
     private var cornerRadius: CGFloat = Constants.UI.maskCornerRadius
     
-    init(frame: CGRect, maskFrame: CGRect) {
-        self.maskFrame = maskFrame
+    init(frame: CGRect, maskFrames: Array<CGRect>) {
+        self.maskFrames = maskFrames
         super.init(frame: frame)
         self.setUp()
     }
     
     required init?(coder: NSCoder) {
-        self.maskFrame = CGRect.zero
+        self.maskFrames = []
         super.init(coder: coder)
         self.setUp()
     }
@@ -32,7 +32,9 @@ class MaskView: UIView {
     override func draw(_ rect: CGRect) {
         UIColor.yellow.setFill()
         let mask: UIBezierPath = UIBezierPath.init(rect: self.bounds)
-        mask.append(UIBezierPath.init(roundedRect: maskFrame, cornerRadius: cornerRadius))
+        for frame in self.maskFrames {
+            mask.append(UIBezierPath.init(roundedRect: frame, cornerRadius: cornerRadius))
+        }
         mask.usesEvenOddFillRule = true
         mask.fill()
     }

@@ -8,9 +8,8 @@
 import Foundation
 import UIKit
 
-class MoireViewController: UIViewController {
-    private weak var highlightedPatternViewController: PatternViewController?
-    private weak var dimView: UIView?
+class MoireViewController: UIViewController { // TODO: remove the core animation implementation and render all patterns in a single metal layer and benchmark? (currently the memory usage is quite high with more patterns per moire)
+    private weak var dimView: UIView? // TODO: implement this properly by changing color in renderer
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,28 +57,55 @@ class MoireViewController: UIViewController {
     }
     
     func setUpMasks(with frames: Array<CGRect>) {
-        // TODO: at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
-        let maskView1 = MaskView.init(frame: self.view.bounds, maskFrame: frames[0])
-        self.children[1].view.mask = maskView1
-        
-        let maskView2 = MaskView.init(frame: self.view.bounds, maskFrame: frames[1])
-        self.children[0].view.mask = maskView2
+        // TODO: (with two patterns) at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
+        guard self.children.count > 0 else {return}
+        assert(frames.count >= self.children.count)
+        for i in 0...(self.children.count - 1) {
+            var maskFrames: Array<CGRect> = []
+            for j in 0...(self.children.count - 1) {
+                if j != i {
+                    maskFrames.append(frames[j])
+                }
+            }
+            let maskView = MaskView.init(frame: self.view.bounds, maskFrames: maskFrames)
+            self.children[i].view.mask = maskView
+        }
     }
     
     func highlightPatternView(patternViewIndex: Int) {
         let pvc = self.children[patternViewIndex]
         self.view.bringSubviewToFront(self.dimView!)
         self.dimView!.isHidden = false
-        self.highlightedPatternViewController = (pvc as! PatternViewController)
         self.view.bringSubviewToFront(pvc.view)
     }
     
     func unhighlightPatternView(patternViewIndex: Int) {
         let pvc = self.children[patternViewIndex]
-        self.highlightedPatternViewController = nil
         self.view.sendSubviewToBack(self.dimView!)
         self.dimView!.isHidden = true
         self.view.sendSubviewToBack(pvc.view)
+    }
+    
+    func dimPatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        self.view.sendSubviewToBack(self.dimView!)
+        self.dimView!.isHidden = false
+        self.view.sendSubviewToBack(pvc.view)
+    }
+    
+    func undimPatternViews() { // TODO: add parameter to enable multiple highlights/dims
+        self.view.sendSubviewToBack(self.dimView!)
+        self.dimView!.isHidden = true
+    }
+    
+    func hidePatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        pvc.view.isHidden = true
+    }
+    
+    func unhidePatternView(patternViewIndex: Int) {
+        let pvc = self.children[patternViewIndex]
+        pvc.view.isHidden = false
     }
     
     func modifyPatternView(patternViewIndex: Int, newPattern: Pattern) {

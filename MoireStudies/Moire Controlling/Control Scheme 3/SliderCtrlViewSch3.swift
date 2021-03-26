@@ -8,15 +8,17 @@
 import Foundation
 import UIKit
 
-class SliderCtrlViewSch3: UIView {
-    weak var target: CtrlViewControllerSch3?
+class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
+    weak var target: BasicCtrlViewController?
     @IBOutlet weak var speedSlider: UISlider!
-    @IBOutlet weak var directionSlider: UISlider!
+    @IBOutlet weak var directionSlider: UISlider! // TODO: subclass to allow finer control
     @IBOutlet weak var blackWidthSlider: UISlider!
     @IBOutlet weak var whiteWidthSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
     @IBOutlet weak var scaleFactorSlider: UISlider!
     @IBOutlet weak var highlightButton: UIButton!
+    @IBOutlet weak var dimButton: UIButton!
+    @IBOutlet weak var menuButton: UIButton!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -34,18 +36,21 @@ class SliderCtrlViewSch3: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
-        speedSlider.minimumValue = Float(Constants.Bounds.speedRange.lowerBound)
-        speedSlider.maximumValue = 45.0
-        directionSlider.minimumValue = 0.0
-        directionSlider.maximumValue = 2 * Float.pi
-        blackWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        blackWidthSlider.maximumValue = 20.0
-        whiteWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        whiteWidthSlider.maximumValue = 20.0
+        speedSlider.minimumValue = Float(BoundsManager.speedRange.lowerBound)
+        speedSlider.maximumValue = Float(BoundsManager.speedRange.upperBound)
+        directionSlider.minimumValue = Float(BoundsManager.directionRange.lowerBound)
+        directionSlider.maximumValue = Float(BoundsManager.directionRange.upperBound)
+        blackWidthSlider.minimumValue = Float(BoundsManager.blackWidthRange.lowerBound)
+        blackWidthSlider.maximumValue = Float(BoundsManager.blackWidthRange.upperBound)
+        whiteWidthSlider.minimumValue = Float(BoundsManager.whiteWidthRange.lowerBound)
+        whiteWidthSlider.maximumValue = Float(BoundsManager.whiteWidthRange.upperBound)
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
         scaleFactorSlider.maximumValue = 10.0
+        
+        menuButton.showsMenuAsPrimaryAction = true
+        menuButton.menu = self.makeMenu(isHidden: false)
     }
     
     @IBAction func startEditing(_ sender: Any) {
@@ -104,20 +109,80 @@ class SliderCtrlViewSch3: UIView {
         }
     }
     
-    @IBAction func highlightButtonPressed(_ sender: Any) {
+    @IBAction func highlightButtonHeld(_ sender: Any) {
         self.target?.highlightPattern()
     }
     
     @IBAction func highlightButtonReleased(_ sender: Any) {
         self.target?.unhighlightPattern()
     }
+    
+    @IBAction func dimButtonHeld(_ sender: Any) {
+        self.target?.dimPattern()
+    }
+    
+    @IBAction func dimButtonReleased(_ sender: Any) {
+        self.target?.undimPattern()
+    }
 }
 
 extension SliderCtrlViewSch3 {
+    private func makeMenu(isHidden: Bool) -> UIMenu {
+        let hide = UIAction(title: "Hide Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.hidePattern()})
+        
+        let unhide = UIAction(title: "Unhide Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.unhidePattern()})
+        
+        let duplicate = UIAction(title: "Duplicate Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.duplicatePattern()})
+        
+        let delete = UIAction(title: "Delete Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deletePattern()})
+        
+        if isHidden {
+            return UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [unhide, duplicate, delete])
+        } else {
+            return UIMenu(title: "Pattern Options", image: nil, identifier: nil, options: [], children: [hide, duplicate, delete])
+        }
+    }
     
+    @objc func hidePattern() {
+        let success = self.target!.hidePattern()
+        if success {
+            menuButton.menu = self.makeMenu(isHidden: true)
+        }
+    }
+    
+    @objc func unhidePattern() {
+        self.target?.unhidePattern()
+        menuButton.menu = self.makeMenu(isHidden: false)
+    }
+    
+    @objc func deletePattern() {
+        self.target?.deletePattern()
+    }
+    
+    @objc func duplicatePattern() {
+        self.target?.duplicatePattern()
+    }
 }
 
-extension SliderCtrlViewSch3: ControlViewSch3 {
+extension SliderCtrlViewSch3 {
+    func matchControlsWithBounds(fillRatioRange: ClosedRange<CGFloat>, scaleFactorRange: ClosedRange<CGFloat>) {
+        if fillRatioRange.upperBound - fillRatioRange.lowerBound < 0.001 {
+            self.fillRatioSlider.isEnabled = false
+        } else {
+            self.fillRatioSlider.isEnabled = true
+            self.fillRatioSlider.minimumValue = Float(fillRatioRange.lowerBound)
+            self.fillRatioSlider.maximumValue = Float(fillRatioRange.upperBound)
+        }
+        
+        if scaleFactorRange.upperBound - scaleFactorRange.lowerBound < 0.001 {
+            self.scaleFactorSlider.isEnabled = false
+        } else {
+            self.scaleFactorSlider.isEnabled = true
+            self.scaleFactorSlider.minimumValue = Float(scaleFactorRange.lowerBound)
+            self.scaleFactorSlider.maximumValue = Float(scaleFactorRange.upperBound)
+        }
+    }
+    
     func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?) {
         if let s = speed {
             self.speedSlider.value = Float(s)
