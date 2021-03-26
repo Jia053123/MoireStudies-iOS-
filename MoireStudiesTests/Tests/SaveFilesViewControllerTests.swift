@@ -23,10 +23,10 @@ class SaveFilesViewControllerTests: XCTestCase {
                                           direction: basePattern.direction + CGFloat(i) * 0.01,
                                           blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
                                           whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
-            assert(Constants.Bounds.speedRange.contains(newPattern.speed))
-            assert(Constants.Bounds.directionRange.contains(newPattern.direction))
-            assert(Constants.Bounds.blackWidthRange.contains(newPattern.blackWidth))
-            assert(Constants.Bounds.whiteWidthRange.contains(newPattern.whiteWidth))
+            assert(BoundsManager.speedRange.contains(newPattern.speed))
+            assert(BoundsManager.directionRange.contains(newPattern.direction))
+            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
+            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
             newMoire.patterns.append(newPattern)
         }
         return newMoire

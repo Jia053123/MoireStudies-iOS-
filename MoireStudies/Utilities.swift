@@ -22,10 +22,10 @@ class Utilities: NSObject {
     }
     
     static func isWithinBounds(pattern: Pattern) -> Bool {
-        if !Constants.Bounds.speedRange.contains(pattern.speed) {return false}
-        if !Constants.Bounds.directionRange.contains(pattern.direction) {return false}
-        if !Constants.Bounds.blackWidthRange.contains(pattern.blackWidth) {return false}
-        if !Constants.Bounds.whiteWidthRange.contains(pattern.whiteWidth) {return false}
+        if !BoundsManager.speedRange.contains(pattern.speed) {return false}
+        if !BoundsManager.directionRange.contains(pattern.direction) {return false}
+        if !BoundsManager.blackWidthRange.contains(pattern.blackWidth) {return false}
+        if !BoundsManager.whiteWidthRange.contains(pattern.whiteWidth) {return false}
         return true
     }
 }

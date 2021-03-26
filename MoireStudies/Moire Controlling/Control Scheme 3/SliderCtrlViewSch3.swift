@@ -36,14 +36,14 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
             self.addSubview(view)
             view.frame = self.bounds
         }
-        speedSlider.minimumValue = Float(Constants.Bounds.speedRange.lowerBound)
-        speedSlider.maximumValue = Float(Constants.Bounds.speedRange.upperBound)
-        directionSlider.minimumValue = Float(Constants.Bounds.directionRange.lowerBound)
-        directionSlider.maximumValue = Float(Constants.Bounds.directionRange.upperBound)
-        blackWidthSlider.minimumValue = Float(Constants.Bounds.blackWidthRange.lowerBound)
-        blackWidthSlider.maximumValue = Float(Constants.Bounds.blackWidthRange.upperBound)
-        whiteWidthSlider.minimumValue = Float(Constants.Bounds.whiteWidthRange.lowerBound)
-        whiteWidthSlider.maximumValue = Float(Constants.Bounds.whiteWidthRange.upperBound)
+        speedSlider.minimumValue = Float(BoundsManager.speedRange.lowerBound)
+        speedSlider.maximumValue = Float(BoundsManager.speedRange.upperBound)
+        directionSlider.minimumValue = Float(BoundsManager.directionRange.lowerBound)
+        directionSlider.maximumValue = Float(BoundsManager.directionRange.upperBound)
+        blackWidthSlider.minimumValue = Float(BoundsManager.blackWidthRange.lowerBound)
+        blackWidthSlider.maximumValue = Float(BoundsManager.blackWidthRange.upperBound)
+        whiteWidthSlider.minimumValue = Float(BoundsManager.whiteWidthRange.lowerBound)
+        whiteWidthSlider.maximumValue = Float(BoundsManager.whiteWidthRange.upperBound)
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0

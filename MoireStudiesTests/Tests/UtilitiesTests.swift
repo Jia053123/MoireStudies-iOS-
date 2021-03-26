@@ -34,32 +34,32 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
     
     func testIsWithinBounds() {
         let speedValid: CGFloat = 15.887
-        assert(Constants.Bounds.speedRange.contains(speedValid))
+        assert(BoundsManager.speedRange.contains(speedValid))
         let speedTooHigh: CGFloat = 99999
-        assert(Constants.Bounds.speedRange.upperBound < speedTooHigh)
+        assert(BoundsManager.speedRange.upperBound < speedTooHigh)
         let speedTooLow: CGFloat = -99999
-        assert(Constants.Bounds.speedRange.lowerBound > speedTooLow)
+        assert(BoundsManager.speedRange.lowerBound > speedTooLow)
         
         let directionValid: CGFloat = 1.398
-        assert(Constants.Bounds.directionRange.contains(directionValid))
+        assert(BoundsManager.directionRange.contains(directionValid))
         let directionTooHigh: CGFloat = 59.65
-        assert(Constants.Bounds.directionRange.upperBound < directionTooHigh)
+        assert(BoundsManager.directionRange.upperBound < directionTooHigh)
         let directionTooLow: CGFloat = -128.3
-        assert(Constants.Bounds.directionRange.lowerBound > directionTooLow)
+        assert(BoundsManager.directionRange.lowerBound > directionTooLow)
         
         let blackWidthValid: CGFloat = 7.267
-        assert(Constants.Bounds.blackWidthRange.contains(blackWidthValid))
+        assert(BoundsManager.blackWidthRange.contains(blackWidthValid))
         let blackWidthTooHigh: CGFloat = 186745
-        assert(Constants.Bounds.blackWidthRange.upperBound < blackWidthTooHigh)
+        assert(BoundsManager.blackWidthRange.upperBound < blackWidthTooHigh)
         let blackWidthTooLow: CGFloat = 0
-        assert(Constants.Bounds.blackWidthRange.lowerBound > blackWidthTooLow)
+        assert(BoundsManager.blackWidthRange.lowerBound > blackWidthTooLow)
         
         let whiteWidthValid: CGFloat = 6.445
-        assert(Constants.Bounds.whiteWidthRange.contains(whiteWidthValid))
+        assert(BoundsManager.whiteWidthRange.contains(whiteWidthValid))
         let whiteWidthTooHigh: CGFloat = 64593
-        assert(Constants.Bounds.whiteWidthRange.upperBound < whiteWidthTooHigh)
+        assert(BoundsManager.whiteWidthRange.upperBound < whiteWidthTooHigh)
         let whiteWidthTooLow: CGFloat = -1
-        assert(Constants.Bounds.whiteWidthRange.lowerBound > whiteWidthTooLow)
+        assert(BoundsManager.whiteWidthRange.lowerBound > whiteWidthTooLow)
         
         XCTAssertTrue(Utilities.isWithinBounds(pattern: Pattern.init(speed: speedValid,
                                                                      direction: directionValid,

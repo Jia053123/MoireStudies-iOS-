@@ -24,10 +24,10 @@ struct Pattern: Equatable, Codable {
     }
     
     static func randomPattern() -> Pattern {
-        return Pattern(speed: CGFloat.random(in: Constants.Bounds.speedRange),
-                       direction: CGFloat.random(in: Constants.Bounds.directionRange),
-                       blackWidth: CGFloat.random(in: Constants.Bounds.blackWidthRange),
-                       whiteWidth: CGFloat.random(in: Constants.Bounds.whiteWidthRange))
+        return Pattern(speed: CGFloat.random(in: BoundsManager.speedRange),
+                       direction: CGFloat.random(in: BoundsManager.directionRange),
+                       blackWidth: CGFloat.random(in: BoundsManager.blackWidthRange),
+                       whiteWidth: CGFloat.random(in: BoundsManager.whiteWidthRange))
     }
     
     static func randomDemoPattern() -> Pattern {

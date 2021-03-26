@@ -57,10 +57,10 @@ class MainViewControllerTests: XCTestCase {
                                           direction: basePattern.direction + CGFloat(i) * 0.01,
                                           blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
                                           whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
-            assert(Constants.Bounds.speedRange.contains(newPattern.speed))
-            assert(Constants.Bounds.directionRange.contains(newPattern.direction))
-            assert(Constants.Bounds.blackWidthRange.contains(newPattern.blackWidth))
-            assert(Constants.Bounds.whiteWidthRange.contains(newPattern.whiteWidth))
+            assert(BoundsManager.speedRange.contains(newPattern.speed))
+            assert(BoundsManager.directionRange.contains(newPattern.direction))
+            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
+            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
             moire.patterns.append(newPattern)
         }
     }
@@ -182,7 +182,7 @@ extension MainViewControllerTests {
         let ids = self.mockControlsViewController.ids!
         let p0Id = ids[0]
         let expectedSpeedValue0 = CGFloat(10.153)
-        assert(Constants.Bounds.speedRange.contains(expectedSpeedValue0))
+        assert(BoundsManager.speedRange.contains(expectedSpeedValue0))
         assert(m1C.patterns[0].speed != expectedSpeedValue0)
         XCTAssertTrue(self.mainViewController.modifyPattern(speed: expectedSpeedValue0, callerId: p0Id))
         m1C.patterns[0].speed = expectedSpeedValue0
@@ -192,7 +192,7 @@ extension MainViewControllerTests {
         
         let p1Id = ids[1]
         let expectedDirectionValue1 = CGFloat(1.111)
-        assert(Constants.Bounds.directionRange.contains(expectedDirectionValue1))
+        assert(BoundsManager.directionRange.contains(expectedDirectionValue1))
         assert(m1C.patterns[1].direction != expectedDirectionValue1)
         XCTAssertTrue(self.mainViewController.modifyPattern(direction: 1.0, callerId: p1Id))
         XCTAssertTrue(self.mainViewController.modifyPattern(direction: expectedDirectionValue1, callerId: p1Id))
@@ -206,10 +206,10 @@ extension MainViewControllerTests {
         let expectedDirection3 = CGFloat(1.212)
         let expectedBlackWidth3 = CGFloat(5.953)
         let expectedWhiteWidth3 = CGFloat(6.663)
-        assert(Constants.Bounds.speedRange.contains(expectedSpeed3))
-        assert(Constants.Bounds.directionRange.contains(expectedDirection3))
-        assert(Constants.Bounds.blackWidthRange.contains(expectedBlackWidth3))
-        assert(Constants.Bounds.whiteWidthRange.contains(expectedWhiteWidth3))
+        assert(BoundsManager.speedRange.contains(expectedSpeed3))
+        assert(BoundsManager.directionRange.contains(expectedDirection3))
+        assert(BoundsManager.blackWidthRange.contains(expectedBlackWidth3))
+        assert(BoundsManager.whiteWidthRange.contains(expectedWhiteWidth3))
         assert(m1C.patterns[3].speed != expectedSpeed3)
         assert(m1C.patterns[3].direction != expectedDirection3)
         assert(m1C.patterns[3].blackWidth != expectedBlackWidth3)
@@ -242,10 +242,10 @@ extension MainViewControllerTests {
         let unexpectedDirection2 = CGFloat(1.212)
         let unexpectedBlackWidth2 = CGFloat(5.953)
         let unexpectedWhiteWidth2 = CGFloat(6.663)
-        assert(Constants.Bounds.speedRange.contains(unexpectedSpeed2))
-        assert(Constants.Bounds.directionRange.contains(unexpectedDirection2))
-        assert(Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
-        assert(Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(BoundsManager.speedRange.contains(unexpectedSpeed2))
+        assert(BoundsManager.directionRange.contains(unexpectedDirection2))
+        assert(BoundsManager.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(BoundsManager.whiteWidthRange.contains(unexpectedWhiteWidth2))
         assert(m1C.patterns[2].speed != unexpectedSpeed2)
         assert(m1C.patterns[2].direction != unexpectedDirection2)
         assert(m1C.patterns[2].blackWidth != unexpectedBlackWidth2)
@@ -273,10 +273,10 @@ extension MainViewControllerTests {
         let unexpectedDirection2 = CGFloat(1.212)
         let unexpectedBlackWidth2 = CGFloat(5.953)
         let unexpectedWhiteWidth2 = CGFloat(6.663)
-        assert(Constants.Bounds.speedRange.contains(unexpectedSpeed2))
-        assert(Constants.Bounds.directionRange.contains(unexpectedDirection2))
-        assert(Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
-        assert(Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(BoundsManager.speedRange.contains(unexpectedSpeed2))
+        assert(BoundsManager.directionRange.contains(unexpectedDirection2))
+        assert(BoundsManager.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(BoundsManager.whiteWidthRange.contains(unexpectedWhiteWidth2))
         XCTAssertFalse(self.mainViewController.modifyPattern(speed: unexpectedSpeed2, callerId: invalidId1))
         XCTAssertFalse(self.mainViewController.modifyPattern(speed: unexpectedSpeed2, callerId: invalidId2))
         XCTAssertFalse(self.mainViewController.modifyPattern(direction: unexpectedDirection2, callerId: invalidId1))
@@ -300,10 +300,10 @@ extension MainViewControllerTests {
         let unexpectedDirection2 = CGFloat(100000)
         let unexpectedBlackWidth2 = CGFloat(100000)
         let unexpectedWhiteWidth2 = CGFloat(100000)
-        assert(!Constants.Bounds.speedRange.contains(unexpectedSpeed2))
-        assert(!Constants.Bounds.directionRange.contains(unexpectedDirection2))
-        assert(!Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
-        assert(!Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(!BoundsManager.speedRange.contains(unexpectedSpeed2))
+        assert(!BoundsManager.directionRange.contains(unexpectedDirection2))
+        assert(!BoundsManager.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(!BoundsManager.whiteWidthRange.contains(unexpectedWhiteWidth2))
         assert(m1C.patterns[2].speed != unexpectedSpeed2)
         assert(m1C.patterns[2].direction != unexpectedDirection2)
         assert(m1C.patterns[2].blackWidth != unexpectedBlackWidth2)
@@ -327,10 +327,10 @@ extension MainViewControllerTests {
         let unexpectedDirection2 = CGFloat(100000)
         let unexpectedBlackWidth2 = CGFloat(100000)
         let unexpectedWhiteWidth2 = CGFloat(100000)
-        assert(!Constants.Bounds.speedRange.contains(unexpectedSpeed2))
-        assert(!Constants.Bounds.directionRange.contains(unexpectedDirection2))
-        assert(!Constants.Bounds.blackWidthRange.contains(unexpectedBlackWidth2))
-        assert(!Constants.Bounds.whiteWidthRange.contains(unexpectedWhiteWidth2))
+        assert(!BoundsManager.speedRange.contains(unexpectedSpeed2))
+        assert(!BoundsManager.directionRange.contains(unexpectedDirection2))
+        assert(!BoundsManager.blackWidthRange.contains(unexpectedBlackWidth2))
+        assert(!BoundsManager.whiteWidthRange.contains(unexpectedWhiteWidth2))
         assert(m1C.patterns[2].speed != unexpectedSpeed2)
         assert(m1C.patterns[2].direction != unexpectedDirection2)
         assert(m1C.patterns[2].blackWidth != unexpectedBlackWidth2)
@@ -465,7 +465,7 @@ extension MainViewControllerTests {
     }
     
     func testAppendPattern_MoireNotEmptyPatternBeyondLimitNoCaller_ReturnFailureMoireStaySame() {
-        let upperbound = Constants.Bounds.numOfPatternsPerMoire.upperBound
+        let upperbound = Constants.Constrains.numOfPatternsPerMoire.upperBound
         self.setUpOneMoireAndLoad(numOfPatterns: upperbound)
         XCTAssertFalse(self.mainViewController.createPattern(callerId: nil, newPattern: Pattern.debugPattern()))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, upperbound)
@@ -477,7 +477,7 @@ extension MainViewControllerTests {
     }
     
     func testAppendPattern_MoireNotEmptyPatternBeyondLimitHaveCaller_ReturnFailureMoireStaySame() {
-        let upperbound = Constants.Bounds.numOfPatternsPerMoire.upperBound
+        let upperbound = Constants.Constrains.numOfPatternsPerMoire.upperBound
         self.setUpOneMoireAndLoad(numOfPatterns: upperbound)
         let ids = self.mockControlsViewController.ids!
         XCTAssertFalse(self.mainViewController.createPattern(callerId: ids[1], newPattern: Pattern.debugPattern()))
@@ -494,7 +494,7 @@ extension MainViewControllerTests {
 extension MainViewControllerTests {
     func testDeletePattern_PatternNotUnderLimitAndValidId_ReturnTrueAndDeletePattern() {
         self.setUpOneMoireAndLoad(numOfPatterns: 5)
-        assert(Constants.Bounds.numOfPatternsPerMoire.contains(5))
+        assert(Constants.Constrains.numOfPatternsPerMoire.contains(5))
         let ids = self.mockControlsViewController.ids!
         
         XCTAssertTrue(self.mainViewController.deletePattern(callerId: ids[1]))
@@ -519,7 +519,7 @@ extension MainViewControllerTests {
         XCTAssertEqual(self.mockControlsViewController.initPatterns?[1], m1C.patterns[3])
         XCTAssertEqual(self.mockControlsViewController.initPatterns?[2], m1C.patterns[4])
         
-        assert(Constants.Bounds.numOfPatternsPerMoire.contains(2))
+        assert(Constants.Constrains.numOfPatternsPerMoire.contains(2))
         XCTAssertTrue(self.mainViewController.deletePattern(callerId: ids[2]))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 2)
         XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[2])
@@ -543,7 +543,7 @@ extension MainViewControllerTests {
     
     func testDeletePattern_PatternAtLimitAndValidId_ReturnFalseAndPatternStaySame() {
         self.setUpOneMoireAndLoad(numOfPatterns: 1)
-        assert(!Constants.Bounds.numOfPatternsPerMoire.contains(0))
+        assert(!Constants.Constrains.numOfPatternsPerMoire.contains(0))
         
         let ids = self.mockControlsViewController.ids!
         XCTAssertFalse(self.mainViewController.deletePattern(callerId: ids[0]))
@@ -555,7 +555,7 @@ extension MainViewControllerTests {
     
     func testDeletePattern_PatternAtLimitAndInvalidId_ReturnFalseAndPatternStaySame() {
         self.setUpOneMoireAndLoad(numOfPatterns: 1)
-        assert(!Constants.Bounds.numOfPatternsPerMoire.contains(0))
+        assert(!Constants.Constrains.numOfPatternsPerMoire.contains(0))
         
         XCTAssertFalse(self.mainViewController.deletePattern(callerId: 8))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns?.count, 1)

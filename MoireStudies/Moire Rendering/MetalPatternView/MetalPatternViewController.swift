@@ -19,7 +19,7 @@ class MetalPatternViewController: UIViewController {
     private var patternStripes: Array<MetalStripe>! // must be sorted: the first element always has the most positive translation value
     private var recycledStripes: Array<MetalStripe> = []
     private let CheckDataIntegrityPerFrame = false
-    private var estimatedMaxNumOfStripes: Int {get{return Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1}} // this is used to reserve data structure capacity for this class and the renderer. It may not be strictly the maximum possible number
+    private var estimatedMaxNumOfStripes: Int {get{return Int(ceil(self.diagonalOfDrawableTexture / Float(BoundsManager.blackWidthRange.lowerBound + BoundsManager.whiteWidthRange.lowerBound))) + 1}} // this is used to reserve data structure capacity for this class and the renderer. It may not be strictly the maximum possible number
     
     private lazy var viewportSizePixel: CGSize = (self.view.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?

@@ -230,7 +230,7 @@ extension MainViewController: PatternManager {
     
     func modifyPattern(speed: CGFloat, callerId: Int) -> Bool {
 //        print("setting speed to: ", speed)
-        guard Constants.Bounds.speedRange.contains(speed) else {
+        guard BoundsManager.speedRange.contains(speed) else {
             print("speed out of bound")
             return false
         }
@@ -243,7 +243,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(direction: CGFloat, callerId: Int) -> Bool {
-        guard Constants.Bounds.directionRange.contains(direction) else {
+        guard BoundsManager.directionRange.contains(direction) else {
             print("direction out of bound")
             return false
         }
@@ -257,7 +257,7 @@ extension MainViewController: PatternManager {
     
     func modifyPattern(blackWidth: CGFloat, callerId: Int) -> Bool {
 //        print("setting blackWidth to: ", blackWidth)
-        guard Constants.Bounds.blackWidthRange.contains(blackWidth) else {
+        guard BoundsManager.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
             return false
         }
@@ -270,7 +270,7 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(whiteWidth: CGFloat, callerId: Int) -> Bool {
-        guard Constants.Bounds.whiteWidthRange.contains(whiteWidth) else {
+        guard BoundsManager.whiteWidthRange.contains(whiteWidth) else {
             print("whiteWidth out of bound")
             return false
         }
@@ -300,7 +300,7 @@ extension MainViewController: PatternManager {
     }
     
     func createPattern(callerId: Int?, newPattern: Pattern) -> Bool {
-        guard self.currentMoire!.patterns.count < Constants.Bounds.numOfPatternsPerMoire.upperBound else {
+        guard self.currentMoire!.patterns.count < Constants.Constrains.numOfPatternsPerMoire.upperBound else {
             print("creation failed: maximum number of patterns per moire reached")
             return false
         }
@@ -315,7 +315,7 @@ extension MainViewController: PatternManager {
     }
     
     func deletePattern(callerId: Int) -> Bool {
-        guard self.currentMoire!.patterns.count > Constants.Bounds.numOfPatternsPerMoire.lowerBound else {
+        guard self.currentMoire!.patterns.count > Constants.Constrains.numOfPatternsPerMoire.lowerBound else {
             print("deletion failed: minimum number of patterns per moire reached")
             return false
         }
