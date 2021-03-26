@@ -10,7 +10,7 @@ import UIKit
 
 struct Constants {
     struct UI {
-        static let maskCornerRadius: CGFloat = 12.0
+        static let maskCornerRadius: CGFloat = 8.0
         static let tileHeight: CGFloat = BoundsManager.blackWidthRange.lowerBound + BoundsManager.whiteWidthRange.lowerBound /// For CoreAnimPatternView only: the less the height, the more the num of strips rendered on screen, the thinner the minimum black/white width
         
         static private let controlFramesTopMargin: CGFloat = {
