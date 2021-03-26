@@ -27,6 +27,8 @@
 		8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */; };
 		8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */; };
 		8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */; };
+		8E35A672260D649A007E3181 /* BoundsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35A671260D649A007E3181 /* BoundsManager.swift */; };
+		8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */; };
 		8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */; };
 		8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E36F75625931993004BC2F3 /* TileLayer.swift */; };
 		8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */; };
@@ -102,6 +104,8 @@
 		8E3144A225A04C1C00BB0399 /* SliderCtrlViewSch2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch2.xib; sourceTree = "<group>"; };
 		8E3144A325A04C1C00BB0399 /* SliderCtrlViewSch2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch2.swift; sourceTree = "<group>"; };
 		8E326B7A2581B73500A80D36 /* SliderCtrlViewSch1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCtrlViewSch1.xib; sourceTree = "<group>"; };
+		8E35A671260D649A007E3181 /* BoundsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsManager.swift; sourceTree = "<group>"; };
+		8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundsManagerTests.swift; sourceTree = "<group>"; };
 		8E36F73E25930969004BC2F3 /* SliderCtrlViewSch1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch1.swift; sourceTree = "<group>"; };
 		8E36F75625931993004BC2F3 /* TileLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileLayer.swift; sourceTree = "<group>"; };
 		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
@@ -273,6 +277,7 @@
 				8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
+				8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				8E96B7AD257F33CF007527E2 /* Main.storyboard */,
 				8E31449125A0393A00BB0399 /* Constants.swift */,
 				8E6EF2E925C85B0C0009905C /* Utilities.swift */,
+				8E35A671260D649A007E3181 /* BoundsManager.swift */,
 				8E2E462E25D1ECD900B0EA23 /* Auxiliary Controllers */,
 				8EE29F7925A0591500FF2539 /* Model */,
 				8E2E463225D1EFBA00B0EA23 /* Main Controller */,
@@ -521,6 +527,7 @@
 				8E5BABE025AE82F4003FC799 /* LocalMoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
+				8E35A672260D649A007E3181 /* BoundsManager.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
@@ -561,6 +568,7 @@
 				8E2E45F125D1BA0B00B0EA23 /* LocalMoireModelTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
+				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
 				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */,
 			);

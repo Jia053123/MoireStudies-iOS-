@@ -9,6 +9,10 @@
 import XCTest
 import UIKit
 
+// TODO: test passing initialization settings to the ControlsViewController
+// TODO: test init moire that's out of bound (force fit it into bounds)
+// TODO: test with corrupted and readonly models
+
 class MainViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var mockMoireModel: MockMoireModelFilesNormal!
@@ -79,9 +83,6 @@ class MainViewControllerTests: XCTestCase {
         XCTAssertTrue(self.mockMoireViewController.setUpPerformed)
     }
 }
-
-// TODO: test passing initialization settings to the ControlsViewController
-// TODO: test init moire that's out of bound (force fit it into bounds)
 
 /// test sending  ControlsViewController valid ids corresponding to the current moire
 extension MainViewControllerTests {
