@@ -51,5 +51,14 @@ class BoundsManagerTests: XCTestCase {
         let typicalWhiteWidth: CGFloat = 11.865
         assert(BoundsManager.whiteWidthRange.contains(typicalWhiteWidth))
         self.testOutputBoundsNeitherTooLiberalNorTooStrict(blackWidth: typicalBlackWidth, whiteWidth: typicalWhiteWidth)
+        
+        self.testOutputBoundsNeitherTooLiberalNorTooStrict(blackWidth: BoundsManager.blackWidthRange.lowerBound,
+                                                           whiteWidth: BoundsManager.whiteWidthRange.lowerBound)
+        self.testOutputBoundsNeitherTooLiberalNorTooStrict(blackWidth: BoundsManager.blackWidthRange.lowerBound,
+                                                           whiteWidth: BoundsManager.whiteWidthRange.upperBound)
+        self.testOutputBoundsNeitherTooLiberalNorTooStrict(blackWidth: BoundsManager.blackWidthRange.upperBound,
+                                                           whiteWidth: BoundsManager.whiteWidthRange.lowerBound)
+        self.testOutputBoundsNeitherTooLiberalNorTooStrict(blackWidth: BoundsManager.blackWidthRange.upperBound,
+                                                           whiteWidth: BoundsManager.whiteWidthRange.upperBound)
     }
 }
