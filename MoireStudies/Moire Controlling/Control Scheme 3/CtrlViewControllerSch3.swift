@@ -30,7 +30,11 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
 
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! CtrlViewSch3Subclass
-        let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
-        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
+        
+        let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)!
+        cv.matchControlsWithBounds(fillRatioRange: boundResult.fillRatioRange, scaleFactorRange: boundResult.scaleFactorRange)
+        
+        let valueResult = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
+        cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth, fillRatio: valueResult.fillRatio, scaleFactor: valueResult.scaleFactor)
     }
 }

@@ -165,6 +165,24 @@ extension SliderCtrlViewSch3 {
 }
 
 extension SliderCtrlViewSch3 {
+    func matchControlsWithBounds(fillRatioRange: ClosedRange<CGFloat>, scaleFactorRange: ClosedRange<CGFloat>) {
+        if fillRatioRange.upperBound - fillRatioRange.lowerBound < 0.001 {
+            self.fillRatioSlider.isEnabled = false
+        } else {
+            self.fillRatioSlider.isEnabled = true
+            self.fillRatioSlider.minimumValue = Float(fillRatioRange.lowerBound)
+            self.fillRatioSlider.maximumValue = Float(fillRatioRange.upperBound)
+        }
+        
+        if scaleFactorRange.upperBound - scaleFactorRange.lowerBound < 0.001 {
+            self.scaleFactorSlider.isEnabled = false
+        } else {
+            self.scaleFactorSlider.isEnabled = true
+            self.scaleFactorSlider.minimumValue = Float(scaleFactorRange.lowerBound)
+            self.scaleFactorSlider.maximumValue = Float(scaleFactorRange.upperBound)
+        }
+    }
+    
     func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?) {
         if let s = speed {
             self.speedSlider.value = Float(s)
