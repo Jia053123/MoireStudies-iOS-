@@ -12,16 +12,19 @@ struct Constants {
     struct UI {
         static let maskCornerRadius: CGFloat = 12.0
         static let tileHeight: CGFloat = BoundsManager.blackWidthRange.lowerBound + BoundsManager.whiteWidthRange.lowerBound /// For CoreAnimPatternView only: the less the height, the more the num of strips rendered on screen, the thinner the minimum black/white width
+        
+        static private let controlFramesTopMargin: CGFloat = {
+#if targetEnvironment(macCatalyst)
+return 55.0
+#else
+return 15.0
+#endif
+        }()
         static private let frameDefaultSize: CGSize = CGSize(width: 150, height: 200)
         static let controlFramesDefault: Array<CGRect> = {() -> Array<CGRect> in
-#if targetEnvironment(macCatalyst)
-            let controlFramesTopMargin: Int = 55
-#else
-            let controlFramesTopMargin: Int = 15
-#endif
             var frames: Array<CGRect> = []
             for i in 0...(Constants.Constrains.numOfPatternsPerMoire.upperBound - 1) {
-                let origin = CGPoint(x: i * Int(frameDefaultSize.width + 15) + 15, y: controlFramesTopMargin)
+                let origin = CGPoint(x: CGFloat(i * Int(frameDefaultSize.width + 15)) + 15, y: controlFramesTopMargin)
                 frames.append(CGRect(origin: origin, size: frameDefaultSize))
             }
             return frames
@@ -29,14 +32,9 @@ struct Constants {
         
         static private let frameTallSize: CGSize = CGSize(width: 150, height: 300)
         static let controlFramesTall: Array<CGRect> = {() -> Array<CGRect> in
-#if targetEnvironment(macCatalyst)
-            let controlFramesTopMargin: Int = 55
-#else
-            let controlFramesTopMargin: Int = 15
-#endif
             var frames: Array<CGRect> = []
             for i in 0...(Constants.Constrains.numOfPatternsPerMoire.upperBound - 1) {
-                let origin = CGPoint(x: i * Int(frameTallSize.width + 15) + 15, y: controlFramesTopMargin)
+                let origin = CGPoint(x: CGFloat(i * Int(frameTallSize.width + 15) + 15), y: controlFramesTopMargin)
                 frames.append(CGRect(origin: origin, size: frameTallSize))
             }
             return frames
