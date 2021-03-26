@@ -41,8 +41,8 @@ class BoundsManagerTests: XCTestCase {
         // the bounds cannot be too strict (one of the widths must be near its limit)
         XCTAssertTrue(abs(rMinSF.blackWidth - BoundsManager.blackWidthRange.lowerBound) < 0.001 ||
                         abs(rMinSF.whiteWidth - BoundsManager.whiteWidthRange.lowerBound) < 0.001)
-        XCTAssertTrue(abs(rMaxSF.blackWidth - BoundsManager.blackWidthRange.upperBound) < 0.001 ||
-                        abs(rMaxSF.whiteWidth - BoundsManager.whiteWidthRange.upperBound) < 0.001)
+        XCTAssertTrue(abs(rMaxSF.blackWidth - BoundsManager.blackWidthRange.upperBound) < 0.101 ||
+                        abs(rMaxSF.whiteWidth - BoundsManager.whiteWidthRange.upperBound) < 0.101)
     }
     
     func testFindingTheExactBounds_OutputBoundsNeitherTooLiberalNorTooStrict() {

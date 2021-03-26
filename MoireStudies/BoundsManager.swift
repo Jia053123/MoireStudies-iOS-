@@ -69,11 +69,11 @@ class BoundsManager: NSObject {
         let sfCase2WhiteWidth = BoundsManager.whiteWidthRange.lowerBound
         let sfCase2BlackWidth = sfCase2WhiteWidth / (1-currentFillRatio) - sfCase2WhiteWidth
         if BoundsManager.blackWidthRange.contains(sfCase2BlackWidth) {
-            fillRatioBreakingPoints.append((sfCase2BlackWidth + sfCase2WhiteWidth) / baseCombinedWidth)
+            scaleFactorBreakingPoints.append((sfCase2BlackWidth + sfCase2WhiteWidth) / baseCombinedWidth)
         }
         // case 3: blackWidth at max
         let sfCase3BlackWidth = BoundsManager.blackWidthRange.upperBound
-        let sfCase3WhiteWidth = sfCase3BlackWidth / currentFillRatio - sfCase3BlackWidth
+        let sfCase3WhiteWidth =  sfCase3BlackWidth / currentFillRatio - sfCase3BlackWidth
         if BoundsManager.whiteWidthRange.contains(sfCase3WhiteWidth) {
             scaleFactorBreakingPoints.append((sfCase3BlackWidth + sfCase3WhiteWidth) / baseCombinedWidth)
         }
@@ -81,7 +81,7 @@ class BoundsManager: NSObject {
         let sfCase4WhiteWidth = BoundsManager.whiteWidthRange.upperBound
         let sfCase4BlackWidth = sfCase4WhiteWidth / (1-currentFillRatio) - sfCase4WhiteWidth
         if BoundsManager.blackWidthRange.contains(sfCase4BlackWidth) {
-            fillRatioBreakingPoints.append((sfCase2BlackWidth + sfCase2WhiteWidth) / baseCombinedWidth)
+            scaleFactorBreakingPoints.append((sfCase4BlackWidth + sfCase4WhiteWidth) / baseCombinedWidth)
         }
         // find min and max
         var minSF = scaleFactorBreakingPoints.first!
@@ -91,6 +91,6 @@ class BoundsManager: NSObject {
             if sf > maxSF { maxSF = sf}
         }
         
-        return (fillRatioRange: minFR...maxFR, scaleFactorRange: minFR...maxFR)
+        return (fillRatioRange: minFR...maxFR, scaleFactorRange: minSF...maxSF)
     }
 }
