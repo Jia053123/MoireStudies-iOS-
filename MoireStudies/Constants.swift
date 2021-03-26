@@ -15,7 +15,7 @@ struct Constants {
         static private let frameDefaultSize: CGSize = CGSize(width: 150, height: 200)
         static let controlFramesDefault: Array<CGRect> = {() -> Array<CGRect> in
 #if targetEnvironment(macCatalyst)
-            let controlFramesTopMargin: Int = 50
+            let controlFramesTopMargin: Int = 55
 #else
             let controlFramesTopMargin: Int = 15
 #endif
@@ -30,7 +30,7 @@ struct Constants {
         static private let frameTallSize: CGSize = CGSize(width: 150, height: 300)
         static let controlFramesTall: Array<CGRect> = {() -> Array<CGRect> in
 #if targetEnvironment(macCatalyst)
-            let controlFramesTopMargin: Int = 50
+            let controlFramesTopMargin: Int = 55
 #else
             let controlFramesTopMargin: Int = 15
 #endif
