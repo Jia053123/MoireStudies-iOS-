@@ -147,7 +147,7 @@ extension SaveFilesViewController: UICollectionViewDataSource {
 
 extension SaveFilesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == self.moireModel.numOfMoires() {
+        if indexPath.row == self.allMoiresCache.count {
             print("selected plus to create a new moire")
             self.createNewMoire()
             self.dismissAndLoadSelectedMoire()
