@@ -31,7 +31,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     func matchControlsWithModel(pattern: Pattern) {
         let cv = self.view as! CtrlViewSch3Subclass
         
-        let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)!
+        guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth) else {return}
         cv.matchControlsWithBounds(fillRatioRange: boundResult.fillRatioRange, scaleFactorRange: boundResult.scaleFactorRange)
         
         let valueResult = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)

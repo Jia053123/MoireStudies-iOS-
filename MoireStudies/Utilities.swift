@@ -28,4 +28,8 @@ class Utilities: NSObject {
         if !BoundsManager.whiteWidthRange.contains(pattern.whiteWidth) {return false}
         return true
     }
+    
+//    static func fitWithinBounds(pattern: Pattern) -> Pattern {
+//
+//    }
 }

@@ -87,4 +87,41 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
             }
         }
     }
+    
+//    func testFitWithinBounds() {
+//        let speedValid: CGFloat = 15.887
+//        assert(BoundsManager.speedRange.contains(speedValid))
+//        let speedTooHigh: CGFloat = 99999
+//        assert(BoundsManager.speedRange.upperBound < speedTooHigh)
+//        let speedTooLow: CGFloat = -99999
+//        assert(BoundsManager.speedRange.lowerBound > speedTooLow)
+//
+//        let directionValid: CGFloat = 1.398
+//        assert(BoundsManager.directionRange.contains(directionValid))
+//        let directionTooHigh: CGFloat = 59.65
+//        assert(BoundsManager.directionRange.upperBound < directionTooHigh)
+//        let directionTooLow: CGFloat = -128.3
+//        assert(BoundsManager.directionRange.lowerBound > directionTooLow)
+//
+//        let blackWidthValid: CGFloat = 7.267
+//        assert(BoundsManager.blackWidthRange.contains(blackWidthValid))
+//        let blackWidthTooHigh: CGFloat = 186745
+//        assert(BoundsManager.blackWidthRange.upperBound < blackWidthTooHigh)
+//        let blackWidthTooLow: CGFloat = 0
+//        assert(BoundsManager.blackWidthRange.lowerBound > blackWidthTooLow)
+//
+//        let whiteWidthValid: CGFloat = 6.445
+//        assert(BoundsManager.whiteWidthRange.contains(whiteWidthValid))
+//        let whiteWidthTooHigh: CGFloat = 64593
+//        assert(BoundsManager.whiteWidthRange.upperBound < whiteWidthTooHigh)
+//        let whiteWidthTooLow: CGFloat = -1
+//        assert(BoundsManager.whiteWidthRange.lowerBound > whiteWidthTooLow)
+//
+//        let goodPattern = Pattern.init(speed: speedValid,
+//                                       direction: directionValid,
+//                                       blackWidth: blackWidthValid,
+//                                       whiteWidth: whiteWidthValid)
+//
+//        XCTAssert(Utilities.fitWithinBounds(pattern: goodPattern) == goodPattern)
+//    }
 }
