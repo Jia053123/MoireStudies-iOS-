@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 class SaveFilesViewController: UIViewController {
-    var currentMoireId: String?
+    var initiallySelectedMoireId: String?
     private var _selectedMoireId: String?
     private var selectedMoireId: String? {
-        get {return _selectedMoireId ?? currentMoireId}
+        get {return _selectedMoireId ?? initiallySelectedMoireId}
         set {
             _selectedMoireId = newValue
             if let smi = _selectedMoireId {
@@ -23,21 +23,36 @@ class SaveFilesViewController: UIViewController {
             }
         }
     }
-    private lazy var moireIdToLoad: String? = currentMoireId
-    private var moireModel: MoireModel = MoireModel.init()
-    private var allMoiresCache: Array<Moire>
+    private lazy var moireIdToLoad: String? = initiallySelectedMoireId // The moire to be edited by main view
+    private var moireModel: MoireModel!
+    private var allMoiresCache: Array<Moire>! // supposed to be in perfect sync with the files stored on disk at all time
     private weak var highlightedCell: SaveFileCollectionViewCell?
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var loadButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
+    private func setUpWithModelAndMoireId(moireModel: MoireModel = LocalMoireModel.init()) {
+        self.moireModel = moireModel
+        self.reloadCache()
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.setUpWithModelAndMoireId()
+    }
+    
     required init?(coder: NSCoder) {
-        allMoiresCache = moireModel.readAllMoiresSortedByLastCreated()
         super.init(coder: coder)
+        self.setUpWithModelAndMoireId()
+    }
+    
+    init?(coder: NSCoder, mockMoireModel: MoireModel) {
+        super.init(coder: coder)
+        self.setUpWithModelAndMoireId(moireModel: mockMoireModel)
     }
     
     private func reloadCache() {
-        allMoiresCache = moireModel.readAllMoiresSortedByLastCreated()
+        allMoiresCache = self.moireModel.readAllMoiresSortedByLastCreated()
     }
     
     private func reloadCells() {
@@ -55,7 +70,7 @@ class SaveFilesViewController: UIViewController {
     }
     
     private func createNewMoire() {
-        let newMoire = self.moireModel.createNewDemo()
+        let newMoire = self.moireModel.createNewDemoMoire()
         self.reloadCells()
         self.selectedMoireId = newMoire.id
     }
@@ -112,12 +127,12 @@ extension SaveFilesViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.moireModel.numOfMoires() + 1
+        return self.allMoiresCache.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "saveFileCell", for: indexPath) as! SaveFileCollectionViewCell
-        if indexPath.row < self.moireModel.numOfMoires() {
+        if indexPath.row < self.allMoiresCache.count {
             let m = self.allMoiresCache[indexPath.row]
             cell.setUp(previewImage: m.preview)
             if m.id == self.selectedMoireId {
@@ -132,7 +147,7 @@ extension SaveFilesViewController: UICollectionViewDataSource {
 
 extension SaveFilesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == self.moireModel.numOfMoires() {
+        if indexPath.row == self.allMoiresCache.count {
             print("selected plus to create a new moire")
             self.createNewMoire()
             self.dismissAndLoadSelectedMoire()

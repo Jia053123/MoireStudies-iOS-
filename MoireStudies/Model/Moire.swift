@@ -11,31 +11,9 @@ import UIKit
 /**
  Summary: represent the model of a single moire
  */
-class Moire: Codable {
-    private var _id: String?
-    var id: String {
-        get {
-            if let i = _id {
-                return i
-            } else {
-                _id = UUID().uuidString
-                return _id!
-            }
-        }
-    }
-    
-    private var _patterns: Array<Pattern> = []
-    var patterns: Array<Pattern> { 
-        get {
-            if _patterns.isEmpty {
-                self.reset()
-            }
-            return _patterns
-        }
-        set {
-            _patterns = newValue
-        }
-    }
+class Moire: Codable, Equatable {
+    let id: String
+    var patterns: Array<Pattern> = []
     
     private var _previewData: Data?
     var preview: UIImage {
@@ -50,10 +28,26 @@ class Moire: Codable {
         }
     }
     
-    func reset() {
-        self._patterns = []
-        self._patterns.append(Pattern.demoPattern1())
-        self._patterns.append(Pattern.demoPattern2())
+    init(id: String = UUID().uuidString) {
+        self.id = id
+    }
+    
+    func resetData() {
+        self.patterns = []
         _previewData = nil
+    }
+    
+    /// two moires are equal iff their IDs are identical and their patterns are equal and in the same order
+    static func == (lhs: Moire, rhs: Moire) -> Bool {
+        return (lhs.id == rhs.id) && (lhs.patterns == rhs.patterns)
+    }
+}
+
+extension Moire: NSCopying {
+    /// new object posesses copy of ID and patterns. previewData is not copied
+    func copy(with zone: NSZone? = nil) -> Any {
+        let copiedMoire = Moire.init(id: self.id)
+        copiedMoire.patterns = self.patterns
+        return copiedMoire
     }
 }

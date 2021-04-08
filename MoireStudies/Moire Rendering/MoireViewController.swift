@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class MoireViewController: UIViewController { // TODO: remove the core animation implementation and render all patterns in a single metal layer and benchmark? (currently the memory usage is quite high with more patterns per moire)
-    private weak var dimView: UIView?
+    private weak var dimView: UIView? // TODO: implement this properly by changing color in renderer
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +58,7 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
     
     func setUpMasks(with frames: Array<CGRect>) {
         // TODO: (with two patterns) at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
+        guard self.children.count > 0 else {return}
         assert(frames.count >= self.children.count)
         for i in 0...(self.children.count - 1) {
             var maskFrames: Array<CGRect> = []

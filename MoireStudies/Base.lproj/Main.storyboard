@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="BYZ-38-t0r" customClass="MainViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -80,6 +80,7 @@
                             <constraint firstItem="KkF-Ph-85z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zej-Xn-8Ri"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>
                         <outlet property="buttonsContainerView" destination="KkF-Ph-85z" id="8Q9-rY-li9"/>
@@ -97,7 +98,7 @@
         <!--Save Files View Controller-->
         <scene sceneID="Anb-Bu-Mm6">
             <objects>
-                <viewController id="KRW-Dp-kSv" customClass="SaveFilesViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SaveFilesViewController" id="KRW-Dp-kSv" customClass="SaveFilesViewController" customModule="MoireStudies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nZI-Af-clz">
                         <rect key="frame" x="0.0" y="0.0" width="704" height="728"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -130,7 +131,6 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Files" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-7G-qwP">
                                 <rect key="frame" x="314" y="11" width="76" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="76" id="Ga4-RH-ySP"/>
                                     <constraint firstAttribute="height" constant="21" id="YBQ-rx-CUg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -213,7 +213,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="dSF-CJ-L0O"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>

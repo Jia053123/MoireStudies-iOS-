@@ -18,6 +18,8 @@ class SettingsViewController: UIViewController { // TODO: now we have a lot of s
     private static let CoreAnimation = "Core Animation"
     private static let Metal = "Metal"
     private let renderSettingItems = [CoreAnimation, Metal]
+    private static let Developer = "Built by Jialiang Xiang in Toronto (jialiangx2021@outlook.com)"
+    private let creditItems = [Developer]
     
     private var selectedIndexPathSec0: IndexPath?
     private var selectedIndexPathSec1: IndexPath?
@@ -52,7 +54,7 @@ class SettingsViewController: UIViewController { // TODO: now we have a lot of s
 
 extension SettingsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -61,6 +63,8 @@ extension SettingsViewController: UITableViewDataSource {
             return "Set a Control Scheme: "
         case 1:
             return "Set a Render Method: "
+        case 2:
+            return "Credit"
         default:
             return "Section Title"
         }
@@ -72,6 +76,8 @@ extension SettingsViewController: UITableViewDataSource {
             return controlSettingItems.count
         case 1:
             return renderSettingItems.count
+        case 2:
+            return creditItems.count
         default:
             return 0
         }
@@ -84,6 +90,8 @@ extension SettingsViewController: UITableViewDataSource {
             cell.textLabel!.text = controlSettingItems[indexPath.row]
         case 1:
             cell.textLabel!.text = renderSettingItems[indexPath.row]
+        case 2:
+            cell.textLabel!.text = creditItems[indexPath.row]
         default:
             cell.textLabel!.text = "Cell Title"
         }

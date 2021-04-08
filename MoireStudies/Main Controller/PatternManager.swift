@@ -10,17 +10,17 @@ import UIKit
 
 protocol PatternManager: UIViewController {
     // these functions return false when the action is illegal, otherwise they return true and the action is performed
-    func highlightPattern(caller: CtrlViewController) -> Bool
-    func unhighlightPattern(caller: CtrlViewController) -> Bool
-    func dimPattern(caller: CtrlViewController) -> Bool
-    func undimPattern(caller: CtrlViewController) -> Bool
-    func modifyPattern(speed: CGFloat, caller: CtrlViewController) -> Bool
-    func modifyPattern(direction: CGFloat, caller: CtrlViewController) -> Bool
-    func modifyPattern(blackWidth: CGFloat, caller: CtrlViewController) -> Bool
-    func modifyPattern(whiteWidth: CGFloat, caller: CtrlViewController) -> Bool
-    func getPattern(caller: CtrlViewController) -> Pattern?
-    func hidePattern(caller: CtrlViewController) -> Bool
-    func unhidePattern(caller: CtrlViewController) -> Bool
-    func createPattern(caller: CtrlViewController?, newPattern: Pattern) -> Bool
-    func deletePattern(caller: CtrlViewController) -> Bool
+    func highlightPattern(callerId: String) -> Bool
+    func unhighlightPattern(callerId: String) -> Bool
+    func dimPattern(callerId: String) -> Bool
+    func undimPattern(callerId: String) -> Bool
+    func modifyPattern(speed: CGFloat, callerId: String) -> Bool
+    func modifyPattern(direction: CGFloat, callerId: String) -> Bool
+    func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool
+    func modifyPattern(whiteWidth: CGFloat, callerId: String) -> Bool
+    func getPattern(callerId: String) -> Pattern?
+    func hidePattern(callerId: String) -> Bool
+    func unhidePattern(callerId: String) -> Bool
+    func createPattern(callerId: String?, newPattern: Pattern) -> Bool
+    func deletePattern(callerId: String) -> Bool
 }

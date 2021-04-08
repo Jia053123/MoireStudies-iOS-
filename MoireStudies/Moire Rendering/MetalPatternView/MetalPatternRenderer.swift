@@ -101,7 +101,7 @@ class MetalPatternRenderer: NSObject {
     /**
      Summary: to be called for each frame to render the stripes
      */
-    func draw(stripesToRender: Array<MetalStripe>, in metalLayer: CAMetalLayer, of viewportSize: CGSize) {
+    func draw(stripesToRender: Array<MetalStripe>, in metalLayer: CAMetalLayer, of viewportSize: CGSize) { // TODO: autorelease pool
         guard !stripesToRender.isEmpty else {return}
         
         self.viewportSize.x = Float(viewportSize.width)

@@ -8,8 +8,8 @@
 import Foundation
 import UIKit
 
-class SliderCtrlViewSch3: UIView {
-    weak var target: CtrlViewControllerSch3?
+class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
+    weak var target: BasicCtrlViewController?
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var directionSlider: UISlider! // TODO: subclass to allow finer control
     @IBOutlet weak var blackWidthSlider: UISlider!
@@ -36,14 +36,14 @@ class SliderCtrlViewSch3: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
-        speedSlider.minimumValue = Float(Constants.Bounds.speedRange.lowerBound)
-        speedSlider.maximumValue = 45.0
-        directionSlider.minimumValue = 0.0
-        directionSlider.maximumValue = 2 * Float.pi
-        blackWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        blackWidthSlider.maximumValue = 20.0
-        whiteWidthSlider.minimumValue = Float(Constants.UI.tileHeight / 2)
-        whiteWidthSlider.maximumValue = 20.0
+        speedSlider.minimumValue = Float(BoundsManager.speedRange.lowerBound)
+        speedSlider.maximumValue = Float(BoundsManager.speedRange.upperBound)
+        directionSlider.minimumValue = Float(BoundsManager.directionRange.lowerBound)
+        directionSlider.maximumValue = Float(BoundsManager.directionRange.upperBound)
+        blackWidthSlider.minimumValue = Float(BoundsManager.blackWidthRange.lowerBound)
+        blackWidthSlider.maximumValue = Float(BoundsManager.blackWidthRange.upperBound)
+        whiteWidthSlider.minimumValue = Float(BoundsManager.whiteWidthRange.lowerBound)
+        whiteWidthSlider.maximumValue = Float(BoundsManager.whiteWidthRange.upperBound)
         fillRatioSlider.minimumValue = 0.1
         fillRatioSlider.maximumValue = 0.9
         scaleFactorSlider.minimumValue = 1.0
@@ -164,7 +164,25 @@ extension SliderCtrlViewSch3 {
     }
 }
 
-extension SliderCtrlViewSch3: ControlViewSch3 {
+extension SliderCtrlViewSch3 {
+    func matchControlsWithBounds(fillRatioRange: ClosedRange<CGFloat>, scaleFactorRange: ClosedRange<CGFloat>) {
+        if fillRatioRange.upperBound - fillRatioRange.lowerBound < 0.001 {
+            self.fillRatioSlider.isEnabled = false
+        } else {
+            self.fillRatioSlider.isEnabled = true
+            self.fillRatioSlider.minimumValue = Float(fillRatioRange.lowerBound)
+            self.fillRatioSlider.maximumValue = Float(fillRatioRange.upperBound)
+        }
+        
+        if scaleFactorRange.upperBound - scaleFactorRange.lowerBound < 0.001 {
+            self.scaleFactorSlider.isEnabled = false
+        } else {
+            self.scaleFactorSlider.isEnabled = true
+            self.scaleFactorSlider.minimumValue = Float(scaleFactorRange.lowerBound)
+            self.scaleFactorSlider.maximumValue = Float(scaleFactorRange.upperBound)
+        }
+    }
+    
     func matchControlsWithValues(speed: CGFloat?, direction: CGFloat?, blackWidth: CGFloat?, whiteWidth: CGFloat?, fillRatio: CGFloat?, scaleFactor: CGFloat?) {
         if let s = speed {
             self.speedSlider.value = Float(s)

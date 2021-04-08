@@ -19,7 +19,7 @@ class MetalPatternViewController: UIViewController {
     private var patternStripes: Array<MetalStripe>! // must be sorted: the first element always has the most positive translation value
     private var recycledStripes: Array<MetalStripe> = []
     private let CheckDataIntegrityPerFrame = false
-    private var estimatedMaxNumOfStripes: Int {get{return Int(ceil(self.diagonalOfDrawableTexture / Float(Constants.Bounds.blackWidthRange.lowerBound + Constants.Bounds.whiteWidthRange.lowerBound))) + 1}} // this is used to reserve data structure capacity for this class and the renderer. It may not be strictly the maximum possible number
+    private var estimatedMaxNumOfStripes: Int {get{return Int(ceil(self.diagonalOfDrawableTexture / Float(BoundsManager.blackWidthRange.lowerBound + BoundsManager.whiteWidthRange.lowerBound))) + 1}} // this is used to reserve data structure capacity for this class and the renderer. It may not be strictly the maximum possible number
     
     private lazy var viewportSizePixel: CGSize = (self.view.layer as! CAMetalLayer).drawableSize
     private var diagonalOfDrawableTexture: Float { // TODO: diagonal is the max value. Calc this dynamically to save a bit GPU time?
@@ -86,6 +86,7 @@ class MetalPatternViewController: UIViewController {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = lastStripe.translation - width
                 self.patternStripes.append(newStripe)
+//                print("fitted to end")
                 fitMoreStripesToTheEndIfNecessary()
             } else {
                 return
@@ -97,6 +98,7 @@ class MetalPatternViewController: UIViewController {
                 let newStripe = self.recycledStripes.popLast() ?? MetalStripe()
                 newStripe.translation = firstStripe.translation + width
                 self.patternStripes.insert(newStripe, at: 0) // note: O(n)
+//                print("fitted to beginning")
                 fitMoreStripesToTheBeginningIfNecessary()
             } else {
                 return
@@ -129,26 +131,43 @@ class MetalPatternViewController: UIViewController {
         fitMoreStripesToTheBeginningIfNecessary()
     }
     
-    private func translateStripes(frameDuration: CFTimeInterval) { // always move from negative towards positive
+    private func translateStripes(frameDuration: CFTimeInterval) {
         let stripeCount = self.patternStripes.count
         // translate
         for i in (0 ..< stripeCount).reversed() {
             let stripe = self.patternStripes[i]
             stripe.translation += Float(Double(self.speedInPixel) * frameDuration)
         }
-        // remove offscreen stripes and append them to the rear
+        // remove offscreen stripes and append them to the rear, depending on whether the speed is positive or negative
         let width = self.blackWidthInPixel + self.whiteWidthInPixel
-        repeat {
-            let firstT = self.patternStripes.first!
-            if !self.translationRange.contains(firstT.translation) {
-                let offScreenStripe = self.patternStripes.removeFirst()
-                let lastStripe = self.patternStripes.last!
-                offScreenStripe.translation = lastStripe.translation - width
-                self.patternStripes.append(offScreenStripe)
-            } else {
-                break // all stripes after this should also be within bound
-            }
-        } while true
+        if self.speedInPixel > 0 {
+            // moving from negative towards positive
+            repeat {
+                let firstT = self.patternStripes.first!
+                if !self.translationRange.contains(firstT.translation) {
+                    let offScreenStripe = self.patternStripes.removeFirst()
+                    let lastStripe = self.patternStripes.last!
+                    offScreenStripe.translation = lastStripe.translation - width
+                    self.patternStripes.append(offScreenStripe)
+                } else {
+                    break // all stripes after this should also be within bound
+                }
+            } while true
+        }
+        if self.speedInPixel < 0 {
+            // moving from positive towards negative
+            repeat {
+                let lastT = self.patternStripes.last!
+                if !self.translationRange.contains(lastT.translation) {
+                    let offScreenStripe = self.patternStripes.removeLast()
+                    let firstStripe = self.patternStripes.first!
+                    offScreenStripe.translation = firstStripe.translation + width
+                    self.patternStripes.insert(offScreenStripe, at: 0)
+                } else {
+                    break // all stripes before this should also be within bound
+                }
+            } while true
+        }
     }
     
     func render(frameDuration: CFTimeInterval) {

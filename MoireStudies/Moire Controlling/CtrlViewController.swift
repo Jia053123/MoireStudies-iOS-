@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CtrlViewController: UIViewController {
-    var id: String? { get }
+    var id: String! { get }
     var delegate: PatternManager? { get set }
     init(id: String, frame: CGRect, pattern: Pattern?)
     func matchControlsWithModel(pattern: Pattern)
