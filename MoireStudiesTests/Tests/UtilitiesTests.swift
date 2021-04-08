@@ -88,6 +88,46 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
         }
     }
     
+    func testIsWithinBoundsMoire() {
+        let speedTooHigh: CGFloat = 99999
+        assert(BoundsManager.speedRange.upperBound < speedTooHigh)
+
+        let directionTooLow: CGFloat = -128.3
+        assert(BoundsManager.directionRange.lowerBound > directionTooLow)
+
+        let blackWidthTooHigh: CGFloat = 186745
+        assert(BoundsManager.blackWidthRange.upperBound < blackWidthTooHigh)
+
+        let whiteWidthTooLow: CGFloat = -1
+        assert(BoundsManager.whiteWidthRange.lowerBound > whiteWidthTooLow)
+        
+        var p0 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p0))
+        var p1 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p1))
+        var p2 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p2))
+        var p3 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p3))
+        let p4 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p4))
+        let p5 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p5))
+        
+        p0.speed = speedTooHigh
+        p1.direction = directionTooLow
+        p2.blackWidth = blackWidthTooHigh
+        p3.whiteWidth = whiteWidthTooLow
+        
+        let outofBoundM = Moire()
+        outofBoundM.patterns = [p0, p1, p2, p3, p4]
+        XCTAssertFalse(Utilities.isWithinBounds(moire: outofBoundM))
+        
+        let withinBoundM = Moire()
+        withinBoundM.patterns = [p4, p5]
+        XCTAssertTrue(Utilities.isWithinBounds(moire: withinBoundM))
+    }
+    
     func testFitWithinBounds() {
         let speedValid: CGFloat = 15.887
         assert(BoundsManager.speedRange.contains(speedValid))
@@ -174,5 +214,44 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
                 }
             }
         }
+    }
+    
+    func testFitWithinBoundsMoire() {
+        let speedTooHigh: CGFloat = 99999
+        assert(BoundsManager.speedRange.upperBound < speedTooHigh)
+
+        let directionTooLow: CGFloat = -128.3
+        assert(BoundsManager.directionRange.lowerBound > directionTooLow)
+
+        let blackWidthTooHigh: CGFloat = 186745
+        assert(BoundsManager.blackWidthRange.upperBound < blackWidthTooHigh)
+
+        let whiteWidthTooLow: CGFloat = -1
+        assert(BoundsManager.whiteWidthRange.lowerBound > whiteWidthTooLow)
+        
+        var p0 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p0))
+        var p1 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p1))
+        var p2 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p2))
+        var p3 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p3))
+        let p4 = Pattern.debugPattern()
+        assert(Utilities.isWithinBounds(pattern: p4))
+        
+        p0.speed = speedTooHigh
+        p1.direction = directionTooLow
+        p2.blackWidth = blackWidthTooHigh
+        p3.whiteWidth = whiteWidthTooLow
+        
+        let m = Moire()
+        m.patterns = [p0, p1, p2, p3, p4]
+        let fittedM = Utilities.fitWithinBounds(moire: m)
+        XCTAssertEqual(fittedM.patterns[0], Utilities.fitWithinBounds(pattern: p0))
+        XCTAssertEqual(fittedM.patterns[1], Utilities.fitWithinBounds(pattern: p1))
+        XCTAssertEqual(fittedM.patterns[2], Utilities.fitWithinBounds(pattern: p2))
+        XCTAssertEqual(fittedM.patterns[3], Utilities.fitWithinBounds(pattern: p3))
+        XCTAssertEqual(fittedM.patterns[4], p4)
     }
 }

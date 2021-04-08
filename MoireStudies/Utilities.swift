@@ -29,6 +29,15 @@ class Utilities: NSObject {
         return true
     }
     
+    static func isWithinBounds(moire: Moire) -> Bool {
+        for p in moire.patterns {
+            if !Utilities.isWithinBounds(pattern: p) {
+                return false
+            }
+        }
+        return true
+    }
+    
     static func fitWithinBounds(pattern: Pattern) -> Pattern {
         var output = pattern
         
@@ -60,5 +69,13 @@ class Utilities: NSObject {
         
         assert(Utilities.isWithinBounds(pattern: output))
         return output
+    }
+    
+    static func fitWithinBounds(moire: Moire) -> Moire {
+        let fittedMoire = moire.copy() as! Moire
+        for i in 0..<fittedMoire.patterns.count {
+            fittedMoire.patterns[i] = Utilities.fitWithinBounds(pattern: fittedMoire.patterns[i])
+        }
+        return fittedMoire
     }
 }

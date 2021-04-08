@@ -104,7 +104,7 @@ class MainViewController: UIViewController {
         } else {
             self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemoMoire()
         }
-        // 
+        self.currentMoire = Utilities.fitWithinBounds(moire: self.currentMoire!)
     }
     
     func initInitSettings() {

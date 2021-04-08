@@ -95,6 +95,10 @@ extension MainViewControllerTests {
 
 /// test loading the moire to edit from model
 extension MainViewControllerTests {
+    func testLoadMoireWithCorruptedModel_CreateNewAndSave() {
+        //TODO
+    }
+    
     func testLoadMoire_NoInitIdAndModelHasOneEmptyMoire_LoadTheMoire() {
         let m1 = Moire()
         assert(m1.patterns.isEmpty)
@@ -111,6 +115,18 @@ extension MainViewControllerTests {
         self.mockMoireModel.setStoredMoires(moires: [m1])
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+    }
+    
+    func testLoadMoire_NoInitIdAndModelHasOneIllegalMoire_LoadAndCorrectTheMoire() {
+        let m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 4)
+        m1.patterns[0].speed = BoundsManager.speedRange.upperBound + 9127
+        m1.patterns[2].blackWidth = BoundsManager.blackWidthRange.lowerBound - 1
+        let m1C = m1.copy() as! Moire
+        self.mockMoireModel.setStoredMoires(moires: [m1])
+        self.prepareMainViewController()
+        let expectedPatterns = Utilities.fitWithinBounds(moire: m1C).patterns
+        XCTAssert(self.mockMoireViewController.currentPatterns == expectedPatterns)
     }
     
     func testLoadMoire_NoInitIdAndModelHasMultipleMoires_LoadTheLatestOne() {
@@ -176,6 +192,10 @@ extension MainViewControllerTests {
 
 /// test modifying and saving moires
 extension MainViewControllerTests {
+    func testModifyMoireWithReadonlyModel_NoRuntimeError() {
+        // TODO
+    }
+    
     func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSave() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
