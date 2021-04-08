@@ -29,7 +29,7 @@ class Utilities: NSObject {
         return true
     }
     
-//    static func fitWithinBounds(pattern: Pattern) -> Pattern {
-//
-//    }
+    static func fitWithinBounds(pattern: Pattern) -> Pattern {
+        return Pattern.defaultPattern() // stub
+    }
 }
