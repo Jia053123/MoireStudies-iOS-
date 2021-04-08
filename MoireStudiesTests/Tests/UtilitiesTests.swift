@@ -142,12 +142,14 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
                             while expectedResult > BoundsManager.directionRange.upperBound {
                                 expectedResult -= 2*CGFloat.pi
                             }
+                            assert(BoundsManager.directionRange.contains(expectedResult))
                             XCTAssertEqual(fittedPattern.direction, expectedResult)
                         } else if d < BoundsManager.directionRange.lowerBound {
                             var expectedResult = patternToTest.direction
                             while expectedResult < BoundsManager.directionRange.lowerBound {
                                 expectedResult += 2*CGFloat.pi
                             }
+                            assert(BoundsManager.directionRange.contains(expectedResult))
                             XCTAssertEqual(fittedPattern.direction, expectedResult)
                         } else {
                             XCTAssertEqual(fittedPattern.direction, patternToTest.direction)

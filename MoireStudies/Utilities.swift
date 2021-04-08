@@ -30,6 +30,35 @@ class Utilities: NSObject {
     }
     
     static func fitWithinBounds(pattern: Pattern) -> Pattern {
-        return Pattern.defaultPattern() // stub
+        var output = pattern
+        
+        if output.speed > BoundsManager.speedRange.upperBound {
+            output.speed = BoundsManager.speedRange.upperBound
+        } else if output.speed < BoundsManager.speedRange.lowerBound {
+            output.speed = BoundsManager.speedRange.lowerBound
+        }
+        
+        while output.direction > BoundsManager.directionRange.upperBound {
+            output.direction -= 2*CGFloat.pi
+        }
+        
+        while output.direction < BoundsManager.directionRange.lowerBound {
+            output.direction += 2*CGFloat.pi
+        }
+        
+        if output.blackWidth > BoundsManager.blackWidthRange.upperBound {
+            output.blackWidth = BoundsManager.blackWidthRange.upperBound
+        } else if output.blackWidth < BoundsManager.blackWidthRange.lowerBound {
+            output.blackWidth = BoundsManager.blackWidthRange.lowerBound
+        }
+        
+        if output.whiteWidth > BoundsManager.whiteWidthRange.upperBound {
+            output.whiteWidth = BoundsManager.whiteWidthRange.upperBound
+        } else if output.whiteWidth < BoundsManager.whiteWidthRange.lowerBound {
+            output.whiteWidth = BoundsManager.whiteWidthRange.lowerBound
+        }
+        
+        assert(Utilities.isWithinBounds(pattern: output))
+        return output
     }
 }
