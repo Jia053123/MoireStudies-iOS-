@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class HighDegreeCtrlViewController: UIViewController {
-    var id: String?
+    var id: String!
     var delegate: PatternManager?
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {

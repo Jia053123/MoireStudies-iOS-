@@ -58,6 +58,10 @@
 		8E96B7B1257F33D3007527E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B0257F33D3007527E2 /* Assets.xcassets */; };
 		8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */; };
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
+		8E9F367D261FB096002471F5 /* HighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */; };
+		8E9F367E261FB096002471F5 /* HighDegreeCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367A261FB096002471F5 /* HighDegreeCtrlViewController.swift */; };
+		8E9F367F261FB096002471F5 /* SliderHighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */; };
+		8E9F3680261FB096002471F5 /* SliderHighDegreeCtrlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */; };
 		8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */; };
 		8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */; };
 		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */; };
@@ -147,6 +151,10 @@
 		8E96B7C2257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlView.swift; sourceTree = "<group>"; };
+		8E9F367A261FB096002471F5 /* HighDegreeCtrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewController.swift; sourceTree = "<group>"; };
+		8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHighDegreeCtrlView.swift; sourceTree = "<group>"; };
+		8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderHighDegreeCtrlView.xib; sourceTree = "<group>"; };
 		8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3Tests.swift; sourceTree = "<group>"; };
 		8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTestsWithNormalModel.swift; sourceTree = "<group>"; };
@@ -308,10 +316,10 @@
 		8E72F3D825F01A46004E98DF /* High Degree Control */ = {
 			isa = PBXGroup;
 			children = (
-				8E72F3D925F01B18004E98DF /* HighDegreeCtrlViewController.swift */,
-				8E72F3DE25F01DCC004E98DF /* HighDegreeCtrlView.swift */,
-				8E72F3E325F01E62004E98DF /* SliderHighDegreeCtrlView.swift */,
-				8E72F3E825F01FCB004E98DF /* SliderHighDegreeCtrlView.xib */,
+				8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */,
+				8E9F367A261FB096002471F5 /* HighDegreeCtrlViewController.swift */,
+				8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */,
+				8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */,
 			);
 			path = "High Degree Control";
 			sourceTree = "<group>";
@@ -499,7 +507,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E72F3E925F01FCB004E98DF /* SliderHighDegreeCtrlView.xib in Resources */,
+				8E9F3680261FB096002471F5 /* SliderHighDegreeCtrlView.xib in Resources */,
 				8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */,
 				8E3144A425A04C1C00BB0399 /* SliderCtrlViewSch2.xib in Resources */,
 				8E326B7B2581B73500A80D36 /* SliderCtrlViewSch1.xib in Resources */,
@@ -545,7 +553,6 @@
 				8E35A672260D649A007E3181 /* BoundsManager.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
-				8E72F3DF25F01DCC004E98DF /* HighDegreeCtrlView.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
 				8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */,
 				8E1EDFDA25D2650E002572C3 /* WeakTileLayerContainer.swift in Sources */,
@@ -554,8 +561,10 @@
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E2ED94D25F7F3D500C7E817 /* MoireModel.swift in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */,
+				8E9F367F261FB096002471F5 /* SliderHighDegreeCtrlView.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
+				8E9F367E261FB096002471F5 /* HighDegreeCtrlViewController.swift in Sources */,
 				8E60787625A3D3C6002EB000 /* InitSettings.swift in Sources */,
 				8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
@@ -568,6 +577,7 @@
 				8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 				8E28187125D0FA67007C3E3D /* MoireViewController.swift in Sources */,
+				8E9F367D261FB096002471F5 /* HighDegreeCtrlView.swift in Sources */,
 				8E5816E825E743A100FFE709 /* SliderCtrlViewSch3.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
