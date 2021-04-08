@@ -60,7 +60,7 @@
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
 		8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */; };
 		8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */; };
-		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */; };
+		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -149,7 +149,7 @@
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3Tests.swift; sourceTree = "<group>"; };
 		8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
-		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
+		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTestsWithNormalModel.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -274,7 +274,7 @@
 			children = (
 				8E6BF3F025AEC880005FE7CA /* LocalMoireModelTests.swift */,
 				8E64FF4E2602B3C7009A85DE /* SaveFilesViewControllerTests.swift */,
-				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */,
+				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */,
 				8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
@@ -572,7 +572,7 @@
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
 				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
-				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */,
+				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -102,7 +102,7 @@ class MockMoireModelFilesNormal: MoireModel {
 
 /// When the model is corrupted, it saves successfully, but reports more moires available than it is able to read (currently all files are corrupted)
 class MockMoireModelFilesCorrupted: MoireModel {
-    private var moiresSupposedToBeStored: Array<Moire> = []
+    private(set) var moiresSupposedToBeStored: Array<Moire> = []
     
     func setMoiresSupposedToBeStored(moires: Array<Moire>) {
         self.moiresSupposedToBeStored = moires

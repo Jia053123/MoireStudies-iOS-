@@ -10,15 +10,38 @@ import XCTest
 import UIKit
 
 // TODO: test passing initialization settings to the ControlsViewController
-// TODO: test init moire that's out of bound (force fit it into bounds)
-// TODO: test with corrupted and readonly models
 
-class MainViewControllerTestsWithNormalModel: XCTestCase {
+class MainViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    var mockMoireModelNormal: MockMoireModelFilesNormal!
     var mockMoireViewController: MockMoireViewController!
     var mockControlsViewController: MockControlsViewController!
     var mainViewController: MainViewController!
+    
+    func prepareMainViewController() {
+        self.mainViewController.loadViewIfNeeded()
+        self.mainViewController.viewWillAppear(false)
+        self.mainViewController.viewDidAppear(false)
+    }
+    
+    func resetAndPopulate(moire: Moire, numOfPatterns: Int) {
+        moire.resetData()
+        let basePattern = Pattern.init(speed: 10.0, direction: 1.0, blackWidth: 5.0, whiteWidth: 6.0)
+        for i in 0..<numOfPatterns {
+            let newPattern = Pattern.init(speed: basePattern.speed + CGFloat(i) * 0.01,
+                                          direction: basePattern.direction + CGFloat(i) * 0.01,
+                                          blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
+                                          whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
+            assert(BoundsManager.speedRange.contains(newPattern.speed))
+            assert(BoundsManager.directionRange.contains(newPattern.direction))
+            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
+            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
+            moire.patterns.append(newPattern)
+        }
+    }
+}
+
+class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
+    var mockMoireModelNormal: MockMoireModelFilesNormal!
     var m1: Moire!
     var m1C: Moire!
 
@@ -41,28 +64,6 @@ class MainViewControllerTestsWithNormalModel: XCTestCase {
         self.mainViewController = nil
         self.m1 = nil
         self.m1C = nil
-    }
-    
-    private func prepareMainViewController() {
-        self.mainViewController.loadViewIfNeeded()
-        self.mainViewController.viewWillAppear(false)
-        self.mainViewController.viewDidAppear(false)
-    }
-    
-    private func resetAndPopulate(moire: Moire, numOfPatterns: Int) {
-        moire.resetData()
-        let basePattern = Pattern.init(speed: 10.0, direction: 1.0, blackWidth: 5.0, whiteWidth: 6.0)
-        for i in 0..<numOfPatterns {
-            let newPattern = Pattern.init(speed: basePattern.speed + CGFloat(i) * 0.01,
-                                          direction: basePattern.direction + CGFloat(i) * 0.01,
-                                          blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
-                                          whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
-            assert(BoundsManager.speedRange.contains(newPattern.speed))
-            assert(BoundsManager.directionRange.contains(newPattern.direction))
-            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
-            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
-            moire.patterns.append(newPattern)
-        }
     }
     
     private func setUpOneMoireAndLoad(numOfPatterns: Int) {
@@ -95,11 +96,6 @@ extension MainViewControllerTestsWithNormalModel {
 
 /// test loading the moire to edit from model
 extension MainViewControllerTestsWithNormalModel {
-    func testLoadMoireWithCorruptedModel_CreateNewAndSave() {
-        // TODO
-        
-    }
-    
     func testLoadMoire_NoInitIdAndModelHasOneEmptyMoire_LoadTheMoire() {
         let m1 = Moire()
         assert(m1.patterns.isEmpty)
@@ -193,10 +189,6 @@ extension MainViewControllerTestsWithNormalModel {
 
 /// test modifying and saving moires
 extension MainViewControllerTestsWithNormalModel {
-    func testModifyMoireWithReadonlyModel_NoRuntimeError() {
-        // TODO
-    }
-    
     func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSave() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
@@ -583,5 +575,85 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertEqual(self.mockMoireViewController.currentPatterns?[0], m1C.patterns[0])
         XCTAssertEqual(self.mockControlsViewController.initPatterns?.count, 1)
         XCTAssertEqual(self.mockControlsViewController.initPatterns?[0], m1C.patterns[0])
+    }
+}
+
+class MainViewControllerTestsWithCorruptedModel: MainViewControllerTests {
+    var mockMoireModelCorrupted: MockMoireModelFilesCorrupted!
+    
+    override func setUpWithError() throws {
+        self.mockMoireModelCorrupted = MockMoireModelFilesCorrupted()
+        self.mockMoireViewController = MockMoireViewController()
+        self.mockControlsViewController = MockControlsViewController()
+        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
+            return MainViewController.init(coder: coder,
+                                           mockMoireModel: self.mockMoireModelCorrupted,
+                                           mockMoireViewController: self.mockMoireViewController,
+                                           mockControlsViewController: self.mockControlsViewController)
+        }
+    }
+    
+    override func tearDownWithError() throws {
+        self.mockMoireModelCorrupted = nil
+        self.mockMoireViewController = nil
+        self.mockControlsViewController = nil
+        self.mainViewController = nil
+    }
+    
+    func testLoadMoireWithCorruptedModel_CreateNewAndSave() {
+        let m1 = Moire()
+        let m2 = Moire()
+        let m3 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 3)
+        self.resetAndPopulate(moire: m2, numOfPatterns: 1)
+        self.resetAndPopulate(moire: m3, numOfPatterns: 5)
+        self.mockMoireModelCorrupted.setMoiresSupposedToBeStored(moires: [m1, m2, m3])
+        self.prepareMainViewController()
+        XCTAssert(self.mockMoireViewController.currentPatterns != nil)
+        XCTAssert(self.mockMoireViewController.currentPatterns!.count > 0)
+        XCTAssertEqual(self.mockMoireModelCorrupted.numOfMoires(), 4)
+        XCTAssert(self.mockMoireModelCorrupted.moiresSupposedToBeStored.last!.patterns == self.mockMoireViewController.currentPatterns!)
+    }
+}
+
+class MainViewControllerTestsWithReadonlyModel: MainViewControllerTests {
+    var mockMoireModelReadonly: MockMoireModelReadOnly!
+    
+    override func setUpWithError() throws {
+        self.mockMoireModelReadonly = MockMoireModelReadOnly()
+        self.mockMoireViewController = MockMoireViewController()
+        self.mockControlsViewController = MockControlsViewController()
+        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
+            return MainViewController.init(coder: coder,
+                                           mockMoireModel: self.mockMoireModelReadonly,
+                                           mockMoireViewController: self.mockMoireViewController,
+                                           mockControlsViewController: self.mockControlsViewController)
+        }
+    }
+    
+    override func tearDownWithError() throws {
+        self.mockMoireModelReadonly = nil
+        self.mockMoireViewController = nil
+        self.mockControlsViewController = nil
+        self.mainViewController = nil
+    }
+    
+    func testModifyMoireWithReadonlyModel_NoRuntimeError() {
+        let m = Moire()
+        self.resetAndPopulate(moire: m, numOfPatterns: 4)
+        let mc = m.copy() as! Moire
+        self.mockMoireModelReadonly.setExistingMoires(moires: [m])
+        self.prepareMainViewController()
+        assert(self.mockMoireViewController.currentPatterns == mc.patterns)
+        
+        let ids = self.mockControlsViewController.ids!
+        let p0Id = ids[0]
+        let speedValueToSet = CGFloat(10.153)
+        assert(BoundsManager.speedRange.contains(speedValueToSet))
+        assert(mc.patterns[0].speed != speedValueToSet)
+        XCTAssertTrue(self.mainViewController.modifyPattern(speed: speedValueToSet, callerId: p0Id))
+        mc.patterns[0].speed = speedValueToSet
+        XCTAssert(self.mockMoireViewController.currentPatterns == mc.patterns)
+        assert(!self.mainViewController.saveMoire())
     }
 }
