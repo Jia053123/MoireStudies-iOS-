@@ -62,6 +62,7 @@
 		8E9F367E261FB096002471F5 /* HighDegreeCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367A261FB096002471F5 /* HighDegreeCtrlViewController.swift */; };
 		8E9F367F261FB096002471F5 /* SliderHighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */; };
 		8E9F3680261FB096002471F5 /* SliderHighDegreeCtrlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */; };
+		8E9F3685262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */; };
 		8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */; };
 		8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */; };
 		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */; };
@@ -155,6 +156,7 @@
 		8E9F367A261FB096002471F5 /* HighDegreeCtrlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewController.swift; sourceTree = "<group>"; };
 		8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHighDegreeCtrlView.swift; sourceTree = "<group>"; };
 		8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderHighDegreeCtrlView.xib; sourceTree = "<group>"; };
+		8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewControllerTests.swift; sourceTree = "<group>"; };
 		8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3Tests.swift; sourceTree = "<group>"; };
 		8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTestsWithNormalModel.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */,
 				8EAA4DED25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
+				8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */,
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
 				8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */,
 			);
@@ -587,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAA4DEE25F342B300B9DC81 /* CtrlAndPatternMatcherTests.swift in Sources */,
+				8E9F3685262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift in Sources */,
 				8E2ED93A25F74ECD00C7E817 /* MockControlsViewController.swift in Sources */,
 				8E64FF4A26005D47009A85DE /* MockPatternManager.swift in Sources */,
 				8E64FF4F2602B3C7009A85DE /* SaveFilesViewControllerTests.swift in Sources */,

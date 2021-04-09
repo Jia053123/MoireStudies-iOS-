@@ -43,5 +43,11 @@ class ControlsViewController: UIViewController {
             self.view.addSubview(cvc.view)
             cvc.didMove(toParent: self)
         }
+        // temp code for the high degree controls
+        let hdcvc = HighDegreeCtrlViewController.init(id: "01234", frame: Constants.UI.highDegreeControlFrame, patterns: patterns)
+        hdcvc.delegate = delegate
+        self.addChild(hdcvc)
+        self.view.addSubview(hdcvc.view)
+        hdcvc.didMove(toParent: self)
     }
 }

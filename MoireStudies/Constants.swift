@@ -40,7 +40,7 @@ return 15.0
             return frames
         }()
         
-        static let highDegreeControlFrame = CGRect(x: 15, y: 315, width: 150, height: 300)
+        static let highDegreeControlFrame = CGRect(x: 15, y: 330, width: 150, height: 300)
     }
     
     struct Constrains {

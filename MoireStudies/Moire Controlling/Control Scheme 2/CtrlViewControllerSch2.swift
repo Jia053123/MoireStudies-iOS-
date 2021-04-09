@@ -10,7 +10,7 @@ import UIKit
 
 class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     var id: String!
-    var delegate: PatternManager?
+    var delegate: PatternManager!
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id

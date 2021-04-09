@@ -11,7 +11,7 @@ import UIKit
 class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
     var id: String!
-    var delegate: PatternManager?
+    var delegate: PatternManager!
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id

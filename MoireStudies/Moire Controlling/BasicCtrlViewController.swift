@@ -10,7 +10,7 @@ import UIKit
 
 protocol BasicCtrlViewController: CtrlViewController {
     var id: String! {get set}
-    var delegate: PatternManager? {get set}
+    var delegate: PatternManager! {get set}
     
     func matchControlsWithModel(pattern: Pattern) // TODO: make a pattern class with optionals to avoid setting the slider being controlled? 
 }

@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-protocol HighDegreeCtrlView {
-    var target: HighDegreeCtrlViewController? { get set }
+protocol HighDegreeCtrlView: UIView {
+    var target: HighDegreeCtrlViewController! { get set }
 }

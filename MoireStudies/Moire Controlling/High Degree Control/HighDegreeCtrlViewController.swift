@@ -10,12 +10,18 @@ import UIKit
 
 class HighDegreeCtrlViewController: UIViewController {
     var id: String!
-    var delegate: PatternManager?
+    var delegate: PatternManager!
     
-    required init(id: String, frame: CGRect, pattern: Pattern?) {
+    required init(id: String, frame: CGRect, patterns: Array<Pattern>?) {
         self.id = id
         super.init(nibName: nil, bundle: nil)
-        // stub
+        
+        let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
+        self.view = controlView
+        controlView.target = self
+        if let ps = patterns {
+            self.matchControlsWithModel(patterns: ps)
+        }
     }
     
     required init?(coder: NSCoder) {
@@ -23,8 +29,8 @@ class HighDegreeCtrlViewController: UIViewController {
     }
 }
 
-extension HighDegreeCtrlViewController: CtrlViewController {
-    func matchControlsWithModel(pattern: Pattern) {
-        
+extension HighDegreeCtrlViewController {//: CtrlViewController {
+    func matchControlsWithModel(patterns: Array<Pattern>) {
+        // stub
     }
 }
