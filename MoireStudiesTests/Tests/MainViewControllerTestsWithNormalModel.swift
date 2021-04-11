@@ -94,7 +94,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
 }
 
-/// test loading the moire to edit from model
+/// test initializing moire from model
 extension MainViewControllerTestsWithNormalModel {
     func testLoadMoire_NoInitIdAndModelHasOneEmptyMoire_LoadTheMoire() {
         let m1 = Moire()
@@ -246,6 +246,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
+    func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
+        // Stub
+    }
+    
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 3)
         
@@ -277,6 +281,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
+    func testModifyMoire_MultiplePatterns_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
+        // Stub
+    }
+    
     func testModifyMoire_InvalidIdNoPatternLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 0)
         
@@ -304,6 +312,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
     }
     
+    func testModifyMoire_MultiplePatterns_InvalidIdNotEnoughPatternLegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
+        // Stub
+    }
+    
     func testModifyMoire_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         
@@ -329,6 +341,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
+    }
+    
+    func testModifyMoire_MultiplePatterns_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
+        //Stub
     }
     
     func testModifyMoire_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -360,6 +376,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireViewController.currentPatterns == m1C.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == m1C.id}) == m1C)
+    }
+    
+    func testModifyMoire_MultiplePatterns_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
+        // Stub
     }
 }
 
