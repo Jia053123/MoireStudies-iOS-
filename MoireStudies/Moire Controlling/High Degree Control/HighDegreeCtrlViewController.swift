@@ -29,7 +29,7 @@ class HighDegreeCtrlViewController: UIViewController {
     }
 }
 
-extension HighDegreeCtrlViewController {//: CtrlViewController {
+extension HighDegreeCtrlViewController: HighDegCtrlViewController {
     func matchControlsWithModel(patterns: Array<Pattern>) {
         // stub
     }
