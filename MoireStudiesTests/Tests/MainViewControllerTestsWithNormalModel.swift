@@ -92,6 +92,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
     
     func testSendSettings_DefaultSettings_SendSettingsThatIsCompleteAndCorrect() {
+        // TODO: update upon adding new entries to the config struct
         self.setUpOneMoireAndLoad(numOfPatterns: 3)
         let frameCount = self.mockControlsViewController.settings?.controlFrames.count
         XCTAssertNotNil(frameCount)
@@ -101,6 +102,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
     
     func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
+        // TODO: update upon adding new entries to the config struct
         var testSettings = Configurations.init()
         testSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
         self.mainViewController.initSettings = testSettings

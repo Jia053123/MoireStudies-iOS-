@@ -9,30 +9,41 @@ import Foundation
 import UIKit
 
 struct Configurations: Codable, Equatable {
-    var renderSetting: RenderSettings = RenderSettings.metal
-    var ctrlSchemeSetting: CtrlSchemeSettings = CtrlSchemeSettings.controlScheme3Slider
+    var renderSetting: RenderSetting = RenderSetting.metal
+    var ctrlSchemeSetting: CtrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
     var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames
         get {
             switch self.ctrlSchemeSetting {
-            case CtrlSchemeSettings.controlScheme1Slider, CtrlSchemeSettings.controlScheme2Slider:
+            case CtrlSchemeSetting.controlScheme1Slider, CtrlSchemeSetting.controlScheme2Slider:
                 return Constants.UI.controlFramesDefault
-            case CtrlSchemeSettings.controlScheme3Slider:
+            case CtrlSchemeSetting.controlScheme3Slider:
                 return Constants.UI.controlFramesTall
             default:
                 return Constants.UI.controlFramesDefault
             }
         }
     }
+    var highDegreeControlCount: Int {get {return self.highDegreeControlSettings.count}}
+    var highDegreeControlSettings: Array<HighDegreeControlSettings> = []
 }
 
-enum CtrlSchemeSettings: String, Codable {
+struct HighDegreeControlSettings: Codable, Equatable {
+    var highDegCtrlSchemeSetting: HighDegCtrlSchemeSetting = .basicScheme
+    var indexesOfPatternControlled: Set<Int>
+}
+
+enum CtrlSchemeSetting: String, Codable {
     case controlScheme1Slider
     case controlScheme1Gesture
     case controlScheme2Slider
     case controlScheme3Slider
 }
 
-enum RenderSettings: String, Codable {
+enum HighDegCtrlSchemeSetting: String, Codable {
+    case basicScheme
+}
+
+enum RenderSetting: String, Codable {
     case coreAnimation
     case metal
 }

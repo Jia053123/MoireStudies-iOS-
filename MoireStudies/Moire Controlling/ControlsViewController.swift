@@ -29,13 +29,13 @@ class ControlsViewController: UIViewController {
             var cvc: CtrlViewController
             let id = ids[i]
             switch configs.ctrlSchemeSetting {
-            case CtrlSchemeSettings.controlScheme1Slider:
+            case CtrlSchemeSetting.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
-            case CtrlSchemeSettings.controlScheme2Slider:
+            case CtrlSchemeSetting.controlScheme2Slider:
                 cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: patterns[i])
-            case CtrlSchemeSettings.controlScheme1Gesture:
+            case CtrlSchemeSetting.controlScheme1Gesture:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
-            case CtrlSchemeSettings.controlScheme3Slider:
+            case CtrlSchemeSetting.controlScheme3Slider:
                 cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             }
             cvc.delegate = delegate

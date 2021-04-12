@@ -42,9 +42,9 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
         for pattern in patterns {
             var pvc: PatternViewController
             switch configs.renderSetting {
-            case RenderSettings.coreAnimation:
+            case RenderSetting.coreAnimation:
                 pvc = CoreAnimPatternViewController()
-            case RenderSettings.metal:
+            case RenderSetting.metal:
                 pvc = MetalPatternViewController()
             }
             self.addChild(pvc)
