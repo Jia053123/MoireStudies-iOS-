@@ -28,7 +28,7 @@ class ControlsViewController: UIViewController {
         for i in 0..<patterns.count {
             var cvc: CtrlViewController
             let id = ids[i]
-            switch settings.interfaceSetting {
+            switch settings.ctrlSchemeSetting {
             case CtrlSchemeSettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case CtrlSchemeSettings.controlScheme2Slider:

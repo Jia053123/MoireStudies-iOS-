@@ -102,7 +102,7 @@ extension MainViewControllerTestsWithNormalModel {
     
     func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
         var testSettings = InitSettings.init()
-        testSettings.interfaceSetting = CtrlSchemeSettings.controlScheme1Slider
+        testSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
         self.mainViewController.initSettings = testSettings
         
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
@@ -111,7 +111,7 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertTrue(frameCount! >= 4)
         
         XCTAssertEqual(self.mainViewController.initSettings, self.mockControlsViewController.settings)
-        XCTAssertEqual(self.mockControlsViewController.settings?.interfaceSetting, CtrlSchemeSettings.controlScheme1Slider)
+        XCTAssertEqual(self.mockControlsViewController.settings?.ctrlSchemeSetting, CtrlSchemeSettings.controlScheme1Slider)
     }
 }
 
@@ -696,29 +696,5 @@ class MainViewControllerTestsWithReadonlyModel: MainViewControllerTests {
         mc.patterns[0].speed = speedValueToSet
         XCTAssert(self.mockMoireViewController.currentPatterns == mc.patterns)
         assert(!self.mainViewController.saveMoire())
-    }
-}
-
-
-class MainViewControllerTestsWithNormalModelAndPredefinedSettings: MainViewControllerTests {
-    var mockMoireModelNormal: MockMoireModelFilesNormal!
-
-    override func setUpWithError() throws {
-        self.mockMoireModelNormal = MockMoireModelFilesNormal()
-        self.mockMoireViewController = MockMoireViewController()
-        self.mockControlsViewController = MockControlsViewController()
-        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
-            return MainViewController.init(coder: coder,
-                                           mockMoireModel: self.mockMoireModelNormal,
-                                           mockMoireViewController: self.mockMoireViewController,
-                                           mockControlsViewController: self.mockControlsViewController)
-        }
-    }
-    
-    override func tearDownWithError() throws {
-        self.mockMoireModelNormal = nil
-        self.mockMoireViewController = nil
-        self.mockControlsViewController = nil
-        self.mainViewController = nil
     }
 }

@@ -10,10 +10,10 @@ import UIKit
 
 struct InitSettings: Codable, Equatable {
     var renderSetting: RenderSettings = RenderSettings.metal
-    var interfaceSetting: CtrlSchemeSettings = CtrlSchemeSettings.controlScheme3Slider
+    var ctrlSchemeSetting: CtrlSchemeSettings = CtrlSchemeSettings.controlScheme3Slider
     var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames
         get {
-            switch self.interfaceSetting {
+            switch self.ctrlSchemeSetting {
             case CtrlSchemeSettings.controlScheme1Slider, CtrlSchemeSettings.controlScheme2Slider:
                 return Constants.UI.controlFramesDefault
             case CtrlSchemeSettings.controlScheme3Slider:
