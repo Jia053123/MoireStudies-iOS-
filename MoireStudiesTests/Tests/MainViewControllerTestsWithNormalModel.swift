@@ -94,26 +94,31 @@ extension MainViewControllerTestsWithNormalModel {
     func testSendSettings_DefaultSettings_SendSettingsThatIsCompleteAndCorrect() {
         // TODO: update upon adding new entries to the config struct
         self.setUpOneMoireAndLoad(numOfPatterns: 3)
-        let frameCount = self.mockControlsViewController.settings?.controlFrames.count
+        let frameCount = self.mockControlsViewController.configs?.controlFrames.count
         XCTAssertNotNil(frameCount)
         XCTAssertTrue(frameCount! >= 3)
         
-        XCTAssertEqual(self.mainViewController.initSettings, self.mockControlsViewController.settings)
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
     }
     
     func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
         // TODO: update upon adding new entries to the config struct
-        var testSettings = Configurations.init()
-        testSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
-        self.mainViewController.initSettings = testSettings
+        var testConfigs = Configurations.init()
+        testConfigs.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme1Slider
+        let setOfIndexesToControl: Set<Int> = [1,2]
+        let hdcs = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: setOfIndexesToControl)
+        testConfigs.highDegreeControlSettings = [hdcs]
+        self.mainViewController.configurations = testConfigs
         
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
-        let frameCount = self.mockControlsViewController.settings?.controlFrames.count
+        let frameCount = self.mockControlsViewController.configs?.controlFrames.count
         XCTAssertNotNil(frameCount)
         XCTAssertTrue(frameCount! >= 4)
         
-        XCTAssertEqual(self.mainViewController.initSettings, self.mockControlsViewController.settings)
-        XCTAssertEqual(self.mockControlsViewController.settings?.ctrlSchemeSetting, CtrlSchemeSettings.controlScheme1Slider)
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.ctrlSchemeSetting, CtrlSchemeSetting.controlScheme1Slider)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings, [hdcs])
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlCount, 1)
     }
 }
 
