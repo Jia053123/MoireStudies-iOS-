@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-struct InitSettings: Codable { 
+struct InitSettings: Codable, Equatable {
     var renderSetting: RenderSettings = RenderSettings.metal
-    var interfaceSetting: UISettings = UISettings.controlScheme3Slider
+    var interfaceSetting: CtrlSchemeSettings = CtrlSchemeSettings.controlScheme3Slider
     var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames
         get {
             switch self.interfaceSetting {
-            case UISettings.controlScheme1Slider, UISettings.controlScheme2Slider:
+            case CtrlSchemeSettings.controlScheme1Slider, CtrlSchemeSettings.controlScheme2Slider:
                 return Constants.UI.controlFramesDefault
-            case UISettings.controlScheme3Slider:
+            case CtrlSchemeSettings.controlScheme3Slider:
                 return Constants.UI.controlFramesTall
             default:
                 return Constants.UI.controlFramesDefault
@@ -25,7 +25,7 @@ struct InitSettings: Codable {
     }
 }
 
-enum UISettings: String, Codable {
+enum CtrlSchemeSettings: String, Codable {
     case controlScheme1Slider
     case controlScheme1Gesture
     case controlScheme2Slider

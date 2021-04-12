@@ -9,8 +9,6 @@
 import XCTest
 import UIKit
 
-// TODO: test passing initialization settings to the ControlsViewController
-
 class MainViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var mockMoireViewController: MockMoireViewController!
@@ -85,12 +83,35 @@ class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
     }
 }
 
-/// test sending  ControlsViewController valid ids corresponding to the current moire
+/// test sending ControlsViewController valid ids and correct settings
 extension MainViewControllerTestsWithNormalModel {
     func testSendControlIds_SendIdsThatAreComplete() {
         self.setUpOneMoireAndLoad(numOfPatterns: 4)
         XCTAssertNotNil(self.mockControlsViewController.ids)
         XCTAssertEqual(self.mockControlsViewController.ids!.count, 4)
+    }
+    
+    func testSendSettings_DefaultSettings_SendSettingsThatIsCompleteAndCorrect() {
+        self.setUpOneMoireAndLoad(numOfPatterns: 3)
+        let frameCount = self.mockControlsViewController.settings?.controlFrames.count
+        XCTAssertNotNil(frameCount)
+        XCTAssertTrue(frameCount! >= 3)
+        
+        XCTAssertEqual(self.mainViewController.initSettings, self.mockControlsViewController.settings)
+    }
+    
+    func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
+        var testSettings = InitSettings.init()
+        testSettings.interfaceSetting = CtrlSchemeSettings.controlScheme1Slider
+        self.mainViewController.initSettings = testSettings
+        
+        self.setUpOneMoireAndLoad(numOfPatterns: 4)
+        let frameCount = self.mockControlsViewController.settings?.controlFrames.count
+        XCTAssertNotNil(frameCount)
+        XCTAssertTrue(frameCount! >= 4)
+        
+        XCTAssertEqual(self.mainViewController.initSettings, self.mockControlsViewController.settings)
+        XCTAssertEqual(self.mockControlsViewController.settings?.interfaceSetting, CtrlSchemeSettings.controlScheme1Slider)
     }
 }
 
@@ -247,7 +268,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
     
     func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
-        // Stub
+        
     }
     
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -675,5 +696,29 @@ class MainViewControllerTestsWithReadonlyModel: MainViewControllerTests {
         mc.patterns[0].speed = speedValueToSet
         XCTAssert(self.mockMoireViewController.currentPatterns == mc.patterns)
         assert(!self.mainViewController.saveMoire())
+    }
+}
+
+
+class MainViewControllerTestsWithNormalModelAndPredefinedSettings: MainViewControllerTests {
+    var mockMoireModelNormal: MockMoireModelFilesNormal!
+
+    override func setUpWithError() throws {
+        self.mockMoireModelNormal = MockMoireModelFilesNormal()
+        self.mockMoireViewController = MockMoireViewController()
+        self.mockControlsViewController = MockControlsViewController()
+        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
+            return MainViewController.init(coder: coder,
+                                           mockMoireModel: self.mockMoireModelNormal,
+                                           mockMoireViewController: self.mockMoireViewController,
+                                           mockControlsViewController: self.mockControlsViewController)
+        }
+    }
+    
+    override func tearDownWithError() throws {
+        self.mockMoireModelNormal = nil
+        self.mockMoireViewController = nil
+        self.mockControlsViewController = nil
+        self.mainViewController = nil
     }
 }

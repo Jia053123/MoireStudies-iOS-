@@ -18,9 +18,9 @@ protocol PatternManager: UIViewController {
     func modifyPattern(direction: CGFloat, callerId: String) -> Bool
     func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool
     func modifyPattern(whiteWidth: CGFloat, callerId: String) -> Bool
-    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool
+//    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool
     func getPattern(callerId: String) -> Pattern?
-    func getPatterns(callerId: String) -> Array<Pattern>?
+//    func getPatterns(callerId: String) -> Array<Pattern>?
     func hidePattern(callerId: String) -> Bool
     func unhidePattern(callerId: String) -> Bool
     func createPattern(callerId: String?, newPattern: Pattern) -> Bool
