@@ -10,7 +10,7 @@ import UIKit
 
 class SettingsViewController: UIViewController { // TODO: now we have a lot of scattered info. create a setting item struct type to consolidate
     @IBOutlet weak var tableView: UITableView!
-    var initSettings = InitSettings()
+    var initConfig = Configurations()
     private static let FillRatioAndScaleFactor = "Fill Ratio and Scale Factor"
     private static let BlackWidthAndWhiteWidth = "Black Width and White Width"
     private static let CompositeControls = "Composite Controls (Metal Only)"
@@ -29,7 +29,7 @@ class SettingsViewController: UIViewController { // TODO: now we have a lot of s
         super.viewWillDisappear(animated)
         if isBeingDismissed {
             if let mvc = self.presentingViewController as? MainViewController {
-                mvc.initSettings = self.initSettings
+                mvc.configurations = self.initConfig
                 mvc.updateMainView()
             }
         }
@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController { // TODO: now we have a lot of s
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("prepare for segue")
         let mvc: MainViewController = segue.destination as! MainViewController
-        mvc.initSettings = self.initSettings
+        mvc.configurations = self.initConfig
         if mvc.isViewLoaded {
             mvc.updateMainView()
         }
@@ -98,7 +98,7 @@ extension SettingsViewController: UITableViewDataSource {
         // tick the current settings
         switch indexPath.section {
         case 0:
-            let selectedSetting = self.initSettings.ctrlSchemeSetting
+            let selectedSetting = self.initConfig.ctrlSchemeSetting
             switch (selectedSetting, cell.textLabel!.text) {
             case (CtrlSchemeSettings.controlScheme1Slider, SettingsViewController.FillRatioAndScaleFactor),
                  (CtrlSchemeSettings.controlScheme2Slider, SettingsViewController.BlackWidthAndWhiteWidth),
@@ -109,7 +109,7 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.accessoryType = UITableViewCell.AccessoryType.none
             }
         case 1:
-            let selectedSetting = self.initSettings.renderSetting
+            let selectedSetting = self.initConfig.renderSetting
             switch (selectedSetting, cell.textLabel!.text) {
             case (RenderSettings.coreAnimation, SettingsViewController.CoreAnimation),
                  (RenderSettings.metal, SettingsViewController.Metal):
@@ -137,17 +137,17 @@ extension SettingsViewController: UITableViewDelegate {
             
             switch controlSettingItems[indexPath.row] {
             case SettingsViewController.FillRatioAndScaleFactor:
-                self.initSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
+                self.initConfig.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
             case SettingsViewController.BlackWidthAndWhiteWidth:
-                self.initSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme2Slider
+                self.initConfig.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme2Slider
             case SettingsViewController.CompositeControls:
-                self.initSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme3Slider
-                if self.initSettings.renderSetting != RenderSettings.metal {
-                    self.initSettings.renderSetting = RenderSettings.metal
+                self.initConfig.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme3Slider
+                if self.initConfig.renderSetting != RenderSettings.metal {
+                    self.initConfig.renderSetting = RenderSettings.metal
                     self.tableView.reloadSections(IndexSet.init(integer: 1), with: UITableView.RowAnimation.none)
                 }
             default:
-                self.initSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
+                self.initConfig.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
             }
         case 1:
             if let sip1 = self.selectedIndexPathSec1 {
@@ -158,15 +158,15 @@ extension SettingsViewController: UITableViewDelegate {
             
             switch renderSettingItems[indexPath.row] {
             case SettingsViewController.CoreAnimation:
-                self.initSettings.renderSetting = RenderSettings.coreAnimation
-                if self.initSettings.ctrlSchemeSetting == CtrlSchemeSettings.controlScheme3Slider {
-                    self.initSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
+                self.initConfig.renderSetting = RenderSettings.coreAnimation
+                if self.initConfig.ctrlSchemeSetting == CtrlSchemeSettings.controlScheme3Slider {
+                    self.initConfig.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
                     self.tableView.reloadSections(IndexSet.init(integer: 0), with: UITableView.RowAnimation.none)
                 }
             case SettingsViewController.Metal:
-                self.initSettings.renderSetting = RenderSettings.metal
+                self.initConfig.renderSetting = RenderSettings.metal
             default:
-                self.initSettings.renderSetting = RenderSettings.metal
+                self.initConfig.renderSetting = RenderSettings.metal
             }
         default:
             break

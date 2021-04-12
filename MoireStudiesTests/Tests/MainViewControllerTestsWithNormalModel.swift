@@ -101,7 +101,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
     
     func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
-        var testSettings = InitSettings.init()
+        var testSettings = Configurations.init()
         testSettings.ctrlSchemeSetting = CtrlSchemeSettings.controlScheme1Slider
         self.mainViewController.initSettings = testSettings
         

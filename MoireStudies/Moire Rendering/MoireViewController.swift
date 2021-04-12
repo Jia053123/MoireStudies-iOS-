@@ -24,15 +24,15 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
         self.dimView = dv
     }
     
-    func setUp(patterns: Array<Pattern>, settings: InitSettings) {
-        self.resetMoireView(patterns: patterns, settings: settings)
+    func setUp(patterns: Array<Pattern>, configs: Configurations) {
+        self.resetMoireView(patterns: patterns, configs: configs)
     }
     
     func numOfPatternViews() -> Int {
         return self.children.count
     }
     
-    func resetMoireView(patterns: Array<Pattern>, settings: InitSettings) {
+    func resetMoireView(patterns: Array<Pattern>, configs: Configurations) {
         for c in self.children {
             c.willMove(toParent: nil)
             c.view.removeFromSuperview() // TODO: reuse the expensive pattern views
@@ -41,7 +41,7 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
         
         for pattern in patterns {
             var pvc: PatternViewController
-            switch settings.renderSetting {
+            switch configs.renderSetting {
             case RenderSettings.coreAnimation:
                 pvc = CoreAnimPatternViewController()
             case RenderSettings.metal:
@@ -53,7 +53,7 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
             pvc.didMove(toParent: self)
             pvc.setUpAndRender(pattern: pattern)
         }
-        self.setUpMasks(with: settings.controlFrames)
+        self.setUpMasks(with: configs.controlFrames)
     }
     
     func setUpMasks(with frames: Array<CGRect>) {

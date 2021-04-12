@@ -13,22 +13,22 @@ class ControlsViewController: UIViewController {
         self.view.backgroundColor = UIColor.clear
     }
     
-    func setUp(patterns: Array<Pattern>, settings: InitSettings, ids: Array<String>, delegate: PatternManager) {
-        self.reset(patterns: patterns, settings: settings, ids: ids, delegate: delegate)
+    func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
+        self.reset(patterns: patterns, configs: configs, ids: ids, delegate: delegate)
     }
 
-    func reset(patterns: Array<Pattern>, settings: InitSettings, ids: Array<String>, delegate: PatternManager) {
+    func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
         for c in self.children {
             c.willMove(toParent: nil)
             c.view.removeFromSuperview()
             c.removeFromParent()  // TODO: reuse?
         }
-        let controlFrames = settings.controlFrames
+        let controlFrames = configs.controlFrames
         assert(controlFrames.count >= patterns.count)
         for i in 0..<patterns.count {
             var cvc: CtrlViewController
             let id = ids[i]
-            switch settings.ctrlSchemeSetting {
+            switch configs.ctrlSchemeSetting {
             case CtrlSchemeSettings.controlScheme1Slider:
                 cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
             case CtrlSchemeSettings.controlScheme2Slider:

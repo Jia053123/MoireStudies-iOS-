@@ -27,7 +27,7 @@ class MainViewController: UIViewController {
     private var moireModel: MoireModel!
     var moireIdToInit: String?
     private var currentMoire: Moire?
-    var initSettings: InitSettings?
+    var configurations: Configurations?
     private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
     
     private weak var moireViewController: MoireViewController!
@@ -81,19 +81,19 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         // set up must be done in the order below!
         self.initCurrentMoire()
-        self.initInitSettings()
+        self.initConfigs()
         self.initMainView()
         self.initControls()
     }
     
     func updateMainView() {
-        if self.initSettings == nil {
-            self.initInitSettings()
+        if self.configurations == nil {
+            self.initConfigs()
         }
         if self.currentMoire == nil || ((self.moireIdToInit != nil) && (self.moireIdToInit != self.currentMoire?.id)) {
             self.initCurrentMoire()
         }
-        self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns, settings: self.initSettings!)
+        self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns, configs: self.configurations!)
         self.resetControls()
     }
     
@@ -107,30 +107,30 @@ class MainViewController: UIViewController {
         self.currentMoire = Utilities.fitWithinBounds(moire: self.currentMoire!)
     }
     
-    func initInitSettings() {
+    func initConfigs() {
         func saveInitSettings() {
             do {
-                UserDefaults.standard.set(try PropertyListEncoder().encode(self.initSettings), forKey: "InitSettings")
+                UserDefaults.standard.set(try PropertyListEncoder().encode(self.configurations), forKey: "InitSettings")
             } catch {
                 print("problem saving initSettings to disk")
             }
         }
-        guard self.initSettings == nil else {
+        guard self.configurations == nil else {
             saveInitSettings()
             return
         }
         do {
             guard let data = UserDefaults.standard.value(forKey: "InitSettings") as? Data else {throw NSError()}
-            self.initSettings = try PropertyListDecoder().decode(InitSettings.self, from: data)
+            self.configurations = try PropertyListDecoder().decode(Configurations.self, from: data)
         } catch {
             print("problem loading initSettings from disk; setting and saving the default")
-            self.initSettings = InitSettings()
+            self.configurations = Configurations()
             saveInitSettings()
         }
     }
     
     func initMainView() {
-        self.moireViewController.setUp(patterns: currentMoire!.patterns, settings: self.initSettings!)
+        self.moireViewController.setUp(patterns: currentMoire!.patterns, configs: self.configurations!)
     }
     
     func initControls() {
@@ -138,7 +138,7 @@ class MainViewController: UIViewController {
         for i in 0..<self.currentMoire!.patterns.count {
             ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: [i])!)
         }
-        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, settings: self.initSettings!, ids: ids, delegate: self)
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, delegate: self)
     }
     
     func resetControls() {
@@ -190,8 +190,8 @@ extension MainViewController {
             switch s {
             case self.gearButton!:
                 let svc: SettingsViewController = segue.destination as! SettingsViewController
-                if let currentSettings = self.initSettings {
-                    svc.initSettings = currentSettings
+                if let currentSettings = self.configurations {
+                    svc.initConfig = currentSettings
                 }
             case self.fileButton!:
                 let sfvc: SaveFilesViewController = segue.destination as! SaveFilesViewController

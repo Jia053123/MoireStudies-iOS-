@@ -14,7 +14,7 @@ class MockControlsViewController: ControlsViewController {
     private(set) var setUpPerformed: Bool = false
     private(set) var resetPerformed: Bool = false
     private(set) var ids: Array<String>?
-    private(set) var settings: InitSettings?
+    private(set) var configs: Configurations?
     
     func resetTestingRecords() {
         self.initPatterns = nil
@@ -23,17 +23,17 @@ class MockControlsViewController: ControlsViewController {
         self.ids = nil
     }
     
-    override func setUp(patterns: Array<Pattern>, settings: InitSettings, ids: Array<String>, delegate: PatternManager) {
+    override func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
         self.setUpPerformed = true
         self.initPatterns = patterns
         self.ids = ids
-        self.settings = settings
+        self.settings = configs
     }
     
-    override func reset(patterns: Array<Pattern>, settings: InitSettings, ids: Array<String>, delegate: PatternManager) {
+    override func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
         self.resetPerformed = true
         self.initPatterns = patterns
         self.ids = ids
-        self.settings = settings
+        self.settings = configs
     }
 }

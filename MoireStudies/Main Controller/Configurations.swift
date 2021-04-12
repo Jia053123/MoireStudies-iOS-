@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct InitSettings: Codable, Equatable {
+struct Configurations: Codable, Equatable {
     var renderSetting: RenderSettings = RenderSettings.metal
     var ctrlSchemeSetting: CtrlSchemeSettings = CtrlSchemeSettings.controlScheme3Slider
     var controlFrames: Array<CGRect> { // TODO: use a dedicated class to manage the frames

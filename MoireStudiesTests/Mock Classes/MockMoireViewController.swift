@@ -27,12 +27,12 @@ class MockMoireViewController: MoireViewController {
         self.patternsUndimmed = false
     }
     
-    override func setUp(patterns: Array<Pattern>, settings: InitSettings) {
+    override func setUp(patterns: Array<Pattern>, configs: Configurations) {
         self.setUpPerformed = true
         self.currentPatterns = patterns
     }
     
-    override func resetMoireView(patterns: Array<Pattern>, settings: InitSettings) {
+    override func resetMoireView(patterns: Array<Pattern>, settings: Configurations) {
         self.resetPerformed = true
         self.currentPatterns = patterns
     }
