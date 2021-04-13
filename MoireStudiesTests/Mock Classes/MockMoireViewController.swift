@@ -19,6 +19,7 @@ class MockMoireViewController: MoireViewController {
     private(set) var patternsUndimmed: Bool = false
     private(set) var hiddenPatternIndexes: Set<Int> = []
     private(set) var unhiddenPatternIndexes: Set<Int> = []
+    private(set) var configs: Configurations?
     
     func resetTestingRecords() {
         self.currentPatterns = nil
@@ -30,11 +31,13 @@ class MockMoireViewController: MoireViewController {
     override func setUp(patterns: Array<Pattern>, configs: Configurations) {
         self.setUpPerformed = true
         self.currentPatterns = patterns
+        self.configs = configs
     }
     
     override func resetMoireView(patterns: Array<Pattern>, configs: Configurations) {
         self.resetPerformed = true
         self.currentPatterns = patterns
+        self.configs = configs
     }
     
     override func highlightPatternView(patternViewIndex: Int) {

@@ -8,6 +8,9 @@
 import Foundation
 import UIKit
 
+/*
+ Summary: stores the current configuration of the application independent from the moire data
+ */
 struct Configurations: Codable, Equatable {
     var renderSetting: RenderSetting = RenderSetting.metal
     var ctrlSchemeSetting: CtrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider

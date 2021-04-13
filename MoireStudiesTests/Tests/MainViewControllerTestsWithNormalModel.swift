@@ -99,6 +99,7 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertTrue(frameCount! >= 3)
         
         XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs, self.mockMoireViewController.configs)
     }
     
     func testSendSettings_CustomSettings_SendSettingsThatIsCompleteAndCorrect() {
@@ -119,6 +120,7 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertEqual(self.mockControlsViewController.configs?.ctrlSchemeSetting, CtrlSchemeSetting.controlScheme1Slider)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings, [hdcs])
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlCount, 1)
+        XCTAssertEqual(self.mockControlsViewController.configs, self.mockMoireViewController.configs)
     }
 }
 
