@@ -10,6 +10,16 @@ import Foundation
 import UIKit
 
 class MockPatternManagerLegal: UIViewController, PatternManager {
+    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
+        // stub
+        return false
+    }
+    
+    func getPatterns(callerId: String) -> Array<Pattern>? {
+        // stub
+        return nil
+    }
+    
     private(set) var modifiedPattern: Pattern?
     private(set) var createdPattern: Pattern?
     private(set) var modifySpeedCallers: Set<String> = []
@@ -122,6 +132,16 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
 }
 
 class MockPatternManagerIllegal: UIViewController, PatternManager {
+    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
+        // stub
+        return false
+    }
+    
+    func getPatterns(callerId: String) -> Array<Pattern>? {
+        // stub
+        return nil
+    }
+    
     var doesReturnPatternControlled: Bool = true
     private(set) var modifySpeedCallers: Set<String> = []
     private(set) var modifyDirectionCallers: Set<String> = []

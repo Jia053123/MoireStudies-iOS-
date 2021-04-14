@@ -283,9 +283,19 @@ extension MainViewController: PatternManager {
         return true
     }
     
+    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
+        // stub
+        return false
+    }
+    
     func getPattern(callerId: String) -> Pattern? {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return nil}
         return self.currentMoire!.patterns[index]
+    }
+    
+    func getPatterns(callerId: String) -> Array<Pattern>? {
+        // stub
+        return nil
     }
     
     func hidePattern(callerId: String) -> Bool {
@@ -328,5 +338,10 @@ extension MainViewController: PatternManager {
         self.updateMainView()
         return true
     }
+    
+//    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
+//        // stub
+//        return false
+//    }
 }
 

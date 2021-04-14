@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /*
- Summary: stores the current configuration of the application independent from the moire data
+ Summary: stores a configuration of the application that can be applied to any moire data
  */
 struct Configurations: Codable, Equatable {
     var renderSetting: RenderSetting = RenderSetting.metal
