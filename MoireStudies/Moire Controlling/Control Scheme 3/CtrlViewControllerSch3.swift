@@ -12,9 +12,11 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
     var id: String!
     weak var delegate: PatternManager!
+    let initPattern: Pattern?
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
+        self.initPattern = pattern
         super.init(nibName: nil, bundle: nil)
         let controlView: CtrlViewSch3Subclass = CtrlViewSch3Subclass.init(frame: frame)
         self.view = controlView
@@ -25,6 +27,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     }
     
     required init?(coder: NSCoder) {
+        self.initPattern = nil
         super.init(coder: coder)
     }
 

@@ -13,9 +13,11 @@ class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
     var isHidden: Bool {get {return _isHidden}}
     var id: String!
     weak var delegate: PatternManager!
+    let initPattern: Pattern?
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
+        self.initPattern = pattern
         super.init(nibName: nil, bundle: nil)
         let controlView: SliderCtrlViewSch1 = SliderCtrlViewSch1.init(frame: frame)
         self.view = controlView
@@ -26,6 +28,7 @@ class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
     }
     
     required init?(coder: NSCoder) {
+        self.initPattern = nil
         super.init(coder: coder)
     }
 

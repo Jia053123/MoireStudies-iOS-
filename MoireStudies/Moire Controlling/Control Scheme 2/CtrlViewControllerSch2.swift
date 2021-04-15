@@ -11,9 +11,11 @@ import UIKit
 class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     var id: String!
     weak var delegate: PatternManager!
+    let initPattern: Pattern?
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
+        self.initPattern = pattern
         super.init(nibName: nil, bundle: nil)
         let controlView: SliderCtrlViewSch2 = SliderCtrlViewSch2.init(frame: frame)
         self.view = controlView
@@ -24,6 +26,7 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     }
 
     required init?(coder: NSCoder) {
+        self.initPattern = nil
         super.init(coder: coder)
     }
 
