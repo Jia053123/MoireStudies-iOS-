@@ -24,19 +24,20 @@ class ControlsViewController: UIViewController {
             c.removeFromParent()  // TODO: reuse?
         }
         let controlFrames = configs.controlFrames
-        assert(controlFrames.count >= patterns.count)
-        for i in 0..<patterns.count {
+        assert(controlFrames.count >= ids.count)
+        for i in 0..<ids.count {
             var cvc: CtrlViewController
             let id = ids[i]
+            let pattern = patterns.count > i ? patterns[i] : nil
             switch configs.ctrlSchemeSetting {
             case CtrlSchemeSetting.controlScheme1Slider:
-                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: pattern)
             case CtrlSchemeSetting.controlScheme2Slider:
-                cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch2.init(id: id, frame: controlFrames[i], pattern: pattern)
             case CtrlSchemeSetting.controlScheme1Gesture:
-                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch1.init(id: id, frame: controlFrames[i], pattern: pattern)
             case CtrlSchemeSetting.controlScheme3Slider:
-                cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: patterns[i])
+                cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: pattern)
             }
             cvc.delegate = delegate
             self.addChild(cvc)
@@ -44,10 +45,10 @@ class ControlsViewController: UIViewController {
             cvc.didMove(toParent: self)
         }
         // stub code for the high degree controls
-        let hdcvc = HighDegreeCtrlViewController.init(id: "01234", frame: Constants.UI.highDegreeControlFrame, patterns: patterns)
-        hdcvc.delegate = delegate
-        self.addChild(hdcvc)
-        self.view.addSubview(hdcvc.view)
-        hdcvc.didMove(toParent: self)
+//        let hdcvc = HighDegreeCtrlViewController.init(id: "01234", frame: Constants.UI.highDegreeControlFrame, patterns: patterns)
+//        hdcvc.delegate = delegate
+//        self.addChild(hdcvc)
+//        self.view.addSubview(hdcvc.view)
+//        hdcvc.didMove(toParent: self)
     }
 }
