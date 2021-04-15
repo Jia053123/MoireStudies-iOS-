@@ -73,6 +73,18 @@ class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
         assert(self.mockMoireViewController.currentPatterns == m1C.patterns)
     }
     
+    private func setUpOneMoireAndLoadWithOneHighDegCtrl(numOfPatterns: Int) {
+        m1 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: numOfPatterns)
+        m1C = m1.copy() as? Moire
+        self.mockMoireModelNormal.setStoredMoires(moires: [m1])
+        let hdcs = HighDegreeControlSettings.init(indexesOfPatternControlled: Set(0...(numOfPatterns-1)))
+        let config = Configurations.init(highDegreeControlSettings: [hdcs])
+        self.mainViewController.configurations = config
+        self.prepareMainViewController()
+        assert(self.mockMoireViewController.currentPatterns == m1C.patterns)
+    }
+    
     func testSettingUpDependencies() throws {
         let m1 = Moire()
         self.mockMoireModelNormal.setStoredMoires(moires: [m1])
@@ -277,7 +289,8 @@ extension MainViewControllerTestsWithNormalModel {
     }
     
     func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
-        
+        self.setUpOneMoireAndLoadWithOneHighDegCtrl(numOfPatterns: 4)
+//        let highDegId = self.mockControlsViewController.highDegIds!.last
     }
     
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
