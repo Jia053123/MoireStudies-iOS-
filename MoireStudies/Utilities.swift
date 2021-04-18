@@ -78,4 +78,13 @@ class Utilities: NSObject {
         }
         return fittedMoire
     }
+    
+    static func tryAccessArray<T>(array: Array<T>, index: Int) -> T? {
+        let lastArrIndex = array.count - 1
+        if index > lastArrIndex {
+            return nil
+        } else {
+            return array[index]
+        }
+    }
 }

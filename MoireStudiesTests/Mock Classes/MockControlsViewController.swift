@@ -23,14 +23,16 @@ class MockControlsViewController: ControlsViewController {
         self.ids = nil
     }
     
-    override func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
+    override func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, highDegIds: Array<String>, delegate: PatternManager) {
+        // TODO: hdid
         self.setUpPerformed = true
         self.initPatterns = patterns
         self.ids = ids
         self.configs = configs
     }
     
-    override func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
+    override func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, highDegIds: Array<String>, delegate: PatternManager) {
+        // TODO: hdid
         self.resetPerformed = true
         self.initPatterns = patterns
         self.ids = ids

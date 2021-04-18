@@ -26,13 +26,16 @@ struct Configurations: Codable, Equatable {
             }
         }
     }
+    var highDegControlFrames: Array<CGRect> {
+        get {return Constants.UI.highDegreeControlFrames}
+    }
     var highDegreeControlCount: Int {get {return self.highDegreeControlSettings.count}}
     var highDegreeControlSettings: Array<HighDegreeControlSettings> = []
 }
 
 struct HighDegreeControlSettings: Codable, Equatable {
     var highDegCtrlSchemeSetting: HighDegCtrlSchemeSetting = .basicScheme
-    var indexesOfPatternControlled: Set<Int>
+    var indexesOfPatternControlled: Array<Int>
 }
 
 enum CtrlSchemeSetting: String, Codable {

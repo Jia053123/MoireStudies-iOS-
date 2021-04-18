@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SliderHighDegreeCtrlView: UIView {
-    var target: HighDegreeCtrlViewController!
+    var target: HighDegCtrlViewControllerBasic!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)

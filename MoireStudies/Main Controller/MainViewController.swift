@@ -138,7 +138,7 @@ class MainViewController: UIViewController {
         for i in 0..<self.currentMoire!.patterns.count {
             ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: [i])!)
         }
-        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, delegate: self)
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, highDegIds: [], delegate: self) // TODO: stub
     }
     
     func resetControls() {

@@ -8,29 +8,32 @@
 import Foundation
 import UIKit
 
-class HighDegreeCtrlViewController: UIViewController {
+class HighDegCtrlViewControllerBasic: UIViewController {
     var id: String!
     var delegate: PatternManager!
+    let initPattern: Array<Pattern?>
     
-    required init(id: String, frame: CGRect, patterns: Array<Pattern>?) {
+    required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
         self.id = id
+        self.initPattern = patterns
         super.init(nibName: nil, bundle: nil)
         
         let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
         self.view = controlView
         controlView.target = self
-        if let ps = patterns {
-            self.matchControlsWithModel(patterns: ps)
-        }
+//        if let ps = patterns {
+            self.matchControlsWithModel(patterns: patterns)//ps)
+//        }
     }
     
     required init?(coder: NSCoder) {
+        self.initPattern = []
         super.init(coder: coder)
     }
 }
 
-extension HighDegreeCtrlViewController: HighDegCtrlViewController {
-    func matchControlsWithModel(patterns: Array<Pattern>) {
+extension HighDegCtrlViewControllerBasic: HighDegCtrlViewController {
+    func matchControlsWithModel(patterns: Array<Pattern?>) {
         // stub
     }
 }

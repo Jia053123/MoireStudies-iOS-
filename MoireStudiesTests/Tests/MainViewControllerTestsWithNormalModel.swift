@@ -78,7 +78,7 @@ class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
         self.resetAndPopulate(moire: m1, numOfPatterns: numOfPatterns)
         m1C = m1.copy() as? Moire
         self.mockMoireModelNormal.setStoredMoires(moires: [m1])
-        let hdcs = HighDegreeControlSettings.init(indexesOfPatternControlled: Set(0...(numOfPatterns-1)))
+        let hdcs = HighDegreeControlSettings.init(indexesOfPatternControlled: Array(0...(numOfPatterns-1)))
         let config = Configurations.init(highDegreeControlSettings: [hdcs])
         self.mainViewController.configurations = config
         self.prepareMainViewController()
@@ -118,8 +118,8 @@ extension MainViewControllerTestsWithNormalModel {
         // TODO: update upon adding new entries to the config struct
         var testConfigs = Configurations.init()
         testConfigs.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme1Slider
-        let setOfIndexesToControl: Set<Int> = [1,2]
-        let hdcs = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: setOfIndexesToControl)
+        let arrOfIndexesToControl: Array<Int> = [1,2]
+        let hdcs = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: arrOfIndexesToControl)
         testConfigs.highDegreeControlSettings = [hdcs]
         self.mainViewController.configurations = testConfigs
         
