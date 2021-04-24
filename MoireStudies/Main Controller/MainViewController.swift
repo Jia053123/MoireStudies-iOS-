@@ -138,7 +138,14 @@ class MainViewController: UIViewController {
         for i in 0..<self.currentMoire!.patterns.count {
             ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: [i])!)
         }
-        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, highDegIds: [], delegate: self) // TODO: stub
+        var hdIds: Array<String> = []
+        for i in 0..<self.configurations!.highDegreeControlCount {
+            let indexes = self.configurations!.highDegreeControlSettings[i].indexesOfPatternControlled
+            if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexes) {
+                hdIds.append(newId)
+            }
+        }
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, highDegIds: hdIds, delegate: self)
     }
     
     func resetControls() {
@@ -230,7 +237,10 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(speed: CGFloat, callerId: String) -> Bool {
-//        print("setting speed to: ", speed)
+        guard self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.count == 1 else {
+            print("called modifyPattern with a high degree id")
+            return false
+        }
         guard BoundsManager.speedRange.contains(speed) else {
             print("speed out of bound")
             return false
@@ -244,6 +254,10 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(direction: CGFloat, callerId: String) -> Bool {
+        guard self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.count == 1 else {
+            print("called modifyPattern with a high degree id")
+            return false
+        }
         guard BoundsManager.directionRange.contains(direction) else {
             print("direction out of bound")
             return false
@@ -257,7 +271,10 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool {
-//        print("setting blackWidth to: ", blackWidth)
+        guard self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.count == 1 else {
+            print("called modifyPattern with a high degree id")
+            return false
+        }
         guard BoundsManager.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
             return false
@@ -271,6 +288,10 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPattern(whiteWidth: CGFloat, callerId: String) -> Bool {
+        guard self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.count == 1 else {
+            print("called modifyPattern with a high degree id")
+            return false
+        }
         guard BoundsManager.whiteWidthRange.contains(whiteWidth) else {
             print("whiteWidth out of bound")
             return false
@@ -284,7 +305,10 @@ extension MainViewController: PatternManager {
     }
     
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
-        // stub
+        // TODO: stub
+        // if array length is wrong, return false
+        
+        // if not all the changes are legal, apply what is legal, and return false
         return false
     }
     
@@ -294,7 +318,7 @@ extension MainViewController: PatternManager {
     }
     
     func getPatterns(callerId: String) -> Array<Pattern>? {
-        // stub
+        // TODO: stub
         return nil
     }
     
@@ -340,7 +364,7 @@ extension MainViewController: PatternManager {
     }
     
 //    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
-//        // stub
+//        // TODO: stub
 //        return false
 //    }
 }

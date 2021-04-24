@@ -14,7 +14,7 @@ protocol PatternManager: UIViewController {
     func modifyPattern(direction: CGFloat, callerId: String) -> Bool
     func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool
     func modifyPattern(whiteWidth: CGFloat, callerId: String) -> Bool
-    /// if cannot apply all the changes, apply what is legal, and return false
+    /// if array length is wrong, return false; if not all the changes are legal, apply what is legal, and return false
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool
     
     func getPattern(callerId: String) -> Pattern?

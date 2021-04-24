@@ -13,25 +13,6 @@ class SaveFilesViewControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var saveFilesViewController: SaveFilesViewController!
     
-    func createPseudoRandomMoire(numOfPatterns: Int, seed: CGFloat) -> Moire {
-        let newMoire = Moire()
-        newMoire.resetData()
-        let adjustment = seed.truncatingRemainder(dividingBy: 1.0)
-        let basePattern = Pattern.init(speed: 10.0+adjustment, direction: 1.0+adjustment, blackWidth: 5.0+adjustment, whiteWidth: 6.0+adjustment)
-        for i in 0..<numOfPatterns {
-            let newPattern = Pattern.init(speed: basePattern.speed + CGFloat(i) * 0.01,
-                                          direction: basePattern.direction + CGFloat(i) * 0.01,
-                                          blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01,
-                                          whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01)
-            assert(BoundsManager.speedRange.contains(newPattern.speed))
-            assert(BoundsManager.directionRange.contains(newPattern.direction))
-            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
-            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
-            newMoire.patterns.append(newPattern)
-        }
-        return newMoire
-    }
-    
     func testLoadCells() -> Array<UICollectionViewCell> { // not sure if this is the correct way to test it...
         var cells: Array<UICollectionViewCell> = []
         let numOfSection = self.saveFilesViewController.numberOfSections(in: self.saveFilesViewController.collectionView)
@@ -69,12 +50,12 @@ class SaveFilesViewControllerTestsNormal: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
-        let m1 = self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
+        let m1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
         let m1Id = m1.id
         let storedMoires = [m1,
-                            self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setStoredMoires(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = m1Id
         self.prepareSaveFilesViewController()
@@ -82,9 +63,9 @@ class SaveFilesViewControllerTestsNormal: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
-        let storedMoires = [self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+        let storedMoires = [TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setStoredMoires(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = "-9009"
         self.prepareSaveFilesViewController()
@@ -115,12 +96,12 @@ class SaveFilesViewControllerTestsCorrupted: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
-        let m1 = self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
+        let m1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
         let m1Id = m1.id
         let storedMoires = [m1,
-                            self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setMoiresSupposedToBeStored(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = m1Id
         self.prepareSaveFilesViewController()
@@ -128,9 +109,9 @@ class SaveFilesViewControllerTestsCorrupted: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
-        let storedMoires = [self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+        let storedMoires = [TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setMoiresSupposedToBeStored(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = "invalid id"
         self.prepareSaveFilesViewController()
@@ -161,12 +142,12 @@ class SaveFilesViewControllerTestsReadOnly: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyAndIdAvailable_NoRuntimeError() {
-        let m1 = self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
+        let m1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.513)
         let m1Id = m1.id
         let storedMoires = [m1,
-                            self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setExistingMoires(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = m1Id
         self.prepareSaveFilesViewController()
@@ -174,9 +155,9 @@ class SaveFilesViewControllerTestsReadOnly: SaveFilesViewControllerTests {
     }
     
     func testSettingUp_ModelNotEmptyButIdNotAvailable_NoRuntimeError() {
-        let storedMoires = [self.createPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
-                            self.createPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
-                            self.createPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
+        let storedMoires = [TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 2, seed: 1.564),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 2.998),
+                            TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 1, seed: 2.378)]
         self.mockMoireModel.setExistingMoires(moires: storedMoires)
         self.saveFilesViewController.initiallySelectedMoireId = "invalid id"
         self.prepareSaveFilesViewController()

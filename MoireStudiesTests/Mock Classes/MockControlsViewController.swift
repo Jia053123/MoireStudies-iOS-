@@ -22,6 +22,7 @@ class MockControlsViewController: ControlsViewController {
         self.setUpPerformed = false
         self.resetPerformed = false
         self.ids = nil
+        self.highDegIds = nil
     }
     
     override func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, highDegIds: Array<String>, delegate: PatternManager) {
