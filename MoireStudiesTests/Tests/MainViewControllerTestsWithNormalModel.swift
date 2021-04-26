@@ -305,40 +305,42 @@ extension MainViewControllerTestsWithNormalModel {
         self.prepareMainViewController()
         XCTAssertEqual(self.mockControlsViewController.highDegIds?.count, 2)
         assert(self.mockMoireViewController.currentPatterns == defaultTestMoireCopy.patterns)
-        
+        // modify all patterns
         let highDegId1 = self.mockControlsViewController.highDegIds!.first!
         let m2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 1.999)
         assert(defaultTestMoire != m2)
         XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m2.patterns, callerId: highDegId1))
+        XCTAssertNotEqual(self.mockMoireViewController.currentPatterns, defaultTestMoire.patterns)
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, m2.patterns)
-        
+        // wrong patterns length
         let highDegId2 = self.mockControlsViewController.highDegIds!.last!
         let m3 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 0.876)
         let existingPatterns3 = self.mockMoireViewController.currentPatterns
         XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m3.patterns, callerId: highDegId2))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns3)
-
+        // modify some but not all of the patterns
         let m4 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.111)
         var expectedPatterns4 = m4.patterns
         expectedPatterns4.insert(self.mockMoireViewController.currentPatterns![2], at: 2)
         XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m4.patterns, callerId: highDegId2))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns4)
-
+        // have some valid and invalid values: only the valid ones are applied; return false
         let m5 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.926)
         m5.patterns[0].speed = 999999
         assert(!BoundsManager.speedRange.contains(m5.patterns[0].speed))
         m5.patterns[1].direction = -9999999
-        m5.patterns[1].blackWidth = 9999999
         assert(!BoundsManager.directionRange.contains(m5.patterns[1].direction))
-        assert(!BoundsManager.blackWidthRange.contains(m5.patterns[1].blackWidth))
-        m5.patterns[2].whiteWidth = -9999999
-        assert(!BoundsManager.blackWidthRange.contains(m5.patterns[2].whiteWidth))
+        m5.patterns[1].whiteWidth = 9999999
+        assert(!BoundsManager.whiteWidthRange.contains(m5.patterns[1].whiteWidth))
+        m5.patterns[2].blackWidth = -9999999
+        assert(!BoundsManager.blackWidthRange.contains(m5.patterns[2].blackWidth))
         var expectedPatterns5 = m5.patterns
-        let currentPatterns5 = self.mockMoireViewController.currentPatterns!
-        expectedPatterns5[0].speed = currentPatterns5[0].speed
-        expectedPatterns5[1].direction = currentPatterns5[1].direction
-        expectedPatterns5[1].blackWidth = currentPatterns5[1].blackWidth
-        expectedPatterns5[2].whiteWidth = currentPatterns5[2].whiteWidth
+        let oldPatterns5 = self.mockMoireViewController.currentPatterns!
+        expectedPatterns5[0].speed = oldPatterns5[0].speed
+        expectedPatterns5[1].direction = oldPatterns5[1].direction
+        expectedPatterns5[1].whiteWidth = oldPatterns5[1].whiteWidth
+        expectedPatterns5.insert(oldPatterns5[2], at: 2)
+        expectedPatterns5[3].blackWidth = oldPatterns5[3].blackWidth
         XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m5.patterns, callerId: highDegId2))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns5)
     }

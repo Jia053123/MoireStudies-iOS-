@@ -236,20 +236,39 @@ extension MainViewController: PatternManager {
         return true
     }
     
+    private func modifyPattern(speed: CGFloat, patternIndex: Int) -> Bool {
+        guard BoundsManager.speedRange.contains(speed) else {
+            print("speed out of bound")
+            return false
+        }
+        currentMoire!.patterns[patternIndex].speed = speed
+        return true
+    }
+    
     func modifyPattern(speed: CGFloat, callerId: String) -> Bool {
         guard self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.count == 1 else {
             print("called modifyPattern with a high degree id")
             return false
         }
-        guard BoundsManager.speedRange.contains(speed) else {
-            print("speed out of bound")
-            return false
-        }
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {
+            print("can't find id")
             return false
         }
-        currentMoire!.patterns[index].speed = speed
-        self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        let success = self.modifyPattern(speed: speed, patternIndex: index)
+        if success {
+            self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func modifyPattern(direction: CGFloat, patternIndex: Int) -> Bool {
+        guard BoundsManager.directionRange.contains(direction) else {
+            print("direction out of bound")
+            return false
+        }
+        currentMoire!.patterns[patternIndex].direction = direction
         return true
     }
     
@@ -258,15 +277,25 @@ extension MainViewController: PatternManager {
             print("called modifyPattern with a high degree id")
             return false
         }
-        guard BoundsManager.directionRange.contains(direction) else {
-            print("direction out of bound")
-            return false
-        }
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {
+            print("can't find id")
             return false
         }
-        currentMoire!.patterns[index].direction = direction
-        self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        let success = self.modifyPattern(direction: direction, patternIndex: index)
+        if success {
+            self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func modifyPattern(blackWidth: CGFloat, patternIndex: Int) -> Bool {
+        guard BoundsManager.blackWidthRange.contains(blackWidth) else {
+            print("blackWidth out of bound")
+            return false
+        }
+        currentMoire!.patterns[patternIndex].blackWidth = blackWidth
         return true
     }
     
@@ -275,15 +304,25 @@ extension MainViewController: PatternManager {
             print("called modifyPattern with a high degree id")
             return false
         }
-        guard BoundsManager.blackWidthRange.contains(blackWidth) else {
-            print("blackWidth out of bound")
-            return false
-        }
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {
+            print("can't find id")
             return false
         }
-        currentMoire!.patterns[index].blackWidth = blackWidth
-        self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+        let success = self.modifyPattern(blackWidth: blackWidth, patternIndex: index)
+        if success {
+            self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func modifyPattern(whiteWidth: CGFloat, patternIndex: Int) -> Bool {
+        guard BoundsManager.whiteWidthRange.contains(whiteWidth) else {
+            print("whiteWidth out of bound")
+            return false
+        }
+        currentMoire!.patterns[patternIndex].whiteWidth = whiteWidth
         return true
     }
     
@@ -292,24 +331,45 @@ extension MainViewController: PatternManager {
             print("called modifyPattern with a high degree id")
             return false
         }
-        guard BoundsManager.whiteWidthRange.contains(whiteWidth) else {
-            print("whiteWidth out of bound")
-            return false
-        }
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {
+            print("can't find id")
             return false
         }
-        currentMoire!.patterns[index].whiteWidth = whiteWidth
-        self.moireViewController .modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
-        return true
+        let success = self.modifyPattern(whiteWidth: whiteWidth, patternIndex: index)
+        if success {
+            self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            return true
+        } else {
+            return false
+        }
     }
     
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
-        // TODO: stub
+        guard let patternIndexes = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId) else {
+            return false
+        }
         // if array length is wrong, return false
-        
+        guard modifiedPatterns.count == patternIndexes.count else {
+            return false
+        }
         // if not all the changes are legal, apply what is legal, and return false
-        return false
+        var completeSuccess = true
+        for i in 0..<patternIndexes.count {
+            let newPattern = modifiedPatterns[i]
+            let patternIndex = patternIndexes[i]
+            var success = true
+            success = self.modifyPattern(speed: newPattern.speed, patternIndex: patternIndex)
+            completeSuccess = completeSuccess && success
+            success = self.modifyPattern(direction: newPattern.direction, patternIndex: patternIndex)
+            completeSuccess = completeSuccess && success
+            success = self.modifyPattern(blackWidth: newPattern.blackWidth, patternIndex: patternIndex)
+            completeSuccess = completeSuccess && success
+            success = self.modifyPattern(whiteWidth: newPattern.whiteWidth, patternIndex: patternIndex)
+            completeSuccess = completeSuccess && success
+            
+            self.moireViewController.modifyPatternView(patternViewIndex: patternIndex, newPattern: currentMoire!.patterns[patternIndex])
+        }
+        return completeSuccess
     }
     
     func getPattern(callerId: String) -> Pattern? {
