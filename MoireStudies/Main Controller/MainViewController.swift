@@ -105,6 +105,9 @@ class MainViewController: UIViewController {
             self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemoMoire()
         }
         self.currentMoire = Utilities.fitWithinBounds(moire: self.currentMoire!)
+        if self.currentMoire!.patterns.count > Constants.Constrains.numOfPatternsPerMoire.upperBound {
+            self.currentMoire!.patterns = Array(self.currentMoire!.patterns[0..<Constants.Constrains.numOfPatternsPerMoire.upperBound])
+        }
     }
     
     func initConfigs() {

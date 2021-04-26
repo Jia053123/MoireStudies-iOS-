@@ -220,7 +220,7 @@ extension MainViewControllerTestsWithNormalModel {
         _ = self.mockMoireModelNormal.saveOrModify(moire: m3)
         self.mainViewController.moireIdToInit = m2C.id
         self.prepareMainViewController()
-        XCTAssert(self.mockMoireViewController.currentPatterns == Array(m2C.patterns[0..<Constants.Constrains.numOfPatternsPerMoire.upperBound]))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, Array(m2C.patterns[0..<Constants.Constrains.numOfPatternsPerMoire.upperBound]))
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
     }
     
