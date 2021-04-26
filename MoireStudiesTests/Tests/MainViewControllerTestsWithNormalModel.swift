@@ -296,55 +296,6 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, defaultTestMoireCopy.patterns)
     }
     
-    func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
-        self.setUpDefaultTestMoire(numOfPatterns: 4)
-        let hdcs1 = HighDegreeControlSettings.init(indexesOfPatternControlled: Array(0...3))
-        let hdcs2 = HighDegreeControlSettings.init(indexesOfPatternControlled: [0,1,3])
-        let config = Configurations.init(highDegreeControlSettings: [hdcs1, hdcs2])
-        self.mainViewController.configurations = config
-        self.prepareMainViewController()
-        XCTAssertEqual(self.mockControlsViewController.highDegIds?.count, 2)
-        assert(self.mockMoireViewController.currentPatterns == defaultTestMoireCopy.patterns)
-        // modify all patterns
-        let highDegId1 = self.mockControlsViewController.highDegIds!.first!
-        let m2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 1.999)
-        assert(defaultTestMoire != m2)
-        XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m2.patterns, callerId: highDegId1))
-        XCTAssertNotEqual(self.mockMoireViewController.currentPatterns, defaultTestMoire.patterns)
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns, m2.patterns)
-        // wrong patterns length
-        let highDegId2 = self.mockControlsViewController.highDegIds!.last!
-        let m3 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 0.876)
-        let existingPatterns3 = self.mockMoireViewController.currentPatterns
-        XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m3.patterns, callerId: highDegId2))
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns3)
-        // modify some but not all of the patterns
-        let m4 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.111)
-        var expectedPatterns4 = m4.patterns
-        expectedPatterns4.insert(self.mockMoireViewController.currentPatterns![2], at: 2)
-        XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m4.patterns, callerId: highDegId2))
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns4)
-        // have some valid and invalid values: only the valid ones are applied; return false
-        let m5 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.926)
-        m5.patterns[0].speed = 999999
-        assert(!BoundsManager.speedRange.contains(m5.patterns[0].speed))
-        m5.patterns[1].direction = -9999999
-        assert(!BoundsManager.directionRange.contains(m5.patterns[1].direction))
-        m5.patterns[1].whiteWidth = 9999999
-        assert(!BoundsManager.whiteWidthRange.contains(m5.patterns[1].whiteWidth))
-        m5.patterns[2].blackWidth = -9999999
-        assert(!BoundsManager.blackWidthRange.contains(m5.patterns[2].blackWidth))
-        var expectedPatterns5 = m5.patterns
-        let oldPatterns5 = self.mockMoireViewController.currentPatterns!
-        expectedPatterns5[0].speed = oldPatterns5[0].speed
-        expectedPatterns5[1].direction = oldPatterns5[1].direction
-        expectedPatterns5[1].whiteWidth = oldPatterns5[1].whiteWidth
-        expectedPatterns5.insert(oldPatterns5[2], at: 2)
-        expectedPatterns5[3].blackWidth = oldPatterns5[3].blackWidth
-        XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m5.patterns, callerId: highDegId2))
-        XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns5)
-    }
-    
     func testModifyMoire_InvalidIdLegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 3)
         
@@ -407,10 +358,6 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == defaultTestMoireCopy.id}) == defaultTestMoireCopy)
     }
     
-    func testModifyMoire_MultiplePatterns_InvalidIdNotEnoughPatternLegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
-        // Stub
-    }
-    
     func testModifyMoire_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
@@ -436,10 +383,6 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireViewController.currentPatterns == defaultTestMoireCopy.patterns)
         XCTAssertTrue(self.mainViewController.saveMoire())
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == defaultTestMoireCopy.id}) == defaultTestMoireCopy)
-    }
-    
-    func testModifyMoire_MultiplePatterns_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
-        //Stub
     }
     
     func testModifyMoire_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternUnchanged() {
@@ -473,8 +416,70 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == defaultTestMoireCopy.id}) == defaultTestMoireCopy)
     }
     
-    func testModifyMoire_MultiplePatterns_InvalidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
-        // Stub
+    func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
+        self.setUpDefaultTestMoire(numOfPatterns: 4)
+        let hdcs1 = HighDegreeControlSettings.init(indexesOfPatternControlled: Array(0...3))
+        let hdcs2 = HighDegreeControlSettings.init(indexesOfPatternControlled: [0,1,3])
+        let config = Configurations.init(highDegreeControlSettings: [hdcs1, hdcs2])
+        self.mainViewController.configurations = config
+        self.prepareMainViewController()
+        assert(self.mockControlsViewController.highDegIds?.count == 2)
+        assert(self.mockMoireViewController.currentPatterns == defaultTestMoireCopy.patterns)
+        // modify all patterns
+        let highDegId1 = self.mockControlsViewController.highDegIds!.first!
+        let m2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 1.999)
+        assert(defaultTestMoire != m2)
+        XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m2.patterns, callerId: highDegId1))
+        XCTAssertNotEqual(self.mockMoireViewController.currentPatterns, defaultTestMoire.patterns)
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, m2.patterns)
+        // modify some but not all of the patterns
+        let highDegId2 = self.mockControlsViewController.highDegIds!.last!
+        let m4 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.111)
+        var expectedPatterns4 = m4.patterns
+        expectedPatterns4.insert(self.mockMoireViewController.currentPatterns![2], at: 2)
+        XCTAssertTrue(self.mainViewController.modifyPatterns(modifiedPatterns: m4.patterns, callerId: highDegId2))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns4)
+    }
+    
+    func testModifyMoire_MultiplePatterns_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
+        self.setUpDefaultTestMoire(numOfPatterns: 4)
+        let hdcs = HighDegreeControlSettings.init(indexesOfPatternControlled: [0,1,3])
+        let config = Configurations.init(highDegreeControlSettings: [hdcs])
+        self.mainViewController.configurations = config
+        self.prepareMainViewController()
+        // wrong patterns length
+        let highDegId = self.mockControlsViewController.highDegIds!.last!
+        let m3 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 0.876)
+        let existingPatterns3 = self.mockMoireViewController.currentPatterns
+        XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m3.patterns, callerId: highDegId))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns3)
+        // have some valid and invalid values: only the valid ones are applied; return false
+        let m5 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.926)
+        m5.patterns[0].speed = 999999
+        assert(!BoundsManager.speedRange.contains(m5.patterns[0].speed))
+        m5.patterns[1].direction = -9999999
+        assert(!BoundsManager.directionRange.contains(m5.patterns[1].direction))
+        m5.patterns[1].whiteWidth = 9999999
+        assert(!BoundsManager.whiteWidthRange.contains(m5.patterns[1].whiteWidth))
+        m5.patterns[2].blackWidth = -9999999
+        assert(!BoundsManager.blackWidthRange.contains(m5.patterns[2].blackWidth))
+        var expectedPatterns5 = m5.patterns
+        let oldPatterns5 = self.mockMoireViewController.currentPatterns!
+        expectedPatterns5[0].speed = oldPatterns5[0].speed
+        expectedPatterns5[1].direction = oldPatterns5[1].direction
+        expectedPatterns5[1].whiteWidth = oldPatterns5[1].whiteWidth
+        expectedPatterns5.insert(oldPatterns5[2], at: 2)
+        expectedPatterns5[3].blackWidth = oldPatterns5[3].blackWidth
+        XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m5.patterns, callerId: highDegId))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns5)
+    }
+    
+    func testModifyMoire_MultiplePatterns_InvalidIdLegalValues_ReturnFalseAndPatternsUnchanged() {
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        let m = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.004)
+        let existingPatterns = self.mockMoireViewController.currentPatterns
+        XCTAssertFalse(self.mainViewController.modifyPatterns(modifiedPatterns: m.patterns, callerId: "023"))
+        XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns)
     }
 }
 
