@@ -15,7 +15,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
         return false
     }
     
-    func getPatterns(callerId: String) -> Array<Pattern>? {
+    func retrievePatterns(callerId: String) -> Array<Pattern>? {
         // stub
         return nil
     }
@@ -103,7 +103,7 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
         return true
     }
     
-    func getPattern(callerId: String) -> Pattern? {
+    func retrievePattern(callerId: String) -> Pattern? {
         self.getCallers.insert(callerId)
         return self.modifiedPattern
     }
@@ -137,7 +137,7 @@ class MockPatternManagerIllegal: UIViewController, PatternManager {
         return false
     }
     
-    func getPatterns(callerId: String) -> Array<Pattern>? {
+    func retrievePatterns(callerId: String) -> Array<Pattern>? {
         // stub
         return nil
     }
@@ -213,7 +213,7 @@ class MockPatternManagerIllegal: UIViewController, PatternManager {
         return false
     }
     
-    func getPattern(callerId: String) -> Pattern? {
+    func retrievePattern(callerId: String) -> Pattern? {
         self.getCallers.insert(callerId)
         return self.doesReturnPatternControlled ? Pattern.defaultPattern() : nil
     }

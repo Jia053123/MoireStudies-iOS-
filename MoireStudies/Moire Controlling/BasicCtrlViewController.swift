@@ -52,7 +52,7 @@ extension BasicCtrlViewController {
         guard let del = self.delegate else {return false}
         let success = del.modifyPattern(blackWidth: blackWidth, callerId: self.id)
         if success {
-            let newPattern = del.getPattern(callerId: self.id)!
+            let newPattern = del.retrievePattern(callerId: self.id)!
             self.matchControlsWithModel(pattern: newPattern)
         }
         return success
@@ -62,7 +62,7 @@ extension BasicCtrlViewController {
         guard let del = self.delegate else {return false}
         let success = del.modifyPattern(whiteWidth: whiteWidth, callerId: self.id)
         if success {
-            let newPattern = del.getPattern(callerId: self.id)!
+            let newPattern = del.retrievePattern(callerId: self.id)!
             self.matchControlsWithModel(pattern: newPattern)
         }
         return success
@@ -70,7 +70,7 @@ extension BasicCtrlViewController {
     
     func modifyPattern(fillRatio: CGFloat) -> Bool {
         guard let del = self.delegate else {return false}
-        guard let p: Pattern = del.getPattern(callerId: self.id) else {return false}
+        guard let p: Pattern = del.retrievePattern(callerId: self.id) else {return false}
         let sf = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fillRatio, scaleFactor: sf)
         let r1 = del.modifyPattern(blackWidth: result.blackWidth, callerId: self.id)
@@ -78,7 +78,7 @@ extension BasicCtrlViewController {
         
         let success = r1 && r2
         if success {
-            let newPattern = del.getPattern(callerId: self.id)!
+            let newPattern = del.retrievePattern(callerId: self.id)!
             self.matchControlsWithModel(pattern: newPattern)
         }
         return success
@@ -86,7 +86,7 @@ extension BasicCtrlViewController {
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
         guard let del = self.delegate else {return false}
-        guard let p: Pattern = del.getPattern(callerId: self.id) else {return false}
+        guard let p: Pattern = del.retrievePattern(callerId: self.id) else {return false}
         let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fr, scaleFactor: scaleFactor)
         let r1 = del.modifyPattern(blackWidth: result.blackWidth, callerId: self.id)
@@ -94,7 +94,7 @@ extension BasicCtrlViewController {
         
         let success = r1 && r2
         if success {
-            let newPattern = del.getPattern(callerId: self.id)!
+            let newPattern = del.retrievePattern(callerId: self.id)!
             self.matchControlsWithModel(pattern: newPattern)
         }
         return success
@@ -102,7 +102,7 @@ extension BasicCtrlViewController {
     
     func duplicatePattern() {
         guard let del = self.delegate else {return}
-        guard let newP: Pattern = del.getPattern(callerId: self.id) else {return}
+        guard let newP: Pattern = del.retrievePattern(callerId: self.id) else {return}
         _ = del.createPattern(callerId: self.id, newPattern: newP)
     }
     

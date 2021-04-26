@@ -372,12 +372,12 @@ extension MainViewController: PatternManager {
         return completeSuccess
     }
     
-    func getPattern(callerId: String) -> Pattern? {
+    func retrievePattern(callerId: String) -> Pattern? {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return nil}
         return self.currentMoire!.patterns[index]
     }
     
-    func getPatterns(callerId: String) -> Array<Pattern>? {
+    func retrievePatterns(callerId: String) -> Array<Pattern>? {
         // TODO: stub
         return nil
     }

@@ -65,9 +65,10 @@
 		8E9F3680261FB096002471F5 /* SliderHighDegreeCtrlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */; };
 		8E9F3685262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */; };
 		8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */; };
-		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */; };
+		8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */; };
 		8EBF7C86262529A3009E4F4B /* ControlsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */; };
 		8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */; };
+		8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -161,9 +162,10 @@
 		8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderHighDegreeCtrlView.xib; sourceTree = "<group>"; };
 		8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewControllerTests.swift; sourceTree = "<group>"; };
 		8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3Tests.swift; sourceTree = "<group>"; };
-		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTestsWithNormalModel.swift; sourceTree = "<group>"; };
+		8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewControllerTests.swift; sourceTree = "<group>"; };
 		8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
+		8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -290,7 +292,8 @@
 			children = (
 				8E6BF3F025AEC880005FE7CA /* LocalMoireModelTests.swift */,
 				8E64FF4E2602B3C7009A85DE /* SaveFilesViewControllerTests.swift */,
-				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift */,
+				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */,
+				8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */,
 				8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
 				8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */,
@@ -598,6 +601,7 @@
 			files = (
 				8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */,
 				8E9F3685262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift in Sources */,
+				8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */,
 				8E2ED93A25F74ECD00C7E817 /* MockControlsViewController.swift in Sources */,
 				8E64FF4A26005D47009A85DE /* MockPatternManager.swift in Sources */,
 				8E64FF4F2602B3C7009A85DE /* SaveFilesViewControllerTests.swift in Sources */,
@@ -608,7 +612,7 @@
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
 				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
-				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTestsWithNormalModel.swift in Sources */,
+				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

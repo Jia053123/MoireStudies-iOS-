@@ -17,11 +17,11 @@ class CtrlAndPatternMatcher {
         return self.registeredIds.contains(id)
     }
 
-    /// for example, if a controller controls the pattern 1, 2, 3, its id is "123"        
+    /// for example, if a controller controls the pattern 1, 22, 3, its id is "/1/22/3"
     func getOrCreateCtrlViewControllerId(indexesOfPatternControlled: Array<Int>) -> String? {
         var id: String = ""
         for i in 0..<indexesOfPatternControlled.count {
-            id.append(String(indexesOfPatternControlled[i]))
+            id.append("/" + String(indexesOfPatternControlled[i]))
         }
         if !self.registeredIds.contains(id) {
             print("new id created and registered")
@@ -33,9 +33,27 @@ class CtrlAndPatternMatcher {
     
     func getIndexesOfPatternControlled(controllerId: String) -> Array<Int>? {
         if self.isRegistered(id: controllerId) {
-            var indexes: Array<Int> = []
+            var allIndexesData: Array<String> = []
+            var currentIndexesData = ""
             for char in controllerId {
-                guard let newIndex = Int(String(char)) else {return nil}
+                if char == "/" {
+                    // record data collected (if not empty) and reset current data
+                    if currentIndexesData != "" {
+                        allIndexesData.append(currentIndexesData)
+                        currentIndexesData = ""
+                    }
+                } else {
+                    // add to current data
+                    currentIndexesData += String(char)
+                }
+            }
+            if currentIndexesData != "" {
+                allIndexesData.append(currentIndexesData)
+                currentIndexesData = ""
+            }
+            var indexes: Array<Int> = []
+            for d in allIndexesData {
+                guard let newIndex = Int(d) else {return nil}
                 indexes.append(newIndex)
             }
             return indexes

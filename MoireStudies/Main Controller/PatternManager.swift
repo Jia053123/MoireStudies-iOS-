@@ -17,8 +17,8 @@ protocol PatternManager: UIViewController {
     /// if array length is wrong, return false; if not all the changes are legal, apply what is legal, and return false
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool
     
-    func getPattern(callerId: String) -> Pattern?
-    func getPatterns(callerId: String) -> Array<Pattern>?
+    func retrievePattern(callerId: String) -> Pattern?
+    func retrievePatterns(callerId: String) -> Array<Pattern>?
     
     func highlightPattern(callerId: String) -> Bool
     func unhighlightPattern(callerId: String) -> Bool
