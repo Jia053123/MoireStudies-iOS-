@@ -25,6 +25,10 @@ class MainViewController: UIViewController {
     @IBOutlet weak var fileButton: UIButton!
     @IBOutlet weak var newPatternButton: UIButton!
     @IBOutlet weak var newHighDegCtrlButton: UIButton!
+    @IBOutlet weak var dialogueContainerView: UIView!
+    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var dialogueContent: UILabel!
     private var moireModel: MoireModel!
     var moireIdToInit: String?
     private var currentMoire: Moire?
@@ -75,6 +79,7 @@ class MainViewController: UIViewController {
         self.view.addSubview(self.controlsViewController.view)
         self.controlsViewController.didMove(toParent: self)
         // setup Buttons
+        self.dialogueContainerView.isHidden = true
         self.view.bringSubviewToFront(buttonsContainerView)
     }
     
@@ -197,6 +202,14 @@ extension MainViewController {
     }
     
     @IBAction func newHighDegCtrlButtonPressed(_ sender: Any) {
+        // TODO: stub
+    }
+    
+    @IBAction func confirmButtonPressed(_ sender: Any) {
+        // TODO: stub
+    }
+    
+    @IBAction func cancelButtonPressed(_ sender: Any) {
         // TODO: stub
     }
     

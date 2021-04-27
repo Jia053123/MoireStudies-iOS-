@@ -31,6 +31,7 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" systemColor="labelColor"/>
                                             <imageReference key="image" image="gearshape.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                         </state>
                                         <connections>
                                             <action selector="gearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F1l-75-yoy"/>
@@ -45,6 +46,7 @@
                                         </constraints>
                                         <state key="normal">
                                             <imageReference key="image" image="folder.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                         </state>
                                         <connections>
                                             <action selector="fileButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jcb-4y-1PW"/>
@@ -58,18 +60,21 @@
                                         </constraints>
                                         <state key="normal">
                                             <imageReference key="image" image="plus.rectangle.fill.on.rectangle.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                         </state>
                                         <connections>
                                             <action selector="newPatternButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0Zq-36-0Zn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIh-M2-A8h" userLabel="New High Degree Control Button">
-                                        <rect key="frame" x="55" y="55" width="30" height="30.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIh-M2-A8h" userLabel="New High Degree Control Button">
+                                        <rect key="frame" x="55" y="55" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="Oc2-Cb-Llo"/>
                                             <constraint firstAttribute="width" constant="30" id="bcP-RK-fpx"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="square.stack.3d.up.fill" catalog="system"/>
+                                        <state key="normal" image="square.stack.3d.up.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                        </state>
                                         <connections>
                                             <action selector="newHighDegCtrlButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KyQ-Kl-Xka"/>
                                         </connections>
@@ -89,19 +94,77 @@
                                     <constraint firstItem="ifa-h7-T8I" firstAttribute="top" secondItem="KkF-Ph-85z" secondAttribute="top" constant="15" id="ycx-7q-i7U"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2G-HA-6t5" userLabel="DialogueContainer">
+                                <rect key="frame" x="0.0" y="718" width="1024" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFF-6F-PMn" userLabel="Check">
+                                        <rect key="frame" x="979" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="chd-xd-xID"/>
+                                            <constraint firstAttribute="height" constant="30" id="zFN-Gd-oa3"/>
+                                        </constraints>
+                                        <state key="normal" image="checkmark.rectangle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="confirmButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZU9-0W-96D"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yvt-gS-tjI" userLabel="Cross">
+                                        <rect key="frame" x="939" y="10" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="4ok-lH-YCG"/>
+                                            <constraint firstAttribute="height" constant="30" id="rBa-ta-seb"/>
+                                        </constraints>
+                                        <state key="normal" image="xmark.rectangle.fill" catalog="system">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Pb-BZ-F2U"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Information and instructions for this dialogue" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iPl-l6-m4s" userLabel="Dialogue Content">
+                                        <rect key="frame" x="8" y="14.5" width="916" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstItem="yvt-gS-tjI" firstAttribute="leading" secondItem="iPl-l6-m4s" secondAttribute="trailing" constant="15" id="08l-BC-Dsu"/>
+                                    <constraint firstAttribute="height" constant="50" id="KSv-z2-l44"/>
+                                    <constraint firstAttribute="trailing" secondItem="hFF-6F-PMn" secondAttribute="trailing" constant="15" id="MGj-aa-dHG"/>
+                                    <constraint firstItem="hFF-6F-PMn" firstAttribute="centerY" secondItem="iPl-l6-m4s" secondAttribute="centerY" id="TeG-Ql-txx"/>
+                                    <constraint firstItem="yvt-gS-tjI" firstAttribute="centerY" secondItem="hFF-6F-PMn" secondAttribute="centerY" id="hqU-o8-R9k"/>
+                                    <constraint firstItem="iPl-l6-m4s" firstAttribute="leading" secondItem="O2G-HA-6t5" secondAttribute="leading" constant="8" id="lUi-Om-KiG"/>
+                                    <constraint firstAttribute="trailing" secondItem="hFF-6F-PMn" secondAttribute="trailing" constant="15" id="m8Z-u2-2LB"/>
+                                    <constraint firstItem="hFF-6F-PMn" firstAttribute="leading" secondItem="yvt-gS-tjI" secondAttribute="trailing" constant="10" id="qXa-ks-Ylr"/>
+                                    <constraint firstItem="hFF-6F-PMn" firstAttribute="centerY" secondItem="O2G-HA-6t5" secondAttribute="centerY" id="sp0-Aa-EDn"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration" identifier="MainView"/>
                         <constraints>
+                            <constraint firstItem="O2G-HA-6t5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4po-sU-9kw"/>
+                            <constraint firstItem="KkF-Ph-85z" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="9Sp-ZH-Maf"/>
+                            <constraint firstItem="KkF-Ph-85z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9iM-ZX-zUq"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KkF-Ph-85z" secondAttribute="trailing" id="F3s-mr-v40"/>
+                            <constraint firstItem="O2G-HA-6t5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VXw-SH-fPr"/>
                             <constraint firstItem="KkF-Ph-85z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Zej-Xn-8Ri"/>
+                            <constraint firstItem="O2G-HA-6t5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="a8n-p0-83d"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="9N9-Fj-8Zd"/>
                     <connections>
                         <outlet property="buttonsContainerView" destination="KkF-Ph-85z" id="8Q9-rY-li9"/>
+                        <outlet property="cancelButton" destination="yvt-gS-tjI" id="Wpq-xK-r2S"/>
+                        <outlet property="confirmButton" destination="hFF-6F-PMn" id="6DG-lS-D8G"/>
+                        <outlet property="dialogueContainerView" destination="O2G-HA-6t5" id="fc3-Eq-tPN"/>
+                        <outlet property="dialogueContent" destination="iPl-l6-m4s" id="p0C-BL-mk8"/>
                         <outlet property="fileButton" destination="coU-E5-Qvx" id="odG-dq-jVX"/>
                         <outlet property="gearButton" destination="ifa-h7-T8I" id="HD9-pE-jEx"/>
                         <outlet property="newHighDegCtrlButton" destination="cIh-M2-A8h" id="FLu-Ib-wkX"/>
@@ -272,15 +335,20 @@
         </scene>
     </scenes>
     <resources>
+        <image name="checkmark.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="folder.fill" catalog="system" width="128" height="97"/>
         <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <image name="plus.rectangle.fill.on.rectangle.fill" catalog="system" width="128" height="96"/>
         <image name="square.stack.3d.up.fill" catalog="system" width="128" height="124"/>
+        <image name="xmark.rectangle.fill" catalog="system" width="128" height="93"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
