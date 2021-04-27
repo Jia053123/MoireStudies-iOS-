@@ -29,6 +29,4 @@ protocol PatternManager: UIViewController {
     
     func createPattern(callerId: String?, newPattern: Pattern) -> Bool
     func deletePattern(callerId: String) -> Bool
-    
-//    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool
 }

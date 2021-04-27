@@ -20,10 +20,11 @@ import UIKit
             - MaskView(1) in mask property
  */
 class MainViewController: UIViewController {
+    @IBOutlet weak var buttonsContainerView: UIView!
     @IBOutlet weak var gearButton: UIButton!
     @IBOutlet weak var fileButton: UIButton!
     @IBOutlet weak var newPatternButton: UIButton!
-    @IBOutlet weak var buttonsContainerView: UIView!
+    @IBOutlet weak var newHighDegCtrlButton: UIButton!
     private var moireModel: MoireModel!
     var moireIdToInit: String?
     private var currentMoire: Moire?
@@ -195,6 +196,10 @@ extension MainViewController {
         performSegue(withIdentifier: "showSaveFilesView", sender: self.fileButton)
     }
     
+    @IBAction func newHighDegCtrlButtonPressed(_ sender: Any) {
+        // TODO: stub
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let s = sender as? UIButton {
             switch s {
@@ -211,6 +216,13 @@ extension MainViewController {
             }
         }
         self.pauseMoire()
+    }
+}
+
+extension MainViewController {
+    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
+        // TODO: stub
+        return false
     }
 }
 
@@ -425,10 +437,5 @@ extension MainViewController: PatternManager {
         self.updateMainView()
         return true
     }
-    
-//    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
-//        // TODO: stub
-//        return false
-//    }
 }
 
