@@ -80,6 +80,7 @@ class MainViewController: UIViewController {
         self.controlsViewController.didMove(toParent: self)
         // setup Buttons
         self.dialogueContainerView.isHidden = true
+        self.view.bringSubviewToFront(dialogueContainerView)
         self.view.bringSubviewToFront(buttonsContainerView)
     }
     

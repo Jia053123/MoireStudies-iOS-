@@ -311,6 +311,7 @@
                         <viewLayoutGuide key="safeArea" id="M60-6N-64f"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="V1K-fl-3A1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8Lz-Qa-okf" secondAttribute="trailing" constant="8" symbolic="YES" id="HNo-yn-fFF"/>
                             <constraint firstItem="gQV-eO-Ryg" firstAttribute="top" secondItem="M60-6N-64f" secondAttribute="top" constant="40" id="KmZ-qf-Ya7"/>
                             <constraint firstItem="M60-6N-64f" firstAttribute="trailing" secondItem="V1K-fl-3A1" secondAttribute="trailing" constant="20" id="PQF-C6-gJZ"/>
                             <constraint firstItem="8Lz-Qa-okf" firstAttribute="top" secondItem="M60-6N-64f" secondAttribute="top" constant="11" id="REk-Jt-B6f"/>

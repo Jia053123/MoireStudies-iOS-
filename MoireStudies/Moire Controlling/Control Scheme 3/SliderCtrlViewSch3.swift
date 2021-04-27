@@ -19,6 +19,7 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBOutlet weak var highlightButton: UIButton!
     @IBOutlet weak var dimButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
+    @IBOutlet weak var checkButton: UIButton!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -51,6 +52,8 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
         
         menuButton.showsMenuAsPrimaryAction = true
         menuButton.menu = self.makeMenu(isHidden: false)
+        
+        checkButton.isHidden = true
     }
     
     @IBAction func startEditing(_ sender: Any) {
@@ -118,12 +121,19 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     }
     
     @IBAction func dimButtonHeld(_ sender: Any) {
-        self.target?.dimPattern()
+//        self.target?.dimPattern()
+        _ = self.target?.hidePattern()
     }
     
     @IBAction func dimButtonReleased(_ sender: Any) {
-        self.target?.undimPattern()
+//        self.target?.undimPattern()
+        self.target?.unhidePattern()
     }
+    
+    @IBAction func checkButtonPressed(_ sender: Any) {
+        // TODO: stub
+    }
+    
 }
 
 extension SliderCtrlViewSch3 {
