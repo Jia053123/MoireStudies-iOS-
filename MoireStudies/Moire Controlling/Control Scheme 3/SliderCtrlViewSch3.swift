@@ -20,6 +20,7 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBOutlet weak var dimButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
+    private(set) var isSelected: Bool = false
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -131,25 +132,15 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     }
     
     @IBAction func checkButtonPressed(_ sender: Any) {
-        // TODO: stub
+        if self.isSelected {
+            self.isSelected = false
+            self.checkButton.tintColor = UIColor.systemBlue
+        } else {
+            self.isSelected = true
+            self.checkButton.tintColor = UIColor.systemGreen
+        }
     }
     
-}
-
-extension SliderCtrlViewSch3 {
-    func enterSelectionMode() {
-        self.highlightButton.isHidden = true
-        self.menuButton.isHidden = true
-        self.dimButton.isHidden = true
-        self.checkButton.isHidden = false
-    }
-    
-    func exitSelectionMode() {
-        self.checkButton.isHidden = true
-        self.highlightButton.isHidden = false
-        self.menuButton.isHidden = false
-        self.dimButton.isHidden = false
-    }
 }
 
 extension SliderCtrlViewSch3 {
@@ -228,6 +219,26 @@ extension SliderCtrlViewSch3 {
         if let s = scaleFactor {
             self.scaleFactorSlider.value = Float(s)
         }
+    }
+}
+
+extension SliderCtrlViewSch3 {
+    func enterSelectionMode() {
+        self.isSelected = false
+        
+        self.highlightButton.isHidden = true
+        self.menuButton.isHidden = true
+        self.dimButton.isHidden = true
+        self.checkButton.isHidden = false
+    }
+    
+    func exitSelectionMode() {
+        self.isSelected = false
+        
+        self.checkButton.isHidden = true
+        self.highlightButton.isHidden = false
+        self.menuButton.isHidden = false
+        self.dimButton.isHidden = false
     }
 }
 
