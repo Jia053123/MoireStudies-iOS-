@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class ControlsViewController: UIViewController {
+    private var controlViewControllers: Array<CtrlViewController>!
+    private var highDegControlViewControllers: Array<HighDegCtrlViewController>!
+    
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clear
     }
@@ -62,14 +65,25 @@ class ControlsViewController: UIViewController {
             self.view.addSubview(hdcvc.view)
             hdcvc.didMove(toParent: self)
         }
+        
+        self.controlViewControllers = Array(self.children.dropLast(highDegIds.count)) as? [CtrlViewController]
+        self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
     }
     
     func enterSelectionMode() {
-        // TODO: stub
+        for c in self.controlViewControllers {
+            if !c.isInSelectionMode {
+                c.enterSelectionMode()
+            }
+        }
     }
     
     func exitSelectionMode() {
-        // TODO: stub
+        for c in self.controlViewControllers {
+            if c.isInSelectionMode {
+                c.exitSelectionMode()
+            }
+        }
     }
 }
 
