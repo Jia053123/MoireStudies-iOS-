@@ -104,4 +104,12 @@ class SliderCtrlViewSch1 : UIView { // TODO: make the outlets private
         self.fillRatioSlider.value = Float(fillRatio)
         self.scaleFactorSlider.value = Float(scaleFactor)
     }
+    
+    func enterSelectionMode() {
+        // TODO: stub
+    }
+    
+    func exitSelectionMode() {
+        // TODO: stub
+    }
 }

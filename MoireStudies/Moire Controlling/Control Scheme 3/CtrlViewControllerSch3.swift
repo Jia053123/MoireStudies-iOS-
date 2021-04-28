@@ -14,6 +14,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     weak var patternDelegate: PatternManager!
     weak var controlDelegate: ControlManager!
     let initPattern: Pattern?
+    private(set) var isInSelectionMode: Bool = false
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
@@ -43,10 +44,14 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     }
     
     func enterSelectionMode() {
-        // TODO: stub
+        let cv = self.view as! CtrlViewSch3Subclass
+        cv.enterSelectionMode()
+        self.isInSelectionMode = true
     }
     
     func exitSelectionMode() {
-        // TODO: stub
+        let cv = self.view as! CtrlViewSch3Subclass
+        cv.exitSelectionMode()
+        self.isInSelectionMode = false
     }
 }

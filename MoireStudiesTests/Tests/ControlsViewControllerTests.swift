@@ -20,26 +20,8 @@ class ControlsViewControllerTests: XCTestCase {
         self.controlsViewController = nil
     }
     
-    private func arrayOfValidPseudoRandomPatterns(numOfPatterns: Int, seed: CGFloat) -> Array<Pattern> {
-        let adjustment = seed.truncatingRemainder(dividingBy: 1.0)
-        var output: Array<Pattern> = []
-        let basePattern = Pattern.init(speed: 10.0, direction: 1.0, blackWidth: 5.0, whiteWidth: 6.0)
-        for i in 0..<numOfPatterns {
-            let newPattern = Pattern.init(speed: basePattern.speed + CGFloat(i) * 0.01 + adjustment,
-                                          direction: basePattern.direction + CGFloat(i) * 0.01 + adjustment,
-                                          blackWidth: basePattern.blackWidth + CGFloat(i) * 0.01 + adjustment,
-                                          whiteWidth: basePattern.whiteWidth + CGFloat(i) * 0.01 + adjustment)
-            assert(BoundsManager.speedRange.contains(newPattern.speed))
-            assert(BoundsManager.directionRange.contains(newPattern.direction))
-            assert(BoundsManager.blackWidthRange.contains(newPattern.blackWidth))
-            assert(BoundsManager.whiteWidthRange.contains(newPattern.whiteWidth))
-            output.append(newPattern)
-        }
-        return output
-    }
-    
     func testSettingUpAndResettingCtrlViewControllers_validPatternsConfigsIdAndDelegate_NoHighDeg_CreateAndSetUpChildrenCorrectly() {
-        let patterns1 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 4, seed: 3.123)
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.123).patterns
         let ids1 = ["a", "b", "c", "d"]
         var config1 = Configurations.init()
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
@@ -60,7 +42,7 @@ class ControlsViewControllerTests: XCTestCase {
             }
         }
         
-        let patterns2 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 3, seed: 1.404)
+        let patterns2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.404).patterns
         let ids2 = ["c", "d", "e"]
         var config2 = Configurations.init()
         config2.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme2Slider
@@ -82,7 +64,7 @@ class ControlsViewControllerTests: XCTestCase {
     }
     
     func testSettingUpAndResettingCtrlViewControllers_MismatchedPatternsAndIdNum_NoHighDeg_CreateAControllerForEachId() {
-        let patterns1 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 4, seed: 3.173)
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.173).patterns
         let ids1 = ["a", "b", "c"]
         var config1 = Configurations.init()
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
@@ -103,7 +85,7 @@ class ControlsViewControllerTests: XCTestCase {
             }
         }
         
-        let patterns2 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 3, seed: 1.474)
+        let patterns2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.474).patterns
         let ids2 = ["c", "d", "e", "f"]
         self.controlsViewController.setUp(patterns: patterns2, configs: config1, ids: ids2, highDegIds: [], delegate: delegate)
         
@@ -126,7 +108,7 @@ class ControlsViewControllerTests: XCTestCase {
     }
     
     func testSettingUpAndResettingCtrlViewControllers_validAndMisMatchedPatternsConfigsIdAndDelegate_WithHighDeg_CreateAndSetUpAChildForEachId() {
-        let patterns1 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 4, seed: 3.123)
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.123).patterns
         let ids1 = ["a", "b", "c", "d"]
         let hdIds1 = ["abd"]
         var config1 = Configurations.init()
@@ -158,7 +140,7 @@ class ControlsViewControllerTests: XCTestCase {
             XCTAssertEqual(cvc?.initPattern[2], patterns1[3])
         }
         
-        let patterns2 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 3, seed: -1.404)
+        let patterns2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: -1.404).patterns
         let ids2 = ["c", "d", "e"]
         let hdIds2 = ["ce", "de", "cde"]
         var config2 = Configurations.init()
@@ -193,12 +175,44 @@ class ControlsViewControllerTests: XCTestCase {
     }
     
     func testSettingUpAndResettingCtrlViewControllers_validPatternsConfigsId_IllegalDelegate_NoRuntimeError() {
-        let patterns1 = self.arrayOfValidPseudoRandomPatterns(numOfPatterns: 4, seed: 3.123)
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.123).patterns
         let ids1 = ["a", "b", "c", "d"]
         var config1 = Configurations.init()
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerIllegal()
         self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
+    }
+    
+    func testEnteringAndExitingSelectionMode_TheFirstDegreeControllersEnterAndExitSelectionMode() {
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 1.998).patterns
+        let ids1 = ["a", "b", "c", "d"]
+        let hdIds1 = ["abd"]
+        var config1 = Configurations.init()
+        config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
+        let hdcs1 = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: [0,1,3])
+        config1.highDegreeControlSettings = [hdcs1]
+        let delegate = MockPatternManagerLegal()
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: hdIds1, delegate: delegate)
+        
+        self.controlsViewController.enterSelectionMode()
+        for i in 0..<4 {
+            let c = self.controlsViewController.children[i]
+            guard let cvc = c as? CtrlViewController else {
+                assertionFailure()
+                return
+            }
+            XCTAssertTrue(cvc.isInSelectionMode)
+        }
+        
+        self.controlsViewController.exitSelectionMode()
+        for i in 0..<4 {
+            let c = self.controlsViewController.children[i]
+            guard let cvc = c as? CtrlViewController else {
+                assertionFailure()
+                return
+            }
+            XCTAssertFalse(cvc.isInSelectionMode)
+        }
     }
 }

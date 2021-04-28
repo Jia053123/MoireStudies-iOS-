@@ -137,6 +137,22 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
 }
 
 extension SliderCtrlViewSch3 {
+    func enterSelectionMode() {
+        self.highlightButton.isHidden = true
+        self.menuButton.isHidden = true
+        self.dimButton.isHidden = true
+        self.checkButton.isHidden = false
+    }
+    
+    func exitSelectionMode() {
+        self.checkButton.isHidden = true
+        self.highlightButton.isHidden = false
+        self.menuButton.isHidden = false
+        self.dimButton.isHidden = false
+    }
+}
+
+extension SliderCtrlViewSch3 {
     private func makeMenu(isHidden: Bool) -> UIMenu {
         let hide = UIAction(title: "Hide Pattern", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: [], state: UIMenuElement.State.off, handler: {_ in self.hidePattern()})
         

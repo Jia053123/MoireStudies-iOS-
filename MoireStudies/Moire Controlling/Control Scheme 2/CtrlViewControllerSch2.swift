@@ -13,6 +13,7 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     weak var patternDelegate: PatternManager!
     weak var controlDelegate: ControlManager!
     let initPattern: Pattern?
+    private(set) var isInSelectionMode: Bool = false
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
@@ -37,10 +38,14 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     }
     
     func enterSelectionMode() {
-        // TODO: stub
+        let cv = self.view as! SliderCtrlViewSch2
+        cv.enterSelectionMode()
+        self.isInSelectionMode = true
     }
     
     func exitSelectionMode() {
-        // TODO: stub
+        let cv = self.view as! SliderCtrlViewSch2
+        cv.exitSelectionMode()
+        self.isInSelectionMode = false
     }
 }

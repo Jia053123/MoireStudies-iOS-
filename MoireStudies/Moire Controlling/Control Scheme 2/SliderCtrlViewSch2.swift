@@ -104,4 +104,12 @@ class SliderCtrlViewSch2 : UIView { // TODO: make the outlets private
         self.blackSlider.value = Float(blackWidth)
         self.whiteSlider.value = Float(whiteWidth)
     }
+    
+    func enterSelectionMode() {
+        // TODO: stub
+    }
+    
+    func exitSelectionMode() {
+        // TODO: stub
+    }
 }
