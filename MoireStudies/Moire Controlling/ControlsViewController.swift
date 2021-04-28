@@ -39,7 +39,7 @@ class ControlsViewController: UIViewController {
             case CtrlSchemeSetting.controlScheme3Slider:
                 cvc = CtrlViewControllerSch3.init(id: id, frame: controlFrames[i], pattern: p)
             }
-            cvc.delegate = delegate
+            cvc.patternDelegate = delegate
             self.addChild(cvc)
             self.view.addSubview(cvc.view)
             cvc.didMove(toParent: self)
@@ -63,4 +63,16 @@ class ControlsViewController: UIViewController {
             hdcvc.didMove(toParent: self)
         }
     }
+    
+    func enterSelectionMode() {
+        // TODO: stub
+    }
+    
+    func exitSelectionMode() {
+        // TODO: stub
+    }
+}
+
+extension ControlsViewController: ControlManager {
+    
 }

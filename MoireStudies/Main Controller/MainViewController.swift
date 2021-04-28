@@ -203,7 +203,8 @@ extension MainViewController {
     }
     
     @IBAction func newHighDegCtrlButtonPressed(_ sender: Any) {
-        // TODO: stub
+        self.controlsViewController.enterSelectionMode()
+        self.dialogueContainerView.isHidden = false
     }
     
     @IBAction func confirmButtonPressed(_ sender: Any) {

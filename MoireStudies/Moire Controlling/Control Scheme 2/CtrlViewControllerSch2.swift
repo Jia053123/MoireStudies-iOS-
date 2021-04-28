@@ -10,7 +10,8 @@ import UIKit
 
 class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     var id: String!
-    weak var delegate: PatternManager!
+    weak var patternDelegate: PatternManager!
+    weak var controlDelegate: ControlManager!
     let initPattern: Pattern?
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {

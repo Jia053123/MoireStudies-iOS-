@@ -69,6 +69,7 @@
 		8EBF7C86262529A3009E4F4B /* ControlsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */; };
 		8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */; };
 		8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */; };
+		8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -166,6 +167,7 @@
 		8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewControllerTests.swift; sourceTree = "<group>"; };
 		8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
+		8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,6 +235,7 @@
 		8E2E462325D1EA9B00B0EA23 /* Moire Controlling */ = {
 			isa = PBXGroup;
 			children = (
+				8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */,
 				8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */,
 				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
@@ -556,6 +559,7 @@
 				8E72F41825F2BA04004E98DF /* CtrlViewControllerSch2.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
+				8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */,
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,

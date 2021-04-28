@@ -22,7 +22,7 @@ class CtrlViewControllerSch3TestsLegal: XCTestCase {
         self.ctrlViewController = CtrlViewControllerSch3.init(id: self.id, frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), pattern: self.testPattern1)
         self.mockPatternManagerLegal = MockPatternManagerLegal()
         self.mockPatternManagerLegal!.setCurrentPatternControlled(initPattern: self.testPattern1)
-        self.ctrlViewController?.delegate = self.mockPatternManagerLegal
+        self.ctrlViewController?.patternDelegate = self.mockPatternManagerLegal
     }
 
     override func tearDownWithError() throws {
@@ -150,7 +150,7 @@ class CtrlViewControllerSch3TestsIllegal: XCTestCase {
     override func setUpWithError() throws {
         self.ctrlViewController = CtrlViewControllerSch3.init(id: self.id, frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), pattern: self.testPattern1)
         self.mockPatternManagerIllegal = MockPatternManagerIllegal()
-        self.ctrlViewController?.delegate = self.mockPatternManagerIllegal
+        self.ctrlViewController?.patternDelegate = self.mockPatternManagerIllegal
     }
 
     override func tearDownWithError() throws {

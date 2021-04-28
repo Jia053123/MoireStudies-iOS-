@@ -104,7 +104,7 @@
                                             <constraint firstAttribute="height" constant="30" id="zFN-Gd-oa3"/>
                                         </constraints>
                                         <state key="normal" image="checkmark.rectangle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
                                         </state>
                                         <connections>
                                             <action selector="confirmButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZU9-0W-96D"/>
@@ -117,7 +117,7 @@
                                             <constraint firstAttribute="height" constant="30" id="rBa-ta-seb"/>
                                         </constraints>
                                         <state key="normal" image="xmark.rectangle.fill" catalog="system">
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="regular"/>
                                         </state>
                                         <connections>
                                             <action selector="cancelButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Pb-BZ-F2U"/>

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 /// these functions return false when the action is illegal, otherwise they return true and the action is performed
-protocol PatternManager: UIViewController {
+protocol PatternManager: NSObject {
     func modifyPattern(speed: CGFloat, callerId: String) -> Bool
     func modifyPattern(direction: CGFloat, callerId: String) -> Bool
     func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool

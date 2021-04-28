@@ -10,46 +10,46 @@ import UIKit
 
 protocol BasicCtrlViewController: CtrlViewController {
     var id: String! {get set}
-    var delegate: PatternManager! {get set}
+    var patternDelegate: PatternManager! {get set}
     
     func matchControlsWithModel(pattern: Pattern) // TODO: make a pattern class with optionals to avoid setting the slider being controlled? 
 }
 
 extension BasicCtrlViewController {
     func highlightPattern() {
-        _ = delegate?.highlightPattern(callerId: self.id)
+        _ = patternDelegate?.highlightPattern(callerId: self.id)
     }
     
     func unhighlightPattern() {
-        _ = delegate?.unhighlightPattern(callerId: self.id)
+        _ = patternDelegate?.unhighlightPattern(callerId: self.id)
     }
     
     func dimPattern() {
-        _ = delegate?.dimPattern(callerId: self.id)
+        _ = patternDelegate?.dimPattern(callerId: self.id)
     }
     
     func undimPattern() {
-        _ = delegate?.undimPattern(callerId: self.id)
+        _ = patternDelegate?.undimPattern(callerId: self.id)
     }
 
     func hidePattern() -> Bool {
-        return delegate!.hidePattern(callerId: self.id)
+        return patternDelegate!.hidePattern(callerId: self.id)
     }
     
     func unhidePattern() {
-        _ = delegate?.unhidePattern(callerId: self.id)
+        _ = patternDelegate?.unhidePattern(callerId: self.id)
     }
     
     func modifyPattern(speed: CGFloat) -> Bool {
-        return delegate?.modifyPattern(speed: speed, callerId: self.id) ?? false
+        return patternDelegate?.modifyPattern(speed: speed, callerId: self.id) ?? false
     }
     
     func modifyPattern(direction: CGFloat) -> Bool {
-        return delegate?.modifyPattern(direction: direction, callerId: self.id) ?? false
+        return patternDelegate?.modifyPattern(direction: direction, callerId: self.id) ?? false
     }
     
     func modifyPattern(blackWidth: CGFloat) -> Bool {
-        guard let del = self.delegate else {return false}
+        guard let del = self.patternDelegate else {return false}
         let success = del.modifyPattern(blackWidth: blackWidth, callerId: self.id)
         if success {
             let newPattern = del.retrievePattern(callerId: self.id)!
@@ -59,7 +59,7 @@ extension BasicCtrlViewController {
     }
     
     func modifyPattern(whiteWidth: CGFloat) -> Bool {
-        guard let del = self.delegate else {return false}
+        guard let del = self.patternDelegate else {return false}
         let success = del.modifyPattern(whiteWidth: whiteWidth, callerId: self.id)
         if success {
             let newPattern = del.retrievePattern(callerId: self.id)!
@@ -69,7 +69,7 @@ extension BasicCtrlViewController {
     }
     
     func modifyPattern(fillRatio: CGFloat) -> Bool {
-        guard let del = self.delegate else {return false}
+        guard let del = self.patternDelegate else {return false}
         guard let p: Pattern = del.retrievePattern(callerId: self.id) else {return false}
         let sf = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fillRatio, scaleFactor: sf)
@@ -85,7 +85,7 @@ extension BasicCtrlViewController {
     }
     
     func modifyPattern(scaleFactor: CGFloat) -> Bool {
-        guard let del = self.delegate else {return false}
+        guard let del = self.patternDelegate else {return false}
         guard let p: Pattern = del.retrievePattern(callerId: self.id) else {return false}
         let fr = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
         let result = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: fr, scaleFactor: scaleFactor)
@@ -101,12 +101,12 @@ extension BasicCtrlViewController {
     }
     
     func duplicatePattern() {
-        guard let del = self.delegate else {return}
+        guard let del = self.patternDelegate else {return}
         guard let newP: Pattern = del.retrievePattern(callerId: self.id) else {return}
         _ = del.createPattern(callerId: self.id, newPattern: newP)
     }
     
     func deletePattern() {
-        _ = delegate?.deletePattern(callerId: self.id)
+        _ = patternDelegate?.deletePattern(callerId: self.id)
     }
 }
