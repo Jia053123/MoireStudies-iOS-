@@ -20,7 +20,20 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBOutlet weak var dimButton: UIButton!
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
-    private(set) var isSelected: Bool = false
+    private var _isSelected: Bool = false
+    private(set) var isSelected: Bool {
+        set {
+            if newValue {
+                self.checkButton.tintColor = UIColor.systemGreen
+            } else {
+                self.checkButton.tintColor = UIColor.systemBlue
+            }
+            self._isSelected = newValue
+        }
+        get {
+            return self._isSelected
+        }
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -132,13 +145,7 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     }
     
     @IBAction func checkButtonPressed(_ sender: Any) {
-        if self.isSelected {
-            self.isSelected = false
-            self.checkButton.tintColor = UIColor.systemBlue
-        } else {
-            self.isSelected = true
-            self.checkButton.tintColor = UIColor.systemGreen
-        }
+        self.isSelected = !self.isSelected
     }
     
 }

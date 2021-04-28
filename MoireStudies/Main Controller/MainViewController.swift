@@ -204,6 +204,7 @@ extension MainViewController {
     
     @IBAction func newHighDegCtrlButtonPressed(_ sender: Any) {
         self.controlsViewController.enterSelectionMode()
+        self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
         self.dialogueContainerView.isHidden = false
     }
     
@@ -212,7 +213,8 @@ extension MainViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        // TODO: stub
+        self.controlsViewController.exitSelectionMode()
+        self.dialogueContainerView.isHidden = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

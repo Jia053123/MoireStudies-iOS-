@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 struct Constants {
+    struct Text {
+        static let highDegreeControlCreationInstruction = "Creating a batch control panel: Select the patterns to be edited together"
+    }
     struct UI {
         static let maskCornerRadius: CGFloat = 8.0
         static let tileHeight: CGFloat = BoundsManager.blackWidthRange.lowerBound + BoundsManager.whiteWidthRange.lowerBound /// For CoreAnimPatternView only: the less the height, the more the num of strips rendered on screen, the thinner the minimum black/white width
