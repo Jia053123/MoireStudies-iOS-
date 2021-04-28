@@ -14,5 +14,6 @@ protocol CtrlViewController: UIViewController {
     var controlDelegate: ControlManager! { get set }
     init(id: String, frame: CGRect, pattern: Pattern?)
     func matchControlsWithModel(pattern: Pattern)
-    
+    func enterSelectionMode()
+    func exitSelectionMode()
 }

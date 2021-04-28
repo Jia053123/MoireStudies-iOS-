@@ -35,4 +35,12 @@ class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
         let cv = self.view as! SliderCtrlViewSch2
         cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
     }
+    
+    func enterSelectionMode() {
+        // TODO: stub
+    }
+    
+    func exitSelectionMode() {
+        // TODO: stub
+    }
 }

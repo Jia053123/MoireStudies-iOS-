@@ -38,5 +38,13 @@ class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
         let result = Utilities.convertToFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth)
         cv.matchControlsWithValues(speed: pattern.speed, direction: pattern.direction, fillRatio: result.fillRatio, scaleFactor: result.scaleFactor)
     }
+    
+    func enterSelectionMode() {
+        // TODO: stub
+    }
+    
+    func exitSelectionMode() {
+        // TODO: stub
+    }
 }
 
