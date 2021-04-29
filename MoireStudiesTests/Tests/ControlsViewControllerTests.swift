@@ -214,5 +214,18 @@ class ControlsViewControllerTests: XCTestCase {
             }
             XCTAssertFalse(cvc.isInSelectionMode)
         }
+        
+        self.controlsViewController.exitSelectionMode()
+        self.controlsViewController.exitSelectionMode()
+        self.controlsViewController.enterSelectionMode()
+        self.controlsViewController.enterSelectionMode()
+        for i in 0..<4 {
+            let c = self.controlsViewController.children[i]
+            guard let cvc = c as? CtrlViewController else {
+                assertionFailure()
+                return
+            }
+            XCTAssertTrue(cvc.isInSelectionMode)
+        }
     }
 }
