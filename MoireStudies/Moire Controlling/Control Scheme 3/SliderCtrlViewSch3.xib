@@ -230,7 +230,7 @@
                         <action selector="dimButtonReleased:" destination="-1" eventType="touchUpInside" id="h6R-mL-cXf"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USQ-6h-pHJ" userLabel="Check Button">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USQ-6h-pHJ" userLabel="Check Button">
                     <rect key="frame" x="0.0" y="303" width="201" height="22"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
                     <state key="normal" image="checkmark.circle" catalog="system"/>

@@ -72,8 +72,6 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
         
         menuButton.showsMenuAsPrimaryAction = true
         menuButton.menu = self.makeMenu(isHidden: false)
-        
-        checkButton.isHidden = true
     }
     
     @IBAction func startEditing(_ sender: Any) {
@@ -237,10 +235,7 @@ extension SliderCtrlViewSch3 {
 extension SliderCtrlViewSch3 {
     func enterSelectionMode() {
         self.isSelected = false
-        
-//        self.highlightButton.isHidden = true
         self.menuButton.isHidden = true
-//        self.dimButton.isHidden = true
         self.checkButton.isHidden = false
         
         self.speedSlider.isEnabled = false
@@ -254,11 +249,8 @@ extension SliderCtrlViewSch3 {
     
     func exitSelectionMode() {
         self.isSelected = false
-        
         self.checkButton.isHidden = true
-//        self.highlightButton.isHidden = false
         self.menuButton.isHidden = false
-//        self.dimButton.isHidden = false
         
         self.speedSlider.isEnabled = true
         self.directionSlider.isEnabled = true

@@ -14,6 +14,26 @@ class SliderCtrlViewSch1 : UIView { // TODO: make the outlets private
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var fillRatioSlider: UISlider!
     @IBOutlet weak var scaleFactorSlider: UISlider!
+    @IBOutlet weak var checkButton: UIButton!
+    
+    private var _isSelected: Bool = false
+    private(set) var isSelected: Bool {
+        get {return self._isSelected}
+        set {
+            if newValue {
+                var selectedIcon = UIImage.init(systemName: "checkmark.circle.fill")
+                selectedIcon = selectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+                selectedIcon = selectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+                self.checkButton.setImage(selectedIcon, for: UIControl.State.normal)
+            } else {
+                var unselectedIcon = UIImage.init(systemName: "checkmark.circle")
+                unselectedIcon = unselectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+                unselectedIcon = unselectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .black))
+                self.checkButton.setImage(unselectedIcon, for: UIControl.State.normal)
+            }
+            self._isSelected = newValue
+        }
+    }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -81,6 +101,10 @@ class SliderCtrlViewSch1 : UIView { // TODO: make the outlets private
         }
     }
     
+    @IBAction func checkButtonPressed(_ sender: Any) {
+        self.isSelected = !self.isSelected
+    }
+    
     private func calcSpeed(speedSegmentIndex: Int) -> CGFloat { // TODO: move to controller? 
         return (CGFloat(speedSegmentIndex) + 1.0) * 8.0 + 10.0
     }
@@ -106,10 +130,22 @@ class SliderCtrlViewSch1 : UIView { // TODO: make the outlets private
     }
     
     func enterSelectionMode() {
-        // TODO: stub
+        self.isSelected = false
+        self.checkButton.isHidden = false
+        
+        self.speedSegmentedControl.isEnabled = false
+        self.directionSlider.isEnabled = false
+        self.fillRatioSlider.isEnabled = false
+        self.scaleFactorSlider.isEnabled = false
     }
     
     func exitSelectionMode() {
-        // TODO: stub
+        self.isSelected = false
+        self.checkButton.isHidden = true
+        
+        self.speedSegmentedControl.isEnabled = true
+        self.directionSlider.isEnabled = true
+        self.fillRatioSlider.isEnabled = true
+        self.scaleFactorSlider.isEnabled = true
     }
 }
