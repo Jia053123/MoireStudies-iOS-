@@ -22,16 +22,16 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBOutlet weak var checkButton: UIButton!
     private var _isSelected: Bool = false
     private(set) var isSelected: Bool {
+        get {return self._isSelected}
         set {
             if newValue {
                 self.checkButton.tintColor = UIColor.systemGreen
+                self.checkButton.setImage(UIImage.init(systemName: "checkmark.circle.fill"), for: UIControl.State.normal)
             } else {
                 self.checkButton.tintColor = UIColor.systemBlue
+                self.checkButton.setImage(UIImage.init(systemName: "checkmark.circle"), for: UIControl.State.normal)
             }
             self._isSelected = newValue
-        }
-        get {
-            return self._isSelected
         }
     }
     
@@ -147,7 +147,6 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBAction func checkButtonPressed(_ sender: Any) {
         self.isSelected = !self.isSelected
     }
-    
 }
 
 extension SliderCtrlViewSch3 {

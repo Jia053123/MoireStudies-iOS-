@@ -10,7 +10,7 @@ import UIKit
 
 struct Constants {
     struct Text {
-        static let highDegreeControlCreationInstruction = "Creating a batch control panel: Select the patterns to be edited together"
+        static let highDegreeControlCreationInstruction = "Creating a new batch control panel: Please select the patterns to be edited together"
     }
     struct UI {
         static let maskCornerRadius: CGFloat = 8.0
