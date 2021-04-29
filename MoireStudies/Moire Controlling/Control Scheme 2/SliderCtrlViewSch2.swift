@@ -17,7 +17,7 @@ class SliderCtrlViewSch2 : UIView { // TODO: make the outlets private
     @IBOutlet weak var checkButton: UIButton!
     
     private var _isSelected: Bool = false
-    private(set) var isSelected: Bool {
+    private var isSelected: Bool {
         get {return self._isSelected}
         set {
             if newValue {
