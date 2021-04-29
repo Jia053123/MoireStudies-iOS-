@@ -26,10 +26,16 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
         set {
             if newValue {
                 self.checkButton.tintColor = UIColor.systemGreen
-                self.checkButton.setImage(UIImage.init(systemName: "checkmark.circle.fill"), for: UIControl.State.normal)
+                var selectedIcon = UIImage.init(systemName: "checkmark.circle.fill")
+                selectedIcon = selectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+                selectedIcon = selectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+                self.checkButton.setImage(selectedIcon, for: UIControl.State.normal)
             } else {
-                self.checkButton.tintColor = UIColor.systemBlue
-                self.checkButton.setImage(UIImage.init(systemName: "checkmark.circle"), for: UIControl.State.normal)
+                self.checkButton.tintColor = UIColor.systemGreen
+                var unselectedIcon = UIImage.init(systemName: "checkmark.circle")
+                unselectedIcon = unselectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))
+                unselectedIcon = unselectedIcon!.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .black))
+                self.checkButton.setImage(unselectedIcon, for: UIControl.State.normal)
             }
             self._isSelected = newValue
         }
@@ -232,19 +238,35 @@ extension SliderCtrlViewSch3 {
     func enterSelectionMode() {
         self.isSelected = false
         
-        self.highlightButton.isHidden = true
+//        self.highlightButton.isHidden = true
         self.menuButton.isHidden = true
-        self.dimButton.isHidden = true
+//        self.dimButton.isHidden = true
         self.checkButton.isHidden = false
+        
+        self.speedSlider.isEnabled = false
+        self.directionSlider.isEnabled = false
+        self.fillRatioSlider.isEnabled = false
+        self.blackWidthSlider.isEnabled = false
+        self.whiteWidthSlider.isEnabled = false
+        self.fillRatioSlider.isEnabled = false
+        self.scaleFactorSlider.isEnabled = false
     }
     
     func exitSelectionMode() {
         self.isSelected = false
         
         self.checkButton.isHidden = true
-        self.highlightButton.isHidden = false
+//        self.highlightButton.isHidden = false
         self.menuButton.isHidden = false
-        self.dimButton.isHidden = false
+//        self.dimButton.isHidden = false
+        
+        self.speedSlider.isEnabled = true
+        self.directionSlider.isEnabled = true
+        self.fillRatioSlider.isEnabled = true
+        self.blackWidthSlider.isEnabled = true
+        self.whiteWidthSlider.isEnabled = true
+        self.fillRatioSlider.isEnabled = true
+        self.scaleFactorSlider.isEnabled = true
     }
 }
 

@@ -188,6 +188,29 @@ extension MainViewController {
 }
 
 extension MainViewController {
+    private func enterSelectionMode() {
+        self.controlsViewController.enterSelectionMode()
+        self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
+        self.dialogueContainerView.isHidden = false
+        
+        self.newPatternButton.isEnabled = false
+        self.gearButton.isEnabled = false
+        self.fileButton.isEnabled = false
+        self.newHighDegCtrlButton.isEnabled = false
+    }
+    
+    private func exitSelectionMode() {
+        self.controlsViewController.exitSelectionMode()
+        self.dialogueContainerView.isHidden = true
+        
+        self.newPatternButton.isEnabled = true
+        self.gearButton.isEnabled = true
+        self.fileButton.isEnabled = true
+        self.newHighDegCtrlButton.isEnabled = true
+    }
+}
+
+extension MainViewController {
     @IBAction func newPatternButtonPressed(_ sender: Any) {
         _ = self.createPattern(callerId: nil, newPattern: Pattern.randomDemoPattern())
     }
@@ -203,9 +226,7 @@ extension MainViewController {
     }
     
     @IBAction func newHighDegCtrlButtonPressed(_ sender: Any) {
-        self.controlsViewController.enterSelectionMode()
-        self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
-        self.dialogueContainerView.isHidden = false
+        self.enterSelectionMode()
     }
     
     @IBAction func confirmButtonPressed(_ sender: Any) {
@@ -213,8 +234,7 @@ extension MainViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        self.controlsViewController.exitSelectionMode()
-        self.dialogueContainerView.isHidden = true
+        self.exitSelectionMode()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
