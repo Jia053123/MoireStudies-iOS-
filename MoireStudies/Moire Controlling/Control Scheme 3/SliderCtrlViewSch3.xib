@@ -231,9 +231,11 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USQ-6h-pHJ" userLabel="Check Button">
-                    <rect key="frame" x="0.0" y="303" width="201" height="22"/>
+                    <rect key="frame" x="87.5" y="303" width="26.5" height="25.5"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
-                    <state key="normal" image="checkmark.circle" catalog="system"/>
+                    <state key="normal" image="checkmark.circle" catalog="system">
+                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
+                    </state>
                     <connections>
                         <action selector="checkButtonPressed:" destination="-1" eventType="touchUpInside" id="11g-rn-8L9"/>
                     </connections>
@@ -264,7 +266,6 @@
                 <constraint firstItem="dHM-LJ-fiF" firstAttribute="top" secondItem="gK1-fR-jhi" secondAttribute="bottom" id="Kg4-7H-keR"/>
                 <constraint firstItem="USQ-6h-pHJ" firstAttribute="top" secondItem="gK1-fR-jhi" secondAttribute="bottom" id="M13-WN-6CE"/>
                 <constraint firstItem="NPb-OV-8LQ" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="MDf-l7-DV1"/>
-                <constraint firstItem="wjM-mO-Qzw" firstAttribute="trailing" secondItem="USQ-6h-pHJ" secondAttribute="trailing" id="NFI-42-iLU"/>
                 <constraint firstItem="9qB-ed-vKY" firstAttribute="top" secondItem="8Qc-Vf-FzV" secondAttribute="bottom" id="NsA-cJ-KMQ"/>
                 <constraint firstItem="Czy-mw-wc6" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" id="OpI-MV-Uhj"/>
                 <constraint firstItem="gK1-fR-jhi" firstAttribute="height" secondItem="COa-BD-Z5T" secondAttribute="height" id="QwN-VX-DiD"/>
@@ -300,6 +301,7 @@
                 <constraint firstItem="9qB-ed-vKY" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.9" id="jUL-jA-aTk"/>
                 <constraint firstItem="GLw-JF-ocz" firstAttribute="top" secondItem="JvY-7a-rPz" secondAttribute="bottom" id="kDn-Wk-ZJF"/>
                 <constraint firstItem="V3X-UX-Yku" firstAttribute="width" secondItem="HIh-Ms-d8D" secondAttribute="width" multiplier="0.9" id="kPs-nM-h5Z"/>
+                <constraint firstItem="wjM-mO-Qzw" firstAttribute="top" secondItem="USQ-6h-pHJ" secondAttribute="bottom" id="mty-4Z-KYk"/>
                 <constraint firstItem="bA0-b6-Ffz" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="mwK-9J-TD1"/>
                 <constraint firstItem="JvY-7a-rPz" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="rNn-fx-Bvl"/>
                 <constraint firstItem="COa-BD-Z5T" firstAttribute="centerX" secondItem="MIZ-pY-bGK" secondAttribute="centerX" id="rPe-Ay-lCF"/>
