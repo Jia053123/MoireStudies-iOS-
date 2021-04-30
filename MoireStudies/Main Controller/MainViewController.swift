@@ -233,7 +233,10 @@ extension MainViewController {
     
     @IBAction func confirmButtonPressed(_ sender: Any) {
         // TODO: stub
+        // collect selection info
         
+        // create new control
+        // exit selection mode
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {

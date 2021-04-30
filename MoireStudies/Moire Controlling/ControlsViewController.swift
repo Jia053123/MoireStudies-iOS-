@@ -11,6 +11,17 @@ import UIKit
 class ControlsViewController: UIViewController {
     private var controlViewControllers: Array<CtrlViewController>!
     private var highDegControlViewControllers: Array<HighDegCtrlViewController>!
+    var selectedPatternIndexes: Array<Int> {
+        get {
+            var selectedIndexes: Array<Int> = []
+            for i in 0..<self.controlViewControllers.count {
+                if self.controlViewControllers[i].isSelected {
+                    selectedIndexes.append(i)
+                }
+            }
+            return selectedIndexes
+        }
+    }
     
     override func viewDidLoad() {
         self.view.backgroundColor = UIColor.clear

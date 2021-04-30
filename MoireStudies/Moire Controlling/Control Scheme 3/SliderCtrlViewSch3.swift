@@ -21,7 +21,7 @@ class SliderCtrlViewSch3: UIView { // TODO: make the outlets private
     @IBOutlet weak var menuButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
     private var _isSelected: Bool = false
-    private var isSelected: Bool {
+    var isSelected: Bool {
         get {return self._isSelected}
         set {
             if newValue {
@@ -261,5 +261,3 @@ extension SliderCtrlViewSch3 {
         self.scaleFactorSlider.isEnabled = true
     }
 }
-
-

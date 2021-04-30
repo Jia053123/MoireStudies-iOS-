@@ -15,6 +15,9 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     weak var controlDelegate: ControlManager!
     let initPattern: Pattern?
     private(set) var isInSelectionMode: Bool = false
+    var isSelected: Bool {
+        get { return (self.view as! SliderCtrlViewSch3).isSelected}
+    }
     
     required init(id: String, frame: CGRect, pattern: Pattern?) {
         self.id = id
@@ -47,6 +50,13 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
         let cv = self.view as! CtrlViewSch3Subclass
         cv.enterSelectionMode()
         self.isInSelectionMode = true
+    }
+    
+    func selectIfInSelectionMode() {
+        if self.isInSelectionMode {
+            (self.view as! CtrlViewSch3Subclass).isSelected = true
+            assert(self.isSelected)
+        }
     }
     
     func exitSelectionMode() {

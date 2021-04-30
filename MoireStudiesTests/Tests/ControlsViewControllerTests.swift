@@ -228,4 +228,36 @@ class ControlsViewControllerTests: XCTestCase {
             XCTAssertTrue(cvc.isInSelectionMode)
         }
     }
+    
+    func testGettingSelectedPatternIndexes_InSelectionMode_ReturnTheIndexesOfThePatternsSelectedInAscendingOrder() {
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.113).patterns
+        let ids1 = ["a", "b", "c", "d"]
+        var config1 = Configurations.init()
+        config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
+        config1.highDegreeControlSettings = []
+        let delegate = MockPatternManagerLegal()
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
+        
+        self.controlsViewController.enterSelectionMode()
+        (self.controlsViewController.children[3] as! CtrlViewControllerSch3).selectIfInSelectionMode()
+        (self.controlsViewController.children[1] as! CtrlViewControllerSch3).selectIfInSelectionMode()
+        XCTAssertEqual(self.controlsViewController.selectedPatternIndexes, [1,3])
+    }
+    
+    func testGettingSelectedPatternIndexes_NotInSelectionMode_ReturnEmptyArray() {
+        let patterns1 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 4, seed: 3.113).patterns
+        let ids1 = ["a", "b", "c", "d", "e"]
+        var config1 = Configurations.init()
+        config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
+        config1.highDegreeControlSettings = []
+        let delegate = MockPatternManagerLegal()
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
+        
+        XCTAssertEqual(self.controlsViewController.selectedPatternIndexes, [])
+        self.controlsViewController.enterSelectionMode()
+        (self.controlsViewController.children[2] as! CtrlViewControllerSch3).selectIfInSelectionMode()
+        (self.controlsViewController.children[0] as! CtrlViewControllerSch3).selectIfInSelectionMode()
+        self.controlsViewController.exitSelectionMode()
+        XCTAssertEqual(self.controlsViewController.selectedPatternIndexes, [])
+    }
 }
