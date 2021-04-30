@@ -13,6 +13,8 @@ class MockControlsViewController: ControlsViewController {
     private(set) var initPatterns: Array<Pattern>?
     private(set) var setUpPerformed: Bool = false
     private(set) var resetPerformed: Bool = false
+    private(set) var enteredSelectionMode: Bool = false
+    private(set) var exitedSelectionMode: Bool = false
     private(set) var ids: Array<String>?
     private(set) var highDegIds: Array<String>?
     private(set) var configs: Configurations?
@@ -39,5 +41,13 @@ class MockControlsViewController: ControlsViewController {
         self.ids = ids
         self.highDegIds = highDegIds
         self.configs = configs
+    }
+    
+    override func enterSelectionMode() {
+        self.enteredSelectionMode = true
+    }
+    
+    override func exitSelectionMode() {
+        self.exitedSelectionMode = true 
     }
 }

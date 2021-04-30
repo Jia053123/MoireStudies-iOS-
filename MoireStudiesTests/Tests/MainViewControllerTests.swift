@@ -128,6 +128,25 @@ extension MainViewControllerTestsWithNormalModel {
     }
 }
 
+/// test setting up high degree controls
+extension MainViewControllerTestsWithNormalModel {
+    func testEnteringSelectionMode_CalledCorrespondingMethodInControlsViewController() {
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
+        XCTAssertTrue(self.mockControlsViewController.enteredSelectionMode)
+        XCTAssertFalse(self.mockControlsViewController.exitedSelectionMode)
+    }
+    
+    func testExitingSelectionMode_CalledCorrespondingMethodInControlsViewController() {
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        self.mainViewController.cancelButtonPressed(NSObject())
+        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
+        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
+        self.mainViewController.cancelButtonPressed(NSObject())
+        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
+    }
+}
+
 /// test initializing moire from model
 extension MainViewControllerTestsWithNormalModel {
     func testLoadMoire_NoInitIdAndModelHasOneEmptyMoire_LoadTheMoire() {

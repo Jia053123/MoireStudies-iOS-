@@ -38,6 +38,8 @@ class MainViewController: UIViewController {
     private weak var moireViewController: MoireViewController!
     private weak var controlsViewController: ControlsViewController!
     
+//    private var isInSelectionMode = false
+    
     private func setUpModelAndChildControllers(moireModel: MoireModel = LocalMoireModel.init(),
                                                moireViewController: MoireViewController = MoireViewController(),
                                                controlsViewController: ControlsViewController = ControlsViewController()) {
@@ -231,6 +233,7 @@ extension MainViewController {
     
     @IBAction func confirmButtonPressed(_ sender: Any) {
         // TODO: stub
+        
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
