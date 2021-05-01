@@ -262,9 +262,28 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first!.patterns == self.mockMoireViewController.currentPatterns!)
     }
     
-//    func testLoadMoire_WithInitIdAndCurrentMoireDifferentId_LoadMoireWithId() {
-//        
-//    }
+    func testUpdateMoire_WithInitIdAndCurrentMoireDifferentId_LoadNewMoireWithId() {
+        let m1 = Moire()
+        let m2 = Moire()
+        let m3 = Moire()
+        self.resetAndPopulate(moire: m1, numOfPatterns: 3)
+        self.resetAndPopulate(moire: m2, numOfPatterns: 1)
+        self.resetAndPopulate(moire: m3, numOfPatterns: 5)
+        let m1C = m1.copy() as! Moire
+        let m2C = m2.copy() as! Moire
+        let m3C = m3.copy() as! Moire
+        
+        self.mockMoireModelNormal.setStoredMoires(moires: [])
+        _ = self.mockMoireModelNormal.saveOrModify(moire: m1)
+        _ = self.mockMoireModelNormal.saveOrModify(moire: m2)
+        _ = self.mockMoireModelNormal.saveOrModify(moire: m3)
+        self.mainViewController.moireIdToInit = m2C.id
+        self.prepareMainViewController()
+        self.mainViewController.moireIdToInit = m3C.id
+        self.mainViewController.updateMainView()
+        XCTAssert(self.mockMoireViewController.currentPatterns == m3C.patterns)
+        XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
+    }
 }
 
 class MainViewControllerTestsWithCorruptedModel: MainViewControllerTests {

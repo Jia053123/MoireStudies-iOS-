@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ControlsViewController: UIViewController {
+class ControlsViewController: UIViewController, PatternsSelector {
     private var controlViewControllers: Array<CtrlViewController>!
     private var highDegControlViewControllers: Array<HighDegCtrlViewController>!
     var selectedPatternIndexes: Array<Int> {
@@ -80,11 +80,7 @@ class ControlsViewController: UIViewController {
         self.controlViewControllers = Array(self.children.dropLast(highDegIds.count)) as? [CtrlViewController]
         self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
     }
-    
-    
-}
 
-extension ControlsViewController: PatternsSelector {
     func enterSelectionMode() {
         for c in self.controlViewControllers {
             if !c.isInSelectionMode {
@@ -92,7 +88,7 @@ extension ControlsViewController: PatternsSelector {
             }
         }
     }
-    
+
     func exitSelectionMode() {
         for c in self.controlViewControllers {
             if c.isInSelectionMode {
