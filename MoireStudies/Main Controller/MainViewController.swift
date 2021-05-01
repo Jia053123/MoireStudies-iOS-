@@ -167,33 +167,6 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController {
-    private func pauseMoire() {
-        self.moireViewController.viewControllerLosingFocus()
-    }
-    
-    private func enterSelectionMode() {
-        self.controlsViewController.enterSelectionMode()
-        self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
-        self.dialogueContainerView.isHidden = false
-        
-        self.newPatternButton.isEnabled = false
-        self.gearButton.isEnabled = false
-        self.fileButton.isEnabled = false
-        self.newHighDegCtrlButton.isEnabled = false
-    }
-    
-    private func exitSelectionMode() {
-        self.controlsViewController.exitSelectionMode()
-        self.dialogueContainerView.isHidden = true
-        
-        self.newPatternButton.isEnabled = true
-        self.gearButton.isEnabled = true
-        self.fileButton.isEnabled = true
-        self.newHighDegCtrlButton.isEnabled = true
-    }
-}
-
-extension MainViewController {
     @IBAction func newPatternButtonPressed(_ sender: Any) {
         _ = self.createPattern(callerId: nil, newPattern: Pattern.randomDemoPattern())
     }
@@ -239,6 +212,33 @@ extension MainViewController {
             }
         }
         self.pauseMoire()
+    }
+}
+
+extension MainViewController {
+    private func pauseMoire() {
+        self.moireViewController.viewControllerLosingFocus()
+    }
+    
+    private func enterSelectionMode() {
+        self.controlsViewController.enterSelectionMode()
+        self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
+        self.dialogueContainerView.isHidden = false
+        
+        self.newPatternButton.isEnabled = false
+        self.gearButton.isEnabled = false
+        self.fileButton.isEnabled = false
+        self.newHighDegCtrlButton.isEnabled = false
+    }
+    
+    private func exitSelectionMode() {
+        self.controlsViewController.exitSelectionMode()
+        self.dialogueContainerView.isHidden = true
+        
+        self.newPatternButton.isEnabled = true
+        self.gearButton.isEnabled = true
+        self.fileButton.isEnabled = true
+        self.newHighDegCtrlButton.isEnabled = true
     }
 }
 

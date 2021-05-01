@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 extension MainViewController: PatternManager {
+    
     func highlightPattern(callerId: String) -> Bool {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return false}
         self.moireViewController.highlightPatternView(patternViewIndex: index)
