@@ -117,7 +117,9 @@ class MoireViewController: UIViewController { // TODO: remove the core animation
             (c as! PatternViewController).viewControllerLosingFocus()
         }
     }
-    
+}
+
+extension MoireViewController: MoireScreenshotProvider {
     func takeMoireScreenshot() -> UIImage? {
         // get screenshot for each pattern view
         var imgs: Array<UIImage> = []

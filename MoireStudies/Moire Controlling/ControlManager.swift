@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol ControlManager: NSObject {
+protocol ControlManager: AnyObject {
     
 }

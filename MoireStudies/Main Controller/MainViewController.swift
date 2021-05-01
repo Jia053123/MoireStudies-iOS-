@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dialogueContent: UILabel!
-    private var moireModel: MoireModel!
+    private var moireModelAccessor: MoireModelAccessor!
     var moireIdToInit: String?
     var currentMoire: Moire?
     var configurations: Configurations?
@@ -42,7 +42,7 @@ class MainViewController: UIViewController {
                                                moireViewController: MoireViewController = MoireViewController(),
                                                controlsViewController: ControlsViewController = ControlsViewController()) {
         // setup MoireModel
-        self.moireModel = moireModel
+        self.moireModelAccessor = MoireModelAccessor.init(moireModel: moireModel, screenshotProvider: moireViewController)
         // setup MoireViewController
         self.addChild(moireViewController)
         self.moireViewController = moireViewController
@@ -105,16 +105,7 @@ class MainViewController: UIViewController {
     }
     
     func initCurrentMoire() {
-        if let miti = self.moireIdToInit {
-            print("init moire from id: " + miti)
-            self.currentMoire = self.moireModel.read(moireId: miti) ?? self.moireModel.createNewDemoMoire()
-        } else {
-            self.currentMoire = self.moireModel.readLastCreatedOrEdited() ?? self.moireModel.createNewDemoMoire()
-        }
-        self.currentMoire = Utilities.fitWithinBounds(moire: self.currentMoire!)
-        if self.currentMoire!.patterns.count > Constants.Constrains.numOfPatternsPerMoire.upperBound {
-            self.currentMoire!.patterns = Array(self.currentMoire!.patterns[0..<Constants.Constrains.numOfPatternsPerMoire.upperBound])
-        }
+        self.currentMoire = self.moireModelAccessor.loadMoire(preferredId: self.moireIdToInit)
     }
     
     func initConfigs() {
@@ -162,32 +153,24 @@ class MainViewController: UIViewController {
         self.initControls()
     }
     
+    func saveMoire() -> Bool {
+        guard let cm = self.currentMoire else {
+            print("cannot save current moire because it's nil")
+            return false
+        }
+        return self.moireModelAccessor.saveMoire(moireToSave: cm)
+    }
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
 }
 
 extension MainViewController {
-    func saveMoire() -> Bool {
-        // save preview
-        if let img = self.moireViewController.takeMoireScreenshot() {
-            self.currentMoire?.preview = img
-        } else {print("failed to take screenshot")}
-        // write to disk
-        if let cm = self.currentMoire {
-            return self.moireModel.saveOrModify(moire: cm)
-        } else {
-            print("cannot save current moire because it's nil")
-            return false
-        }
-    }
-    
-    func pauseMoire() {
+    private func pauseMoire() {
         self.moireViewController.viewControllerLosingFocus()
     }
-}
-
-extension MainViewController {
+    
     private func enterSelectionMode() {
         self.controlsViewController.enterSelectionMode()
         self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction

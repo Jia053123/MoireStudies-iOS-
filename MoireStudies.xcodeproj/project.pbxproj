@@ -72,6 +72,8 @@
 		8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */; };
 		8EBF7CC7263D1EAF009E4F4B /* MainViewController+PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */; };
 		8EBF7CCC263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */; };
+		8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */; };
+		8EBF7CED263DC940009E4F4B /* MoireScreenshotProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -172,6 +174,8 @@
 		8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
 		8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManager.swift"; sourceTree = "<group>"; };
 		8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManagerTests.swift"; sourceTree = "<group>"; };
+		8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModelAccessor.swift; sourceTree = "<group>"; };
+		8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireScreenshotProvider.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +231,7 @@
 		8E2E462225D1EA3C00B0EA23 /* Moire Rendering */ = {
 			isa = PBXGroup;
 			children = (
+				8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */,
 				8E28187025D0FA67007C3E3D /* MoireViewController.swift */,
 				8E314489259F030000BB0399 /* MaskView.swift */,
 				8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */,
@@ -288,8 +293,9 @@
 			children = (
 				8E60787525A3D3C6002EB000 /* Configurations.swift */,
 				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
-				8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */,
 				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
+				8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */,
+				8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */,
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 			);
 			path = "Main Controller";
@@ -573,6 +579,7 @@
 				8E5BABE025AE82F4003FC799 /* LocalMoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
+				8EBF7CED263DC940009E4F4B /* MoireScreenshotProvider.swift in Sources */,
 				8E35A672260D649A007E3181 /* BoundsManager.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
@@ -596,6 +603,7 @@
 				8E7FD9C325D0D1430064A0A6 /* MetalPatternViewController.swift in Sources */,
 				8E72F41D25F2BA0D004E98DF /* CtrlViewControllerSch3.swift in Sources */,
 				8E5816E325E7438200FFE709 /* BasicCtrlViewController.swift in Sources */,
+				8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,
 				8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */,
