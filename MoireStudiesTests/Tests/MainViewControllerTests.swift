@@ -261,6 +261,10 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.count == 1)
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first!.patterns == self.mockMoireViewController.currentPatterns!)
     }
+    
+//    func testLoadMoire_WithInitIdAndCurrentMoireDifferentId_LoadMoireWithId() {
+//        
+//    }
 }
 
 class MainViewControllerTestsWithCorruptedModel: MainViewControllerTests {

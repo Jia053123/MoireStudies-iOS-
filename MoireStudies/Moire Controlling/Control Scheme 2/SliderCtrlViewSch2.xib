@@ -138,7 +138,7 @@
                     <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2I-cd-9aw" userLabel="Selection Button">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s2I-cd-9aw" userLabel="Selection Button">
                     <rect key="frame" x="71" y="243.5" width="26.5" height="25.5"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
                     <state key="normal" image="checkmark.circle" catalog="system">

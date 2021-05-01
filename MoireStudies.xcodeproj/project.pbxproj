@@ -70,10 +70,10 @@
 		8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */; };
 		8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */; };
 		8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */; };
-		8EBF7CC7263D1EAF009E4F4B /* MainViewController+PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */; };
 		8EBF7CCC263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */; };
 		8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */; };
 		8EBF7CED263DC940009E4F4B /* MoireScreenshotProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */; };
+		8EBF7CFB263DE097009E4F4B /* MoireManagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CFA263DE097009E4F4B /* MoireManagingController.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -172,10 +172,10 @@
 		8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
-		8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManager.swift"; sourceTree = "<group>"; };
 		8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManagerTests.swift"; sourceTree = "<group>"; };
 		8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModelAccessor.swift; sourceTree = "<group>"; };
 		8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireScreenshotProvider.swift; sourceTree = "<group>"; };
+		8EBF7CFA263DE097009E4F4B /* MoireManagingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireManagingController.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -292,9 +292,9 @@
 			isa = PBXGroup;
 			children = (
 				8E60787525A3D3C6002EB000 /* Configurations.swift */,
+				8EBF7CFA263DE097009E4F4B /* MoireManagingController.swift */,
 				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
 				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
-				8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */,
 				8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */,
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 			);
@@ -575,7 +575,6 @@
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
-				8EBF7CC7263D1EAF009E4F4B /* MainViewController+PatternManager.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* LocalMoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
@@ -583,6 +582,7 @@
 				8E35A672260D649A007E3181 /* BoundsManager.swift in Sources */,
 				8E2BB6E3259329440018D913 /* MetalPatternView.swift in Sources */,
 				8E60787E25A3DB56002EB000 /* SettingsViewController.swift in Sources */,
+				8EBF7CFB263DE097009E4F4B /* MoireManagingController.swift in Sources */,
 				8E6EF2E525C3CB080009905C /* MetalStripe.swift in Sources */,
 				8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */,
 				8E1EDFDA25D2650E002572C3 /* WeakTileLayerContainer.swift in Sources */,

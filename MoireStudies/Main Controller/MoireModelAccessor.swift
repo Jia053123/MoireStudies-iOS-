@@ -9,7 +9,7 @@ import Foundation
 
 class MoireModelAccessor {
     private var moireModel: MoireModel
-    private weak var screenshotProvider: MoireScreenshotProvider!
+    private weak var screenshotProvider: MoireScreenshotProvider?
     
     required init(moireModel: MoireModel, screenshotProvider: MoireScreenshotProvider) {
         self.moireModel = moireModel
@@ -33,7 +33,7 @@ class MoireModelAccessor {
     
     func saveMoire(moireToSave: Moire) -> Bool {
         // save preview
-        if let img = self.screenshotProvider.takeMoireScreenshot() {
+        if let img = self.screenshotProvider?.takeMoireScreenshot() {
             moireToSave.preview = img
         } else {print("failed to take screenshot")}
         // write to disk

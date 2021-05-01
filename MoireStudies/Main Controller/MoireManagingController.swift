@@ -1,5 +1,5 @@
 //
-//  MainViewController+PatternManager.swift
+//  MoireManagingController.swift
 //  MoireStudies
 //
 //  Created by Jialiang Xiang on 2021-05-01.
@@ -8,7 +8,164 @@
 import Foundation
 import UIKit
 
-extension MainViewController: PatternManager {
+/**
+ View Hierarchy:
+ - MainViewController
+    - UIButton
+    - ControlsViewContainerController
+        - ControlViewController (n)
+    - MoireViewController (1)
+        - DimView (0..1)
+        - PatternViewController (n)
+            - MaskView(1) in mask property
+ */
+class MoireManagingController: UIViewController {
+    private weak var moireViewController: MoireViewController!
+    private weak var controlsViewController: ControlsViewController!
+    private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
+    private(set) var currentMoire: Moire?
+    private var moireModelAccessor: MoireModelAccessor!
+    var configurations: Configurations?
+    var moireIdToInit: String?
+    
+    func setUpModelAndChildControllers(moireModel: MoireModel = LocalMoireModel.init(),
+                                       moireViewController: MoireViewController = MoireViewController(),
+                                       controlsViewController: ControlsViewController = ControlsViewController()) {
+        // setup MoireModel
+        self.moireModelAccessor = MoireModelAccessor.init(moireModel: moireModel, screenshotProvider: moireViewController)
+        // setup MoireViewController
+        self.addChild(moireViewController)
+        self.moireViewController = moireViewController
+        // setup ControlsViewController
+        self.addChild(controlsViewController)
+        self.controlsViewController = controlsViewController
+    }
+    
+    init?(coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
+        super.init(coder: coder)
+        self.setUpModelAndChildControllers(moireModel: mockMoireModel,
+                                           moireViewController: mockMoireViewController,
+                                           controlsViewController: mockControlsViewController)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.setUpModelAndChildControllers()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setUpModelAndChildControllers()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // setup MoireViewController
+        self.moireViewController.view.frame = self.view.bounds
+        self.view.addSubview(self.moireViewController.view)
+        self.moireViewController.didMove(toParent: self)
+        // setup ControlsViewController
+        self.controlsViewController.view.frame = self.view.bounds
+        self.view.addSubview(self.controlsViewController.view)
+        self.controlsViewController.didMove(toParent: self)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // set up must be done in the order below!
+        self.initCurrentMoire()
+        self.initConfigs()
+        self.initMainView()
+        self.initControls()
+    }
+    
+    func updateMainView() {
+        if self.configurations == nil {
+            self.initConfigs()
+        }
+        if self.currentMoire == nil || ((self.moireIdToInit != nil) && (self.moireIdToInit != self.currentMoire?.id)) {
+            self.initCurrentMoire()
+        }
+        self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns, configs: self.configurations!)
+        self.resetControls()
+    }
+    
+    func initCurrentMoire() {
+        self.currentMoire = self.moireModelAccessor.loadMoire(preferredId: self.moireIdToInit)
+    }
+    
+    func initConfigs() {
+        func saveInitSettings() {
+            do {
+                UserDefaults.standard.set(try PropertyListEncoder().encode(self.configurations), forKey: "InitSettings")
+            } catch {
+                print("problem saving initSettings to disk")
+            }
+        }
+        guard self.configurations == nil else {
+            saveInitSettings()
+            return
+        }
+        do {
+            guard let data = UserDefaults.standard.value(forKey: "InitSettings") as? Data else {throw NSError()}
+            self.configurations = try PropertyListDecoder().decode(Configurations.self, from: data)
+        } catch {
+            print("problem loading initSettings from disk; setting and saving the default")
+            self.configurations = Configurations()
+            saveInitSettings()
+        }
+    }
+    
+    func initMainView() {
+        self.moireViewController.setUp(patterns: currentMoire!.patterns, configs: self.configurations!)
+    }
+    
+    func initControls() {
+        var ids: Array<String> = []
+        for i in 0..<self.currentMoire!.patterns.count {
+            ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: [i])!)
+        }
+        var hdIds: Array<String> = []
+        for i in 0..<self.configurations!.highDegreeControlCount {
+            let indexes = self.configurations!.highDegreeControlSettings[i].indexesOfPatternControlled
+            if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexes) {
+                hdIds.append(newId)
+            }
+        }
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, highDegIds: hdIds, delegate: self)
+    }
+    
+    func resetControls() {
+        self.initControls()
+    }
+
+    func pauseMoire() {
+        self.moireViewController.viewControllerLosingFocus()
+    }
+    
+    func enterSelectionMode() {
+        self.controlsViewController.enterSelectionMode()
+    }
+    
+    func exitSelectionMode() {
+        self.controlsViewController.exitSelectionMode()
+    }
+
+    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
+        // TODO: stub
+        return false
+    }
+    
+    func saveMoire() -> Bool {
+        guard let cm = self.currentMoire else {
+            print("cannot save current moire because it's nil")
+            return false
+        }
+        return self.moireModelAccessor.saveMoire(moireToSave: cm)
+    }
+}
+
+extension MoireManagingController: PatternManager {
     
     func highlightPattern(callerId: String) -> Bool {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return false}
@@ -221,4 +378,3 @@ extension MainViewController: PatternManager {
         return true
     }
 }
-
