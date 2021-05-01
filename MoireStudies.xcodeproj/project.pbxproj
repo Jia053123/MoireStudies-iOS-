@@ -70,6 +70,8 @@
 		8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */; };
 		8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */; };
 		8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */; };
+		8EBF7CC7263D1EAF009E4F4B /* MainViewController+PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */; };
+		8EBF7CCC263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -168,6 +170,8 @@
 		8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
 		8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
+		8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManager.swift"; sourceTree = "<group>"; };
+		8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManagerTests.swift"; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -284,6 +288,7 @@
 			children = (
 				8E60787525A3D3C6002EB000 /* Configurations.swift */,
 				8E9690E12596FA3700C69DDC /* MainViewController.swift */,
+				8EBF7CC6263D1EAF009E4F4B /* MainViewController+PatternManager.swift */,
 				8EE29F5425A054C700FF2539 /* PatternManager.swift */,
 				8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */,
 			);
@@ -296,6 +301,7 @@
 				8E6BF3F025AEC880005FE7CA /* LocalMoireModelTests.swift */,
 				8E64FF4E2602B3C7009A85DE /* SaveFilesViewControllerTests.swift */,
 				8EAA4DF525F342FF00B9DC81 /* MainViewControllerTests.swift */,
+				8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */,
 				8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */,
 				8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
@@ -563,6 +569,7 @@
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
+				8EBF7CC7263D1EAF009E4F4B /* MainViewController+PatternManager.swift in Sources */,
 				8E5BABE025AE82F4003FC799 /* LocalMoireModel.swift in Sources */,
 				8E6EF2EA25C85B0D0009905C /* Utilities.swift in Sources */,
 				8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */,
@@ -616,6 +623,7 @@
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
 				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
+				8EBF7CCC263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift in Sources */,
 				8EAA4DF625F342FF00B9DC81 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
