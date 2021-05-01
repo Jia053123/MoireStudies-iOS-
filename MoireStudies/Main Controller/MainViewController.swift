@@ -78,8 +78,12 @@ class MainViewController: MoireManagingController {
         self.pauseMoire()
     }
     
-    override func enterSelectionMode() {
-        super.enterSelectionMode()
+    func pauseMoire() {
+        self.moireDisplayer.viewControllerLosingFocus()
+    }
+    
+    func enterSelectionMode() {
+        self.patternsSelector.enterSelectionMode()
         self.dialogueContent.text = Constants.Text.highDegreeControlCreationInstruction
         self.dialogueContainerView.isHidden = false
         
@@ -89,8 +93,8 @@ class MainViewController: MoireManagingController {
         self.newHighDegCtrlButton.isEnabled = false
     }
 
-    override func exitSelectionMode() {
-        super.exitSelectionMode()
+    func exitSelectionMode() {
+        self.patternsSelector.exitSelectionMode()
         self.dialogueContainerView.isHidden = true
         
         self.newPatternButton.isEnabled = true

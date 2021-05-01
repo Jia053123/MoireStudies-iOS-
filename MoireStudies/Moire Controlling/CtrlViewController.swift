@@ -11,7 +11,7 @@ import UIKit
 protocol CtrlViewController: UIViewController {
     var id: String! { get }
     var patternDelegate: PatternManager! { get set }
-    var controlDelegate: ControlManager! { get set }
+    var controlDelegate: ControlsManager! { get set }
     var isInSelectionMode: Bool { get }
     var isSelected: Bool { get }
     init(id: String, frame: CGRect, pattern: Pattern?)

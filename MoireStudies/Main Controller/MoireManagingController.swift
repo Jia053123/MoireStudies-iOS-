@@ -20,13 +20,15 @@ import UIKit
             - MaskView(1) in mask property
  */
 class MoireManagingController: UIViewController {
-    private weak var moireViewController: MoireViewController!
-    private weak var controlsViewController: ControlsViewController!
-    private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
-    private(set) var currentMoire: Moire?
     private var moireModelAccessor: MoireModelAccessor!
+    private weak var moireViewController: MoireViewController!
+    var moireDisplayer: MoireDisplayer { get{ return self.moireViewController } }
+    private weak var controlsViewController: ControlsViewController!
+    var patternsSelector: PatternsSelector { get{ return self.controlsViewController } }
+    private var ctrlAndPatternMatcher = CtrlAndPatternMatcher()
     var configurations: Configurations?
     var moireIdToInit: String?
+    private(set) var currentMoire: Moire?
     
     func setUpModelAndChildControllers(moireModel: MoireModel = LocalMoireModel.init(),
                                        moireViewController: MoireViewController = MoireViewController(),
@@ -139,18 +141,6 @@ class MoireManagingController: UIViewController {
         self.initControls()
     }
 
-    func pauseMoire() {
-        self.moireViewController.viewControllerLosingFocus()
-    }
-    
-    func enterSelectionMode() {
-        self.controlsViewController.enterSelectionMode()
-    }
-    
-    func exitSelectionMode() {
-        self.controlsViewController.exitSelectionMode()
-    }
-
     func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
         // TODO: stub
         return false
@@ -166,7 +156,6 @@ class MoireManagingController: UIViewController {
 }
 
 extension MoireManagingController: PatternManager {
-    
     func highlightPattern(callerId: String) -> Bool {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return false}
         self.moireViewController.highlightPatternView(patternViewIndex: index)

@@ -69,11 +69,13 @@
 		8EBF7C86262529A3009E4F4B /* ControlsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */; };
 		8EBF7CA1262E7F5A009E4F4B /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */; };
 		8EBF7CAC26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */; };
-		8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */; };
+		8EBF7CB42638FE3A009E4F4B /* ControlsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CB32638FE3A009E4F4B /* ControlsManager.swift */; };
 		8EBF7CCC263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */; };
 		8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */; };
 		8EBF7CED263DC940009E4F4B /* MoireScreenshotProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */; };
 		8EBF7CFB263DE097009E4F4B /* MoireManagingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7CFA263DE097009E4F4B /* MoireManagingController.swift */; };
+		8EBF7D06263E065B009E4F4B /* PatternsSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7D05263E065B009E4F4B /* PatternsSelector.swift */; };
+		8EBF7D0E263E07BB009E4F4B /* MoireDisplayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF7D0D263E07BB009E4F4B /* MoireDisplayer.swift */; };
 		8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F5425A054C700FF2539 /* PatternManager.swift */; };
 		8EE29F8825A05BC100FF2539 /* CtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */; };
 /* End PBXBuildFile section */
@@ -171,11 +173,13 @@
 		8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewControllerTests.swift; sourceTree = "<group>"; };
 		8EBF7CA0262E7F5A009E4F4B /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtilities.swift; sourceTree = "<group>"; };
 		8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcherTests.swift; sourceTree = "<group>"; };
-		8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlManager.swift; sourceTree = "<group>"; };
+		8EBF7CB32638FE3A009E4F4B /* ControlsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsManager.swift; sourceTree = "<group>"; };
 		8EBF7CCB263DAEFD009E4F4B /* MainViewController+PatternManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainViewController+PatternManagerTests.swift"; sourceTree = "<group>"; };
 		8EBF7CE7263DC6F7009E4F4B /* MoireModelAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireModelAccessor.swift; sourceTree = "<group>"; };
 		8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireScreenshotProvider.swift; sourceTree = "<group>"; };
 		8EBF7CFA263DE097009E4F4B /* MoireManagingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireManagingController.swift; sourceTree = "<group>"; };
+		8EBF7D05263E065B009E4F4B /* PatternsSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsSelector.swift; sourceTree = "<group>"; };
+		8EBF7D0D263E07BB009E4F4B /* MoireDisplayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoireDisplayer.swift; sourceTree = "<group>"; };
 		8EE29F5425A054C700FF2539 /* PatternManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternManager.swift; sourceTree = "<group>"; };
 		8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -232,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				8EBF7CEC263DC940009E4F4B /* MoireScreenshotProvider.swift */,
+				8EBF7D0D263E07BB009E4F4B /* MoireDisplayer.swift */,
 				8E28187025D0FA67007C3E3D /* MoireViewController.swift */,
 				8E314489259F030000BB0399 /* MaskView.swift */,
 				8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */,
@@ -244,7 +249,8 @@
 		8E2E462325D1EA9B00B0EA23 /* Moire Controlling */ = {
 			isa = PBXGroup;
 			children = (
-				8EBF7CB32638FE3A009E4F4B /* ControlManager.swift */,
+				8EBF7CB32638FE3A009E4F4B /* ControlsManager.swift */,
+				8EBF7D05263E065B009E4F4B /* PatternsSelector.swift */,
 				8E2E463625D1F08000B0EA23 /* ControlsViewController.swift */,
 				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
@@ -569,9 +575,10 @@
 				8EE29F5525A054C700FF2539 /* PatternManager.swift in Sources */,
 				8E7FD9BE25D0D08A0064A0A6 /* PatternViewController.swift in Sources */,
 				8E72F41825F2BA04004E98DF /* CtrlViewControllerSch2.swift in Sources */,
+				8EBF7D06263E065B009E4F4B /* PatternsSelector.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
-				8EBF7CB42638FE3A009E4F4B /* ControlManager.swift in Sources */,
+				8EBF7CB42638FE3A009E4F4B /* ControlsManager.swift in Sources */,
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
 				8E2E460F25D1E4BF00B0EA23 /* CoreAnimPatternViewController.swift in Sources */,
 				8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */,
@@ -588,6 +595,7 @@
 				8E1EDFDA25D2650E002572C3 /* WeakTileLayerContainer.swift in Sources */,
 				8E2E463725D1F08000B0EA23 /* ControlsViewController.swift in Sources */,
 				8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */,
+				8EBF7D0E263E07BB009E4F4B /* MoireDisplayer.swift in Sources */,
 				8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */,
 				8E2ED94D25F7F3D500C7E817 /* MoireModel.swift in Sources */,
 				8E36F73F25930969004BC2F3 /* SliderCtrlViewSch1.swift in Sources */,

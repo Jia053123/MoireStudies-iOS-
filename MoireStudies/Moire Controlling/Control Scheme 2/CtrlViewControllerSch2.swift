@@ -11,7 +11,7 @@ import UIKit
 class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
     var id: String!
     weak var patternDelegate: PatternManager!
-    weak var controlDelegate: ControlManager!
+    weak var controlDelegate: ControlsManager!
     let initPattern: Pattern?
     private(set) var isInSelectionMode: Bool = false
     var isSelected: Bool {

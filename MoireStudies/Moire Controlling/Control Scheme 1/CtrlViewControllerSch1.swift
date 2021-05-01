@@ -13,7 +13,7 @@ class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
     var isHidden: Bool {get {return _isHidden}}
     var id: String!
     weak var patternDelegate: PatternManager!
-    weak var controlDelegate: ControlManager!
+    weak var controlDelegate: ControlsManager!
     let initPattern: Pattern?
     private(set) var isInSelectionMode: Bool = false
     var isSelected: Bool {

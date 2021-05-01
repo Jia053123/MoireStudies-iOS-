@@ -81,6 +81,10 @@ class ControlsViewController: UIViewController {
         self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
     }
     
+    
+}
+
+extension ControlsViewController: PatternsSelector {
     func enterSelectionMode() {
         for c in self.controlViewControllers {
             if !c.isInSelectionMode {
@@ -98,6 +102,6 @@ class ControlsViewController: UIViewController {
     }
 }
 
-extension ControlsViewController: ControlManager {
+extension ControlsViewController: ControlsManager {
     
 }

@@ -3,22 +3,4 @@
    uuid = "629740B0-B807-4195-9E39-1F34765378D9"
    type = "1"
    version = "2.0">
-   <Breakpoints>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E856D0E8-0667-486F-A365-0350339606D2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MoireStudiesTests/Tests/MainViewControllerTestsWithNormalModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "testLoadMoire_MoireExceedsMaxNumOfPatterns_WithInitIdAndModelHasTheOneWithId_LoadTheOneWithId()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-   </Breakpoints>
 </Bucket>

@@ -12,7 +12,7 @@ class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
     var id: String!
     weak var patternDelegate: PatternManager!
-    weak var controlDelegate: ControlManager!
+    weak var controlDelegate: ControlsManager!
     let initPattern: Pattern?
     private(set) var isInSelectionMode: Bool = false
     var isSelected: Bool {
