@@ -46,6 +46,7 @@ enum CtrlSchemeSetting: String, Codable {
 }
 
 enum HighDegCtrlSchemeSetting: String, Codable {
+    case testScheme
     case basicScheme
 }
 

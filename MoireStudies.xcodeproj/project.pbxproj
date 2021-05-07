@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E1533162645110D002446D9 /* MockHighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
@@ -98,6 +99,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHighDegCtrlViewController.swift; sourceTree = "<group>"; };
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
 				8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */,
 				8E5816E225E7438200FFE709 /* BasicCtrlViewController.swift */,
+				8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */,
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
 				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
 				8E5816D925E7063D00FFE709 /* Control Scheme 3 */,
@@ -614,6 +617,7 @@
 				8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,
+				8E1533162645110D002446D9 /* MockHighDegCtrlViewController.swift in Sources */,
 				8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */,
 				8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */,
 				8E28187125D0FA67007C3E3D /* MoireViewController.swift in Sources */,

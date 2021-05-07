@@ -141,9 +141,21 @@ class MoireManagingController: UIViewController {
         self.initControls()
     }
 
-    func createHighDegControl(type: HighDegreeControlSettings, patternsToControl: Array<Int>) -> Bool {
-        // TODO: stub
-        return false
+    func createHighDegControl(type: HighDegCtrlSchemeSetting, indexesOfPatternsToControl: Array<Int>) -> Bool {
+        var indexesToUse: Array<Int> = []
+        for i in indexesOfPatternsToControl {
+            // check validity
+            guard i >= 0 && i < self.currentMoire!.patterns.count else {continue}
+            // check uniqueness
+            if !indexesToUse.contains(i) {
+                indexesToUse.append(i)
+            }
+        }
+        guard Constants.SettingsClassesDictionary.highDegControllerClasses[type]!.supportedNumOfPatterns.contains(indexesToUse.count) else { return false }
+        let newHDCSetting = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: type, indexesOfPatternControlled: indexesToUse)
+        self.configurations!.highDegreeControlSettings.append(newHDCSetting)
+        self.updateMainView()
+        return true
     }
     
     func saveMoire() -> Bool {

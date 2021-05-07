@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class HighDegCtrlViewControllerBasic: UIViewController {
+    static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
     var delegate: PatternManager!
     let initPattern: Array<Pattern?>

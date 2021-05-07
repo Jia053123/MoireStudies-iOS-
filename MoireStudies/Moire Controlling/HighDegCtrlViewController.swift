@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 protocol HighDegCtrlViewController: UIViewController {
+    static var supportedNumOfPatterns: ClosedRange<Int> { get }
     var id: String! { get }
     var delegate: PatternManager! { get set }
     init(id: String, frame: CGRect, patterns: Array<Pattern?>)

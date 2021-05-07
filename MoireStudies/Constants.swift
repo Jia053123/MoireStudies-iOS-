@@ -71,4 +71,11 @@ return 15.0
             }
         }
     }
+    
+    struct SettingsClassesDictionary {
+        static let highDegControllerClasses: Dictionary<HighDegCtrlSchemeSetting, HighDegCtrlViewController.Type> = [
+            .testScheme: MockHighDegCtrlViewController.self,
+            .basicScheme: HighDegCtrlViewControllerBasic.self
+        ]
+    }
 }

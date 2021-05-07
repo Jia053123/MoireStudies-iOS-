@@ -145,6 +145,89 @@ extension MainViewControllerTestsWithNormalModel {
         self.mainViewController.cancelButtonPressed(NSObject())
         XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
     }
+    
+    func testCreatingHighDegreeControl_NumOfPatternsWithInRangeAndNoRepetition_CreateNewHighDegreeControl() {
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.mainViewController.configurations = emptyConfig
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,3]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .basicScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
+        
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,2]))
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [2,3,1]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 3)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].highDegCtrlSchemeSetting, .basicScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].indexesOfPatternControlled, [0,2])
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[2].highDegCtrlSchemeSetting, .basicScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[2].indexesOfPatternControlled, [2,3,1])
+    }
+    
+    func testCreatingHighDegreeControl_NumOfPatternsWithInRangeAndHaveRepetition_CreateNewHighDegreeControlForEachUniqueIndex() {
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.mainViewController.configurations = emptyConfig
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 5)
+        
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,0,3,0]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .testScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
+    }
+    
+    func testCreatingHighDegreeControl_NumOfPatternsOutOfRangeAndNoRepetition_ReturnFalseAndDoNothing() {
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.mainViewController.configurations = emptyConfig
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 5)
+        
+        assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(1))
+        XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2]))
+        assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(5))
+        assert(HighDegCtrlViewControllerBasic.supportedNumOfPatterns.contains(5))
+        XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2,0,1,3,4]))
+        
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 0)
+    }
+    
+    func testCreatingHighDegreeControl_NumOfPatternsWithInRangeOnlyIfIgnoreRepetition_CreateNewHighDegreeControlForEachUniqueIndex() {
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.mainViewController.configurations = emptyConfig
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,1,2,3,2,1,3,0,0,2]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .testScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,1,2,3])
+    }
+    
+    func testCreatingHighDegreeControl_SomeOfThePatternIndexesDoNotExist_CreateNewHighDegreeControlForEachUniqueAndValidIndex() {
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.mainViewController.configurations = emptyConfig
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,100,3]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .basicScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
+        
+        assert(!HighDegCtrlViewControllerBasic.supportedNumOfPatterns.contains(10))
+        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [1,199,1,3,234,9987,3,334,0,0]))
+        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 2)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].highDegCtrlSchemeSetting, .basicScheme)
+        XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].indexesOfPatternControlled, [1,3,0])
+    }
 }
 
 /// test initializing moire from model
