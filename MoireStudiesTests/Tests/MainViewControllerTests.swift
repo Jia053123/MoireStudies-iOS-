@@ -146,6 +146,14 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
     }
     
+    func testConfirmInSelectionMode_ExitSelectionMode() {
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
+        assert(self.mockControlsViewController.enteredSelectionMode)
+        self.mainViewController.confirmButtonPressed(NSObject())
+        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
+    }
+    
     func testCreatingHighDegreeControl_NumOfPatternsWithInRangeAndNoRepetition_CreateNewHighDegreeControl() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []

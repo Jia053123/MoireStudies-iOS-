@@ -22,9 +22,7 @@ class HighDegCtrlViewControllerBasic: UIViewController {
         let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
         self.view = controlView
         controlView.target = self
-//        if let ps = patterns {
-            self.matchControlsWithModel(patterns: patterns)//ps)
-//        }
+        self.matchControlsWithModel(patterns: patterns) 
     }
     
     required init?(coder: NSCoder) {

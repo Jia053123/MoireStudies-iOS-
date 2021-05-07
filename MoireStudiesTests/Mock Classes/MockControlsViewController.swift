@@ -18,6 +18,7 @@ class MockControlsViewController: ControlsViewController {
     private(set) var ids: Array<String>?
     private(set) var highDegIds: Array<String>?
     private(set) var configs: Configurations?
+    override var selectedPatternIndexes: Array<Int> {return []}
     
     func resetTestingRecords() {
         self.initPatterns = nil

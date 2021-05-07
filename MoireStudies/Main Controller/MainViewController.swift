@@ -46,10 +46,12 @@ class MainViewController: MoireManagingController {
     }
     
     @IBAction func confirmButtonPressed(_ sender: Any) {
-        // TODO: stub
-        // collect selection info
-        // create new control
-        // exit selection mode
+        let selectedIndexes = self.patternsSelector.selectedPatternIndexes
+        let success = self.createHighDegControl(type: .basicScheme, indexesOfPatternsToControl: selectedIndexes)
+        if !success {
+            print("failed to create new control")
+        }
+        self.exitSelectionMode()
     }
     
     @IBAction func cancelButtonPressed(_ sender: Any) {
