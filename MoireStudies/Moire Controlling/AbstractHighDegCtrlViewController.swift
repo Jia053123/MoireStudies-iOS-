@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol AbstractHighDegCtrlViewController: HighDegCtrlViewController {
-    
+    var id: String! { get set }
 }
 
 extension AbstractHighDegCtrlViewController {

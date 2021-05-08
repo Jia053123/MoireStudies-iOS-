@@ -13,12 +13,12 @@ class MoireManagingControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var mockMoireViewController: MockMoireViewController!
     var mockControlsViewController: MockControlsViewController!
-    var mainViewController: MoireManagingController!
+    var moireManagingController: MoireManagingController!
     
     func prepareMainViewController() {
-        self.mainViewController.loadViewIfNeeded()
-        self.mainViewController.viewWillAppear(false)
-        self.mainViewController.viewDidAppear(false)
+        self.moireManagingController.loadViewIfNeeded()
+        self.moireManagingController.viewWillAppear(false)
+        self.moireManagingController.viewDidAppear(false)
     }
     
     func resetAndPopulate(moire: Moire, numOfPatterns: Int) {
@@ -47,19 +47,17 @@ class MoireManagingControllerTestsWithNormalModel: MoireManagingControllerTests 
         self.mockMoireModelNormal = MockMoireModelFilesNormal()
         self.mockMoireViewController = MockMoireViewController()
         self.mockControlsViewController = MockControlsViewController()
-        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
-            return MainViewController.init(coder: coder,
-                                           mockMoireModel: self.mockMoireModelNormal,
-                                           mockMoireViewController: self.mockMoireViewController,
-                                           mockControlsViewController: self.mockControlsViewController)
-        }
+        self.moireManagingController = MoireManagingController()
+        self.moireManagingController.setUpModelAndChildControllers(moireModel: self.mockMoireModelNormal,
+                                                                    moireViewController: self.mockMoireViewController,
+                                                                    controlsViewController: self.mockControlsViewController)
     }
     
     override func tearDownWithError() throws {
         self.mockMoireModelNormal = nil
         self.mockMoireViewController = nil
         self.mockControlsViewController = nil
-        self.mainViewController = nil
+        self.moireManagingController = nil
         self.defaultTestMoire = nil
         self.defaultTestMoireCopy = nil
     }
@@ -102,7 +100,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         XCTAssertNotNil(frameCount)
         XCTAssertTrue(frameCount! >= 3)
         
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs, self.mockMoireViewController.configs)
     }
     
@@ -113,14 +111,14 @@ extension MoireManagingControllerTestsWithNormalModel {
         let arrOfIndexesToControl: Array<Int> = [1,2]
         let hdcs = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: arrOfIndexesToControl)
         testConfigs.highDegreeControlSettings = [hdcs]
-        self.mainViewController.configurations = testConfigs
+        self.moireManagingController.configurations = testConfigs
         
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         let frameCount = self.mockControlsViewController.configs?.controlFrames.count
         XCTAssertNotNil(frameCount)
         XCTAssertTrue(frameCount! >= 4)
         
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.ctrlSchemeSetting, CtrlSchemeSetting.controlScheme1Slider)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings, [hdcs])
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlCount, 1)
@@ -130,45 +128,21 @@ extension MoireManagingControllerTestsWithNormalModel {
 
 /// test setting up high degree controls
 extension MoireManagingControllerTestsWithNormalModel {
-    func testEnteringSelectionMode_CalledCorrespondingMethodInControlsViewController() {
-        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
-        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
-        XCTAssertTrue(self.mockControlsViewController.enteredSelectionMode)
-        XCTAssertFalse(self.mockControlsViewController.exitedSelectionMode)
-    }
-    
-    func testExitingSelectionMode_CalledCorrespondingMethodInControlsViewController() {
-        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
-        self.mainViewController.cancelButtonPressed(NSObject())
-        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
-        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
-        self.mainViewController.cancelButtonPressed(NSObject())
-        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
-    }
-    
-    func testConfirmInSelectionMode_ExitSelectionMode() {
-        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
-        self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
-        assert(self.mockControlsViewController.enteredSelectionMode)
-        self.mainViewController.confirmButtonPressed(NSObject())
-        XCTAssertTrue(self.mockControlsViewController.exitedSelectionMode)
-    }
-    
     func testCreatingHighDegreeControl_NumOfPatternsWithInRangeAndNoRepetition_CreateNewHighDegreeControl() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []
-        self.mainViewController.configurations = emptyConfig
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,3]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,3]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .basicScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
         
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,2]))
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [2,3,1]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,2]))
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [2,3,1]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 3)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].highDegCtrlSchemeSetting, .basicScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].indexesOfPatternControlled, [0,2])
@@ -179,11 +153,11 @@ extension MoireManagingControllerTestsWithNormalModel {
     func testCreatingHighDegreeControl_NumOfPatternsWithInRangeAndHaveRepetition_CreateNewHighDegreeControlForEachUniqueIndex() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []
-        self.mainViewController.configurations = emptyConfig
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 5)
         
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,0,3,0]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,0,3,0]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .testScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
@@ -192,14 +166,14 @@ extension MoireManagingControllerTestsWithNormalModel {
     func testCreatingHighDegreeControl_NumOfPatternsOutOfRangeAndNoRepetition_ReturnFalseAndDoNothing() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []
-        self.mainViewController.configurations = emptyConfig
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 5)
         
         assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(1))
-        XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2]))
+        XCTAssertFalse(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2]))
         assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(5))
         assert(HighDegCtrlViewControllerBatchEditing.supportedNumOfPatterns.contains(5))
-        XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2,0,1,3,4]))
+        XCTAssertFalse(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2,0,1,3,4]))
         
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 0)
     }
@@ -207,11 +181,11 @@ extension MoireManagingControllerTestsWithNormalModel {
     func testCreatingHighDegreeControl_NumOfPatternsWithInRangeOnlyIfIgnoreRepetition_CreateNewHighDegreeControlForEachUniqueIndex() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []
-        self.mainViewController.configurations = emptyConfig
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,1,2,3,2,1,3,0,0,2]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [0,1,2,3,2,1,3,0,0,2]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .testScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,1,2,3])
@@ -220,18 +194,18 @@ extension MoireManagingControllerTestsWithNormalModel {
     func testCreatingHighDegreeControl_SomeOfThePatternIndexesDoNotExist_CreateNewHighDegreeControlForEachUniqueAndValidIndex() {
         var emptyConfig = Configurations.init()
         emptyConfig.highDegreeControlSettings = []
-        self.mainViewController.configurations = emptyConfig
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,100,3]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [0,100,3]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 1)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .basicScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
         
         assert(!HighDegCtrlViewControllerBatchEditing.supportedNumOfPatterns.contains(10))
-        XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [1,199,1,3,234,9987,3,334,0,0]))
-        XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
+        XCTAssertTrue(self.moireManagingController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [1,199,1,3,234,9987,3,334,0,0]))
+        XCTAssertEqual(self.moireManagingController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 2)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].highDegCtrlSchemeSetting, .basicScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings[1].indexesOfPatternControlled, [1,3,0])
@@ -305,7 +279,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         _ = self.mockMoireModelNormal.saveOrModify(moire: m1)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m2)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m3)
-        self.mainViewController.moireIdToInit = m2C.id
+        self.moireManagingController.moireIdToInit = m2C.id
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns == m2C.patterns)
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
@@ -328,7 +302,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         _ = self.mockMoireModelNormal.saveOrModify(moire: m1)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m2)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m3)
-        self.mainViewController.moireIdToInit = m2C.id
+        self.moireManagingController.moireIdToInit = m2C.id
         self.prepareMainViewController()
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, Array(m2C.patterns[0..<Constants.Constrains.numOfPatternsPerMoire.upperBound]))
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
@@ -345,7 +319,7 @@ extension MoireManagingControllerTestsWithNormalModel {
     
     func testLoadMoire_WithInitIdAndModelHasNoMoire_CreateNewAndSave() {
         self.mockMoireModelNormal.setStoredMoires(moires: [])
-        self.mainViewController.moireIdToInit = "NonexistentMoire"
+        self.moireManagingController.moireIdToInit = "NonexistentMoire"
         self.prepareMainViewController()
         XCTAssert(self.mockMoireViewController.currentPatterns != nil)
         XCTAssert(self.mockMoireViewController.currentPatterns!.count > 0)
@@ -368,10 +342,10 @@ extension MoireManagingControllerTestsWithNormalModel {
         _ = self.mockMoireModelNormal.saveOrModify(moire: m1)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m2)
         _ = self.mockMoireModelNormal.saveOrModify(moire: m3)
-        self.mainViewController.moireIdToInit = m2C.id
+        self.moireManagingController.moireIdToInit = m2C.id
         self.prepareMainViewController()
-        self.mainViewController.moireIdToInit = m3C.id
-        self.mainViewController.updateMainView()
+        self.moireManagingController.moireIdToInit = m3C.id
+        self.moireManagingController.updateMainView()
         XCTAssert(self.mockMoireViewController.currentPatterns == m3C.patterns)
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited == [m1C, m2C, m3C])
     }
@@ -384,7 +358,7 @@ class MoireManagingControllerTestsWithCorruptedModel: MoireManagingControllerTes
         self.mockMoireModelCorrupted = MockMoireModelFilesCorrupted()
         self.mockMoireViewController = MockMoireViewController()
         self.mockControlsViewController = MockControlsViewController()
-        self.mainViewController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
+        self.moireManagingController = storyboard.instantiateViewController(identifier: "MainViewController") {coder in
             return MainViewController.init(coder: coder,
                                            mockMoireModel: self.mockMoireModelCorrupted,
                                            mockMoireViewController: self.mockMoireViewController,
@@ -396,7 +370,7 @@ class MoireManagingControllerTestsWithCorruptedModel: MoireManagingControllerTes
         self.mockMoireModelCorrupted = nil
         self.mockMoireViewController = nil
         self.mockControlsViewController = nil
-        self.mainViewController = nil
+        self.moireManagingController = nil
     }
     
     func testLoadMoireWithCorruptedModel_CreateNewAndSave() {

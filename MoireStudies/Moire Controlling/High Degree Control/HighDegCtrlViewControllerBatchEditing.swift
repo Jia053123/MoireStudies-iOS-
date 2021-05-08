@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HighDegCtrlViewControllerBatchEditing: UIViewController {
+class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCtrlViewController {
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
     var delegate: PatternManager!

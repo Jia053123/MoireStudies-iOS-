@@ -19,6 +19,18 @@ class MainViewController: MoireManagingController {
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var dialogueContent: UILabel!
     
+    init?(coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
+           super.init(coder: coder)
+           self.setUpModelAndChildControllers(moireModel: mockMoireModel,
+                                              moireViewController: mockMoireViewController,
+                                              controlsViewController: mockControlsViewController)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setUpModelAndChildControllers()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // setup Buttons

@@ -43,13 +43,6 @@ class MoireManagingController: UIViewController {
         self.controlsViewController = controlsViewController
     }
     
-    init?(coder: NSCoder, mockMoireModel: MoireModel, mockMoireViewController: MoireViewController, mockControlsViewController: ControlsViewController) {
-        super.init(coder: coder)
-        self.setUpModelAndChildControllers(moireModel: mockMoireModel,
-                                           moireViewController: mockMoireViewController,
-                                           controlsViewController: mockControlsViewController)
-    }
-    
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.setUpModelAndChildControllers()

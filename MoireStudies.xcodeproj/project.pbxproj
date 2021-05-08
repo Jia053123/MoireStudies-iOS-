@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E1533162645110D002446D9 /* MockHighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */; };
 		8E153324264712C8002446D9 /* AbstractHighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E153323264712C8002446D9 /* AbstractHighDegCtrlViewController.swift */; };
+		8E15333526471DCD002446D9 /* MainViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15333426471DCD002446D9 /* MainViewControllerTests.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
@@ -102,6 +103,7 @@
 /* Begin PBXFileReference section */
 		8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHighDegCtrlViewController.swift; sourceTree = "<group>"; };
 		8E153323264712C8002446D9 /* AbstractHighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractHighDegCtrlViewController.swift; sourceTree = "<group>"; };
+		8E15333426471DCD002446D9 /* MainViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerTests.swift; sourceTree = "<group>"; };
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				8E64FF4E2602B3C7009A85DE /* SaveFilesViewControllerTests.swift */,
 				8EAA4DF525F342FF00B9DC81 /* MoireManagingControllerTests.swift */,
 				8EBF7CCB263DAEFD009E4F4B /* MoireManagingController+PatternManagerTests.swift */,
+				8E15333426471DCD002446D9 /* MainViewControllerTests.swift */,
 				8EBF7CAB26375F06009E4F4B /* CtrlAndPatternMatcherTests.swift */,
 				8EBF7C85262529A3009E4F4B /* ControlsViewControllerTests.swift */,
 				8EAA4DE825F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift */,
@@ -649,6 +652,7 @@
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
 				8EBF7CCC263DAEFD009E4F4B /* MoireManagingController+PatternManagerTests.swift in Sources */,
 				8EAA4DF625F342FF00B9DC81 /* MoireManagingControllerTests.swift in Sources */,
+				8E15333526471DCD002446D9 /* MainViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
