@@ -9,11 +9,11 @@
 import XCTest
 import UIKit
 
-class MainViewControllerTests: XCTestCase {
+class MoireManagingControllerTests: XCTestCase {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var mockMoireViewController: MockMoireViewController!
     var mockControlsViewController: MockControlsViewController!
-    var mainViewController: MainViewController!
+    var mainViewController: MoireManagingController!
     
     func prepareMainViewController() {
         self.mainViewController.loadViewIfNeeded()
@@ -38,7 +38,7 @@ class MainViewControllerTests: XCTestCase {
     }
 }
 
-class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
+class MoireManagingControllerTestsWithNormalModel: MoireManagingControllerTests {
     var mockMoireModelNormal: MockMoireModelFilesNormal!
     var defaultTestMoire: Moire!
     var defaultTestMoireCopy: Moire!
@@ -88,7 +88,7 @@ class MainViewControllerTestsWithNormalModel: MainViewControllerTests {
 }
 
 /// test sending ControlsViewController valid ids and correct settings
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testSendControlIds_SendIdsThatAreComplete() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         XCTAssertNotNil(self.mockControlsViewController.ids)
@@ -129,7 +129,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test setting up high degree controls
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testEnteringSelectionMode_CalledCorrespondingMethodInControlsViewController() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         self.mainViewController.newHighDegCtrlButtonPressed(NSObject())
@@ -239,7 +239,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test initializing moire from model
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testLoadMoire_NoInitIdAndModelHasOneEmptyMoire_LoadTheMoire() {
         let m1 = Moire()
         assert(m1.patterns.isEmpty)
@@ -377,7 +377,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
 }
 
-class MainViewControllerTestsWithCorruptedModel: MainViewControllerTests {
+class MoireManagingControllerTestsWithCorruptedModel: MoireManagingControllerTests {
     var mockMoireModelCorrupted: MockMoireModelFilesCorrupted!
     
     override func setUpWithError() throws {

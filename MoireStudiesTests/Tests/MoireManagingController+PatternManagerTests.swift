@@ -10,7 +10,7 @@ import XCTest
 import UIKit
 
 /// test modifying and saving moires
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSave() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
@@ -268,7 +268,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test modifying patterns' display properties
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testModifyDisplayProperties_ValidId_CorrectMethodsCalled() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
@@ -318,7 +318,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test sending pattern data back to the controls
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testRetrievePattern_ValidId_ReturnCorrespondingPatternOfTheCurrentMoire() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 3)
         
@@ -352,7 +352,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test appending patterns in moire
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testAppendPattern_MoireEmptyPatternWithinLimitNoCaller_ReturnSuccessAndAppend() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 0)
         XCTAssertTrue(self.mainViewController.createPattern(callerId: nil, newPattern: Pattern.debugPattern()))
@@ -418,7 +418,7 @@ extension MainViewControllerTestsWithNormalModel {
 }
 
 /// test deleting patterns in moire
-extension MainViewControllerTestsWithNormalModel {
+extension MoireManagingControllerTestsWithNormalModel {
     func testDeletePattern_PatternNotUnderLimitAndValidId_ReturnTrueAndDeletePattern() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 5)
         assert(Constants.Constrains.numOfPatternsPerMoire.contains(5))
@@ -492,7 +492,7 @@ extension MainViewControllerTestsWithNormalModel {
     }
 }
 
-class MainViewControllerTestsWithReadonlyModel: MainViewControllerTests {
+class MoireManagingControllerTestsWithReadonlyModel: MoireManagingControllerTests {
     var mockMoireModelReadonly: MockMoireModelReadOnly!
     
     override func setUpWithError() throws {
