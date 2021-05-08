@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch2: UIViewController, BasicCtrlViewController {
+class CtrlViewControllerSch2: UIViewController, AbstractCtrlViewController {
     var id: String!
     weak var patternDelegate: PatternManager!
     weak var controlDelegate: ControlsManager!

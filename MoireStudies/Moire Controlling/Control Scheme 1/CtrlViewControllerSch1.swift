@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch1: UIViewController, BasicCtrlViewController {
+class CtrlViewControllerSch1: UIViewController, AbstractCtrlViewController {
     var _isHidden: Bool = false
     var isHidden: Bool {get {return _isHidden}}
     var id: String!

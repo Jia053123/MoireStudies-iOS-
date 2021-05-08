@@ -8,14 +8,12 @@
 import Foundation
 import UIKit
 
-protocol BasicCtrlViewController: CtrlViewController {
+protocol AbstractCtrlViewController: CtrlViewController {
     var id: String! {get set}
-    var patternDelegate: PatternManager! {get set}
-    
-    func matchControlsWithModel(pattern: Pattern) // TODO: make a pattern class with optionals to avoid setting the slider being controlled? 
+    // TODO: make a pattern class with optionals to avoid setting the slider being controlled?
 }
 
-extension BasicCtrlViewController {
+extension AbstractCtrlViewController {
     func highlightPattern() {
         _ = patternDelegate?.highlightPattern(callerId: self.id)
     }

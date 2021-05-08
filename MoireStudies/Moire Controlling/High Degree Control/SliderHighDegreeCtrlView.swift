@@ -9,7 +9,11 @@ import Foundation
 import UIKit
 
 class SliderHighDegreeCtrlView: UIView {
-    var target: HighDegCtrlViewControllerBasic!
+    var target: HighDegCtrlViewControllerBatchEditing!
+    @IBOutlet weak var speedSlider: UISlider!
+    @IBOutlet weak var directionSlider: UISlider!
+    @IBOutlet weak var fillSlider: UISlider!
+    @IBOutlet weak var scaleSlider: UISlider!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -27,6 +31,18 @@ class SliderHighDegreeCtrlView: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
+    }
+    
+    @IBAction func speedChanged(_ sender: Any) {
+    }
+    
+    @IBAction func directionChanged(_ sender: Any) {
+    }
+    
+    @IBAction func fillChanged(_ sender: Any) {
+    }
+    
+    @IBAction func scaleChanged(_ sender: Any) {
     }
 }
 

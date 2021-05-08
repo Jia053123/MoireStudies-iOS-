@@ -198,7 +198,7 @@ extension MainViewControllerTestsWithNormalModel {
         assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(1))
         XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2]))
         assert(!Constants.SettingsClassesDictionary.highDegControllerClasses[.testScheme]!.supportedNumOfPatterns.contains(5))
-        assert(HighDegCtrlViewControllerBasic.supportedNumOfPatterns.contains(5))
+        assert(HighDegCtrlViewControllerBatchEditing.supportedNumOfPatterns.contains(5))
         XCTAssertFalse(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.testScheme, indexesOfPatternsToControl: [2,0,1,3,4]))
         
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 0)
@@ -229,7 +229,7 @@ extension MainViewControllerTestsWithNormalModel {
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.highDegCtrlSchemeSetting, .basicScheme)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.first?.indexesOfPatternControlled, [0,3])
         
-        assert(!HighDegCtrlViewControllerBasic.supportedNumOfPatterns.contains(10))
+        assert(!HighDegCtrlViewControllerBatchEditing.supportedNumOfPatterns.contains(10))
         XCTAssertTrue(self.mainViewController.createHighDegControl(type: HighDegCtrlSchemeSetting.basicScheme, indexesOfPatternsToControl: [1,199,1,3,234,9987,3,334,0,0]))
         XCTAssertEqual(self.mainViewController.configurations, self.mockControlsViewController.configs)
         XCTAssertEqual(self.mockControlsViewController.configs?.highDegreeControlSettings.count, 2)

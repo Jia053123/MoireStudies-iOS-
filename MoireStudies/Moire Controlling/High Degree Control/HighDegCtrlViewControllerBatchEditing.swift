@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class HighDegCtrlViewControllerBasic: UIViewController {
+class HighDegCtrlViewControllerBatchEditing: UIViewController {
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
     var delegate: PatternManager!
@@ -22,7 +22,7 @@ class HighDegCtrlViewControllerBasic: UIViewController {
         let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
         self.view = controlView
         controlView.target = self
-        self.matchControlsWithModel(patterns: patterns) 
+        self.matchControlsWithModel(patterns: patterns)
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +31,7 @@ class HighDegCtrlViewControllerBasic: UIViewController {
     }
 }
 
-extension HighDegCtrlViewControllerBasic: HighDegCtrlViewController {
+extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     func matchControlsWithModel(patterns: Array<Pattern?>) {
         // stub
     }

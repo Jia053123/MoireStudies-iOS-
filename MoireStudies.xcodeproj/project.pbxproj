@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8E1533162645110D002446D9 /* MockHighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */; };
+		8E153324264712C8002446D9 /* AbstractHighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E153323264712C8002446D9 /* AbstractHighDegCtrlViewController.swift */; };
 		8E1B9E7425B68AFF0021D398 /* CtrlAndPatternMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */; };
 		8E1B9E8325BCE2560021D398 /* UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E8225BCE2560021D398 /* UiTests.swift */; };
 		8E1B9E9125BE7AB60021D398 /* MetalPatternViewShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 8E1B9E9025BE7AB60021D398 /* MetalPatternViewShader.metal */; };
@@ -37,7 +38,7 @@
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
 		8E4FF59A2623629E006983A1 /* HighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */; };
 		8E5816DE25E7074400FFE709 /* SliderCtrlViewSch3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */; };
-		8E5816E325E7438200FFE709 /* BasicCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E225E7438200FFE709 /* BasicCtrlViewController.swift */; };
+		8E5816E325E7438200FFE709 /* AbstractCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E225E7438200FFE709 /* AbstractCtrlViewController.swift */; };
 		8E5816E825E743A100FFE709 /* SliderCtrlViewSch3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E725E743A100FFE709 /* SliderCtrlViewSch3.swift */; };
 		8E5BABE025AE82F4003FC799 /* LocalMoireModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5BABDF25AE82F4003FC799 /* LocalMoireModel.swift */; };
 		8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E60786725A2F049002EB000 /* UtilitiesTests.swift */; };
@@ -61,7 +62,7 @@
 		8E96B7B4257F33D3007527E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E96B7B2257F33D3007527E2 /* LaunchScreen.storyboard */; };
 		8E96B7B7257F33D3007527E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7B6257F33D3007527E2 /* main.m */; };
 		8E9F367D261FB096002471F5 /* HighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */; };
-		8E9F367E261FB096002471F5 /* HighDegCtrlViewControllerBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBasic.swift */; };
+		8E9F367E261FB096002471F5 /* HighDegCtrlViewControllerBatchEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBatchEditing.swift */; };
 		8E9F367F261FB096002471F5 /* SliderHighDegreeCtrlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */; };
 		8E9F3680261FB096002471F5 /* SliderHighDegreeCtrlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */; };
 		8E9F3685262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */; };
@@ -100,6 +101,7 @@
 
 /* Begin PBXFileReference section */
 		8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockHighDegCtrlViewController.swift; sourceTree = "<group>"; };
+		8E153323264712C8002446D9 /* AbstractHighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractHighDegCtrlViewController.swift; sourceTree = "<group>"; };
 		8E1B9E7325B68AFF0021D398 /* CtrlAndPatternMatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CtrlAndPatternMatcher.swift; sourceTree = "<group>"; };
 		8E1B9E8125BCE2550021D398 /* MoireStudiesUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesUITests-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E1B9E8225BCE2560021D398 /* UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiTests.swift; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
 		8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegCtrlViewController.swift; sourceTree = "<group>"; };
 		8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch3.xib; sourceTree = "<group>"; };
-		8E5816E225E7438200FFE709 /* BasicCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCtrlViewController.swift; sourceTree = "<group>"; };
+		8E5816E225E7438200FFE709 /* AbstractCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCtrlViewController.swift; sourceTree = "<group>"; };
 		8E5816E725E743A100FFE709 /* SliderCtrlViewSch3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCtrlViewSch3.swift; sourceTree = "<group>"; };
 		8E5BABDF25AE82F4003FC799 /* LocalMoireModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalMoireModel.swift; sourceTree = "<group>"; };
 		8E60786625A2F049002EB000 /* MoireStudiesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudiesTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -166,7 +168,7 @@
 		8E96B7C7257F33D4007527E2 /* MoireStudiesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoireStudiesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E96B7CD257F33D4007527E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlView.swift; sourceTree = "<group>"; };
-		8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBasic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegCtrlViewControllerBasic.swift; sourceTree = "<group>"; };
+		8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBatchEditing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighDegCtrlViewControllerBatchEditing.swift; sourceTree = "<group>"; };
 		8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHighDegreeCtrlView.swift; sourceTree = "<group>"; };
 		8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderHighDegreeCtrlView.xib; sourceTree = "<group>"; };
 		8E9F3684262019A9002471F5 /* HighDegreeCtrlViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegreeCtrlViewControllerTests.swift; sourceTree = "<group>"; };
@@ -257,7 +259,8 @@
 				8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */,
 				8EE29F8725A05BC000FF2539 /* CtrlViewController.swift */,
 				8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */,
-				8E5816E225E7438200FFE709 /* BasicCtrlViewController.swift */,
+				8E5816E225E7438200FFE709 /* AbstractCtrlViewController.swift */,
+				8E153323264712C8002446D9 /* AbstractHighDegCtrlViewController.swift */,
 				8E15331126450F96002446D9 /* MockHighDegCtrlViewController.swift */,
 				8E2E462625D1EBF000B0EA23 /* Control Scheme 1 */,
 				8E2E462725D1EBFD00B0EA23 /* Control Scheme 2 */,
@@ -351,7 +354,7 @@
 		8E72F3D825F01A46004E98DF /* High Degree Control */ = {
 			isa = PBXGroup;
 			children = (
-				8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBasic.swift */,
+				8E9F367A261FB096002471F5 /* HighDegCtrlViewControllerBatchEditing.swift */,
 				8E9F3679261FB096002471F5 /* HighDegreeCtrlView.swift */,
 				8E9F367B261FB096002471F5 /* SliderHighDegreeCtrlView.swift */,
 				8E9F367C261FB096002471F5 /* SliderHighDegreeCtrlView.xib */,
@@ -580,6 +583,7 @@
 				8E72F41825F2BA04004E98DF /* CtrlViewControllerSch2.swift in Sources */,
 				8EBF7D06263E065B009E4F4B /* PatternsSelector.swift in Sources */,
 				8E31448A259F030000BB0399 /* MaskView.swift in Sources */,
+				8E153324264712C8002446D9 /* AbstractHighDegCtrlViewController.swift in Sources */,
 				8E31449225A0393A00BB0399 /* Constants.swift in Sources */,
 				8EBF7CB42638FE3A009E4F4B /* ControlsManager.swift in Sources */,
 				8E1B9EB625C265440021D398 /* MetalPatternRenderer.swift in Sources */,
@@ -605,7 +609,7 @@
 				8E9F367F261FB096002471F5 /* SliderHighDegreeCtrlView.swift in Sources */,
 				8E36F75725931993004BC2F3 /* TileLayer.swift in Sources */,
 				8E2BB6D62593277E0018D913 /* Pattern.swift in Sources */,
-				8E9F367E261FB096002471F5 /* HighDegCtrlViewControllerBasic.swift in Sources */,
+				8E9F367E261FB096002471F5 /* HighDegCtrlViewControllerBatchEditing.swift in Sources */,
 				8E60787625A3D3C6002EB000 /* Configurations.swift in Sources */,
 				8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */,
 				8E96B7B7257F33D3007527E2 /* main.m in Sources */,
@@ -613,7 +617,7 @@
 				8E3144A525A04C1C00BB0399 /* SliderCtrlViewSch2.swift in Sources */,
 				8E7FD9C325D0D1430064A0A6 /* MetalPatternViewController.swift in Sources */,
 				8E72F41D25F2BA0D004E98DF /* CtrlViewControllerSch3.swift in Sources */,
-				8E5816E325E7438200FFE709 /* BasicCtrlViewController.swift in Sources */,
+				8E5816E325E7438200FFE709 /* AbstractCtrlViewController.swift in Sources */,
 				8EBF7CE8263DC6F7009E4F4B /* MoireModelAccessor.swift in Sources */,
 				8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */,
 				8E6EB6FE25A52EBF007EA799 /* Moire.swift in Sources */,

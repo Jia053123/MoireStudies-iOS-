@@ -69,7 +69,7 @@ class ControlsViewController: UIViewController, PatternsSelector {
             
             switch hds.highDegCtrlSchemeSetting {
             case .basicScheme:
-                hdcvc = HighDegCtrlViewControllerBasic.init(id: id, frame: hdControlFrames[i], patterns: ps)
+                hdcvc = HighDegCtrlViewControllerBatchEditing.init(id: id, frame: hdControlFrames[i], patterns: ps)
             case .testScheme:
                 hdcvc = MockHighDegCtrlViewController.init(id: id, frame: hdControlFrames[i], patterns: ps)
             }

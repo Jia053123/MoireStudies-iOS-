@@ -9,5 +9,5 @@ import Foundation
 import UIKit
 
 protocol HighDegreeCtrlView: UIView {
-    var target: HighDegCtrlViewControllerBasic! { get set }
+    var target: HighDegCtrlViewControllerBatchEditing! { get set }
 }

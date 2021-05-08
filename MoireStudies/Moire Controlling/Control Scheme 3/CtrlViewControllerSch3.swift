@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CtrlViewControllerSch3: UIViewController, BasicCtrlViewController {
+class CtrlViewControllerSch3: UIViewController, AbstractCtrlViewController {
     typealias CtrlViewSch3Subclass = SliderCtrlViewSch3
     var id: String!
     weak var patternDelegate: PatternManager!

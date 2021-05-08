@@ -131,8 +131,8 @@ class ControlsViewControllerTests: XCTestCase {
             }
             let i = self.controlsViewController.children.count - 1
             let c = self.controlsViewController.children[i]
-            XCTAssertNotNil(c as? HighDegCtrlViewControllerBasic)
-            let cvc = c as? HighDegCtrlViewControllerBasic
+            XCTAssertNotNil(c as? HighDegCtrlViewControllerBatchEditing)
+            let cvc = c as? HighDegCtrlViewControllerBatchEditing
             XCTAssertEqual(cvc?.id, hdIds1.first!)
             XCTAssertEqual(cvc?.view.frame, config1.highDegControlFrames.first)
             XCTAssertEqual(cvc?.initPattern[0], patterns1[0])
@@ -165,8 +165,8 @@ class ControlsViewControllerTests: XCTestCase {
             }
             for i in 3 ..< 6 {
                 let c = self.controlsViewController.children[i]
-                XCTAssertNotNil(c as? HighDegCtrlViewControllerBasic)
-                let cvc = c as? HighDegCtrlViewControllerBasic
+                XCTAssertNotNil(c as? HighDegCtrlViewControllerBatchEditing)
+                let cvc = c as? HighDegCtrlViewControllerBatchEditing
                 XCTAssertEqual(cvc?.id, hdIds2[i-3])
                 XCTAssertEqual(cvc?.view.frame, config1.highDegControlFrames[i-3])
                 XCTAssertEqual(cvc?.initPattern, config2.highDegreeControlSettings[i-3].indexesOfPatternControlled.map({patterns2[$0]}))

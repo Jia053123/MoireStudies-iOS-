@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class SliderCtrlViewSch2 : UIView { // TODO: make the outlets private
-    weak var target: BasicCtrlViewController?
+    weak var target: AbstractCtrlViewController?
     @IBOutlet weak var speedSegmentedControl: UISegmentedControl!
     @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var blackSlider: UISlider!
