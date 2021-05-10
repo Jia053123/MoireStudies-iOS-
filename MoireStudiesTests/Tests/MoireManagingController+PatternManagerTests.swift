@@ -349,11 +349,17 @@ extension MoireManagingControllerTestsWithNormalModel {
     }
     
     func testRetrievePatterns_ValidId_ReturnCorrespondingPatternOfTheCurrentMoire() {
+        // without those lines below to reset the config, this test sometimes fails when run individually and always fails when run together with others
+        var emptyConfig = Configurations.init()
+        emptyConfig.highDegreeControlSettings = []
+        self.moireManagingController.configurations = emptyConfig
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        
         var expectedPatterns = self.moireManagingController.currentMoire!.patterns
         expectedPatterns.remove(at: 1)
         assert(self.moireManagingController.createHighDegControl(type: .basicScheme, indexesOfPatternsToControl: [0,2,3]))
         let id = self.mockControlsViewController.highDegIds!.first
+        print("))))) id: ", id!)
         XCTAssertEqual(self.moireManagingController.retrievePatterns(callerId: id!), expectedPatterns)
     }
     

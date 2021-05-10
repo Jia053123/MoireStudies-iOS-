@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-class MockHighDegCtrlViewController: UIViewController, HighDegCtrlViewController {
+/// not in the unit test target so that it can be assigned as an option in Constants while avoiding circular referencing
+class MockHighDegCtrlViewController: UIViewController, AbstractHighDegCtrlViewController {
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...4
     var id: String!
     var patternsDelegate: PatternManager!

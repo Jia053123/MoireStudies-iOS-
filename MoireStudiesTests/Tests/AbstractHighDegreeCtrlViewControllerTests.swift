@@ -7,7 +7,7 @@
 
 import XCTest
 
-class HighDegreeCtrlViewControllerTests: XCTestCase {
+class AbstractHighDegreeCtrlViewControllerTests: XCTestCase {
 
     override func setUpWithError() throws {
         
