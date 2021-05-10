@@ -11,7 +11,7 @@ import UIKit
 class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCtrlViewController {
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
-    var delegate: PatternManager!
+    var patternsDelegate: PatternManager!
     let initPattern: Array<Pattern?>
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {

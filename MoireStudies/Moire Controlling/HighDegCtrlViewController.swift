@@ -11,7 +11,7 @@ import UIKit
 protocol HighDegCtrlViewController: UIViewController {
     static var supportedNumOfPatterns: ClosedRange<Int> { get }
     var id: String! { get }
-    var delegate: PatternManager! { get set }
+    var patternsDelegate: PatternManager! { get set }
     init(id: String, frame: CGRect, patterns: Array<Pattern?>)
     func matchControlsWithModel(patterns: Array<Pattern?>)
 }

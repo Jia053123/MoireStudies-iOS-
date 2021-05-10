@@ -336,13 +336,25 @@ extension MoireManagingControllerTestsWithNormalModel {
     func testRetrievePattern_InvalidId_ReturnNil() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 3)
         
-        XCTAssertNil(self.moireManagingController.retrievePattern(callerId: "3"))
+        XCTAssertNil(self.moireManagingController.retrievePattern(callerId: "/3"))
         XCTAssertNil(self.moireManagingController.retrievePattern(callerId: "-1"))
+    }
+    
+    func testRetrievePattern_ValidHighDegreeId_ReturnTheFirstPatternItControls() {
+        self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
+        let expectedPattern = self.moireManagingController.currentMoire!.patterns.first
+        assert(self.moireManagingController.createHighDegControl(type: .basicScheme, indexesOfPatternsToControl: [0,2,3]))
+        let id = self.mockControlsViewController.highDegIds!.first
+        XCTAssertEqual(self.moireManagingController.retrievePattern(callerId: id!), expectedPattern)
     }
     
     func testRetrievePatterns_ValidId_ReturnCorrespondingPatternOfTheCurrentMoire() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
-        
+        var expectedPatterns = self.moireManagingController.currentMoire!.patterns
+        expectedPatterns.remove(at: 1)
+        assert(self.moireManagingController.createHighDegControl(type: .basicScheme, indexesOfPatternsToControl: [0,2,3]))
+        let id = self.mockControlsViewController.highDegIds!.first
+        XCTAssertEqual(self.moireManagingController.retrievePatterns(callerId: id!), expectedPatterns)
     }
     
     func testRetrievePatterns_InvalidId_ReturnNil() {

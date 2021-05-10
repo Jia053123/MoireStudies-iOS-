@@ -14,7 +14,7 @@ protocol PatternManager: AnyObject {
     func modifyPattern(direction: CGFloat, callerId: String) -> Bool
     func modifyPattern(blackWidth: CGFloat, callerId: String) -> Bool
     func modifyPattern(whiteWidth: CGFloat, callerId: String) -> Bool
-    /// if array length is wrong, return false; if not all the changes are legal, apply what is legal, and return false
+    /// modifiedPatterns refers to only the patterns controlled by the caller; if array length is wrong, return false; if not all the changes are legal, apply what is legal, and return false
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool
     
     func retrievePattern(callerId: String) -> Pattern?

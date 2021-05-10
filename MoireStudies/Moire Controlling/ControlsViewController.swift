@@ -73,7 +73,7 @@ class ControlsViewController: UIViewController, PatternsSelector {
             case .testScheme:
                 hdcvc = MockHighDegCtrlViewController.init(id: id, frame: hdControlFrames[i], patterns: ps)
             }
-            hdcvc.delegate = delegate
+            hdcvc.patternsDelegate = delegate
             self.addChild(hdcvc)
             self.view.addSubview(hdcvc.view)
             hdcvc.didMove(toParent: self)

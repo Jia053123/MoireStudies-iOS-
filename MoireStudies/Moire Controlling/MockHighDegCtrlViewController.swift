@@ -11,7 +11,7 @@ import UIKit
 class MockHighDegCtrlViewController: UIViewController, HighDegCtrlViewController {
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...4
     var id: String!
-    var delegate: PatternManager!
+    var patternsDelegate: PatternManager!
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
         super.init(nibName: nil, bundle: nil)
