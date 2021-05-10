@@ -359,7 +359,8 @@ extension MoireManagingControllerTestsWithNormalModel {
     
     func testRetrievePatterns_InvalidId_ReturnNil() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 2)
-        
+        let invalidId = "/1/999/ab"
+        XCTAssertNil(self.moireManagingController.retrievePatterns(callerId: invalidId))
     }
 }
 

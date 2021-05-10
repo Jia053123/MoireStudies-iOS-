@@ -326,8 +326,13 @@ extension MoireManagingController: PatternManager {
     }
     
     func retrievePatterns(callerId: String) -> Array<Pattern>? {
-        // TODO: stub
-        return nil
+        guard let indexes = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId) else {return nil}
+        var patterns: Array<Pattern> = []
+        for i in indexes {
+            guard let p = self.currentMoire?.patterns[i] else {return nil}
+            patterns.append(p)
+        }
+        return patterns
     }
     
     func hidePattern(callerId: String) -> Bool {
