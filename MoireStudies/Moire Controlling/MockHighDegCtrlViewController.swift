@@ -15,6 +15,7 @@ class MockHighDegCtrlViewController: UIViewController, AbstractHighDegCtrlViewCo
     var patternsDelegate: PatternManager!
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
+        self.id = id
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,6 +24,7 @@ class MockHighDegCtrlViewController: UIViewController, AbstractHighDegCtrlViewCo
     }
     
     func matchControlsWithModel(patterns: Array<Pattern?>) {
+        // TODO: stub
     }
     
     

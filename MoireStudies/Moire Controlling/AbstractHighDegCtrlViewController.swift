@@ -15,8 +15,10 @@ protocol AbstractHighDegCtrlViewController: HighDegCtrlViewController {
 /// the index parameters are from the POV of this class. E.g. if this class controlls 3 patterns, then their indexes are respectively 0,1,2
 extension AbstractHighDegCtrlViewController {
     func modifyPattern(index: Int, speed: CGFloat) -> Bool {
-        // TODO: stub
-        return false
+        guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
+        else {return false}
+        currentPatterns[index].speed = speed
+        return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
     
     func modifyPattern(index: Int, direction: CGFloat) -> Bool {

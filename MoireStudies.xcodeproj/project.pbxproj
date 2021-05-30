@@ -37,6 +37,7 @@
 		8E400DEC25AC1E9100AB2865 /* TouchableUISegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */; };
 		8E400DFA25ACFA3A00AB2865 /* SaveFilesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */; };
 		8E400DFF25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */; };
+		8E46326926619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46326826619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift */; };
 		8E4FF59A2623629E006983A1 /* HighDegCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */; };
 		8E5816DE25E7074400FFE709 /* SliderCtrlViewSch3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */; };
 		8E5816E325E7438200FFE709 /* AbstractCtrlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5816E225E7438200FFE709 /* AbstractCtrlViewController.swift */; };
@@ -133,6 +134,7 @@
 		8E400DEB25AC1E9100AB2865 /* TouchableUISegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchableUISegmentedControl.swift; sourceTree = "<group>"; };
 		8E400DF925ACFA3A00AB2865 /* SaveFilesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFilesViewController.swift; sourceTree = "<group>"; };
 		8E400DFE25AD5B3E00AB2865 /* SaveFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveFileCollectionViewCell.swift; sourceTree = "<group>"; };
+		8E46326826619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractHighDegCtrlViewControllerTests.swift; sourceTree = "<group>"; };
 		8E4FF5992623629E006983A1 /* HighDegCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegCtrlViewController.swift; sourceTree = "<group>"; };
 		8E5816DD25E7074400FFE709 /* SliderCtrlViewSch3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SliderCtrlViewSch3.xib; sourceTree = "<group>"; };
 		8E5816E225E7438200FFE709 /* AbstractCtrlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractCtrlViewController.swift; sourceTree = "<group>"; };
@@ -329,6 +331,7 @@
 				8E9F3684262019A9002471F5 /* AbstractHighDegreeCtrlViewControllerTests.swift */,
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
 				8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */,
+				8E46326826619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -648,6 +651,7 @@
 				8EBF7C86262529A3009E4F4B /* ControlsViewControllerTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
+				8E46326926619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift in Sources */,
 				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,
 				8E2ED94525F7ED3400C7E817 /* MockMoireModel.swift in Sources */,
 				8EBF7CCC263DAEFD009E4F4B /* MoireManagingController+PatternManagerTests.swift in Sources */,

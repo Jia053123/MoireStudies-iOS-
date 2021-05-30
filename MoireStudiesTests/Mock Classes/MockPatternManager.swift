@@ -10,34 +10,31 @@ import Foundation
 import UIKit
 
 class MockPatternManagerLegal: UIViewController, PatternManager {
-    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
-        // stub
-        return false
-    }
-    
-    func retrievePatterns(callerId: String) -> Array<Pattern>? {
-        // stub
-        return nil
-    }
-    
     private(set) var modifiedPattern: Pattern?
+    private(set) var modifiedPatterns: Array<Pattern>?
     private(set) var createdPattern: Pattern?
     private(set) var modifySpeedCallers: Set<String> = []
     private(set) var modifyDirectionCallers: Set<String> = []
     private(set) var modifyBlackWidthCallers: Set<String> = []
     private(set) var modifyWhiteWidthCallers: Set<String> = []
+    private(set) var modifyMulitplePatternsCallers: Set<String> = []
     private(set) var highlightCallers: Set<String> = []
     private(set) var unhighlightCallers: Set<String> = []
     private(set) var dimCallers: Set<String> = []
     private(set) var undimCallers: Set<String> = []
     private(set) var hideCallers: Set<String> = []
     private(set) var unhideCallers: Set<String> = []
-    private(set) var getCallers: Set<String> = []
+    private(set) var retrievePatternCallers: Set<String> = []
+    private(set) var retrievePatternsCallers: Set<String> = []
     private(set) var createCallers: Set<String?> = []
     private(set) var deleteCallers: Set<String> = []
     
     func setCurrentPatternControlled(initPattern: Pattern) {
         self.modifiedPattern = initPattern
+    }
+    
+    func setCurrentPatternsControlled(initPatterns: Array<Pattern>) {
+        self.modifiedPatterns = initPatterns
     }
     
     func resetTestingRecords() {
@@ -53,7 +50,8 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
         self.undimCallers = []
         self.hideCallers = []
         self.unhideCallers = []
-        self.getCallers = []
+        self.retrievePatternCallers = []
+        self.retrievePatternsCallers = []
         self.createCallers = []
         self.deleteCallers = []
     }
@@ -103,9 +101,20 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
         return true
     }
     
+    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
+        self.modifiedPatterns = modifiedPatterns
+        self.modifyMulitplePatternsCallers.insert(callerId)
+        return true
+    }
+    
     func retrievePattern(callerId: String) -> Pattern? {
-        self.getCallers.insert(callerId)
+        self.retrievePatternCallers.insert(callerId)
         return self.modifiedPattern
+    }
+    
+    func retrievePatterns(callerId: String) -> Array<Pattern>? {
+        self.retrievePatternsCallers.insert(callerId)
+        return self.modifiedPatterns
     }
     
     func hidePattern(callerId: String) -> Bool {
@@ -132,21 +141,12 @@ class MockPatternManagerLegal: UIViewController, PatternManager {
 }
 
 class MockPatternManagerIllegal: UIViewController, PatternManager {
-    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
-        // stub
-        return false
-    }
-    
-    func retrievePatterns(callerId: String) -> Array<Pattern>? {
-        // stub
-        return nil
-    }
-    
     var doesReturnPatternControlled: Bool = true
     private(set) var modifySpeedCallers: Set<String> = []
     private(set) var modifyDirectionCallers: Set<String> = []
     private(set) var modifyBlackWidthCallers: Set<String> = []
     private(set) var modifyWhiteWidthCallers: Set<String> = []
+    private(set) var modifyMulitplePatternsCallers: Set<String> = []
     private(set) var highlightCallers: Set<String> = []
     private(set) var unhighlightCallers: Set<String> = []
     private(set) var dimCallers: Set<String> = []
@@ -213,9 +213,20 @@ class MockPatternManagerIllegal: UIViewController, PatternManager {
         return false
     }
     
+    func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
+        self.modifyMulitplePatternsCallers.insert(callerId)
+        return true
+        return false
+    }
+    
     func retrievePattern(callerId: String) -> Pattern? {
         self.getCallers.insert(callerId)
         return self.doesReturnPatternControlled ? Pattern.defaultPattern() : nil
+    }
+    
+    func retrievePatterns(callerId: String) -> Array<Pattern>? {
+        //TODO: stub
+        return nil
     }
     
     func hidePattern(callerId: String) -> Bool {
