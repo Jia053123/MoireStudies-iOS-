@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MockPatternManagerLegal: UIViewController, PatternManager {
+class MockPatternManagerNormal: UIViewController, PatternManager {
     private(set) var modifiedPattern: Pattern?
     private(set) var modifiedPatterns: Array<Pattern>?
     private(set) var createdPattern: Pattern?
