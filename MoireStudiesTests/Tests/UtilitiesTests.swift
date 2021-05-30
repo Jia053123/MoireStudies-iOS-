@@ -254,4 +254,37 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
         XCTAssertEqual(fittedM.patterns[3], Utilities.fitWithinBounds(pattern: p3))
         XCTAssertEqual(fittedM.patterns[4], p4)
     }
+    
+    func testIntersectRanges_HasIntersection_ReturnIntersection() {
+        let r11 = 0...5
+        let r21 = 2...8
+        let intersection1 = 2...5
+        XCTAssertEqual(Utilities.intersectRanges(range1: r11, range2: r21), intersection1)
+        XCTAssertEqual(Utilities.intersectRanges(range1: r21, range2: r11), intersection1)
+        
+        let r12 = -1.1...5.4
+        let r22 = 1.2...3.2
+        let intersection2 = 1.2...3.2
+        XCTAssertEqual(Utilities.intersectRanges(range1: r12, range2: r22), intersection2)
+        XCTAssertEqual(Utilities.intersectRanges(range1: r22, range2: r12), intersection2)
+        
+        let r13 = -5.3 ... -1.11
+        let r23 = -10.1 ... -0.9
+        let intersection3 = -5.3 ... -1.11
+        XCTAssertEqual(Utilities.intersectRanges(range1: r13, range2: r23), intersection3)
+        XCTAssertEqual(Utilities.intersectRanges(range1: r23, range2: r13), intersection3)
+        
+        let r14 = 0...5
+        let r24 = 5...10
+        let intersection4 = 5...5
+        XCTAssertEqual(Utilities.intersectRanges(range1: r14, range2: r24), intersection4)
+        XCTAssertEqual(Utilities.intersectRanges(range1: r24, range2: r14), intersection4)
+    }
+    
+    func testIntersectRanges_NoIntersection_ReturnNil() {
+        let r11 = -1.5...3.2
+        let r12 = 3.3...5.0
+        XCTAssertNil(Utilities.intersectRanges(range1: r11, range2: r12))
+        XCTAssertNil(Utilities.intersectRanges(range1: r12, range2: r11))
+    }
 }

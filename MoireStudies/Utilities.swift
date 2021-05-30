@@ -87,4 +87,25 @@ class Utilities: NSObject {
             return array[index]
         }
     }
+    
+    static func intersectRanges<T>(range1: ClosedRange<T>, range2: ClosedRange<T>) -> ClosedRange<T>? {
+        var largerLowerBound: T
+        if range1.lowerBound < range2.lowerBound {
+            largerLowerBound = range2.lowerBound
+        } else {
+            largerLowerBound = range1.lowerBound
+        }
+        var smallerUpperBound: T
+        if range1.upperBound < range2.upperBound {
+            smallerUpperBound = range1.upperBound
+        } else {
+            smallerUpperBound = range2.upperBound
+        }
+        
+        if largerLowerBound <= smallerUpperBound {
+            return largerLowerBound...smallerUpperBound
+        } else {
+            return nil
+        }
+    }
 }

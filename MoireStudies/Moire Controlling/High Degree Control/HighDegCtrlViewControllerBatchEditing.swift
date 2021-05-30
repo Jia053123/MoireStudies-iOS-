@@ -91,6 +91,24 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
 
 extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     func matchControlsWithModel(patterns: Array<Pattern?>) {
-        // do nothing
+        let cv = self.view as! SliderHighDegreeCtrlView
+        
+        var speedBound: ClosedRange<CGFloat>?
+        var fillRatioBound : ClosedRange<CGFloat>?
+        var scaleFactorBound: ClosedRange<CGFloat>?
+        for p in patterns {
+            guard let pattern = p else {continue}
+            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth) else {continue}
+            if let frb = fillRatioBound, let sfb = scaleFactorBound {
+                if frb.lowerBound < boundResult.fillRatioRange.lowerBound {
+                    fillRatioBound = boundResult.fillRatioRange.lowerBound...frb.upperBound
+                }
+                if frb.upperBound > boundResult.fillRatioRange.upperBound {
+                    fillRatioBound = frb.lowerBound...boundResult.fillRatioRange.upperBound
+                }
+            }
+        }
+        
+        cv.matchControlsWithBounds(speedRange: speedBound, fillRatioRange: fillRatioBound, scaleRange: scaleFactorBound)
     }
 }

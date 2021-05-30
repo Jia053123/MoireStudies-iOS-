@@ -64,6 +64,10 @@ class SliderHighDegreeCtrlView: UIView {
     @IBAction func scaleChanged(_ sender: Any) {
         self.target.adjustAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
     }
+    
+    func matchControlsWithBounds(speedRange: ClosedRange<CGFloat>?, fillRatioRange: ClosedRange<CGFloat>?, scaleRange: ClosedRange<CGFloat>?) {
+        
+    }
 }
 
 extension SliderHighDegreeCtrlView: HighDegreeCtrlView {
