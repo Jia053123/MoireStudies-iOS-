@@ -22,17 +22,23 @@ extension AbstractHighDegCtrlViewController {
     }
     
     func modifyPattern(index: Int, direction: CGFloat) -> Bool {
-        // TODO: stub
-        return false
+        guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
+        else {return false}
+        currentPatterns[index].direction = direction
+        return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
     
     func modifyPattern(index: Int, blackWidth: CGFloat) -> Bool {
-        // TODO: stub
-        return false
+        guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
+        else {return false}
+        currentPatterns[index].blackWidth = blackWidth
+        return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
     
     func modifyPattern(index: Int, whiteWidth: CGFloat) -> Bool {
-        // TODO: stub
-        return false
+        guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
+        else {return false}
+        currentPatterns[index].whiteWidth = whiteWidth
+        return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
 }
