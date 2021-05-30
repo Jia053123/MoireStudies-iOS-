@@ -31,10 +31,22 @@ class SliderHighDegreeCtrlView: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
+        
         self.speedSlider.minimumValue = 0.5
         self.speedSlider.maximumValue = 1.5
-        self.directionSlider.minimumValue = 0.0
-        self.directionSlider.maximumValue = Float.pi*2
+        self.speedSlider.value = 1.0
+        
+        self.directionSlider.minimumValue = -1 * Float.pi
+        self.directionSlider.maximumValue = Float.pi
+        self.directionSlider.value = 0.0
+        
+        self.fillSlider.minimumValue = 0.5
+        self.fillSlider.maximumValue = 1.5
+        self.fillSlider.value = 1.0
+        
+        self.scaleSlider.minimumValue = -2.0
+        self.scaleSlider.maximumValue = 2.0
+        self.scaleSlider.value = 0.0
     }
     
     @IBAction func speedChanged(_ sender: Any) {
@@ -46,11 +58,11 @@ class SliderHighDegreeCtrlView: UIView {
     }
     
     @IBAction func fillChanged(_ sender: Any) {
-        // TODO: stub
+        self.target.adjustAllFillRatio(netMultiplier: CGFloat(self.fillSlider.value))
     }
     
     @IBAction func scaleChanged(_ sender: Any) {
-        // TODO: stub
+        self.target.adjustAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
     }
 }
 
