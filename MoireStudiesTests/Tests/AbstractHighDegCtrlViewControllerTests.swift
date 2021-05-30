@@ -24,7 +24,7 @@ class AbstractHighDegCtrlViewControllerTests: XCTestCase {
         self.mockPatternManagerIllegal = nil
     }
     
-    public func testModifyPatternSpeed_NormalPatternManager_CallCorrespondingMethodsWithCorrectParametersAndReturnTrue() {
+    public func testModifyPatternSpeed_IndexInRange_NormalPatternManager_CallCorrespondingMethodsWithCorrectParametersAndReturnTrue() {
         let testPatterns = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 0.3456).patterns
         self.mockPatternManagerNormal.setCurrentPatternsControlled(initPatterns: testPatterns)
         self.mockVC = MockHighDegCtrlViewController.init(id: "testId", frame: Constants.UI.highDegreeControlFrames.first!, patterns: testPatterns)
@@ -40,7 +40,7 @@ class AbstractHighDegCtrlViewControllerTests: XCTestCase {
         XCTAssertEqual(self.mockPatternManagerNormal.modifiedPatterns, expectedPatterns)
     }
     
-    public func testModifyPatternDirection_NormalPatternManager_CallCorrespondingMethodsWithCorrectParametersAndReturnTrue() {
+    public func testModifyPatternDirection_IndexInRange_NormalPatternManager_CallCorrespondingMethodsWithCorrectParametersAndReturnTrue() {
         let testPatterns = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 0.3476).patterns
         self.mockPatternManagerNormal.setCurrentPatternsControlled(initPatterns: testPatterns)
         self.mockVC = MockHighDegCtrlViewController.init(id: "testId", frame: Constants.UI.highDegreeControlFrames.first!, patterns: testPatterns)
@@ -56,7 +56,7 @@ class AbstractHighDegCtrlViewControllerTests: XCTestCase {
         XCTAssertEqual(self.mockPatternManagerNormal.modifiedPatterns, expectedPatterns)
     }
     
-    public func testModifyPatternBlackWidth_NormalPatternManager_CallCorrespondingMethodWithCorrectParametersAndReturnTrue() {
+    public func testModifyPatternBlackWidth_IndexInRange_NormalPatternManager_CallCorrespondingMethodWithCorrectParametersAndReturnTrue() {
         let testPatterns = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 0.1456).patterns
         self.mockPatternManagerNormal.setCurrentPatternsControlled(initPatterns: testPatterns)
         self.mockVC = MockHighDegCtrlViewController.init(id: "testId", frame: Constants.UI.highDegreeControlFrames.first!, patterns: testPatterns)
@@ -72,7 +72,7 @@ class AbstractHighDegCtrlViewControllerTests: XCTestCase {
         XCTAssertEqual(self.mockPatternManagerNormal.modifiedPatterns, expectedPatterns)
     }
     
-    public func testModifyPatternWhiteWidth_NormalPatternManager_CallCorrespondingMethodWithCorrectParametersAndReturnTrue() {
+    public func testModifyPatternWhiteWidth_IndexInRange_NormalPatternManager_CallCorrespondingMethodWithCorrectParametersAndReturnTrue() {
         let testPatterns = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 0.145).patterns
         self.mockPatternManagerNormal.setCurrentPatternsControlled(initPatterns: testPatterns)
         self.mockVC = MockHighDegCtrlViewController.init(id: "testId", frame: Constants.UI.highDegreeControlFrames.first!, patterns: testPatterns)
@@ -96,7 +96,19 @@ class AbstractHighDegCtrlViewControllerTests: XCTestCase {
         
         XCTAssertFalse(self.mockVC.modifyPattern(index: 1, speed: 14.333))
         XCTAssertFalse(self.mockVC.modifyPattern(index: 0, direction: 1.112))
-        XCTAssertFalse(self.mockVC.modifyPattern(index: 2, blackWidth: 10.09))
+        XCTAssertFalse(self.mockVC.modifyPattern(index: -2, blackWidth: 10.09))
         XCTAssertFalse(self.mockVC.modifyPattern(index: 1, blackWidth: 11.09))
+    }
+    
+    public func testModifyPattern_IndexOutOfRange_NormalPatternManager_CallCorrespondingMethodsReturnFalseAndNoError() {
+        let testPatterns = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 0.145).patterns
+        self.mockPatternManagerNormal.setCurrentPatternsControlled(initPatterns: testPatterns)
+        self.mockVC = MockHighDegCtrlViewController.init(id: "testId", frame: Constants.UI.highDegreeControlFrames.first!, patterns: testPatterns)
+        self.mockVC.patternsDelegate = self.mockPatternManagerNormal
+        
+        XCTAssertFalse(self.mockVC.modifyPattern(index: -1, speed: 14.333))
+        XCTAssertFalse(self.mockVC.modifyPattern(index: 199, direction: 1.112))
+        XCTAssertFalse(self.mockVC.modifyPattern(index: -2, blackWidth: 10.09))
+        XCTAssertFalse(self.mockVC.modifyPattern(index: 3, blackWidth: 11.09))
     }
 }

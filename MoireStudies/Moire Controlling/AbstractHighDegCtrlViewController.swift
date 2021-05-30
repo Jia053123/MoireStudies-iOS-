@@ -17,6 +17,7 @@ extension AbstractHighDegCtrlViewController {
     func modifyPattern(index: Int, speed: CGFloat) -> Bool {
         guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
         else {return false}
+        guard index >= 0 && index < currentPatterns.count else {return false}
         currentPatterns[index].speed = speed
         return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
@@ -24,6 +25,7 @@ extension AbstractHighDegCtrlViewController {
     func modifyPattern(index: Int, direction: CGFloat) -> Bool {
         guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
         else {return false}
+        guard index >= 0 && index < currentPatterns.count else {return false}
         currentPatterns[index].direction = direction
         return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
@@ -31,6 +33,7 @@ extension AbstractHighDegCtrlViewController {
     func modifyPattern(index: Int, blackWidth: CGFloat) -> Bool {
         guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
         else {return false}
+        guard index >= 0 && index < currentPatterns.count else {return false}
         currentPatterns[index].blackWidth = blackWidth
         return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
@@ -38,6 +41,7 @@ extension AbstractHighDegCtrlViewController {
     func modifyPattern(index: Int, whiteWidth: CGFloat) -> Bool {
         guard var currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
         else {return false}
+        guard index >= 0 && index < currentPatterns.count else {return false}
         currentPatterns[index].whiteWidth = whiteWidth
         return self.patternsDelegate.modifyPatterns(modifiedPatterns: currentPatterns, callerId: self.id)
     }
