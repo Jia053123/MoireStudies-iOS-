@@ -49,7 +49,16 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         let deltaAdjustment = netAdjustment - previousNetDirectionAdjustment
         self.previousNetDirectionAdjustment = netAdjustment
         for i in 0..<currentPatterns.count {
-            _ = self.modifyPattern(index: i, direction: currentPatterns[i].direction + deltaAdjustment)
+            var newDirection = currentPatterns[i].direction + deltaAdjustment
+            
+            while newDirection > BoundsManager.directionRange.upperBound {
+                newDirection -= 2*CGFloat.pi
+            }
+            
+            while newDirection < BoundsManager.directionRange.lowerBound {
+                newDirection += 2*CGFloat.pi
+            }
+            _ = self.modifyPattern(index: i, direction: newDirection)
         }
     }
 
