@@ -158,14 +158,14 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     func matchControlsWithModel(patterns: Array<Pattern?>) {
         let cv = self.view as! SliderHighDegreeCtrlView
         if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
-            cv.resetSpeedControlWithBounds(speedMultiplierRange: mcsmr)
+            cv.resetSpeedControl(range: mcsmr, value: 1.0)
         }
-        cv.resetDirectionControl()
+        cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
-            cv.resetFillRatioControlWithBounds(fillRatioMultiplierRange: mcfrmr)
+            cv.resetFillRatioControl(range: mcfrmr, value: 1.0)
         }
         if let mcsfar = self.mostConservativeScaleFactorAdjustmentRange(patterns: patterns) {
-            cv.resetScaleFactorControlWithBounds(scaleFactorAdjustmentRange: mcsfar)
+            cv.resetScaleFactorControl(range: mcsfar, value: 0.0)
         }
     }
 }

@@ -65,26 +65,28 @@ class SliderHighDegreeCtrlView: UIView {
         self.target.adjustAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
     }
     
-    func resetSpeedControlWithBounds(speedMultiplierRange: ClosedRange<CGFloat>) {
-        self.speedSlider.minimumValue = Float(speedMultiplierRange.lowerBound)
-        self.speedSlider.maximumValue = Float(speedMultiplierRange.upperBound)
-        self.speedSlider.value = 1.0
+    func resetSpeedControl(range: ClosedRange<CGFloat>, value: CGFloat) {
+        self.speedSlider.minimumValue = Float(range.lowerBound)
+        self.speedSlider.maximumValue = Float(range.upperBound)
+        self.speedSlider.value = Float(value)
     }
 
-    func resetDirectionControl() {
-        self.directionSlider.value = 0.0
+    func resetDirectionControl(range: ClosedRange<CGFloat>, value: CGFloat) {
+        self.directionSlider.minimumValue = Float(range.lowerBound)
+        self.directionSlider.maximumValue = Float(range.upperBound)
+        self.directionSlider.value = Float(value)
     }
 
-    func resetFillRatioControlWithBounds(fillRatioMultiplierRange: ClosedRange<CGFloat>) {
-        self.fillSlider.minimumValue = Float(fillRatioMultiplierRange.lowerBound)
-        self.fillSlider.maximumValue = Float(fillRatioMultiplierRange.upperBound)
-        self.fillSlider.value = 1.0
+    func resetFillRatioControl(range: ClosedRange<CGFloat>, value: CGFloat) {
+        self.fillSlider.minimumValue = Float(range.lowerBound)
+        self.fillSlider.maximumValue = Float(range.upperBound)
+        self.fillSlider.value = Float(value)
     }
 
-    func resetScaleFactorControlWithBounds(scaleFactorAdjustmentRange: ClosedRange<CGFloat>) {
-        self.scaleSlider.minimumValue = Float(scaleFactorAdjustmentRange.lowerBound)
-        self.scaleSlider.maximumValue = Float(scaleFactorAdjustmentRange.upperBound)
-        self.scaleSlider.value = 0.0
+    func resetScaleFactorControl(range: ClosedRange<CGFloat>, value: CGFloat) {
+        self.scaleSlider.minimumValue = Float(range.lowerBound)
+        self.scaleSlider.maximumValue = Float(range.upperBound)
+        self.scaleSlider.value = Float(value)
     }
     
     func matchControlsWithBounds(speedMultiplierRange: ClosedRange<CGFloat>?, fillRatioMultiplierRange: ClosedRange<CGFloat>?, scaleFactorAdjustmentRange: ClosedRange<CGFloat>?) {

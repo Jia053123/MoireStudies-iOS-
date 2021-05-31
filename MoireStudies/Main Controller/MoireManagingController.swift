@@ -190,7 +190,6 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].speed = speed
-//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -219,7 +218,6 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].direction = direction
-//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -248,7 +246,6 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].blackWidth = blackWidth
-//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -277,7 +274,6 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].whiteWidth = whiteWidth
-//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
