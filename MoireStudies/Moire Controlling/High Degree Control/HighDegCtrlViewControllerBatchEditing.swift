@@ -91,24 +91,54 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
 
 extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     func matchControlsWithModel(patterns: Array<Pattern?>) {
-        let cv = self.view as! SliderHighDegreeCtrlView
-        
-        var speedBound: ClosedRange<CGFloat>?
-        var fillRatioBound : ClosedRange<CGFloat>?
-        var scaleFactorBound: ClosedRange<CGFloat>?
-        for p in patterns {
-            guard let pattern = p else {continue}
-            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: pattern.blackWidth, whiteWidth: pattern.whiteWidth) else {continue}
-            if let frb = fillRatioBound, let sfb = scaleFactorBound {
-                if frb.lowerBound < boundResult.fillRatioRange.lowerBound {
-                    fillRatioBound = boundResult.fillRatioRange.lowerBound...frb.upperBound
+        var mostConservativeSpeedRange: ClosedRange<CGFloat>?
+        var mostConservativeFillRatioRange : ClosedRange<CGFloat>?
+        var mostConservativeScaleFactorRange: ClosedRange<CGFloat>?
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            
+            let speedMultiplierBound1 = BoundsManager.speedRange.lowerBound / p.speed
+            let speedMultiplierBound2 = BoundsManager.speedRange.upperBound / p.speed
+            if let mcsr = mostConservativeSpeedRange {
+                if speedMultiplierBound1 > speedMultiplierBound2 {
+                    mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr,
+                                                                           range2: speedMultiplierBound2...speedMultiplierBound1)
+                } else {
+                    mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr,
+                                                                           range2: speedMultiplierBound1...speedMultiplierBound2)
                 }
-                if frb.upperBound > boundResult.fillRatioRange.upperBound {
-                    fillRatioBound = frb.lowerBound...boundResult.fillRatioRange.upperBound
+            } else {
+                if speedMultiplierBound1 > speedMultiplierBound2 {
+                    mostConservativeSpeedRange = speedMultiplierBound2...speedMultiplierBound1
+                } else {
+                    mostConservativeSpeedRange = speedMultiplierBound1...speedMultiplierBound2
                 }
+            }
+            
+            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
+            
+            let fillRatioMultiplierLowerBound = boundResult.fillRatioRange.lowerBound
+            let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound
+            if let mcfrr = mostConservativeFillRatioRange {
+                mostConservativeFillRatioRange = Utilities.intersectRanges(range1: mcfrr,
+                                                                           range2: fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound)
+            } else {
+                mostConservativeFillRatioRange = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
+            }
+            
+            let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound
+            let scaleFactorAdjustmentUpperBound = boundResult.scaleFactorRange.upperBound
+            if let mcsfr = mostConservativeScaleFactorRange {
+                mostConservativeScaleFactorRange = Utilities.intersectRanges(range1: mcsfr,
+                                                                             range2: scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound)
+            } else {
+                mostConservativeScaleFactorRange = scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound
             }
         }
         
-        cv.matchControlsWithBounds(speedRange: speedBound, fillRatioRange: fillRatioBound, scaleRange: scaleFactorBound)
+        let cv = self.view as! SliderHighDegreeCtrlView
+        cv.matchControlsWithBounds(speedMultiplierRange: mostConservativeSpeedRange,
+                                   fillRatioMultiplierRange: mostConservativeFillRatioRange,
+                                   scaleFactorAdjustmentRange: mostConservativeScaleFactorRange)
     }
 }
