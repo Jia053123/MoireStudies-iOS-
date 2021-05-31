@@ -65,7 +65,6 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     func adjustAllFillRatio(netMultiplier: CGFloat) {
         guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
         let deltaMultiplier = netMultiplier - previousNetFillRatioMultiplier
-//        guard deltaMultiplier > 0.01 else {return}
         
         self.previousNetFillRatioMultiplier = netMultiplier
         
@@ -101,52 +100,72 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
 }
 
 extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
-    func matchControlsWithModel(patterns: Array<Pattern?>) {
-        var mostConservativeSpeedRange: ClosedRange<CGFloat>?
-        var mostConservativeFillRatioRange : ClosedRange<CGFloat>?
-        var mostConservativeScaleFactorRange: ClosedRange<CGFloat>?
+    func mostConservativeSpeedMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+        var result: ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
-            
-            // calc speed range
             let speedMultiplierUpperBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
             let speedMultiplierUpperBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
             let speedMultiplierUpperBound = (speedMultiplierUpperBound1 > speedMultiplierUpperBound2) ? speedMultiplierUpperBound1 : speedMultiplierUpperBound2
             
-            if let mcsr = mostConservativeSpeedRange {
-                mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to the original speed after going all the way to 0 because 0 times anything is 0
+            if let mcsr = result {
+                result = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to the original speed after going all the way to 0 because 0 times anything is 0
             } else {
-                mostConservativeSpeedRange = 0...speedMultiplierUpperBound
+                result = 0...speedMultiplierUpperBound
             }
-            
+        }
+        return result
+    }
+    
+    func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+        var result : ClosedRange<CGFloat>?
+        for pattern in patterns {
+            guard let p = pattern else {continue}
             guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
             
-            // calc fill ratio range
             let curretFillRatio = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
             let fillRatioMultiplierLowerBound = boundResult.fillRatioRange.lowerBound / curretFillRatio
             let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound / curretFillRatio
-            if let mcfrr = mostConservativeFillRatioRange {
-                mostConservativeFillRatioRange = Utilities.intersectRanges(range1: mcfrr,
+            if let mcfrr = result {
+                result = Utilities.intersectRanges(range1: mcfrr,
                                                                            range2: fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound)
             } else {
-                mostConservativeFillRatioRange = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
+                result = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
             }
+        }
+        return result
+    }
+    
+    func mostConservativeScaleFactorAdjustmentRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+        var result: ClosedRange<CGFloat>?
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
             
-            // calc scale factor range
             let currentScaleFactor = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
             let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound - currentScaleFactor
             let scaleFactorAdjustmentUpperBound = boundResult.scaleFactorRange.upperBound - currentScaleFactor
-            if let mcsfr = mostConservativeScaleFactorRange {
-                mostConservativeScaleFactorRange = Utilities.intersectRanges(range1: mcsfr,
-                                                                             range2: scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound)
+            if let mcsfr = result {
+                result = Utilities.intersectRanges(range1: mcsfr,
+                                                   range2: scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound)
             } else {
-                mostConservativeScaleFactorRange = scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound
+                result = scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound
             }
         }
-        
+        return result
+    }
+    
+    func matchControlsWithModel(patterns: Array<Pattern?>) {
         let cv = self.view as! SliderHighDegreeCtrlView
-        cv.matchControlsWithBounds(speedMultiplierRange: mostConservativeSpeedRange,
-                                   fillRatioMultiplierRange: mostConservativeFillRatioRange,
-                                   scaleFactorAdjustmentRange: mostConservativeScaleFactorRange)
+        if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
+            cv.resetSpeedControlWithBounds(speedMultiplierRange: mcsmr)
+        }
+        cv.resetDirectionControl()
+        if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
+            cv.resetFillRatioControlWithBounds(fillRatioMultiplierRange: mcfrmr)
+        }
+        if let mcsfar = self.mostConservativeScaleFactorAdjustmentRange(patterns: patterns) {
+            cv.resetScaleFactorControlWithBounds(scaleFactorAdjustmentRange: mcsfar)
+        }
     }
 }
