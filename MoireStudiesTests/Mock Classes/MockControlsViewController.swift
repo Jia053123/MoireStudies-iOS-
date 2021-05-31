@@ -48,7 +48,7 @@ class MockControlsViewController: ControlsViewController {
         self.configs = configs
     }
     
-    override func updatePatterns(newPatterns: Array<Pattern>) {
+    override func updatePatterns(newPatterns: Array<Pattern>, exceptForIDs: Array<String>?) {
         self.timesUpdatePatternsCalled += 1
     }
     
