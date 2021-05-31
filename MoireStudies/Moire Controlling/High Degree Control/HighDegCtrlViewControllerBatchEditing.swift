@@ -108,6 +108,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         for pattern in patterns {
             guard let p = pattern else {continue}
             
+            // calc speed range
             let speedMultiplierUpperBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
             let speedMultiplierUpperBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
             let speedMultiplierUpperBound = (speedMultiplierUpperBound1 > speedMultiplierUpperBound2) ? speedMultiplierUpperBound1 : speedMultiplierUpperBound2
@@ -120,6 +121,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             
             guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
             
+            // calc fill ratio range
             let curretFillRatio = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
             let fillRatioMultiplierLowerBound = boundResult.fillRatioRange.lowerBound / curretFillRatio
             let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound / curretFillRatio
@@ -130,6 +132,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
                 mostConservativeFillRatioRange = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
             }
             
+            // calc scale factor range
             let currentScaleFactor = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
             let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound - currentScaleFactor
             let scaleFactorAdjustmentUpperBound = boundResult.scaleFactorRange.upperBound - currentScaleFactor

@@ -184,13 +184,13 @@ extension MoireManagingController: PatternManager {
         return true
     }
     
-    private func modifyPattern(speed: CGFloat, patternIndex: Int) -> Bool {
+    private func modifyPatternWithoutSendingUpdates(speed: CGFloat, patternIndex: Int) -> Bool {
         guard BoundsManager.speedRange.contains(speed) else {
             print("speed out of bound")
             return false
         }
         currentMoire!.patterns[patternIndex].speed = speed
-        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -203,23 +203,23 @@ extension MoireManagingController: PatternManager {
             print("can't find id")
             return false
         }
-        let success = self.modifyPattern(speed: speed, patternIndex: index)
+        let success = self.modifyPatternWithoutSendingUpdates(speed: speed, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
-            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns, exceptForIDs: [callerId])
             return true
         } else {
             return false
         }
     }
     
-    private func modifyPattern(direction: CGFloat, patternIndex: Int) -> Bool {
+    private func modifyPatternWithoutSendingUpdates(direction: CGFloat, patternIndex: Int) -> Bool {
         guard BoundsManager.directionRange.contains(direction) else {
             print("direction out of bound")
             return false
         }
         currentMoire!.patterns[patternIndex].direction = direction
-        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -232,23 +232,23 @@ extension MoireManagingController: PatternManager {
             print("can't find id")
             return false
         }
-        let success = self.modifyPattern(direction: direction, patternIndex: index)
+        let success = self.modifyPatternWithoutSendingUpdates(direction: direction, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
-            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns, exceptForIDs: [callerId])
             return true
         } else {
             return false
         }
     }
     
-    private func modifyPattern(blackWidth: CGFloat, patternIndex: Int) -> Bool {
+    private func modifyPatternWithoutSendingUpdates(blackWidth: CGFloat, patternIndex: Int) -> Bool {
         guard BoundsManager.blackWidthRange.contains(blackWidth) else {
             print("blackWidth out of bound")
             return false
         }
         currentMoire!.patterns[patternIndex].blackWidth = blackWidth
-        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -261,23 +261,23 @@ extension MoireManagingController: PatternManager {
             print("can't find id")
             return false
         }
-        let success = self.modifyPattern(blackWidth: blackWidth, patternIndex: index)
+        let success = self.modifyPatternWithoutSendingUpdates(blackWidth: blackWidth, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
-            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns, exceptForIDs: [callerId])
             return true
         } else {
             return false
         }
     }
     
-    private func modifyPattern(whiteWidth: CGFloat, patternIndex: Int) -> Bool {
+    private func modifyPatternWithoutSendingUpdates(whiteWidth: CGFloat, patternIndex: Int) -> Bool {
         guard BoundsManager.whiteWidthRange.contains(whiteWidth) else {
             print("whiteWidth out of bound")
             return false
         }
         currentMoire!.patterns[patternIndex].whiteWidth = whiteWidth
-        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+//        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -290,10 +290,10 @@ extension MoireManagingController: PatternManager {
             print("can't find id")
             return false
         }
-        let success = self.modifyPattern(whiteWidth: whiteWidth, patternIndex: index)
+        let success = self.modifyPatternWithoutSendingUpdates(whiteWidth: whiteWidth, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
-            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns, exceptForIDs: [callerId])
             return true
         } else {
             return false
@@ -314,19 +314,19 @@ extension MoireManagingController: PatternManager {
             let newPattern = modifiedPatterns[i]
             let patternIndex = patternIndexes[i]
             var success = true
-            success = self.modifyPattern(speed: newPattern.speed, patternIndex: patternIndex)
+            success = self.modifyPatternWithoutSendingUpdates(speed: newPattern.speed, patternIndex: patternIndex)
             completeSuccess = completeSuccess && success
-            success = self.modifyPattern(direction: newPattern.direction, patternIndex: patternIndex)
+            success = self.modifyPatternWithoutSendingUpdates(direction: newPattern.direction, patternIndex: patternIndex)
             completeSuccess = completeSuccess && success
-            success = self.modifyPattern(blackWidth: newPattern.blackWidth, patternIndex: patternIndex)
+            success = self.modifyPatternWithoutSendingUpdates(blackWidth: newPattern.blackWidth, patternIndex: patternIndex)
             completeSuccess = completeSuccess && success
-            success = self.modifyPattern(whiteWidth: newPattern.whiteWidth, patternIndex: patternIndex)
+            success = self.modifyPatternWithoutSendingUpdates(whiteWidth: newPattern.whiteWidth, patternIndex: patternIndex)
             completeSuccess = completeSuccess && success
             
             self.moireViewController.modifyPatternView(patternViewIndex: patternIndex, newPattern: currentMoire!.patterns[patternIndex])
         }
         if completeSuccess {
-            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns, exceptForIDs: [callerId])
             return true
         } else {
             return false

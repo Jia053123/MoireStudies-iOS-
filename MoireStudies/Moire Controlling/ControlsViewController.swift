@@ -87,7 +87,7 @@ class ControlsViewController: UIViewController, PatternsSelector {
         self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
     }
     
-    func updatePatterns(newPatterns: Array<Pattern>) {
+    func updatePatterns(newPatterns: Array<Pattern>, exceptForIDs: Array<String>?) {
         var ctrlVCs: Array<CtrlViewController> = []
         var hdCtrlVCs: Array<HighDegCtrlViewController> = []
         
@@ -106,9 +106,19 @@ class ControlsViewController: UIViewController, PatternsSelector {
         }
         
         for i in 0..<ctrlVCs.count {
+            if let efids = exceptForIDs {
+                guard !efids.contains(ctrlVCs[i].id) else {
+                    continue
+                }
+            }
             ctrlVCs[i].matchControlsWithModel(pattern: newPatterns[i])
         }
         for i in 0..<hdCtrlVCs.count {
+            if let efids = exceptForIDs {
+                guard !efids.contains(hdCtrlVCs[i].id) else {
+                    continue
+                }
+            }
             let hdcs = self.configurations.highDegreeControlSettings[i]
             let ps = hdcs.indexesOfPatternControlled.map({Utilities.tryAccessArray(array: newPatterns, index: $0)})
             hdCtrlVCs[i].matchControlsWithModel(patterns: ps) // this has to be only the patterns it cares about

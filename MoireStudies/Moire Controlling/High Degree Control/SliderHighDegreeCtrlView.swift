@@ -69,14 +69,18 @@ class SliderHighDegreeCtrlView: UIView {
         if let sr = speedMultiplierRange {
             self.speedSlider.minimumValue = Float(sr.lowerBound)
             self.speedSlider.maximumValue = Float(sr.upperBound)
+            self.speedSlider.value = 1.0
         }
+        self.directionSlider.value = 0.0
         if let frr = fillRatioMultiplierRange {
             self.fillSlider.minimumValue = Float(frr.lowerBound)
             self.fillSlider.maximumValue = Float(frr.upperBound)
+            self.fillSlider.value = 1.0
         }
         if let sfr = scaleFactorAdjustmentRange {
             self.scaleSlider.minimumValue = Float(sfr.lowerBound)
             self.scaleSlider.maximumValue = Float(sfr.upperBound)
+            self.scaleSlider.value = 0.0
         }
     }
 }
