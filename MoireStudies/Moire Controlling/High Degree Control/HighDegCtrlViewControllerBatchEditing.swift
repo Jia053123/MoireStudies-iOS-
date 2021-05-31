@@ -38,7 +38,9 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     func adjustRelativeSpeed(netMultiplier: CGFloat) {
         guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
         let deltaMultiplier = netMultiplier - previousNetSpeedMultiplier
+//        guard abs(deltaMultiplier) > 0.01 else {return}
         self.previousNetSpeedMultiplier = netMultiplier
+        
         for i in 0..<currentPatterns.count {
             _ = self.modifyPattern(index: i, speed: currentPatterns[i].speed + currentPatterns[i].speed * deltaMultiplier)
         }
@@ -50,14 +52,13 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         self.previousNetDirectionAdjustment = netAdjustment
         for i in 0..<currentPatterns.count {
             var newDirection = currentPatterns[i].direction + deltaAdjustment
-            
             while newDirection > BoundsManager.directionRange.upperBound {
                 newDirection -= 2*CGFloat.pi
             }
-            
             while newDirection < BoundsManager.directionRange.lowerBound {
                 newDirection += 2*CGFloat.pi
             }
+            
             _ = self.modifyPattern(index: i, direction: newDirection)
         }
     }
@@ -65,6 +66,8 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     func adjustAllFillRatio(netMultiplier: CGFloat) {
         guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
         let deltaMultiplier = netMultiplier - previousNetFillRatioMultiplier
+//        guard deltaMultiplier > 0.01 else {return}
+        
         self.previousNetFillRatioMultiplier = netMultiplier
         
         for i in 0..<currentPatterns.count {
@@ -106,22 +109,19 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         for pattern in patterns {
             guard let p = pattern else {continue}
             
-            let speedMultiplierBound1 = BoundsManager.speedRange.lowerBound / p.speed
-            let speedMultiplierBound2 = BoundsManager.speedRange.upperBound / p.speed
-            if let mcsr = mostConservativeSpeedRange {
-                if speedMultiplierBound1 > speedMultiplierBound2 {
-                    mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr,
-                                                                           range2: speedMultiplierBound2...speedMultiplierBound1)
-                } else {
-                    mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr,
-                                                                           range2: speedMultiplierBound1...speedMultiplierBound2)
-                }
+            let speedMultiplierUpperBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
+            let speedMultiplierUpperBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
+            let speedMultiplierUpperBound: CGFloat
+            if speedMultiplierUpperBound1 > speedMultiplierUpperBound2 {
+                speedMultiplierUpperBound = speedMultiplierUpperBound1
             } else {
-                if speedMultiplierBound1 > speedMultiplierBound2 {
-                    mostConservativeSpeedRange = speedMultiplierBound2...speedMultiplierBound1
-                } else {
-                    mostConservativeSpeedRange = speedMultiplierBound1...speedMultiplierBound2
-                }
+                speedMultiplierUpperBound = speedMultiplierUpperBound2
+            }
+            
+            if let mcsr = mostConservativeSpeedRange {
+                mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to original speed after going all the way to zero
+            } else {
+                mostConservativeSpeedRange = 0...speedMultiplierUpperBound
             }
             
             guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}

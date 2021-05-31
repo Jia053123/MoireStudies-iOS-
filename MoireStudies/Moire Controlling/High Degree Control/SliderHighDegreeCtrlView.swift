@@ -51,6 +51,7 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func speedChanged(_ sender: Any) {
         self.target.adjustRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
+        print("speed adjustment: ", self.speedSlider.value)
     }
     
     @IBAction func directionChanged(_ sender: Any) {
