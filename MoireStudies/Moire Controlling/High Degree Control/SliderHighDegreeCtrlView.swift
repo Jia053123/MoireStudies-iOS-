@@ -60,6 +60,7 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func fillChanged(_ sender: Any) {
         self.target.adjustAllFillRatio(netMultiplier: CGFloat(self.fillSlider.value))
+        print("fillRatio multiplier: ", self.fillSlider.value)
     }
     
     @IBAction func scaleChanged(_ sender: Any) {

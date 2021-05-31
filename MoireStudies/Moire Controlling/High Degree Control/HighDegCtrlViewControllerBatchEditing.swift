@@ -121,8 +121,9 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             
             guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
             
-            let fillRatioMultiplierLowerBound = boundResult.fillRatioRange.lowerBound
-            let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound
+            let curretFillRatio = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).fillRatio
+            let fillRatioMultiplierLowerBound = boundResult.fillRatioRange.lowerBound / curretFillRatio
+            let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound / curretFillRatio
             if let mcfrr = mostConservativeFillRatioRange {
                 mostConservativeFillRatioRange = Utilities.intersectRanges(range1: mcfrr,
                                                                            range2: fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound)
@@ -130,8 +131,9 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
                 mostConservativeFillRatioRange = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
             }
             
-            let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound
-            let scaleFactorAdjustmentUpperBound = boundResult.scaleFactorRange.upperBound
+            let currentScaleFactor = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
+            let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound - currentScaleFactor
+            let scaleFactorAdjustmentUpperBound = boundResult.scaleFactorRange.upperBound - currentScaleFactor
             if let mcsfr = mostConservativeScaleFactorRange {
                 mostConservativeScaleFactorRange = Utilities.intersectRanges(range1: mcsfr,
                                                                              range2: scaleFactorAdjustmentLowerBound...scaleFactorAdjustmentUpperBound)
