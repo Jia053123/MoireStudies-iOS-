@@ -190,6 +190,7 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].speed = speed
+        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -205,6 +206,7 @@ extension MoireManagingController: PatternManager {
         let success = self.modifyPattern(speed: speed, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
             return true
         } else {
             return false
@@ -217,6 +219,7 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].direction = direction
+        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -232,6 +235,7 @@ extension MoireManagingController: PatternManager {
         let success = self.modifyPattern(direction: direction, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
             return true
         } else {
             return false
@@ -244,6 +248,7 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].blackWidth = blackWidth
+        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -259,6 +264,7 @@ extension MoireManagingController: PatternManager {
         let success = self.modifyPattern(blackWidth: blackWidth, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
             return true
         } else {
             return false
@@ -271,6 +277,7 @@ extension MoireManagingController: PatternManager {
             return false
         }
         currentMoire!.patterns[patternIndex].whiteWidth = whiteWidth
+        self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
         return true
     }
     
@@ -286,6 +293,7 @@ extension MoireManagingController: PatternManager {
         let success = self.modifyPattern(whiteWidth: whiteWidth, patternIndex: index)
         if success {
             self.moireViewController.modifyPatternView(patternViewIndex: index, newPattern: currentMoire!.patterns[index])
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
             return true
         } else {
             return false
@@ -317,7 +325,12 @@ extension MoireManagingController: PatternManager {
             
             self.moireViewController.modifyPatternView(patternViewIndex: patternIndex, newPattern: currentMoire!.patterns[patternIndex])
         }
-        return completeSuccess
+        if completeSuccess {
+            self.controlsViewController.updatePatterns(newPatterns: self.currentMoire!.patterns)
+            return true
+        } else {
+            return false
+        }
     }
     
     func retrievePattern(callerId: String) -> Pattern? {

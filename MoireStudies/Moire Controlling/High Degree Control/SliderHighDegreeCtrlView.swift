@@ -51,7 +51,6 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func speedChanged(_ sender: Any) {
         self.target.adjustRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
-        print("speed adjustment: ", self.speedSlider.value)
     }
     
     @IBAction func directionChanged(_ sender: Any) {
@@ -60,7 +59,6 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func fillChanged(_ sender: Any) {
         self.target.adjustAllFillRatio(netMultiplier: CGFloat(self.fillSlider.value))
-        print("fillRatio multiplier: ", self.fillSlider.value)
     }
     
     @IBAction func scaleChanged(_ sender: Any) {
@@ -71,17 +69,14 @@ class SliderHighDegreeCtrlView: UIView {
         if let sr = speedMultiplierRange {
             self.speedSlider.minimumValue = Float(sr.lowerBound)
             self.speedSlider.maximumValue = Float(sr.upperBound)
-            self.speedSlider.value = 1.0
         }
         if let frr = fillRatioMultiplierRange {
             self.fillSlider.minimumValue = Float(frr.lowerBound)
             self.fillSlider.maximumValue = Float(frr.upperBound)
-            self.fillSlider.value = 1.0
         }
         if let sfr = scaleFactorAdjustmentRange {
             self.scaleSlider.minimumValue = Float(sfr.lowerBound)
             self.scaleSlider.maximumValue = Float(sfr.upperBound)
-            self.scaleSlider.value = 0.0
         }
     }
 }

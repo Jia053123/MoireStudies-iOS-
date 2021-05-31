@@ -8,9 +8,12 @@
 import Foundation
 import UIKit
 
+/// Structure of self.children: CtrlViewController instances + HighDegCtrlViewController instances + other children
+/// Invariable: the order of CtrlViewController instances is the same as that of patterns parameter in setUp and reset methods
 class ControlsViewController: UIViewController, PatternsSelector {
     private var controlViewControllers: Array<CtrlViewController>!
     private var highDegControlViewControllers: Array<HighDegCtrlViewController>!
+    private var configurations: Configurations!
     var selectedPatternIndexes: Array<Int> {
         get {
             var selectedIndexes: Array<Int> = []
@@ -37,6 +40,7 @@ class ControlsViewController: UIViewController, PatternsSelector {
             c.view.removeFromSuperview()
             c.removeFromParent()  // TODO: reuse?
         }
+        self.configurations = configs
         let controlFrames = configs.controlFrames
         assert(controlFrames.count >= ids.count)
         for i in 0..<ids.count {
@@ -81,6 +85,34 @@ class ControlsViewController: UIViewController, PatternsSelector {
         
         self.controlViewControllers = Array(self.children.dropLast(highDegIds.count)) as? [CtrlViewController]
         self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
+    }
+    
+    func updatePatterns(newPatterns: Array<Pattern>) {
+        var ctrlVCs: Array<CtrlViewController> = []
+        var hdCtrlVCs: Array<HighDegCtrlViewController> = []
+        
+        for child in self.children {
+            if let cvc = child as? CtrlViewController {
+                ctrlVCs.append(cvc)
+            }
+            if let hdcvc = child as? HighDegCtrlViewController {
+                hdCtrlVCs.append(hdcvc)
+            }
+        }
+        
+        guard ctrlVCs.count == newPatterns.count else {
+            print("update patterns failed: input is of incorrect length")
+            return
+        }
+        
+        for i in 0..<ctrlVCs.count {
+            ctrlVCs[i].matchControlsWithModel(pattern: newPatterns[i])
+        }
+        for i in 0..<hdCtrlVCs.count {
+            let hdcs = self.configurations.highDegreeControlSettings[i]
+            let ps = hdcs.indexesOfPatternControlled.map({Utilities.tryAccessArray(array: newPatterns, index: $0)})
+            hdCtrlVCs[i].matchControlsWithModel(patterns: ps) // this has to be only the patterns it cares about
+        }
     }
 
     func enterSelectionMode() {

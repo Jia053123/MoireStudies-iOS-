@@ -265,6 +265,9 @@ extension MoireManagingControllerTestsWithNormalModel {
         XCTAssertFalse(self.moireManagingController.modifyPatterns(modifiedPatterns: m.patterns, callerId: "023"))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns)
     }
+    
+//    func testModifyMoire_ValidIdAndLegalValues_UpdateControlsAfterEachSuccessModification() {
+//    }
 }
 
 /// test modifying patterns' display properties

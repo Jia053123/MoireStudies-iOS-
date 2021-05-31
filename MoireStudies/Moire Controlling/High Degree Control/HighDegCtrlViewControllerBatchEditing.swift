@@ -38,7 +38,6 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     func adjustRelativeSpeed(netMultiplier: CGFloat) {
         guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
         let deltaMultiplier = netMultiplier - previousNetSpeedMultiplier
-//        guard abs(deltaMultiplier) > 0.01 else {return}
         self.previousNetSpeedMultiplier = netMultiplier
         
         for i in 0..<currentPatterns.count {
