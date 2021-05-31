@@ -111,15 +111,10 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             
             let speedMultiplierUpperBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
             let speedMultiplierUpperBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
-            let speedMultiplierUpperBound: CGFloat
-            if speedMultiplierUpperBound1 > speedMultiplierUpperBound2 {
-                speedMultiplierUpperBound = speedMultiplierUpperBound1
-            } else {
-                speedMultiplierUpperBound = speedMultiplierUpperBound2
-            }
+            let speedMultiplierUpperBound = (speedMultiplierUpperBound1 > speedMultiplierUpperBound2) ? speedMultiplierUpperBound1 : speedMultiplierUpperBound2
             
             if let mcsr = mostConservativeSpeedRange {
-                mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to original speed after going all the way to zero
+                mostConservativeSpeedRange = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to the original speed after going all the way to 0 because 0 times anything is 0
             } else {
                 mostConservativeSpeedRange = 0...speedMultiplierUpperBound
             }
