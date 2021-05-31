@@ -11,7 +11,7 @@ import UIKit
 
 /// test modifying and saving moires
 extension MoireManagingControllerTestsWithNormalModel {
-    func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSave() {
+    func testModifyMoire_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternAndSaveAndUpdatePatterns() {
         self.setUpDefaultTestMoireAndLoad(numOfPatterns: 4)
         
         let ids = self.mockControlsViewController.ids!
@@ -66,6 +66,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireViewController.currentPatterns == defaultTestMoireCopy.patterns)
         XCTAssertTrue(self.moireManagingController.saveMoire())
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == defaultTestMoireCopy.id}) == defaultTestMoireCopy)
+        XCTAssertTrue(self.mockControlsViewController.timesUpdatePatternsCalled > 13)
     }
     
     func testModifyMoire_CalledWithHighDegId_ValidIdLegalValues_ReturnFalseWithoutModifying() {
@@ -200,7 +201,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         XCTAssert(self.mockMoireModelNormal.currentMoiresSortedByLastCreatedOrEdited.first(where: {$0.id == defaultTestMoireCopy.id}) == defaultTestMoireCopy)
     }
     
-    func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSave() {
+    func testModifyMoire_MultiplePatterns_ValidIdLegalValuesAndSaved_ReturnTrueAndModifyPatternsAndSaveAndUpdatePatterns() {
         self.setUpDefaultTestMoire(numOfPatterns: 4)
         let hdcs1 = HighDegreeControlSettings.init(indexesOfPatternControlled: Array(0...3))
         let hdcs2 = HighDegreeControlSettings.init(indexesOfPatternControlled: [0,1,3])
@@ -223,6 +224,7 @@ extension MoireManagingControllerTestsWithNormalModel {
         expectedPatterns4.insert(self.mockMoireViewController.currentPatterns![2], at: 2)
         XCTAssertTrue(self.moireManagingController.modifyPatterns(modifiedPatterns: m4.patterns, callerId: highDegId2))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, expectedPatterns4)
+        XCTAssertTrue(self.mockControlsViewController.timesUpdatePatternsCalled > 0)
     }
     
     func testModifyMoire_MultiplePatterns_ValidIdIlliegalValuesAndSaved_ReturnFalseAndPatternsUnchanged() {
@@ -265,9 +267,6 @@ extension MoireManagingControllerTestsWithNormalModel {
         XCTAssertFalse(self.moireManagingController.modifyPatterns(modifiedPatterns: m.patterns, callerId: "023"))
         XCTAssertEqual(self.mockMoireViewController.currentPatterns, existingPatterns)
     }
-    
-//    func testModifyMoire_ValidIdAndLegalValues_UpdateControlsAfterEachSuccessModification() {
-//    }
 }
 
 /// test modifying patterns' display properties
