@@ -56,6 +56,7 @@
 		8E72F41D25F2BA0D004E98DF /* CtrlViewControllerSch3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E72F41C25F2BA0D004E98DF /* CtrlViewControllerSch3.swift */; };
 		8E7FD9BE25D0D08A0064A0A6 /* PatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */; };
 		8E7FD9C325D0D1430064A0A6 /* MetalPatternViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7FD9C225D0D1430064A0A6 /* MetalPatternViewController.swift */; };
+		8E8527C22665DA59005DCEC0 /* HighDegCtrlViewControllerBatchEditing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8527C12665DA59005DCEC0 /* HighDegCtrlViewControllerBatchEditing.swift */; };
 		8E9690E22596FA3700C69DDC /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9690E12596FA3700C69DDC /* MainViewController.swift */; };
 		8E96B7A6257F33CF007527E2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A5257F33CF007527E2 /* AppDelegate.m */; };
 		8E96B7A9257F33CF007527E2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7A8257F33CF007527E2 /* SceneDelegate.m */; };
@@ -155,6 +156,7 @@
 		8E72F41C25F2BA0D004E98DF /* CtrlViewControllerSch3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CtrlViewControllerSch3.swift; sourceTree = "<group>"; };
 		8E7FD9BD25D0D08A0064A0A6 /* PatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternViewController.swift; sourceTree = "<group>"; };
 		8E7FD9C225D0D1430064A0A6 /* MetalPatternViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalPatternViewController.swift; sourceTree = "<group>"; };
+		8E8527C12665DA59005DCEC0 /* HighDegCtrlViewControllerBatchEditing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighDegCtrlViewControllerBatchEditing.swift; sourceTree = "<group>"; };
 		8E8D95A1258C3165000CD481 /* MoireStudies-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MoireStudies-Bridging-Header.h"; sourceTree = "<group>"; };
 		8E9690E12596FA3700C69DDC /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8E96B7A1257F33CF007527E2 /* MoireStudies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoireStudies.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,6 +334,7 @@
 				8E60786725A2F049002EB000 /* UtilitiesTests.swift */,
 				8E35A67E260D64E0007E3181 /* BoundsManagerTests.swift */,
 				8E46326826619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift */,
+				8E8527C12665DA59005DCEC0 /* HighDegCtrlViewControllerBatchEditing.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -650,6 +653,7 @@
 				8E2E45F125D1BA0B00B0EA23 /* LocalMoireModelTests.swift in Sources */,
 				8EBF7C86262529A3009E4F4B /* ControlsViewControllerTests.swift in Sources */,
 				8E60786825A2F049002EB000 /* UtilitiesTests.swift in Sources */,
+				8E8527C22665DA59005DCEC0 /* HighDegCtrlViewControllerBatchEditing.swift in Sources */,
 				8EAA4DE925F3423A00B9DC81 /* CtrlViewControllerSch3Tests.swift in Sources */,
 				8E46326926619AA20023C155 /* AbstractHighDegCtrlViewControllerTests.swift in Sources */,
 				8E35A67F260D64E0007E3181 /* BoundsManagerTests.swift in Sources */,

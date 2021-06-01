@@ -12,16 +12,12 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
     var patternsDelegate: PatternManager!
-    let initPattern: Array<Pattern?>
-    
-    private var previousNetSpeedMultiplier: CGFloat = 1.0
-    private var previousNetDirectionAdjustment: CGFloat = 0.0
-    private var previousNetFillRatioMultiplier: CGFloat = 1.0
-    private var previousNetScaleAdjustment: CGFloat = 0.0
+    private(set) var initPatterns: Array<Pattern?>
+    private var basePatterns: Array<Pattern>? /// the basis of adjusments and multiplier calculations; refreshes every time matchControlsWithModel is called
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
         self.id = id
-        self.initPattern = patterns
+        self.initPatterns = patterns
         super.init(nibName: nil, bundle: nil)
         
         let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
@@ -31,70 +27,77 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     required init?(coder: NSCoder) {
-        self.initPattern = []
+        self.initPatterns = []
         super.init(coder: coder)
     }
     
+    /// call this after init or after any external changes being applied to the moire
+    private func updateBasePatterns() {
+        self.basePatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
+    }
+    
     func adjustRelativeSpeed(netMultiplier: CGFloat) {
-        guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
-        let deltaMultiplier = netMultiplier - previousNetSpeedMultiplier
-        self.previousNetSpeedMultiplier = netMultiplier
-        
-        for i in 0..<currentPatterns.count {
-            _ = self.modifyPattern(index: i, speed: currentPatterns[i].speed + currentPatterns[i].speed * deltaMultiplier)
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            for i in 0..<bp.count {
+                _ = self.modifyPattern(index: i, speed: bp[i].speed * netMultiplier)
+            }
         }
     }
     
     func adjustAllDirection(netAdjustment: CGFloat) {
-        guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
-        let deltaAdjustment = netAdjustment - previousNetDirectionAdjustment
-        self.previousNetDirectionAdjustment = netAdjustment
-        for i in 0..<currentPatterns.count {
-            var newDirection = currentPatterns[i].direction + deltaAdjustment
-            while newDirection > BoundsManager.directionRange.upperBound {
-                newDirection -= 2*CGFloat.pi
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            for i in 0..<bp.count {
+                var newDirection = bp[i].direction + netAdjustment
+                while newDirection > BoundsManager.directionRange.upperBound {
+                    newDirection -= 2*CGFloat.pi
+                }
+                while newDirection < BoundsManager.directionRange.lowerBound {
+                    newDirection += 2*CGFloat.pi
+                }
+                _ = self.modifyPattern(index: i, direction: newDirection)
             }
-            while newDirection < BoundsManager.directionRange.lowerBound {
-                newDirection += 2*CGFloat.pi
-            }
-            
-            _ = self.modifyPattern(index: i, direction: newDirection)
         }
     }
 
     func adjustAllFillRatio(netMultiplier: CGFloat) {
-        guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
-        let deltaMultiplier = netMultiplier - previousNetFillRatioMultiplier
-        
-        self.previousNetFillRatioMultiplier = netMultiplier
-        
-        for i in 0..<currentPatterns.count {
-            let currentBlackWidth = currentPatterns[i].blackWidth
-            let currentWhiteWidth = currentPatterns[i].whiteWidth
-            let currentValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: currentBlackWidth, whiteWidth: currentWhiteWidth)
-            let currentScaleFactor = currentValues.scaleFactor
-            let currentFillRatio = currentValues.fillRatio
-            let newFillRatio = currentFillRatio + currentFillRatio * deltaMultiplier
-            let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: newFillRatio, scaleFactor: currentScaleFactor)
-            _ = self.modifyPattern(index: i, blackWidth: newValues.blackWidth)
-            _ = self.modifyPattern(index: i, whiteWidth: newValues.whiteWidth)
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            for i in 0..<bp.count {
+                let baseBlackWidth = bp[i].blackWidth
+                let baseWhiteWidth = bp[i].whiteWidth
+                let baseValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: baseBlackWidth, whiteWidth: baseWhiteWidth)
+                let baseFillRatio = baseValues.fillRatio
+                let baseScaleFactor = baseValues.scaleFactor
+                let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: baseFillRatio*netMultiplier, scaleFactor: baseScaleFactor)
+                _ = self.modifyPattern(index: i, blackWidth: newValues.blackWidth)
+                _ = self.modifyPattern(index: i, whiteWidth: newValues.whiteWidth)
+            }
         }
     }
     
     func adjustAllScale(netAdjustment: CGFloat) {
-        guard let currentPatterns = self.patternsDelegate.retrievePatterns(callerId: self.id) else {return}
-        let deltaAdjustment = netAdjustment - previousNetScaleAdjustment
-        self.previousNetScaleAdjustment = netAdjustment
-        for i in 0..<currentPatterns.count {
-            let currentBlackWidth = currentPatterns[i].blackWidth
-            let currentWhiteWidth = currentPatterns[i].whiteWidth
-            let currentValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: currentBlackWidth, whiteWidth: currentWhiteWidth)
-            let currentFillRatio = currentValues.fillRatio
-            let currentScaleFactor = currentValues.scaleFactor
-            let newScaleFactor = currentScaleFactor + deltaAdjustment
-            let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: currentFillRatio, scaleFactor: newScaleFactor)
-            _ = self.modifyPattern(index: i, blackWidth: newValues.blackWidth)
-            _ = self.modifyPattern(index: i, whiteWidth: newValues.whiteWidth)
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            for i in 0..<bp.count {
+                let baseBlackWidth = bp[i].blackWidth
+                let baseWhiteWidth = bp[i].whiteWidth
+                let baseValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: baseBlackWidth, whiteWidth: baseWhiteWidth)
+                let baseFillRatio = baseValues.fillRatio
+                let baseScaleFactor = baseValues.scaleFactor
+                let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: baseFillRatio, scaleFactor: baseScaleFactor+netAdjustment)
+                _ = self.modifyPattern(index: i, blackWidth: newValues.blackWidth)
+                _ = self.modifyPattern(index: i, whiteWidth: newValues.whiteWidth)
+            }
         }
     }
 }
@@ -128,7 +131,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             let fillRatioMultiplierUpperBound = boundResult.fillRatioRange.upperBound / curretFillRatio
             if let mcfrr = result {
                 result = Utilities.intersectRanges(range1: mcfrr,
-                                                                           range2: fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound)
+                                                   range2: fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound)
             } else {
                 result = fillRatioMultiplierLowerBound...fillRatioMultiplierUpperBound
             }
@@ -156,6 +159,8 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     }
     
     func matchControlsWithModel(patterns: Array<Pattern?>) {
+        self.basePatterns = nil // reset basePatterns after external changes to the moire
+        
         let cv = self.view as! SliderHighDegreeCtrlView
         if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
             cv.resetSpeedControl(range: mcsmr, value: 1.0)
