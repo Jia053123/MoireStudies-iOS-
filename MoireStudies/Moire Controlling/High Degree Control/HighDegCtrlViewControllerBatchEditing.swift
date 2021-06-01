@@ -12,12 +12,12 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     static let supportedNumOfPatterns: ClosedRange<Int> = 2...(Constants.Constrains.numOfPatternsPerMoire.upperBound)
     var id: String!
     var patternsDelegate: PatternManager!
-    private(set) var initPatterns: Array<Pattern?>
+    private(set) var initPattern: Array<Pattern?>
     private var basePatterns: Array<Pattern>? /// the basis of adjusments and multiplier calculations; refreshes every time matchControlsWithModel is called
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
         self.id = id
-        self.initPatterns = patterns
+        self.initPattern = patterns
         super.init(nibName: nil, bundle: nil)
         
         let controlView: HighDegreeCtrlView = SliderHighDegreeCtrlView.init(frame: frame)
@@ -27,7 +27,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     required init?(coder: NSCoder) {
-        self.initPatterns = []
+        self.initPattern = []
         super.init(coder: coder)
     }
     
@@ -36,7 +36,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         self.basePatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
     }
     
-    func adjustRelativeSpeed(netMultiplier: CGFloat) {
+    func modifyRelativeSpeed(netMultiplier: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -47,7 +47,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
-    func adjustAllDirection(netAdjustment: CGFloat) {
+    func modifyAllDirection(netAdjustment: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -65,7 +65,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
 
-    func adjustAllFillRatio(netMultiplier: CGFloat) {
+    func modifyAllFillRatio(netMultiplier: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -83,7 +83,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
-    func adjustAllScale(netAdjustment: CGFloat) {
+    func modifyAllScale(netAdjustment: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -166,6 +166,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             cv.resetSpeedControl(range: mcsmr, value: 1.0)
         }
         cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
+        
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
             cv.resetFillRatioControl(range: mcfrmr, value: 1.0)
         }

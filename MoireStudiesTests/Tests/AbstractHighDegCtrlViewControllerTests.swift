@@ -10,12 +10,12 @@ import XCTest
 
 class AbstractHighDegCtrlViewControllerTests: XCTestCase {
     var mockVC : MockHighDegCtrlViewController!
-    var mockPatternManagerNormal : MockPatternManagerNormal!
-    var mockPatternManagerIllegal : MockPatternManagerIllegal!
+    var mockPatternManagerNormal : MockPatternManagerAlwaysLegal!
+    var mockPatternManagerIllegal : MockPatternManagerAlwaysIllegal!
 
     override func setUpWithError() throws {
-        self.mockPatternManagerNormal = MockPatternManagerNormal.init()
-        self.mockPatternManagerIllegal = MockPatternManagerIllegal.init()
+        self.mockPatternManagerNormal = MockPatternManagerAlwaysLegal.init()
+        self.mockPatternManagerIllegal = MockPatternManagerAlwaysIllegal.init()
     }
     
     override func tearDownWithError() throws {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MockPatternManagerNormal: UIViewController, PatternManager {
+class MockPatternManagerAlwaysLegal: UIViewController, PatternManager {
     private(set) var modifiedPattern: Pattern?
     private(set) var modifiedPatterns: Array<Pattern>?
     private(set) var createdPattern: Pattern?
@@ -140,7 +140,7 @@ class MockPatternManagerNormal: UIViewController, PatternManager {
     }
 }
 
-class MockPatternManagerIllegal: UIViewController, PatternManager {
+class MockPatternManagerAlwaysIllegal: UIViewController, PatternManager {
     var doesReturnPatternControlled: Bool = true
     private(set) var modifySpeedCallers: Set<String> = []
     private(set) var modifyDirectionCallers: Set<String> = []

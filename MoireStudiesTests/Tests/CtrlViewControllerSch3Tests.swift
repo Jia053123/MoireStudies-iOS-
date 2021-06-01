@@ -14,13 +14,13 @@ import UIKit
 class CtrlViewControllerSch3TestsLegal: XCTestCase {
     let id = "1111"
     var ctrlViewController: CtrlViewControllerSch3!
-    var mockPatternManagerLegal: MockPatternManagerNormal!
+    var mockPatternManagerLegal: MockPatternManagerAlwaysLegal!
     let testPattern1 = Pattern.init(speed: 25.0, direction: 1.78, blackWidth: 5.34, whiteWidth: 7.22)
     
     override func setUpWithError() throws {
         assert(Utilities.isWithinBounds(pattern: testPattern1))
         self.ctrlViewController = CtrlViewControllerSch3.init(id: self.id, frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), pattern: self.testPattern1)
-        self.mockPatternManagerLegal = MockPatternManagerNormal()
+        self.mockPatternManagerLegal = MockPatternManagerAlwaysLegal()
         self.mockPatternManagerLegal!.setCurrentPatternControlled(initPattern: self.testPattern1)
         self.ctrlViewController?.patternDelegate = self.mockPatternManagerLegal
     }
@@ -144,12 +144,12 @@ class CtrlViewControllerSch3TestsLegal: XCTestCase {
 class CtrlViewControllerSch3TestsIllegal: XCTestCase {
     let id = "1112"
     var ctrlViewController: CtrlViewControllerSch3!
-    var mockPatternManagerIllegal: MockPatternManagerIllegal!
+    var mockPatternManagerIllegal: MockPatternManagerAlwaysIllegal!
     let testPattern1 = Pattern.init(speed: 25.0, direction: 1.78, blackWidth: 5.34, whiteWidth: 7.22)
     
     override func setUpWithError() throws {
         self.ctrlViewController = CtrlViewControllerSch3.init(id: self.id, frame: CGRect.init(x: 0, y: 0, width: 100, height: 100), pattern: self.testPattern1)
-        self.mockPatternManagerIllegal = MockPatternManagerIllegal()
+        self.mockPatternManagerIllegal = MockPatternManagerAlwaysIllegal()
         self.ctrlViewController?.patternDelegate = self.mockPatternManagerIllegal
     }
 

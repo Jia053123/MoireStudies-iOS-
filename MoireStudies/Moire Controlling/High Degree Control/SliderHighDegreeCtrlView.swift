@@ -50,19 +50,19 @@ class SliderHighDegreeCtrlView: UIView {
     }
     
     @IBAction func speedChanged(_ sender: Any) {
-        self.target.adjustRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
+        self.target.modifyRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }
     
     @IBAction func directionChanged(_ sender: Any) {
-        self.target.adjustAllDirection(netAdjustment: CGFloat(self.directionSlider.value))
+        self.target.modifyAllDirection(netAdjustment: CGFloat(self.directionSlider.value))
     }
     
     @IBAction func fillChanged(_ sender: Any) {
-        self.target.adjustAllFillRatio(netMultiplier: CGFloat(self.fillSlider.value))
+        self.target.modifyAllFillRatio(netMultiplier: CGFloat(self.fillSlider.value))
     }
     
     @IBAction func scaleChanged(_ sender: Any) {
-        self.target.adjustAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
+        self.target.modifyAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
     }
     
     func resetSpeedControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
