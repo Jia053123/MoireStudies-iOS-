@@ -53,7 +53,6 @@ class SliderHighDegreeCtrlView: UIView {
         self.target.matchControlsWithUpdatedModel()
     }
     
-    
     @IBAction func speedChanged(_ sender: Any) {
         self.target.modifyRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }
