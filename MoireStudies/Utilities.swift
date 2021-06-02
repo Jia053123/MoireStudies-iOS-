@@ -108,4 +108,19 @@ class Utilities: NSObject {
             return nil
         }
     }
+    
+    /// Summary: Add padding to both ends of the range to make it more conservative; padding parameter will be applied as its absolute value; if the padding is so large such that the lower bound becomes greater than upper bound, the average of the lower bound and upper bound of closedRange parameter will be returned
+    static func addPaddingsToRange(closedRange: ClosedRange<CGFloat>, padding: CGFloat) -> ClosedRange<CGFloat> {
+        let posPadding = abs(padding)
+        let lb = closedRange.lowerBound
+        let ub = closedRange.upperBound
+        let paddedLb = lb + posPadding
+        let paddedUb = ub - posPadding
+        if paddedLb <= paddedUb {
+            return paddedLb...paddedUb
+        } else {
+            let avg = (lb + ub) / 2.0
+            return avg...avg
+        }
+    }
 }

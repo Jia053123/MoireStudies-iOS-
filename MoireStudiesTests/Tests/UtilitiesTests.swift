@@ -287,4 +287,11 @@ class UtilitiesTests: XCTestCase { // TODO: test more cases
         XCTAssertNil(Utilities.intersectRanges(range1: r11, range2: r12))
         XCTAssertNil(Utilities.intersectRanges(range1: r12, range2: r11))
     }
+    
+    func testAddPaddingsToRange() {
+        let range1: ClosedRange<CGFloat> = -1.0...7.9
+        XCTAssertEqual(Utilities.addPaddingsToRange(closedRange: range1, padding: 0.1), (-1.0+0.1)...(7.9-0.1))
+        let range2: ClosedRange<CGFloat> = -1.0...2.1
+        XCTAssertEqual(Utilities.addPaddingsToRange(closedRange: range2, padding: 2.0), (2.1-1.0)/2.0...(2.1-1.0)/2.0)
+    }
 }

@@ -163,15 +163,15 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         
         let cv = self.view as! SliderHighDegreeCtrlView
         if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
-            cv.resetSpeedControl(range: mcsmr, value: 1.0)
+            cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.0001), value: 1.0)
         }
         cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
         
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
-            cv.resetFillRatioControl(range: mcfrmr, value: 1.0)
+            cv.resetFillRatioControl(range: Utilities.addPaddingsToRange(closedRange: mcfrmr, padding: 0.0001), value: 1.0)
         }
         if let mcsfar = self.mostConservativeScaleFactorAdjustmentRange(patterns: patterns) {
-            cv.resetScaleFactorControl(range: mcsfar, value: 0.0)
+            cv.resetScaleFactorControl(range: Utilities.addPaddingsToRange(closedRange: mcsfar, padding: 0.0001), value: 0.0)
         }
     }
 }
