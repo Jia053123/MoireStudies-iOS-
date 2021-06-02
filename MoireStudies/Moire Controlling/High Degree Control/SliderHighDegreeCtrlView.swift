@@ -49,6 +49,11 @@ class SliderHighDegreeCtrlView: UIView {
         self.scaleSlider.value = 0.0
     }
     
+    @IBAction func doneEditing(_ sender: Any) {
+        self.target.matchControlsWithUpdatedModel()
+    }
+    
+    
     @IBAction func speedChanged(_ sender: Any) {
         self.target.modifyRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }

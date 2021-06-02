@@ -103,7 +103,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
 }
 
 extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
-    func mostConservativeSpeedMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+    private func mostConservativeSpeedMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
         var result: ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
@@ -120,7 +120,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         return result
     }
     
-    func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+    private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
         var result : ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
@@ -139,7 +139,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         return result
     }
     
-    func mostConservativeScaleFactorAdjustmentRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+    private func mostConservativeScaleFactorAdjustmentRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
         var result: ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
@@ -173,5 +173,9 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         if let mcsfar = self.mostConservativeScaleFactorAdjustmentRange(patterns: patterns) {
             cv.resetScaleFactorControl(range: Utilities.addPaddingsToRange(closedRange: mcsfar, padding: 0.0001), value: 0.0)
         }
+    }
+    
+    func matchControlsWithUpdatedModel() {
+        self.matchControlsWithModel(patterns: self.patternsDelegate.retrievePatterns(callerId: self.id)!)
     }
 }

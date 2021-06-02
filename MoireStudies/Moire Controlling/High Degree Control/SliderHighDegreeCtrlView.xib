@@ -52,6 +52,8 @@
                         <constraint firstAttribute="height" constant="25" id="Lm6-mm-bzn"/>
                     </constraints>
                     <connections>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="N6P-YI-vg3"/>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="Nwd-5b-j4I"/>
                         <action selector="speedChanged:" destination="-1" eventType="valueChanged" id="VT5-9Z-ZFC"/>
                     </connections>
                 </slider>
@@ -62,6 +64,8 @@
                     </constraints>
                     <connections>
                         <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="tPG-TR-8eV"/>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="LDg-3F-30Z"/>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="svY-Ce-W41"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-UX-Yku" userLabel="FillRatioSlider">
@@ -70,6 +74,8 @@
                         <constraint firstAttribute="height" constant="25" id="Q3t-pl-SmW"/>
                     </constraints>
                     <connections>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="UdL-UV-05y"/>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="XbK-Ux-p77"/>
                         <action selector="fillChanged:" destination="-1" eventType="valueChanged" id="CV7-Q5-Cl8"/>
                     </connections>
                 </slider>
@@ -79,6 +85,8 @@
                         <constraint firstAttribute="height" constant="25" id="wvV-S7-OLd"/>
                     </constraints>
                     <connections>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="9we-e3-Ffb"/>
+                        <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="gax-QC-CQV"/>
                         <action selector="scaleChanged:" destination="-1" eventType="valueChanged" id="VPp-sf-OsT"/>
                     </connections>
                 </slider>
