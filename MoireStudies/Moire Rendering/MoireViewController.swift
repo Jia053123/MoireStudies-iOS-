@@ -53,21 +53,42 @@ class MoireViewController: UIViewController, MoireDisplayer { // TODO: remove th
             pvc.didMove(toParent: self)
             pvc.setUpAndRender(pattern: pattern)
         }
-        self.setUpMasks(with: configs.controlFrames)
+        self.setUpMasks(with: configs)
     }
     
-    func setUpMasks(with frames: Array<CGRect>) {
+    func setUpMasks(with configurations: Configurations) {
         // TODO: (with two patterns) at the moment, these two masks account for 6 of the 25 offscreen textures to render and aobut 30ms of GPU time per frame. Try creating the effect in shaders instead.
         guard self.children.count > 0 else {return}
-        assert(frames.count >= self.children.count)
-        for i in 0...(self.children.count - 1) {
+        var maskFramesForEachPattern: Array<Array<CGRect>> = []
+        
+        let lowDegFrames = configurations.controlFrames
+        assert(lowDegFrames.count >= self.children.count)
+        for i in 0..<self.children.count {
             var maskFrames: Array<CGRect> = []
-            for j in 0...(self.children.count - 1) {
+            for j in 0..<self.children.count {
                 if j != i {
-                    maskFrames.append(frames[j])
+                    // this pattern (at i) need to be hidden at position j
+                    maskFrames.append(lowDegFrames[j])
                 }
             }
-            let maskView = MaskView.init(frame: self.view.bounds, maskFrames: maskFrames)
+            maskFramesForEachPattern.append(maskFrames)
+        }
+        assert(maskFramesForEachPattern.count == self.children.count)
+        
+        let highDegFrames = configurations.highDegControlFrames
+        assert(highDegFrames.count >= configurations.highDegreeControlSettings.count)
+        for i in 0..<self.children.count {
+            for j in 0..<configurations.highDegreeControlSettings.count {
+                if !configurations.highDegreeControlSettings[j].indexesOfPatternControlled.contains(i) {
+                    // this pattern (at i) neet to be hidden at position j
+                    maskFramesForEachPattern[i].append(highDegFrames[j])
+                }
+            }
+        }
+        
+        assert(self.children.count == maskFramesForEachPattern.count)
+        for i in 0..<self.children.count {
+            let maskView = MaskView.init(frame: self.view.bounds, maskFrames: maskFramesForEachPattern[i])
             self.children[i].view.mask = maskView
         }
     }
