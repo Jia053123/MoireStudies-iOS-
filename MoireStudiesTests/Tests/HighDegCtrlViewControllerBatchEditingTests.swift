@@ -34,7 +34,7 @@ class HighDegCtrlViewControllerBatchEditingTests: XCTestCase {
     func testModifyRelativeSpeed_ApplyMultiplierCorrectly() {
         let originalPatterns = self.generateRandomPatternsToSetUpPatternManagerAndViewController(numOfPatterns: 3, seed: 8.765, id: "testId")
         
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: 2.1)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: 2.1)
         XCTAssert(self.mockPatternManager.modifyMulitplePatternsCallers.contains("testId"))
         let modifiedPatterns = self.mockPatternManager.modifiedPatterns
         XCTAssertNotNil(modifiedPatterns)
@@ -46,11 +46,11 @@ class HighDegCtrlViewControllerBatchEditingTests: XCTestCase {
     func testModifyRelativeSpeed_SameAccumulativeEndValueRegardlessOfAdjustmentProcess() {
         let originalPatterns = self.generateRandomPatternsToSetUpPatternManagerAndViewController(numOfPatterns: 5, seed: 2.897, id: "testId")
         
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: 0.9)
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: 0.8)
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: -0.6)
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: 0.3)
-        self.highDegCtrlViewControllerBatchEditing.modifyRelativeSpeed(netMultiplier: 0.25)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: 0.9)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: 0.8)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: -0.6)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: 0.3)
+        self.highDegCtrlViewControllerBatchEditing.modifyAllSpeed(netMultiplier: 0.25)
         let modifiedPatterns = self.mockPatternManager.modifiedPatterns
         XCTAssertNotNil(modifiedPatterns)
         for i in 0..<originalPatterns.count {

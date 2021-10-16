@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderHighDegreeCtrlView" customModule="MoireStudies" customModuleProvider="target">
             <connections>
+                <outlet property="convergenceSlider" destination="imE-GO-KMq" id="CID-lc-Lew"/>
                 <outlet property="fillSlider" destination="V3X-UX-Yku" id="FwC-KR-TaJ"/>
                 <outlet property="scaleSlider" destination="9qB-ed-vKY" id="RIM-99-ZmM"/>
                 <outlet property="speedSlider" destination="Vdk-Nc-9b1" id="aQh-jM-UD7"/>
@@ -74,7 +75,7 @@
                         <constraint firstAttribute="height" constant="25" id="lDb-lR-2KR"/>
                     </constraints>
                     <connections>
-                        <action selector="directionChanged:" destination="-1" eventType="valueChanged" id="hUL-5e-LZv"/>
+                        <action selector="convergenceChanged:" destination="-1" eventType="valueChanged" id="Xxb-o7-Zbr"/>
                         <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="1XH-3y-0ke"/>
                         <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="q8B-iL-LAD"/>
                     </connections>

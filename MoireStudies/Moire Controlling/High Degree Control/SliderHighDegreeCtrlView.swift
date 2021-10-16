@@ -11,7 +11,7 @@ import UIKit
 class SliderHighDegreeCtrlView: UIView {
     var target: HighDegCtrlViewControllerBatchEditing!
     @IBOutlet weak var speedSlider: UISlider!
-    @IBOutlet weak var directionSlider: UISlider!
+    @IBOutlet weak var convergenceSlider: UISlider!
     @IBOutlet weak var fillSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
     
@@ -36,9 +36,9 @@ class SliderHighDegreeCtrlView: UIView {
         self.speedSlider.maximumValue = 1.5
         self.speedSlider.value = 1.0
         
-        self.directionSlider.minimumValue = -1 * Float.pi
-        self.directionSlider.maximumValue = Float.pi
-        self.directionSlider.value = 0.0
+        self.convergenceSlider.minimumValue = 0.1
+        self.convergenceSlider.maximumValue = 2.0
+        self.convergenceSlider.value = 1.0
         
         self.fillSlider.minimumValue = 0.5
         self.fillSlider.maximumValue = 1.5
@@ -54,11 +54,11 @@ class SliderHighDegreeCtrlView: UIView {
     }
     
     @IBAction func speedChanged(_ sender: Any) {
-        self.target.modifyRelativeSpeed(netMultiplier: CGFloat(self.speedSlider.value))
+        self.target.modifyAllSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }
     
-    @IBAction func directionChanged(_ sender: Any) {
-        self.target.modifyAllDirection(netAdjustment: CGFloat(self.directionSlider.value))
+    @IBAction func convergenceChanged(_ sender: Any) {
+        self.target.modifyAllDirection(netMultiplier: CGFloat(self.convergenceSlider.value))
     }
     
     @IBAction func fillChanged(_ sender: Any) {
@@ -77,11 +77,11 @@ class SliderHighDegreeCtrlView: UIView {
         }
     }
 
-    func resetDirectionControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
-        self.directionSlider.minimumValue = Float(range.lowerBound)
-        self.directionSlider.maximumValue = Float(range.upperBound)
+    func resetConvergenceControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
+        self.convergenceSlider.minimumValue = Float(range.lowerBound)
+        self.convergenceSlider.maximumValue = Float(range.upperBound)
         if let v = value {
-            self.directionSlider.value = Float(v)
+            self.convergenceSlider.value = Float(v)
         }
     }
 

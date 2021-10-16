@@ -36,13 +36,31 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         self.basePatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
     }
     
-    func modifyRelativeSpeed(netMultiplier: CGFloat) {
+    func modifyAllSpeed(netMultiplier: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
         if let bp = basePatterns {
             for i in 0..<bp.count {
                 _ = self.modifyPattern(index: i, speed: bp[i].speed * netMultiplier)
+            }
+        }
+    }
+    
+    func modifyAllDirection(netMultiplier: CGFloat) {
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            for i in 0..<bp.count {
+                var newDirection = bp[i].direction * netMultiplier
+                while newDirection > BoundsManager.directionRange.upperBound {
+                    newDirection -= 2*CGFloat.pi
+                }
+                while newDirection < BoundsManager.directionRange.lowerBound {
+                    newDirection += 2*CGFloat.pi
+                }
+                _ = self.modifyPattern(index: i, direction: newDirection)
             }
         }
     }
@@ -120,6 +138,23 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         return result
     }
     
+    private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+        var result: ClosedRange<CGFloat>?
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            /// the upper and bound should be large enough to push the two patterns with the most different angles all the way around to their original position
+            let convergenceMultiplierUpperBound = (p.direction + CGFloat.pi) / p.direction
+            let convergenceMultiplierLowerBound = (p.direction - CGFloat.pi) / p.direction
+            if let mccmr = result {
+                result = Utilities.intersectRanges(range1: mccmr,
+                                                   range2: convergenceMultiplierLowerBound...convergenceMultiplierUpperBound)
+            } else {
+                result = convergenceMultiplierLowerBound...convergenceMultiplierUpperBound
+            }
+        }
+        return result
+    }
+    
     private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
         var result : ClosedRange<CGFloat>?
         for pattern in patterns {
@@ -143,7 +178,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         var result: ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
-            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue}
+            guard let boundResult = BoundsManager.calcBoundsForFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth) else {continue} 
             
             let currentScaleFactor = Utilities.convertToFillRatioAndScaleFactor(blackWidth: p.blackWidth, whiteWidth: p.whiteWidth).scaleFactor
             let scaleFactorAdjustmentLowerBound = boundResult.scaleFactorRange.lowerBound - currentScaleFactor
@@ -165,8 +200,11 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
             cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.0001), value: 1.0)
         }
-        cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
         
+        if let mccmr = self.mostConservativeConvergenceMultiplierRange(patterns: patterns) {
+            cv.resetConvergenceControl(range: mccmr, value: 1.0)
+        }
+                
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
             cv.resetFillRatioControl(range: Utilities.addPaddingsToRange(closedRange: mcfrmr, padding: 0.0001), value: 1.0)
         }
