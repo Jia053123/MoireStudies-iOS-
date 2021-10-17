@@ -41,7 +41,7 @@ class SliderHighDegreeCtrlView: UIView {
         self.convergenceSlider.maximumValue = 2.0
         self.convergenceSlider.value = 1.0
         
-        self.phaseSlider.minimumValue = 0.1
+        self.phaseSlider.minimumValue = 0.001
         self.phaseSlider.maximumValue = 2.0
         self.phaseSlider.value = 1.0
         
@@ -91,6 +91,14 @@ class SliderHighDegreeCtrlView: UIView {
         self.convergenceSlider.maximumValue = Float(range.upperBound)
         if let v = value {
             self.convergenceSlider.value = Float(v)
+        }
+    }
+    
+    func resetPhaseControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
+        self.phaseSlider.minimumValue = Float(range.lowerBound)
+        self.phaseSlider.maximumValue = Float(range.upperBound)
+        if let v = value {
+            self.phaseSlider.value = Float(v)
         }
     }
 

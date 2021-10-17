@@ -122,19 +122,26 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
+    private func calculateAverageWhiteWidth(patterns: Array<Pattern?>) -> CGFloat {
+        var whiteWidthSum: CGFloat = 0
+        var count: Int = 0
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            whiteWidthSum += p.whiteWidth
+            count += 1
+        }
+        return whiteWidthSum / CGFloat(count)
+    }
+    
     func modifyAllWhiteWidth(phaseMergeFactor: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
-        if let bp = basePatterns {
-            var whiteWidthSum: CGFloat = 0
-            for i in 0..<bp.count {
-                whiteWidthSum += bp[i].whiteWidth
-            }
-            let averageWhiteWidth = whiteWidthSum / CGFloat(bp.count)
+        if let bps = basePatterns {
+            let averageWhiteWidth = calculateAverageWhiteWidth(patterns: bps)
             
-            for i in 0..<bp.count {
-                let whiteWidth = bp[i].whiteWidth
+            for i in 0..<bps.count {
+                let whiteWidth = bps[i].whiteWidth
                 let difference = whiteWidth - averageWhiteWidth
                 let newDifference = difference * phaseMergeFactor
                 let delta = newDifference - difference
@@ -166,10 +173,10 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         if basePatterns == nil {
             self.updateBasePatterns()
         }
-        if let bp = basePatterns {
-            for i in 0..<bp.count {
-                let baseBlackWidth = bp[i].blackWidth
-                let baseWhiteWidth = bp[i].whiteWidth
+        if let bps = basePatterns {
+            for i in 0..<bps.count {
+                let baseBlackWidth = bps[i].blackWidth
+                let baseWhiteWidth = bps[i].whiteWidth
                 let baseValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: baseBlackWidth, whiteWidth: baseWhiteWidth)
                 let baseFillRatio = baseValues.fillRatio
                 let baseScaleFactor = baseValues.scaleFactor
@@ -201,6 +208,34 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     
     private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
         return 0.02...2
+    }
+    
+    private func mostConservativePhaseMergeFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>?{
+        let minFactor: CGFloat = 0.001
+        var result: ClosedRange<CGFloat>?
+        let averageWhiteWidth = calculateAverageWhiteWidth(patterns: patterns)
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            let whiteWidth = p.whiteWidth
+            let difference = whiteWidth - averageWhiteWidth
+            
+            let maxDelta = BoundsManager.whiteWidthRange.upperBound - whiteWidth
+            let minDelta = BoundsManager.whiteWidthRange.lowerBound - whiteWidth
+            
+            let maxNewDifference = maxDelta + difference
+            let minNewDifference = minDelta + difference
+            
+            let maxFactor1 = maxNewDifference / difference
+            let maxFactor2 = minNewDifference / difference
+            let maxFactor = maxFactor1 > maxFactor2 ? maxFactor1 : maxFactor2
+            
+            if let mcpmfr = result {
+                result = Utilities.intersectRanges(range1: mcpmfr, range2: minFactor...maxFactor)
+            } else {
+                result = minFactor...maxFactor
+            }
+        }
+        return result
     }
     
     private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
@@ -251,6 +286,10 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         
         if let mccmr = self.mostConservativeConvergenceMultiplierRange(patterns: patterns) {
             cv.resetConvergenceControl(range: mccmr, value: 1.0)
+        }
+        
+        if let mcpmfr = self.mostConservativePhaseMergeFactorRange(patterns: patterns) {
+            cv.resetPhaseControl(range: mcpmfr, value: 1.0)
         }
                 
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
