@@ -191,6 +191,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     func modifyAllScale(netAdjustment: CGFloat) {
+        NSLog("modifying all scale")
         if basePatterns == nil {
             self.updateBasePatterns()
         }

@@ -17,7 +17,7 @@
                 <outlet property="fillSlider" destination="V3X-UX-Yku" id="FwC-KR-TaJ"/>
                 <outlet property="phaseSlider" destination="hrb-zL-bie" id="j9S-z4-87X"/>
                 <outlet property="relativeScaleSlider" destination="9qB-ed-vKY" id="xAB-9J-weA"/>
-                <outlet property="scaleSlider" destination="9qB-ed-vKY" id="RIM-99-ZmM"/>
+                <outlet property="scaleSlider" destination="vyn-qm-y5J" id="0cp-2n-xJU"/>
                 <outlet property="speedSlider" destination="Vdk-Nc-9b1" id="aQh-jM-UD7"/>
             </connections>
         </placeholder>
@@ -58,6 +58,7 @@
                 </view>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Vdk-Nc-9b1" userLabel="RelSpeedSlider">
                     <rect key="frame" x="10" y="121" width="223" height="26"/>
+                    <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Lm6-mm-bzn"/>
                     </constraints>
@@ -69,7 +70,6 @@
                 </slider>
                 <slider opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="imE-GO-KMq" userLabel="ConvergenceSlider">
                     <rect key="frame" x="10" y="221.5" width="223" height="26"/>
-                    <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="lDb-lR-2KR"/>
                     </constraints>
@@ -163,7 +163,6 @@
                 </slider>
                 <slider opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hrb-zL-bie" userLabel="Phase">
                     <rect key="frame" x="11" y="271.5" width="221" height="26"/>
-                    <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="HcY-zh-17s"/>
                     </constraints>
@@ -224,6 +223,7 @@
                 </label>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-UX-Yku" userLabel="FillRatioSlider">
                     <rect key="frame" x="10" y="171" width="223" height="26"/>
+                    <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Q3t-pl-SmW"/>
                     </constraints>
