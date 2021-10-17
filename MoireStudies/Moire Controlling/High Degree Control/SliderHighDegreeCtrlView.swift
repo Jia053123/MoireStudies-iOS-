@@ -10,11 +10,13 @@ import UIKit
 
 class SliderHighDegreeCtrlView: UIView {
     var target: HighDegCtrlViewControllerBatchEditing!
+    @IBOutlet weak var directionSlider: UISlider!
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var convergenceSlider: UISlider!
     @IBOutlet weak var phaseSlider: UISlider!
     @IBOutlet weak var fillSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
+    @IBOutlet weak var relativeScaleSlider: UISlider!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -32,6 +34,10 @@ class SliderHighDegreeCtrlView: UIView {
             self.addSubview(view)
             view.frame = self.bounds
         }
+        
+        self.directionSlider.minimumValue = -1 * Float.pi
+        self.directionSlider.maximumValue = Float.pi
+        self.directionSlider.value = 0.0
         
         self.speedSlider.minimumValue = 0.5
         self.speedSlider.maximumValue = 1.5
@@ -58,6 +64,10 @@ class SliderHighDegreeCtrlView: UIView {
         self.target.matchControlsWithUpdatedModel()
     }
     
+    @IBAction func directionChanged(_ sender: Any) {
+        self.target.modifyAllDirection(netAdjustment: CGFloat(self.directionSlider.value))
+    }
+    
     @IBAction func speedChanged(_ sender: Any) {
         self.target.modifyAllSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }
@@ -76,6 +86,17 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func scaleChanged(_ sender: Any) {
         self.target.modifyAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
+    }
+    
+    @IBAction func relativeScaleChanged(_ sender: Any) {
+    }
+    
+    func resetDirectionControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
+        self.directionSlider.minimumValue = Float(range.lowerBound)
+        self.directionSlider.maximumValue = Float(range.upperBound)
+        if let v = value {
+            self.directionSlider.value = Float(v)
+        }
     }
     
     func resetSpeedControl(range: ClosedRange<CGFloat>, value: CGFloat?) {

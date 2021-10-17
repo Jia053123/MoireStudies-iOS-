@@ -207,6 +207,10 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
             }
         }
     }
+    
+    func modifyAllScale(netMultiplier: CGFloat) {
+
+    }
 }
 
 extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
@@ -225,10 +229,6 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             }
         }
         return result
-    }
-    
-    private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
-        return 0.1...3
     }
     
     private func mostConservativePhaseMergeFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>?{
@@ -256,7 +256,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
                 result = minFactor...maxFactor
             }
         }
-        return result
+        return Utilities.addPaddingsToRange(closedRange: result!, padding: 0.001)
     }
     
     private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
@@ -301,13 +301,14 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         self.basePatterns = nil // reset basePatterns after external changes to the moire
         
         let cv = self.view as! SliderHighDegreeCtrlView
+        
+        cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
+        
         if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
             cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.0001), value: 1.0)
         }
         
-        if let mccmr = self.mostConservativeConvergenceMultiplierRange(patterns: patterns) {
-            cv.resetConvergenceControl(range: mccmr, value: 1.0)
-        }
+        cv.resetConvergenceControl(range: 0.1...3, value: 1.0)
         
         if let mcpmfr = self.mostConservativePhaseMergeFactorRange(patterns: patterns) {
             cv.resetPhaseControl(range: mcpmfr, value: 1.0)
