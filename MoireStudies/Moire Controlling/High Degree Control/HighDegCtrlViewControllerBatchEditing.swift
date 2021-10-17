@@ -228,16 +228,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     }
     
     private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
-        return 0.001...2.0
-//        let minMultiplier = 0.005
-//        // the max limit is when the smallest angle is about to be different
-//        let nonNilPatterns = patterns.compactMap { $0 }
-//        let allDirectionsNormalized = getNormalizedDirectionForEachPattern(patterns: nonNilPatterns)
-//        let bisectingLineDirection = calculateDirectionOfBisettingLineForSmallestAngle(normalizedDirections: allDirectionsNormalized)
-//
-//
-//        var result: ClosedRange<CGFloat>?
-//
+        return 0.1...3
     }
     
     private func mostConservativePhaseMergeFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>?{

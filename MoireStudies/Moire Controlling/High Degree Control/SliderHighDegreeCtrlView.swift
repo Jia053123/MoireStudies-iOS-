@@ -41,8 +41,8 @@ class SliderHighDegreeCtrlView: UIView {
         self.convergenceSlider.maximumValue = 2.0
         self.convergenceSlider.value = 1.0
         
-        self.phaseSlider.minimumValue = 0.001
-        self.phaseSlider.maximumValue = 2.0
+        self.phaseSlider.minimumValue = 0.1
+        self.phaseSlider.maximumValue = 3.0
         self.phaseSlider.value = 1.0
         
         self.fillSlider.minimumValue = 0.5
