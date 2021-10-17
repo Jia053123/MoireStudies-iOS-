@@ -47,51 +47,72 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
+    private func getNormalizedDirectionForEachPattern(patterns: Array<Pattern>) -> Array<CGFloat> {
+        var allDirectionsNormalized : Array<CGFloat> = []
+        for i in 0..<patterns.count {
+            allDirectionsNormalized.append(patterns[i].direction)
+        }
+        for i in 0..<allDirectionsNormalized.count {
+            assert(allDirectionsNormalized[i] >= 0 && allDirectionsNormalized[i] <= CGFloat.pi*2)
+            if (allDirectionsNormalized[i] > CGFloat.pi) {
+                allDirectionsNormalized[i] -= CGFloat.pi
+            }
+        }
+        return allDirectionsNormalized
+    }
+    
+    private func calculateDirectionOfBisettingLineForSmallestAngle(normalizedDirections: Array<CGFloat>) -> CGFloat {
+        guard normalizedDirections.count > 0 else {return 0}
+        
+        var normalizedDirectionsSorted = normalizedDirections
+        normalizedDirectionsSorted.sort()
+        // make sure the angle between the first and last one is taken into consideration
+        normalizedDirectionsSorted.append(normalizedDirectionsSorted.first! + CGFloat.pi)
+        
+        var smallestAngleDifference: CGFloat = CGFloat.infinity
+        var smallestAngleDifferenceAngleFrom: CGFloat = CGFloat.infinity
+        var smallestAngleDifferenceAngleTo: CGFloat = CGFloat.infinity
+        for i in 0..<normalizedDirectionsSorted.count - 1 {
+            let angleFrom = normalizedDirectionsSorted[i]
+            let angleTo = normalizedDirectionsSorted[i+1]
+            let angleDifference = angleTo - angleFrom
+            if (angleDifference < smallestAngleDifference) {
+                smallestAngleDifference = angleDifference
+                smallestAngleDifferenceAngleFrom = angleFrom
+                smallestAngleDifferenceAngleTo = angleTo
+            }
+        }
+        var bisectingLineDirection = (smallestAngleDifferenceAngleFrom + smallestAngleDifferenceAngleTo) / 2.0
+        if (bisectingLineDirection > CGFloat.pi) {
+            bisectingLineDirection -= CGFloat.pi
+        }
+        return bisectingLineDirection
+    }
+    
     func modifyAllDirection(convergenceFactor: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
         
-        if let bp = basePatterns {
-            // Step1: get, normalize and sort directions from each pattern
-            var allDirectionsNormalized : Array<CGFloat> = []
-            for i in 0..<bp.count {
-                allDirectionsNormalized.append(bp[i].direction)
-            }
-            for i in 0..<allDirectionsNormalized.count {
-                assert(allDirectionsNormalized[i] >= 0 && allDirectionsNormalized[i] <= CGFloat.pi*2)
-                if (allDirectionsNormalized[i] > CGFloat.pi) {
-                    allDirectionsNormalized[i] -= CGFloat.pi
-                }
-            }
-            var allDirectionsNormalizedSorted = allDirectionsNormalized
-            allDirectionsNormalizedSorted.sort()
+        if let bps = basePatterns {
+            let allDirectionsNormalized = getNormalizedDirectionForEachPattern(patterns: bps)
+            let bisectingLineDirection = calculateDirectionOfBisettingLineForSmallestAngle(normalizedDirections: allDirectionsNormalized)
             
-            // Step2: find the two smallest opposite angles (they are identitical in value), and find the direction of the bisetting line
-            var smallestAngleDifference: CGFloat = CGFloat.infinity
-            var smallestAngleDifferenceAngleFrom: CGFloat = CGFloat.infinity
-            var smallestAngleDifferenceAngleTo: CGFloat = CGFloat.infinity
-            for i in 0..<allDirectionsNormalizedSorted.count - 1 {
-                let angleFrom = allDirectionsNormalizedSorted[i]
-                let angleTo = allDirectionsNormalizedSorted[i+1]
-                let angleDifference = angleTo - angleFrom
-                if (angleDifference < smallestAngleDifference) {
-                    smallestAngleDifference = angleDifference
-                    smallestAngleDifferenceAngleFrom = angleFrom
-                    smallestAngleDifferenceAngleTo = angleTo
-                }
-            }
-            let bisectingLineDirection = (smallestAngleDifferenceAngleFrom + smallestAngleDifferenceAngleTo) / 2.0
-            
-            // Step3:  rotate all patterns towards the bisecting line by convergenceFactor
+            // rotate all patterns towards the bisecting line by convergenceFactor
             assert(bisectingLineDirection <= CGFloat.pi)
-            assert(allDirectionsNormalized.count == bp.count)
+            assert(allDirectionsNormalized.count == bps.count)
             for i in 0..<allDirectionsNormalized.count {
-                let direction = allDirectionsNormalized[i]
-                let difference = direction - bisectingLineDirection
+                let normalizedDirection = allDirectionsNormalized[i]
+                var difference = normalizedDirection - bisectingLineDirection
+                if (difference > CGFloat.pi/2) {
+                    difference -= CGFloat.pi
+                }
+                if (difference < -1*CGFloat.pi/2) {
+                    difference += CGFloat.pi
+                }
                 let newDifference = difference * convergenceFactor
                 let angleToRotate = newDifference - difference
-                var newDirection =  bp[i].direction + angleToRotate
+                var newDirection =  bps[i].direction + angleToRotate
                 
                 while newDirection > BoundsManager.directionRange.upperBound {
                     newDirection -= 2*CGFloat.pi
@@ -207,7 +228,16 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     }
     
     private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
-        return 0.02...2
+        return 0.001...2.0
+//        let minMultiplier = 0.005
+//        // the max limit is when the smallest angle is about to be different
+//        let nonNilPatterns = patterns.compactMap { $0 }
+//        let allDirectionsNormalized = getNormalizedDirectionForEachPattern(patterns: nonNilPatterns)
+//        let bisectingLineDirection = calculateDirectionOfBisettingLineForSmallestAngle(normalizedDirections: allDirectionsNormalized)
+//
+//
+//        var result: ClosedRange<CGFloat>?
+//
     }
     
     private func mostConservativePhaseMergeFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>?{
