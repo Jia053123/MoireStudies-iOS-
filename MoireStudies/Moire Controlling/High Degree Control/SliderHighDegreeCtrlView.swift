@@ -36,7 +36,7 @@ class SliderHighDegreeCtrlView: UIView {
         self.speedSlider.maximumValue = 1.5
         self.speedSlider.value = 1.0
         
-        self.convergenceSlider.minimumValue = 0.1
+        self.convergenceSlider.minimumValue = 0.02
         self.convergenceSlider.maximumValue = 2.0
         self.convergenceSlider.value = 1.0
         

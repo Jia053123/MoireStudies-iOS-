@@ -31,7 +31,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         super.init(coder: coder)
     }
     
-    // call this after init or after any external changes being applied to the moire
+    /// call this after init or after any external changes being applied to the moire
     private func updateBasePatterns() {
         self.basePatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
     }
@@ -178,20 +178,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     }
     
     private func mostConservativeConvergenceMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
-        var result: ClosedRange<CGFloat>?
-        for pattern in patterns {
-            guard let p = pattern else {continue}
-            /// the upper and bound should be large enough to push the two patterns with the most different angles all the way around to their original position
-            let convergenceMultiplierUpperBound = (p.direction + CGFloat.pi) / p.direction
-            let convergenceMultiplierLowerBound = (p.direction - CGFloat.pi) / p.direction
-            if let mccmr = result {
-                result = Utilities.intersectRanges(range1: mccmr,
-                                                   range2: convergenceMultiplierLowerBound...convergenceMultiplierUpperBound)
-            } else {
-                result = convergenceMultiplierLowerBound...convergenceMultiplierUpperBound
-            }
-        }
-        return result
+        return 0.02...2
     }
     
     private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
