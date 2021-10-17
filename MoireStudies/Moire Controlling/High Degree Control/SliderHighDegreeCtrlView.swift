@@ -12,6 +12,7 @@ class SliderHighDegreeCtrlView: UIView {
     var target: HighDegCtrlViewControllerBatchEditing!
     @IBOutlet weak var speedSlider: UISlider!
     @IBOutlet weak var convergenceSlider: UISlider!
+    @IBOutlet weak var phaseSlider: UISlider!
     @IBOutlet weak var fillSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
     
@@ -40,6 +41,10 @@ class SliderHighDegreeCtrlView: UIView {
         self.convergenceSlider.maximumValue = 2.0
         self.convergenceSlider.value = 1.0
         
+        self.phaseSlider.minimumValue = 0.1
+        self.phaseSlider.maximumValue = 2.0
+        self.phaseSlider.value = 1.0
+        
         self.fillSlider.minimumValue = 0.5
         self.fillSlider.maximumValue = 1.5
         self.fillSlider.value = 1.0
@@ -59,6 +64,10 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func convergenceChanged(_ sender: Any) {
         self.target.modifyAllDirection(convergenceFactor: CGFloat(self.convergenceSlider.value))
+    }
+    
+    @IBAction func phaseChanged(_ sender: Any) {
+        self.target.modifyAllWhiteWidth(phaseMergeFactor: CGFloat(self.phaseSlider.value))
     }
     
     @IBAction func fillChanged(_ sender: Any) {

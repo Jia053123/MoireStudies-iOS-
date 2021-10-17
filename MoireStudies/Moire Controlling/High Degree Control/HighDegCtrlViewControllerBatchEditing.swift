@@ -121,6 +121,28 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
             }
         }
     }
+    
+    func modifyAllWhiteWidth(phaseMergeFactor: CGFloat) {
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bp = basePatterns {
+            var whiteWidthSum: CGFloat = 0
+            for i in 0..<bp.count {
+                whiteWidthSum += bp[i].whiteWidth
+            }
+            let averageWhiteWidth = whiteWidthSum / CGFloat(bp.count)
+            
+            for i in 0..<bp.count {
+                let whiteWidth = bp[i].whiteWidth
+                let difference = whiteWidth - averageWhiteWidth
+                let newDifference = difference * phaseMergeFactor
+                let delta = newDifference - difference
+                let newWhiteWidth = whiteWidth + delta
+                _ = self.modifyPattern(index: i, whiteWidth: newWhiteWidth)
+            }
+        }
+    }
 
     func modifyAllFillRatio(netMultiplier: CGFloat) {
         if basePatterns == nil {

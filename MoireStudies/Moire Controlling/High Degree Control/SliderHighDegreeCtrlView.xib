@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="convergenceSlider" destination="imE-GO-KMq" id="CID-lc-Lew"/>
                 <outlet property="fillSlider" destination="V3X-UX-Yku" id="FwC-KR-TaJ"/>
+                <outlet property="phaseSlider" destination="hrb-zL-bie" id="j9S-z4-87X"/>
                 <outlet property="scaleSlider" destination="9qB-ed-vKY" id="RIM-99-ZmM"/>
                 <outlet property="speedSlider" destination="Vdk-Nc-9b1" id="aQh-jM-UD7"/>
             </connections>
@@ -131,7 +132,7 @@
                     <connections>
                         <action selector="doneEditing:" destination="-1" eventType="touchUpOutside" id="73f-NQ-43K"/>
                         <action selector="doneEditing:" destination="-1" eventType="touchUpInside" id="v91-nb-FiS"/>
-                        <action selector="scaleChanged:" destination="-1" eventType="valueChanged" id="Xdy-0z-8qB"/>
+                        <action selector="phaseChanged:" destination="-1" eventType="valueChanged" id="Zb7-4f-Omp"/>
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-UX-Yku" userLabel="FillRatioSlider">
