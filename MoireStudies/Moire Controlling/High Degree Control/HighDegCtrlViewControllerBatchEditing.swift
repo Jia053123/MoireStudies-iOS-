@@ -13,7 +13,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     var id: String!
     var patternsDelegate: PatternManager!
     private(set) var initPattern: Array<Pattern?>
-    private var basePatterns: Array<Pattern>? /// the basis of adjusments and multiplier calculations; refreshes every time matchControlsWithModel is called
+    private var basePatterns: Array<Pattern>? // the basis of adjusments and multiplier calculations; refreshes every time matchControlsWithModel is called
     
     required init(id: String, frame: CGRect, patterns: Array<Pattern?>) {
         self.id = id
@@ -31,7 +31,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         super.init(coder: coder)
     }
     
-    /// call this after init or after any external changes being applied to the moire
+    // call this after init or after any external changes being applied to the moire
     private func updateBasePatterns() {
         self.basePatterns = self.patternsDelegate.retrievePatterns(callerId: self.id)
     }
@@ -47,13 +47,52 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
-    func modifyAllDirection(netMultiplier: CGFloat) {
+    func modifyAllDirection(convergenceFactor: CGFloat) {
         if basePatterns == nil {
             self.updateBasePatterns()
         }
+        
         if let bp = basePatterns {
+            // Step1: get, normalize and sort directions from each pattern
+            var allDirectionsNormalized : Array<CGFloat> = []
             for i in 0..<bp.count {
-                var newDirection = bp[i].direction * netMultiplier
+                allDirectionsNormalized.append(bp[i].direction)
+            }
+            for i in 0..<allDirectionsNormalized.count {
+                assert(allDirectionsNormalized[i] >= 0 && allDirectionsNormalized[i] <= CGFloat.pi*2)
+                if (allDirectionsNormalized[i] > CGFloat.pi) {
+                    allDirectionsNormalized[i] -= CGFloat.pi
+                }
+            }
+            var allDirectionsNormalizedSorted = allDirectionsNormalized
+            allDirectionsNormalizedSorted.sort()
+            
+            // Step2: find the two smallest opposite angles (they are identitical in value), and find the direction of the bisetting line
+            var smallestAngleDifference: CGFloat = CGFloat.infinity
+            var smallestAngleDifferenceAngleFrom: CGFloat = CGFloat.infinity
+            var smallestAngleDifferenceAngleTo: CGFloat = CGFloat.infinity
+            for i in 0..<allDirectionsNormalizedSorted.count - 1 {
+                let angleFrom = allDirectionsNormalizedSorted[i]
+                let angleTo = allDirectionsNormalizedSorted[i+1]
+                let angleDifference = angleTo - angleFrom
+                if (angleDifference < smallestAngleDifference) {
+                    smallestAngleDifference = angleDifference
+                    smallestAngleDifferenceAngleFrom = angleFrom
+                    smallestAngleDifferenceAngleTo = angleTo
+                }
+            }
+            let bisectingLineDirection = (smallestAngleDifferenceAngleFrom + smallestAngleDifferenceAngleTo) / 2.0
+            
+            // Step3:  rotate all patterns towards the bisecting line by convergenceFactor
+            assert(bisectingLineDirection <= CGFloat.pi)
+            assert(allDirectionsNormalized.count == bp.count)
+            for i in 0..<allDirectionsNormalized.count {
+                let direction = allDirectionsNormalized[i]
+                let difference = direction - bisectingLineDirection
+                let newDifference = difference * convergenceFactor
+                let angleToRotate = newDifference - difference
+                var newDirection =  bp[i].direction + angleToRotate
+                
                 while newDirection > BoundsManager.directionRange.upperBound {
                     newDirection -= 2*CGFloat.pi
                 }

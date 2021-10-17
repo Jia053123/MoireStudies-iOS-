@@ -58,7 +58,7 @@ class SliderHighDegreeCtrlView: UIView {
     }
     
     @IBAction func convergenceChanged(_ sender: Any) {
-        self.target.modifyAllDirection(netMultiplier: CGFloat(self.convergenceSlider.value))
+        self.target.modifyAllDirection(convergenceFactor: CGFloat(self.convergenceSlider.value))
     }
     
     @IBAction func fillChanged(_ sender: Any) {
