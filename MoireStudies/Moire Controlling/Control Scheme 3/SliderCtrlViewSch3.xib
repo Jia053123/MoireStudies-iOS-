@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,27 +34,27 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GLw-JF-ocz" userLabel="SpacingView2">
-                    <rect key="frame" x="0.0" y="93.5" width="201" height="11"/>
+                    <rect key="frame" x="0.0" y="93.5" width="201" height="10"/>
                     <viewLayoutGuide key="safeArea" id="jw3-wj-1sa"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NPb-OV-8LQ" userLabel="SpacingView3">
-                    <rect key="frame" x="0.0" y="143.5" width="201" height="10.5"/>
+                    <rect key="frame" x="0.0" y="142.5" width="201" height="10.5"/>
                     <viewLayoutGuide key="safeArea" id="y3M-bC-hxX"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Czy-mw-wc6" userLabel="SpacingView4">
-                    <rect key="frame" x="0.0" y="193" width="201" height="10.5"/>
+                    <rect key="frame" x="0.0" y="192" width="201" height="10.5"/>
                     <viewLayoutGuide key="safeArea" id="aNM-7B-0o5"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Va3-0N-J4w" userLabel="SpacingView5">
-                    <rect key="frame" x="0.0" y="242.5" width="201" height="11"/>
+                    <rect key="frame" x="0.0" y="241.5" width="201" height="10.5"/>
                     <viewLayoutGuide key="safeArea" id="jTR-Dt-K2F"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gK1-fR-jhi" userLabel="SpacingView6">
-                    <rect key="frame" x="0.0" y="292.5" width="201" height="10.5"/>
+                    <rect key="frame" x="0.0" y="291" width="201" height="10"/>
                     <viewLayoutGuide key="safeArea" id="2iO-1Z-A5s"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -87,7 +88,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="EeR-r3-5Tp" userLabel="BlackWidthSlider">
-                    <rect key="frame" x="8" y="118.5" width="185" height="26"/>
+                    <rect key="frame" x="8" y="117.5" width="185" height="26"/>
                     <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="ixA-uj-7wr"/>
@@ -100,7 +101,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Sz-5kM" userLabel="WhiteWidthSlider">
-                    <rect key="frame" x="8" y="168" width="185" height="26"/>
+                    <rect key="frame" x="8" y="167" width="185" height="26"/>
                     <color key="tintColor" systemColor="systemTealColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="oyC-76-n3t"/>
@@ -113,7 +114,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V3X-UX-Yku" userLabel="FillRatioSlider">
-                    <rect key="frame" x="8" y="217.5" width="185" height="26"/>
+                    <rect key="frame" x="8" y="216.5" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="Q3t-pl-SmW"/>
                     </constraints>
@@ -125,7 +126,7 @@
                     </connections>
                 </slider>
                 <slider opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="9qB-ed-vKY" userLabel="ScaleFactorSlider">
-                    <rect key="frame" x="8" y="267.5" width="185" height="26"/>
+                    <rect key="frame" x="8" y="266" width="185" height="26"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="wvV-S7-OLd"/>
                     </constraints>
@@ -159,7 +160,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WHITE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z4c-No-WpR">
-                    <rect key="frame" x="82" y="154" width="37.5" height="14"/>
+                    <rect key="frame" x="82" y="153" width="37.5" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="DbR-UX-qdY"/>
                     </constraints>
@@ -170,7 +171,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BLACK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWX-sj-wB0">
-                    <rect key="frame" x="81.5" y="104.5" width="38" height="14"/>
+                    <rect key="frame" x="81.5" y="103.5" width="38" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="UhM-EU-ONI"/>
                     </constraints>
@@ -181,7 +182,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5pX-Br-oCy">
-                    <rect key="frame" x="88.5" y="203.5" width="24" height="14"/>
+                    <rect key="frame" x="88.5" y="202.5" width="24" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="qPk-A5-BiA"/>
                     </constraints>
@@ -192,7 +193,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCALE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qc-Vf-FzV">
-                    <rect key="frame" x="82" y="253.5" width="37" height="14"/>
+                    <rect key="frame" x="82" y="252" width="37" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="q3L-Ey-Uno"/>
                     </constraints>
@@ -203,7 +204,7 @@
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-LJ-fiF" userLabel="Highlight Button">
-                    <rect key="frame" x="10" y="303" width="34" height="25.5"/>
+                    <rect key="frame" x="10" y="301" width="35.5" height="27.5"/>
                     <state key="normal" image="eye.fill" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                     </state>
@@ -214,13 +215,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bA0-b6-Ffz" userLabel="Menu Button">
-                    <rect key="frame" x="87.5" y="303" width="26.5" height="25.5"/>
+                    <rect key="frame" x="86.5" y="301" width="28.5" height="27.5"/>
                     <state key="normal" image="ellipsis.circle.fill" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                     </state>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v0Q-Po-AwO" userLabel="Dim Button">
-                    <rect key="frame" x="157.5" y="303" width="33.5" height="25.5"/>
+                    <rect key="frame" x="154.5" y="301" width="36.5" height="27.5"/>
                     <state key="normal" image="eye" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
                     </state>
@@ -231,7 +232,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="USQ-6h-pHJ" userLabel="Check Button">
-                    <rect key="frame" x="87.5" y="303" width="26.5" height="25.5"/>
+                    <rect key="frame" x="86.5" y="301" width="28.5" height="27.5"/>
                     <color key="tintColor" systemColor="systemGreenColor"/>
                     <state key="normal" image="checkmark.circle" catalog="system">
                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="black"/>
@@ -330,7 +331,7 @@
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
