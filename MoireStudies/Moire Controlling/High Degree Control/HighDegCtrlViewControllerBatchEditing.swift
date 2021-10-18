@@ -191,7 +191,6 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     func modifyAllScale(netAdjustment: CGFloat) {
-        NSLog("modifying all scale")
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -202,7 +201,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
                 let baseValues = Utilities.convertToFillRatioAndScaleFactor(blackWidth: baseBlackWidth, whiteWidth: baseWhiteWidth)
                 let baseFillRatio = baseValues.fillRatio
                 let baseScaleFactor = baseValues.scaleFactor
-                let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: baseFillRatio, scaleFactor: baseScaleFactor+netAdjustment)
+                let newValues = Utilities.convertToBlackWidthAndWhiteWidth(fillRatio: baseFillRatio, scaleFactor: baseScaleFactor + netAdjustment)
                 _ = self.modifyPattern(index: i, blackWidth: newValues.blackWidth)
                 _ = self.modifyPattern(index: i, whiteWidth: newValues.whiteWidth)
             }
@@ -210,7 +209,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     func modifyAllScale(netMultiplier: CGFloat) {
-
+        NSLog("modifyAllScale not implemented")
     }
 }
 

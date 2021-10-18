@@ -79,6 +79,7 @@ class MoireManagingController: UIViewController {
         }
         if self.currentMoire == nil || ((self.moireIdToInit != nil) && (self.moireIdToInit != self.currentMoire?.id)) {
             self.initCurrentMoire()
+            self.configurations?.highDegreeControlSettings = [] // hot fix: clear high degree controls when switching save file
         }
         self.moireViewController.resetMoireView(patterns: self.currentMoire!.patterns, configs: self.configurations!)
         self.resetControls()
