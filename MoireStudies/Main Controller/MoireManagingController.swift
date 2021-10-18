@@ -119,14 +119,14 @@ class MoireManagingController: UIViewController {
         for i in 0..<self.currentMoire!.patterns.count {
             ids.append(self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: [i])!)
         }
-        var hdIds: Array<String> = []
-        for i in 0..<self.configurations!.highDegreeControlCount {
-            let indexes = self.configurations!.highDegreeControlSettings[i].indexesOfPatternControlled
-            if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexes) {
-                hdIds.append(newId)
-            }
-        }
-        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, highDegIds: hdIds, delegate: self)
+//        var hdIds: Array<String> = []
+//        for i in 0..<self.configurations!.highDegreeControlCount {
+//            let indexes = self.configurations!.highDegreeControlSettings[i].indexesOfPatternControlled
+//            if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexes) {
+//                hdIds.append(newId)
+//            }
+//        }
+        self.controlsViewController.setUp(patterns: self.currentMoire!.patterns, configs: self.configurations!, ids: ids, delegate: self)
     }
     
     func resetControls() {
@@ -144,11 +144,13 @@ class MoireManagingController: UIViewController {
             }
         }
         guard Constants.SettingsClassesDictionary.highDegControllerClasses[type]!.supportedNumOfPatterns.contains(indexesToUse.count) else { return false }
-        
-        let newHDCSetting = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: type, indexesOfPatternControlled: indexesToUse)
-        self.configurations!.highDegreeControlSettings.append(newHDCSetting)
-        self.updateMainView()
-        return true
+        if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexesToUse) {
+            let newHDCSetting = HighDegreeControlSettings.init(id: newId, highDegCtrlSchemeSetting: type, indexesOfPatternControlled: indexesToUse)
+            self.configurations!.highDegreeControlSettings.append(newHDCSetting)
+            self.updateMainView()
+            return true
+        }
+      return false
     }
     
     func saveMoire() -> Bool {
@@ -393,15 +395,26 @@ extension MoireManagingController: PatternManager {
         return true
     }
     
-    private func getIndexOfHighDegControlInSettings(id: String) -> Int {
-        var indexesOfControlledPatterns =  self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)
-        for i in 0..<self.configurations!.highDegreeControlSettings.count {
-            var indexesControlled
-        }
-    }
+//    private func getIndexOfHighDegControlInSettings(id: String) -> Int {
+//        var indexesOfControlledPatterns =  self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)
+//        for i in 0..<self.configurations!.highDegreeControlSettings.count {
+//            var indexesControlled
+//        }
+//    }
     
     func removeHighDegControl(id: String) -> Bool {
-        
-        
+        var indexToRemove: Int?
+        for i in 0..<self.configurations!.highDegreeControlCount {
+            let setting = self.configurations!.highDegreeControlSettings[i]
+            if (setting.id == id) {
+                indexToRemove = i
+            }
+        }
+        if let itr = indexToRemove {
+            self.configurations!.highDegreeControlSettings.remove(at: itr)
+            return true
+        } else {
+            return false
+        }
     }
 }
