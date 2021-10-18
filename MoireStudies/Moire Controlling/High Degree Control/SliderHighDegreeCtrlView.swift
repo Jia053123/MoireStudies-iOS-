@@ -16,7 +16,6 @@ class SliderHighDegreeCtrlView: UIView {
     @IBOutlet weak var phaseSlider: UISlider!
     @IBOutlet weak var fillSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
-    @IBOutlet weak var relativeScaleSlider: UISlider!
     @IBOutlet weak var menuButton: UIButton!
     
     required init?(coder: NSCoder) {
@@ -90,9 +89,6 @@ class SliderHighDegreeCtrlView: UIView {
     
     @IBAction func scaleChanged(_ sender: Any) {
         self.target.modifyAllScale(netAdjustment: CGFloat(self.scaleSlider.value))
-    }
-    
-    @IBAction func relativeScaleChanged(_ sender: Any) {
     }
     
     func resetDirectionControl(range: ClosedRange<CGFloat>, value: CGFloat?) {
