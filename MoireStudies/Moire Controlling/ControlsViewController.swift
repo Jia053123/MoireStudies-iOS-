@@ -30,11 +30,11 @@ class ControlsViewController: UIViewController, PatternsSelector {
         self.view.backgroundColor = UIColor.clear
     }
     
-    func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
-        self.reset(patterns: patterns, configs: configs, ids: ids, delegate: delegate)
+    func setUp(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, highDegIds: Array<String>, delegate: PatternManager) {
+        self.reset(patterns: patterns, configs: configs, ids: ids, highDegIds: highDegIds, delegate: delegate)
     }
 
-    func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, delegate: PatternManager) {
+    func reset(patterns: Array<Pattern>, configs: Configurations, ids: Array<String>, highDegIds: Array<String>, delegate: PatternManager) {
         for c in self.children {
             c.willMove(toParent: nil)
             c.view.removeFromSuperview()
@@ -64,11 +64,11 @@ class ControlsViewController: UIViewController, PatternsSelector {
         }
         
         let hdControlFrames = configs.highDegControlFrames
-//        assert(hdControlFrames.count >= highDegIds.count)
-        for i in 0..<configs.highDegreeControlCount {
+        assert(hdControlFrames.count >= highDegIds.count)
+        for i in 0..<highDegIds.count {
             var hdcvc: HighDegCtrlViewController
-//            let hdid = highDegIds[i]
-            let hdid = configs.highDegreeControlSettings[i].id
+            let hdid = highDegIds[i]
+            self.configurations.highDegreeControlSettings[i].id = hdid // TODO: hot fix. need refactoring
             let hds = configs.highDegreeControlSettings[i]
             let ps = hds.indexesOfPatternControlled.map({Utilities.tryAccessArray(array: patterns, index: $0)})
             
@@ -84,7 +84,7 @@ class ControlsViewController: UIViewController, PatternsSelector {
             hdcvc.didMove(toParent: self)
         }
         
-        self.controlViewControllers = Array(self.children.dropLast(configs.highDegreeControlCount)) as? [CtrlViewController]
+        self.controlViewControllers = Array(self.children.dropLast(highDegIds.count)) as? [CtrlViewController]
         self.highDegControlViewControllers = Array(self.children.dropFirst(ids.count)) as? [HighDegCtrlViewController]
     }
     

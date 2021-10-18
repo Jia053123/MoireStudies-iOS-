@@ -27,7 +27,7 @@ class ControlsViewControllerTests: XCTestCase {
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerAlwaysLegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
         
         if self.controlsViewController.children.count != 4 {
             XCTFail()
@@ -47,7 +47,7 @@ class ControlsViewControllerTests: XCTestCase {
         var config2 = Configurations.init()
         config2.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme2Slider
         config2.highDegreeControlSettings = []
-        self.controlsViewController.setUp(patterns: patterns2, configs: config2, ids: ids2, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns2, configs: config2, ids: ids2, highDegIds: [], delegate: delegate)
         
         if self.controlsViewController.children.count != 3 {
             XCTFail()
@@ -70,7 +70,7 @@ class ControlsViewControllerTests: XCTestCase {
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerAlwaysLegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
         
         if self.controlsViewController.children.count != 3 {
             XCTFail()
@@ -87,7 +87,7 @@ class ControlsViewControllerTests: XCTestCase {
         
         let patterns2 = TestUtilities.createValidPseudoRandomMoire(numOfPatterns: 3, seed: 1.474).patterns
         let ids2 = ["c", "d", "e", "f"]
-        self.controlsViewController.setUp(patterns: patterns2, configs: config1, ids: ids2, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns2, configs: config1, ids: ids2, highDegIds: [], delegate: delegate)
         
         if self.controlsViewController.children.count != 4 {
             XCTFail()
@@ -116,7 +116,7 @@ class ControlsViewControllerTests: XCTestCase {
         let hdcs1 = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: .basicScheme, indexesOfPatternControlled: [0,1,3])
         config1.highDegreeControlSettings = [hdcs1]
         let delegate = MockPatternManagerAlwaysLegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1,  delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: hdIds1, delegate: delegate)
         
         if self.controlsViewController.children.count != 5 {
             XCTFail()
@@ -181,7 +181,7 @@ class ControlsViewControllerTests: XCTestCase {
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerAlwaysIllegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
     }
     
     func testEnteringAndExitingSelectionMode_TheFirstDegreeControllersEnterAndExitSelectionMode() {
@@ -236,7 +236,7 @@ class ControlsViewControllerTests: XCTestCase {
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerAlwaysLegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
         
         self.controlsViewController.enterSelectionMode()
         (self.controlsViewController.children[3] as! CtrlViewControllerSch3).selectIfInSelectionMode()
@@ -251,7 +251,7 @@ class ControlsViewControllerTests: XCTestCase {
         config1.ctrlSchemeSetting = CtrlSchemeSetting.controlScheme3Slider
         config1.highDegreeControlSettings = []
         let delegate = MockPatternManagerAlwaysLegal()
-        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, delegate: delegate)
+        self.controlsViewController.setUp(patterns: patterns1, configs: config1, ids: ids1, highDegIds: [], delegate: delegate)
         
         XCTAssertEqual(self.controlsViewController.selectedPatternIndexes, [])
         self.controlsViewController.enterSelectionMode()

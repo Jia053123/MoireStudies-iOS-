@@ -34,7 +34,7 @@ struct Configurations: Codable, Equatable {
 }
 
 struct HighDegreeControlSettings: Codable, Equatable {
-    var id: String
+    var id: String?
     var highDegCtrlSchemeSetting: HighDegCtrlSchemeSetting = .basicScheme
     var indexesOfPatternControlled: Array<Int>
 }
