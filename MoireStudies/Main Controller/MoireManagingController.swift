@@ -133,6 +133,20 @@ class MoireManagingController: UIViewController {
         self.initControls()
     }
 
+    private func areIndexesIdentical(indexes1: Array<Int>, indexes2: Array<Int>) -> Bool {
+        if indexes1.count == indexes2.count {
+            var allIdentical = true
+            for index in indexes1 {
+                if !(indexes2.contains(index)) {
+                    allIdentical = false
+                }
+            }
+            return allIdentical
+        } else {
+            return false
+        }
+    }
+    
     func createHighDegControl(type: HighDegCtrlSchemeSetting, indexesOfPatternsToControl: Array<Int>) -> Bool {
         var indexesToUse: Array<Int> = []
         for i in indexesOfPatternsToControl {
@@ -146,15 +160,8 @@ class MoireManagingController: UIViewController {
         guard Constants.SettingsClassesDictionary.highDegControllerClasses[type]!.supportedNumOfPatterns.contains(indexesToUse.count) else { return false }
         // hot fix: make sure none of the existing ones control identical patterns
         for setting in self.configurations!.highDegreeControlSettings {
-            if setting.indexesOfPatternControlled.count == indexesToUse.count {
-                var allIdentical = true
-                for iopc in setting.indexesOfPatternControlled {
-                    if !(indexesToUse.contains(iopc)) {
-                        allIdentical = false
-                    }
-                }
-                guard !allIdentical else {return false}
-            }
+            let indexesIdentical = self.areIndexesIdentical(indexes1: setting.indexesOfPatternControlled, indexes2: indexesToUse)
+            guard !indexesIdentical else {return false}
         }
         let newHDCSetting = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: type, indexesOfPatternControlled: indexesToUse)
         self.configurations!.highDegreeControlSettings.append(newHDCSetting)
@@ -398,7 +405,20 @@ extension MoireManagingController: PatternManager {
     }
     
     func removeHighDegControl(id: String) -> Bool {
-        
-        return false // stub
+        var indexOfControlToRemove: Int?
+        let indexesOfPatternsControlled = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)
+        guard let iopc = indexesOfPatternsControlled else {return false}
+        for i in 0..<self.configurations!.highDegreeControlCount {
+            let setting = self.configurations!.highDegreeControlSettings[i]
+            if self.areIndexesIdentical(indexes1: setting.indexesOfPatternControlled, indexes2: iopc) {
+                indexOfControlToRemove = i
+            }
+        }
+        if let ioct = indexOfControlToRemove {
+            self.configurations!.highDegreeControlSettings.remove(at: ioct)
+            self.updateMainView()
+            return true
+        }
+        return false
     }
 }
