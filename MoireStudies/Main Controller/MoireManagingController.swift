@@ -144,6 +144,18 @@ class MoireManagingController: UIViewController {
             }
         }
         guard Constants.SettingsClassesDictionary.highDegControllerClasses[type]!.supportedNumOfPatterns.contains(indexesToUse.count) else { return false }
+        // hot fix: make sure none of the existing ones control identical patterns
+        for setting in self.configurations!.highDegreeControlSettings {
+            if setting.indexesOfPatternControlled.count == indexesToUse.count {
+                var allIdentical = true
+                for iopc in setting.indexesOfPatternControlled {
+                    if !(indexesToUse.contains(iopc)) {
+                        allIdentical = false
+                    }
+                }
+                guard !allIdentical else {return false}
+            }
+        }
         let newHDCSetting = HighDegreeControlSettings.init(highDegCtrlSchemeSetting: type, indexesOfPatternControlled: indexesToUse)
         self.configurations!.highDegreeControlSettings.append(newHDCSetting)
         self.updateMainView()
@@ -386,7 +398,7 @@ extension MoireManagingController: PatternManager {
     }
     
     func removeHighDegControl(id: String) -> Bool {
-        NSLog("trying to delete control")
+        
         return false // stub
     }
 }
