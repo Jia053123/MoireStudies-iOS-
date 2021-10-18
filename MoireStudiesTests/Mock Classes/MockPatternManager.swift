@@ -138,6 +138,10 @@ class MockPatternManagerAlwaysLegal: UIViewController, PatternManager {
         self.modifiedPattern = nil
         return true
     }
+    
+    func removeHighDegControl(id: String) -> Bool {
+        return true // stub
+    }
 }
 
 class MockPatternManagerAlwaysIllegal: UIViewController, PatternManager {
@@ -215,7 +219,7 @@ class MockPatternManagerAlwaysIllegal: UIViewController, PatternManager {
     
     func modifyPatterns(modifiedPatterns: Array<Pattern>, callerId: String) -> Bool {
         self.modifyMulitplePatternsCallers.insert(callerId)
-        return true
+//        return true
         return false
     }
     
@@ -247,5 +251,9 @@ class MockPatternManagerAlwaysIllegal: UIViewController, PatternManager {
     func deletePattern(callerId: String) -> Bool {
         self.deleteCallers.insert(callerId)
         return false
+    }
+    
+    func removeHighDegControl(id: String) -> Bool {
+        return false // stub
     }
 }

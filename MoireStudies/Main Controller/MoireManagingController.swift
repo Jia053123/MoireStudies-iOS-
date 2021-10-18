@@ -123,6 +123,7 @@ class MoireManagingController: UIViewController {
         for i in 0..<self.configurations!.highDegreeControlCount {
             let indexes = self.configurations!.highDegreeControlSettings[i].indexesOfPatternControlled
             if let newId = self.ctrlAndPatternMatcher.getOrCreateCtrlViewControllerId(indexesOfPatternControlled: indexes) {
+                self.configurations!.highDegreeControlSettings[i].id = newId // TODO: hot fix. need refactoring
                 hdIds.append(newId)
             }
         }
@@ -386,22 +387,19 @@ extension MoireManagingController: PatternManager {
         return true
     }
     
-    private func removeHighDegControl(index: Int) -> Bool {
-        guard (self.configurations!.highDegreeControlSettings.count > index) else { return false }
-        self.configurations!.highDegreeControlSettings.remove(at: index)
-        self.updateMainView()
-        return true
-    }
-    
-    private func getIndexOfHighDegControlInSettings(id: String) -> Int {
-        var indexesOfControlledPatterns =  self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: id)
-        for i in 0..<self.configurations!.highDegreeControlSettings.count {
-            var indexesControlled
-        }
-    }
-    
     func removeHighDegControl(id: String) -> Bool {
-        
-        
+        var indexOfControlToRemove: Int?
+        for i in 0..<self.configurations!.highDegreeControlCount {
+            let hdcs = self.configurations!.highDegreeControlSettings[i]
+            if hdcs.id == id {
+                indexOfControlToRemove = i
+            }
+        }
+        if let index = indexOfControlToRemove {
+            self.configurations!.highDegreeControlSettings.remove(at: index)
+            return true
+        } else {
+            return false
+        }
     }
 }
