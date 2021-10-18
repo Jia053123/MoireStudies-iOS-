@@ -29,6 +29,4 @@ protocol PatternManager: AnyObject {
     
     func createPattern(callerId: String?, newPattern: Pattern) -> Bool
     func deletePattern(callerId: String) -> Bool
-    
-    func removeHighDegControl(id: String) -> Bool
 }

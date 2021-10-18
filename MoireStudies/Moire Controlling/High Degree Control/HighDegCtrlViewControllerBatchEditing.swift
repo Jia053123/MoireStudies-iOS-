@@ -210,7 +210,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     func modifyAllScale(netMultiplier: CGFloat) {
-        // stub 
+
     }
 }
 
@@ -325,11 +325,5 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     
     func matchControlsWithUpdatedModel() {
         self.matchControlsWithModel(patterns: self.patternsDelegate.retrievePatterns(callerId: self.id)!)
-    }
-}
-
-extension HighDegCtrlViewControllerBatchEditing {
-    func removeThisControl() {
-        self.patternsDelegate.removeHighDegControl(id: self.id)
     }
 }

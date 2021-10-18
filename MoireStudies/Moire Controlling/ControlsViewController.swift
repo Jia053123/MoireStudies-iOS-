@@ -67,16 +67,15 @@ class ControlsViewController: UIViewController, PatternsSelector {
         assert(hdControlFrames.count >= highDegIds.count)
         for i in 0..<highDegIds.count {
             var hdcvc: HighDegCtrlViewController
-            let hdid = highDegIds[i]
-            self.configurations.highDegreeControlSettings[i].id = hdid // TODO: hot fix. need refactoring
+            let id = highDegIds[i]
             let hds = configs.highDegreeControlSettings[i]
             let ps = hds.indexesOfPatternControlled.map({Utilities.tryAccessArray(array: patterns, index: $0)})
             
             switch hds.highDegCtrlSchemeSetting {
             case .basicScheme:
-                hdcvc = HighDegCtrlViewControllerBatchEditing.init(id: hdid, frame: hdControlFrames[i], patterns: ps)
+                hdcvc = HighDegCtrlViewControllerBatchEditing.init(id: id, frame: hdControlFrames[i], patterns: ps)
             case .testScheme:
-                hdcvc = MockHighDegCtrlViewController.init(id: hdid, frame: hdControlFrames[i], patterns: ps)
+                hdcvc = MockHighDegCtrlViewController.init(id: id, frame: hdControlFrames[i], patterns: ps)
             }
             hdcvc.patternsDelegate = delegate
             self.addChild(hdcvc)

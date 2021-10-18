@@ -12,11 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SliderHighDegreeCtrlView" customModule="MoireStudies" customModuleProvider="target">
             <connections>
-                <outlet property="checkButton" destination="bA0-b6-Ffz" id="MNO-6w-4f6"/>
                 <outlet property="convergenceSlider" destination="imE-GO-KMq" id="CID-lc-Lew"/>
                 <outlet property="directionSlider" destination="VN6-JO-GR0" id="Si0-Xn-o1Q"/>
                 <outlet property="fillSlider" destination="V3X-UX-Yku" id="FwC-KR-TaJ"/>
-                <outlet property="menuButton" destination="bA0-b6-Ffz" id="bC2-H6-E6C"/>
                 <outlet property="phaseSlider" destination="hrb-zL-bie" id="j9S-z4-87X"/>
                 <outlet property="relativeScaleSlider" destination="9qB-ed-vKY" id="xAB-9J-weA"/>
                 <outlet property="scaleSlider" destination="vyn-qm-y5J" id="0cp-2n-xJU"/>
