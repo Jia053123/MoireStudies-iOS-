@@ -401,6 +401,7 @@ extension MoireManagingController: PatternManager {
         guard let index = self.ctrlAndPatternMatcher.getIndexesOfPatternControlled(controllerId: callerId)?.first else {return false}
         self.currentMoire!.patterns.remove(at: index)
         print("num of patterns after deletion: ", self.currentMoire!.patterns.count)
+        self.configurations?.highDegreeControlSettings = [] // hot fix: the indexes shift after deletion so have to clear all high degree controls
         self.updateMainView()
         return true
     }
