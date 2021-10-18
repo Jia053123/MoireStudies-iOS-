@@ -17,6 +17,7 @@ class SliderHighDegreeCtrlView: UIView {
     @IBOutlet weak var fillSlider: UISlider!
     @IBOutlet weak var scaleSlider: UISlider!
     @IBOutlet weak var relativeScaleSlider: UISlider!
+    @IBOutlet weak var menuButton: UIButton!
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -58,6 +59,9 @@ class SliderHighDegreeCtrlView: UIView {
         self.scaleSlider.minimumValue = -2.0
         self.scaleSlider.maximumValue = 2.0
         self.scaleSlider.value = 0.0
+        
+        menuButton.showsMenuAsPrimaryAction = true
+        menuButton.menu = self.makeMenu()
     }
     
     @IBAction func doneEditing(_ sender: Any) {
@@ -137,6 +141,18 @@ class SliderHighDegreeCtrlView: UIView {
         if let v = value {
             self.scaleSlider.value = Float(v)
         }
+    }
+}
+
+extension SliderHighDegreeCtrlView {
+    private func makeMenu() -> UIMenu {
+        let delete = UIAction(title: "Remove Panel", image: nil, identifier: nil, discoverabilityTitle: nil, attributes: UIMenuElement.Attributes.destructive, state: UIMenuElement.State.off, handler: {_ in self.deleteThisPanel()})
+        
+        return UIMenu(title: "Panel Options", image: nil, identifier: nil, options: [], children: [delete])
+    }
+    
+    private func deleteThisPanel() {
+        self.target.removeThisControl()
     }
 }
 

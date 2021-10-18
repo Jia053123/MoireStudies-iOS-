@@ -327,3 +327,9 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         self.matchControlsWithModel(patterns: self.patternsDelegate.retrievePatterns(callerId: self.id)!)
     }
 }
+
+extension HighDegCtrlViewControllerBatchEditing {
+    func removeThisControl(){
+        self.patternsDelegate.removeHighDegControl(id: self.id)
+    }
+}

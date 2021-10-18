@@ -384,4 +384,9 @@ extension MoireManagingController: PatternManager {
         self.updateMainView()
         return true
     }
+    
+    func removeHighDegControl(id: String) -> Bool {
+        NSLog("trying to delete control")
+        return false // stub
+    }
 }
