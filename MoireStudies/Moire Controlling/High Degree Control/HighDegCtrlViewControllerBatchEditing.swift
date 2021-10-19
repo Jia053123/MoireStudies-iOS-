@@ -260,7 +260,6 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
     }
     
     private func mostConservativeSpeedVarianceFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
-        let minFactor: CGFloat = 0.1
         var result: ClosedRange<CGFloat>?
         let averageSpeed = calculateAverageSpeed(patterns: patterns)
         for pattern in patterns {
@@ -274,9 +273,10 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
             let maxNewDifference = maxDelta + difference
             let minNewDifference = minDelta + difference
             
-            let maxFactor1 = maxNewDifference / difference
-            let maxFactor2 = minNewDifference / difference
-            let maxFactor = maxFactor1 > maxFactor2 ? maxFactor1 : maxFactor2
+            let factor1 = maxNewDifference / difference
+            let factor2 = minNewDifference / difference
+            let maxFactor = factor1 > factor2 ? factor1 : factor2
+            let minFactor = factor1 > factor2 ? factor2 : factor1
             
             if let mcsvfr = result {
                 result = Utilities.intersectRanges(range1: mcsvfr, range2: minFactor...maxFactor)
