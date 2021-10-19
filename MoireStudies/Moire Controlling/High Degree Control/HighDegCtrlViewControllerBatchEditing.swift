@@ -47,6 +47,34 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
         }
     }
     
+    private func calculateAverageSpeed(patterns: Array<Pattern?>) -> CGFloat {
+        var speedSum: CGFloat = 0
+        var count: Int = 0
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            speedSum += p.speed
+            count += 1
+        }
+        return speedSum / CGFloat(count)
+    }
+    
+    func modifyAllSpeed(varianceFactor: CGFloat) {
+        if basePatterns == nil {
+            self.updateBasePatterns()
+        }
+        if let bps = basePatterns {
+            let averageSpeed = self.calculateAverageSpeed(patterns: bps)
+            for i in 0..<bps.count {
+                let speed = bps[i].speed
+                let difference = speed - averageSpeed
+                let newDifference = difference * varianceFactor
+                let delta = newDifference - difference
+                let newSpeed = speed + delta
+                _ = self.modifyPattern(index: i, speed: newSpeed)
+            }
+        }
+    }
+    
     private func getNormalizedDirectionForEachPattern(patterns: Array<Pattern>) -> Array<CGFloat> {
         var allDirectionsNormalized : Array<CGFloat> = []
         for i in 0..<patterns.count {
@@ -231,6 +259,34 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         return result
     }
     
+    private func mostConservativeSpeedVarianceFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
+        let minFactor: CGFloat = 0.1
+        var result: ClosedRange<CGFloat>?
+        let averageSpeed = calculateAverageSpeed(patterns: patterns)
+        for pattern in patterns {
+            guard let p = pattern else {continue}
+            let speed = p.speed
+            let difference = speed - averageSpeed
+            
+            let maxDelta = BoundsManager.speedRange.upperBound - speed
+            let minDelta = BoundsManager.speedRange.lowerBound - speed
+            
+            let maxNewDifference = maxDelta + difference
+            let minNewDifference = minDelta + difference
+            
+            let maxFactor1 = maxNewDifference / difference
+            let maxFactor2 = minNewDifference / difference
+            let maxFactor = maxFactor1 > maxFactor2 ? maxFactor1 : maxFactor2
+            
+            if let mcsvfr = result {
+                result = Utilities.intersectRanges(range1: mcsvfr, range2: minFactor...maxFactor)
+            } else {
+                result = minFactor...maxFactor
+            }
+        }
+        return result
+    }
+    
     private func mostConservativePhaseMergeFactorRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>?{
         let minFactor: CGFloat = 0.001
         var result: ClosedRange<CGFloat>?
@@ -256,7 +312,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
                 result = minFactor...maxFactor
             }
         }
-        return Utilities.addPaddingsToRange(closedRange: result!, padding: 0.001)
+        return result
     }
     
     private func mostConservativeFillRatioMultiplierRange(patterns: Array<Pattern?>) -> ClosedRange<CGFloat>? {
@@ -304,8 +360,8 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         
         cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
         
-        if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
-            cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.0001), value: 1.0)
+        if let mcsmr = self.mostConservativeSpeedVarianceFactorRange(patterns: patterns) {
+            cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.001), value: 1.0)
         }
         
         cv.resetConvergenceControl(range: 0.1...3, value: 1.0)
@@ -315,10 +371,10 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         }
                 
         if let mcfrmr = self.mostConservativeFillRatioMultiplierRange(patterns: patterns) {
-            cv.resetFillRatioControl(range: Utilities.addPaddingsToRange(closedRange: mcfrmr, padding: 0.0001), value: 1.0)
+            cv.resetFillRatioControl(range: Utilities.addPaddingsToRange(closedRange: mcfrmr, padding: 0.001), value: 1.0)
         }
         if let mcsfar = self.mostConservativeScaleFactorAdjustmentRange(patterns: patterns) {
-            cv.resetScaleFactorControl(range: Utilities.addPaddingsToRange(closedRange: mcsfar, padding: 0.0001), value: 0.0)
+            cv.resetScaleFactorControl(range: Utilities.addPaddingsToRange(closedRange: mcsfar, padding: 0.001), value: 0.0)
         }
     }
     
