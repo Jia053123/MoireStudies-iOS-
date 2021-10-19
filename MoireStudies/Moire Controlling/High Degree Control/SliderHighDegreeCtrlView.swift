@@ -39,8 +39,8 @@ class SliderHighDegreeCtrlView: UIView {
         self.directionSlider.maximumValue = Float.pi
         self.directionSlider.value = 0.0
         
-        self.speedSlider.minimumValue = 5 //0.5
-        self.speedSlider.maximumValue = 0.1//1.5
+        self.speedSlider.minimumValue = -1.5
+        self.speedSlider.maximumValue = 1.5
         self.speedSlider.value = 1.0
         
         self.convergenceSlider.minimumValue = 0.02
@@ -72,7 +72,7 @@ class SliderHighDegreeCtrlView: UIView {
     }
     
     @IBAction func speedChanged(_ sender: Any) {
-        self.target.modifyAllSpeed(varianceFactor: CGFloat(self.speedSlider.value))
+        self.target.modifyAllSpeed(netMultiplier: CGFloat(self.speedSlider.value))
     }
     
     @IBAction func convergenceChanged(_ sender: Any) {

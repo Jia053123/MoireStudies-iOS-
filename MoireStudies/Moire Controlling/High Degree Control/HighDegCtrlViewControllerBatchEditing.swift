@@ -59,6 +59,7 @@ class HighDegCtrlViewControllerBatchEditing: UIViewController, AbstractHighDegCt
     }
     
     func modifyAllSpeed(varianceFactor: CGFloat) {
+        // TODO: does not work when the direction is opposite
         if basePatterns == nil {
             self.updateBasePatterns()
         }
@@ -246,14 +247,14 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         var result: ClosedRange<CGFloat>?
         for pattern in patterns {
             guard let p = pattern else {continue}
-            let speedMultiplierUpperBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
-            let speedMultiplierUpperBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
-            let speedMultiplierUpperBound = (speedMultiplierUpperBound1 > speedMultiplierUpperBound2) ? speedMultiplierUpperBound1 : speedMultiplierUpperBound2
+            let speedMultiplierBound1 = abs(BoundsManager.speedRange.lowerBound / p.speed)
+            let speedMultiplierBound2 = abs(BoundsManager.speedRange.upperBound / p.speed)
+            let speedMultiplierUpperBound = (speedMultiplierBound1 > speedMultiplierBound2) ? speedMultiplierBound1 : speedMultiplierBound2
             
             if let mcsr = result {
-                result = Utilities.intersectRanges(range1: mcsr, range2: 0.1...speedMultiplierUpperBound) // if it were 0 instead of 0.1, you cannot go back to the original speed after going all the way to 0 because 0 times anything is 0
+                result = Utilities.intersectRanges(range1: mcsr, range2: -1*speedMultiplierUpperBound...speedMultiplierUpperBound)
             } else {
-                result = 0...speedMultiplierUpperBound
+                result = -1*speedMultiplierUpperBound...speedMultiplierUpperBound
             }
         }
         return result
@@ -360,7 +361,7 @@ extension HighDegCtrlViewControllerBatchEditing: HighDegCtrlViewController {
         
         cv.resetDirectionControl(range: -1*CGFloat.pi...CGFloat.pi, value: 0.0)
         
-        if let mcsmr = self.mostConservativeSpeedVarianceFactorRange(patterns: patterns) {
+        if let mcsmr = self.mostConservativeSpeedMultiplierRange(patterns: patterns) {
             cv.resetSpeedControl(range: Utilities.addPaddingsToRange(closedRange: mcsmr, padding: 0.001), value: 1.0)
         }
         
