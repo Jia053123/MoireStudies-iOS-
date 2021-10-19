@@ -149,6 +149,7 @@ class MoireManagingController: UIViewController {
     }
     
     func createHighDegControl(type: HighDegCtrlSchemeSetting, indexesOfPatternsToControl: Array<Int>) -> Bool {
+        guard self.configurations!.highDegreeControlCount < Constants.Constrains.maxNumOfHighDegreeControl else {return false}
         var indexesToUse: Array<Int> = []
         for i in indexesOfPatternsToControl {
             // check validity

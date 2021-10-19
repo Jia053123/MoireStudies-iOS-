@@ -46,7 +46,7 @@ return 15.0
         static let highDegreeControlFrames: Array<CGRect> = {() -> Array<CGRect> in
             let frameSize = CGSize.init(width: 150, height: 300)
             var frames: Array<CGRect> = []
-            for i in 0..<5 { // TODO: why 5?
+            for i in 0..<Constants.Constrains.maxNumOfHighDegreeControl {
                 let origin = CGPoint(x: CGFloat(i * Int(frameSize.width + 15) + 15), y: frameTallSize.height + 30)
                 frames.append(CGRect(origin: origin, size: frameSize))
             }
@@ -56,6 +56,7 @@ return 15.0
     
     struct Constrains {
         static let numOfPatternsPerMoire: ClosedRange<Int> = 1...5
+        static let maxNumOfHighDegreeControl: Int = 6
     }
     
     struct Data {
