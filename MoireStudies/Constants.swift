@@ -18,7 +18,7 @@ struct Constants {
         
         static private let controlFramesTopMargin: CGFloat = {
 #if targetEnvironment(macCatalyst)
-return 55.0
+return 45.0
 #else
 return 15.0
 #endif
@@ -47,7 +47,7 @@ return 15.0
             let frameSize = CGSize.init(width: 150, height: 300)
             var frames: Array<CGRect> = []
             for i in 0..<Constants.Constrains.maxNumOfHighDegreeControl {
-                let origin = CGPoint(x: CGFloat(i * Int(frameSize.width + 15) + 15), y: frameTallSize.height + 30)
+                let origin = CGPoint(x: CGFloat(i * Int(frameSize.width + 15) + 15), y: controlFramesTopMargin + frameTallSize.height + 15)
                 frames.append(CGRect(origin: origin, size: frameSize))
             }
             return frames
