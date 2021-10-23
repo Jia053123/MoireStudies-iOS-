@@ -1,6 +1,6 @@
 # MOIRE EDITOR
 
-Screen Recording: https://vimeo.com/525921032
+Screen Recording: https://vimeo.com/637568586
 
 ## Intentions of the Project
 By designing a computation tool for a niche form of art from a blank slate, I intend to study how the tools are shaped by the art forms they create, and how the works of art in turn reflects the creation processes. 
