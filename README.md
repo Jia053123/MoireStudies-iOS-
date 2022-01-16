@@ -40,7 +40,6 @@ Currently this number is 2 but it’s not hardcoded into any major component. Wi
 Currently, a pattern is consisted of identical stripes placed at uniform spacings. It is represented by four attributes only: speed, direction, blackWidth and whiteWidth. 
 An alternative representation I used earlier was speed, direction, fillRatio and scaleFactor. It is less straightforward but maps well onto the Core Animation PatternView I initially built. 
 One-to-one conversion between these two systems is done by the Utilities class. 
-The next step may be to represent distorted stripes with nonuniform spacings, though I’m still working on the details. 
 
 ### Controls
 Currently, there are two control schemes corresponding to the two representations of pattern I used. 
@@ -58,5 +57,4 @@ moving at precisely the specified speed that may be changed in real time. The mu
 The first PatternView I made used white CALayers to tile the screen. Each tile contains a black sub-layer acting as the stripe. 
 It is easy to build and performs well, but the CABasicAnimation has to be chained and isn’t very robust when I push and dismiss other controllers atop of it
 (at least I haven’t found a good fix). It also requires interrupting and resuming the layer animation for each tile when changing speed so a UISegmentedControl has to be used in place of UISlider for that purpose. 
-The next step is to make MetalPatternView capable of rendering distorted stripes. 
-It should also render the masks using the shaders instead of the expensive UIView.mask property. 
+The next step is to make MetalPatternView render the masks using the shaders instead of the expensive UIView.mask property. 
